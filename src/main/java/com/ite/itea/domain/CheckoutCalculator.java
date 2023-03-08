@@ -2,17 +2,18 @@ package com.ite.itea.domain;
 
 import com.ite.itea.domain.dto.ItemDto;
 import com.ite.itea.domain.dto.OrderDto;
-import com.ite.itea.domain.dto.PictureDto;
+import com.ite.itea.domain.dto.PicturesDto;
+import com.ite.itea.domain.dto.ReceiptDto;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CheckoutCalculator {
 
-    public Receipt calculatePrice(OrderDto orderDto) {
+    public ReceiptDto calculatePrice(OrderDto orderDto) {
         var price = getPrice(orderDto);
         var text = getText(orderDto, price);
 
-        return new Receipt(price, text);
+        return new ReceiptDto(price, text);
     }
 
     private String getText(OrderDto orderDto, double price) {
@@ -21,7 +22,7 @@ public class CheckoutCalculator {
         var amountOfPictures = 0;
 
         for (ItemDto itemDto : orderDto.itemDtos()) {
-            if (itemDto instanceof PictureDto) {
+            if (itemDto instanceof PicturesDto) {
                 amountOfPictures += itemDto.getAmount();
             }
         }
@@ -39,7 +40,7 @@ public class CheckoutCalculator {
         var price = 0.0;
 
         for (ItemDto itemDto : orderDto.itemDtos()) {
-            if (itemDto instanceof PictureDto) {
+            if (itemDto instanceof PicturesDto) {
                 price += 14.99 * itemDto.getAmount();
             }
         }

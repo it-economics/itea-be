@@ -11,6 +11,7 @@ For every Kata we will have two Branches. One is the starting point of the Kata 
 Every Kata Branch will have a `.md` file where the acceptance criteria is written.
 You should start by the first point. Write your code/tests and then continue with the second point.
 
+You will find your first task in the branch `01_red_grade_dry`
 
 Endpoints:
 
@@ -24,14 +25,10 @@ To Test this Endpoint you have to send a `post Request`. It is recommended to us
 Here is an example Request:
 ```
 {
-	"items": [
+	"itemRequests": [
         {
             "name": "Picture",
             "amount": 1
-        },
-        {
-            "name": "Chair",
-            "amount": 2
         }
     ]
 }

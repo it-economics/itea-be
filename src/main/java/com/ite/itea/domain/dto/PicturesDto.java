@@ -1,10 +1,10 @@
 package com.ite.itea.domain.dto;
 
-public class PictureDto extends ItemDto {
+public class PicturesDto extends ItemDto {
 
     private final int amount;
 
-    public PictureDto(int amount) {
+    public PicturesDto(int amount) {
         this.amount = amount;
     }
 

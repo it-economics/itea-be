@@ -1,9 +1,11 @@
 package com.ite.itea.domain;
 
+import com.ite.itea.domain.dto.ItemDto;
 import com.ite.itea.domain.dto.OrderDto;
-import com.ite.itea.domain.dto.PictureDto;
+import com.ite.itea.domain.dto.PicturesDto;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.BDDAssertions.then;
@@ -13,8 +15,8 @@ class CheckoutCalculatorTest {
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithPictures() {
         CheckoutCalculator checkoutCalculator = new CheckoutCalculator();
-        var orderPicture = new PictureDto(2);
-        OrderDto orderDto = new OrderDto(List.of(orderPicture));
+        var orderedPicture = new PicturesDto(2);
+        OrderDto orderDto = new OrderDto(List.of(orderedPicture));
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
 
@@ -25,7 +27,8 @@ class CheckoutCalculatorTest {
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithoutItems() {
         CheckoutCalculator checkoutCalculator = new CheckoutCalculator();
-        OrderDto orderDto = new OrderDto(List.of());
+        List<ItemDto> nothingOrdered = new ArrayList<>();
+        OrderDto orderDto = new OrderDto(nothingOrdered);
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
 

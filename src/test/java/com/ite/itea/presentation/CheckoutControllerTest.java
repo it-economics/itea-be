@@ -1,6 +1,6 @@
 package com.ite.itea.presentation;
 
-import com.ite.itea.domain.Receipt;
+import com.ite.itea.domain.response.ReceiptResponse;
 import com.ite.itea.domain.request.ItemNameRequest;
 import com.ite.itea.domain.request.ItemRequest;
 import com.ite.itea.domain.request.OrderRequest;
@@ -36,7 +36,7 @@ class CheckoutControllerTest {
         var orderPicture = new ItemRequest(ItemNameRequest.Picture, 2);
         OrderRequest orderRequest = new OrderRequest(List.of((orderPicture)));
 
-        var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, Receipt.class);
+        var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
 
         then(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
         then(entity.getBody().price()).isEqualTo(29.98);
