@@ -22,13 +22,8 @@ public class CheckoutCalculator {
         var text = "itea \n";
 
         for (ItemDto itemDto : orderDto.itemDtos()) {
-            if (itemDto instanceof PicturesDto) {
-                text += convertToText(itemDto);
-            } else if (itemDto instanceof ChairsDto) {
-                text += convertToText(itemDto);
-            }
+            text += convertToText(itemDto);
         }
-
 
         text += "Total " + formatPrice(priceInCents);
 
