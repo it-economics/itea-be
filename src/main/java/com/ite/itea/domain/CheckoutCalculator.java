@@ -21,22 +21,18 @@ public class CheckoutCalculator {
     private String getText(OrderDto orderDto, long priceInCents) {
         var text = "itea \n";
 
-        var amountOfChairs = 0;
-        var amountOfPictures = 0;
-
         for (ItemDto itemDto : orderDto.itemDtos()) {
             if (itemDto instanceof PicturesDto) {
-                amountOfPictures += itemDto.getAmount();
-                if (amountOfPictures > 0) {
-                    text += MessageFormat.format("Picture 14,99\u00A0€ * {0}\n", amountOfPictures);
+                if (itemDto.getAmount() > 0) {
+                    text += MessageFormat.format("Picture 14,99\u00A0€ * {0}\n", itemDto.getAmount());
                 }
             } else if (itemDto instanceof ChairsDto) {
-                amountOfChairs += itemDto.getAmount();
-                if (amountOfChairs > 0) {
-                    text += MessageFormat.format("Chair 149,99\u00A0€ * {0}\n", amountOfChairs);
+                if (itemDto.getAmount() > 0) {
+                    text += MessageFormat.format("Chair 149,99\u00A0€ * {0}\n", itemDto.getAmount());
                 }
             }
         }
+
 
         text += "Total " + formatPrice(priceInCents);
 
