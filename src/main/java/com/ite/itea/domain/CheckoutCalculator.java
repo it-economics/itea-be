@@ -23,13 +23,9 @@ public class CheckoutCalculator {
 
         for (ItemDto itemDto : orderDto.itemDtos()) {
             if (itemDto instanceof PicturesDto) {
-                if (itemDto.getAmount() > 0) {
-                    text += MessageFormat.format("Picture 14,99\u00A0€ * {0}\n", itemDto.getAmount());
-                }
+                text += convertToText(itemDto);
             } else if (itemDto instanceof ChairsDto) {
-                if (itemDto.getAmount() > 0) {
-                    text += MessageFormat.format("Chair 149,99\u00A0€ * {0}\n", itemDto.getAmount());
-                }
+                text += convertToText(itemDto);
             }
         }
 
@@ -37,6 +33,13 @@ public class CheckoutCalculator {
         text += "Total " + formatPrice(priceInCents);
 
         return text;
+    }
+
+    private String convertToText(ItemDto itemDto) {
+        if (itemDto.getAmount() > 0) {
+            return MessageFormat.format("{0} {1} * {2}\n", itemDto.getName(), formatPrice(itemDto.getPriceInCents()), itemDto.getAmount());
+        }
+        return "";
     }
 
     private String formatPrice(long priceInCents) {
