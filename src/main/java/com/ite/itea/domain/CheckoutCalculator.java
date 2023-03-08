@@ -1,9 +1,6 @@
 package com.ite.itea.domain;
 
-import com.ite.itea.domain.dto.ItemDto;
-import com.ite.itea.domain.dto.OrderDto;
-import com.ite.itea.domain.dto.PicturesDto;
-import com.ite.itea.domain.dto.ReceiptDto;
+import com.ite.itea.domain.dto.*;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -24,16 +21,22 @@ public class CheckoutCalculator {
     private String getText(OrderDto orderDto, long priceInCents) {
         var text = "itea \n";
 
+        var amountOfChairs = 0;
         var amountOfPictures = 0;
 
         for (ItemDto itemDto : orderDto.itemDtos()) {
             if (itemDto instanceof PicturesDto) {
                 amountOfPictures += itemDto.getAmount();
+            } else if (itemDto instanceof ChairsDto) {
+                amountOfChairs += itemDto.getAmount();
             }
         }
 
         if (amountOfPictures > 0) {
             text += MessageFormat.format("Picture 14,99\u00A0€ * {0}\n", amountOfPictures);
+        }
+        if (amountOfChairs > 0) {
+            text += MessageFormat.format("Chair 49,99\u00A0€ * {0}\n", amountOfChairs);
         }
 
         text += "Total " + formatPrice(priceInCents);
@@ -53,6 +56,8 @@ public class CheckoutCalculator {
         for (ItemDto itemDto : orderDto.itemDtos()) {
             if (itemDto instanceof PicturesDto) {
                 priceInCents += 1499L * itemDto.getAmount();
+            } else if (itemDto instanceof ChairsDto) {
+                priceInCents += 4999L * itemDto.getAmount();
             }
         }
 
