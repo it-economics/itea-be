@@ -18,7 +18,7 @@ class CheckoutCalculatorTest {
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithPictures() {
         var orderedPicture = new PicturesDto(2);
-        OrderDto orderDto = new OrderDto(List.of(orderedPicture));
+        OrderDto orderDto = createOrder(orderedPicture);
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
 
@@ -29,7 +29,7 @@ class CheckoutCalculatorTest {
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithChairs() {
         var orderedChairs = new ChairsDto(2);
-        OrderDto orderDto = new OrderDto(List.of(orderedChairs));
+        OrderDto orderDto = createOrder(orderedChairs);
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
 
@@ -46,6 +46,10 @@ class CheckoutCalculatorTest {
 
         then(receipt.priceInCents()).isEqualTo(0L);
         then(receipt.text()).isEqualTo("itea \nTotal 0,00\u00A0€");
+    }
+
+    private OrderDto createOrder(ItemDto orderedItem) {
+        return new OrderDto(List.of(orderedItem));
     }
 
 }
