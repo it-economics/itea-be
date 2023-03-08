@@ -9,6 +9,10 @@ public class PicturesDto extends ItemDto {
         this.amount = amount;
     }
 
+    public String getName() {
+        return "Picture";
+    }
+
     public int getAmount() {
         return amount;
     }

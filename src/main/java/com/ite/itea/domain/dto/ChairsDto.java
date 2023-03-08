@@ -9,6 +9,10 @@ public class ChairsDto extends ItemDto {
         this.amount = amount;
     }
 
+    public String getName() {
+        return "Chair";
+    }
+
     public int getAmount() {
         return amount;
     }

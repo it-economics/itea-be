@@ -4,6 +4,8 @@ public abstract class ItemDto {
 
     private long price;
 
+    public abstract String getName();
+
     public abstract int getAmount();
 
     void setPrice(long price) {
