@@ -55,9 +55,9 @@ public class CheckoutCalculator {
 
         for (ItemDto itemDto : orderDto.itemDtos()) {
             if (itemDto instanceof PicturesDto) {
-                priceInCents += 1499L * itemDto.getAmount();
+                priceInCents += itemDto.getPriceInCents() * itemDto.getAmount();
             } else if (itemDto instanceof ChairsDto) {
-                priceInCents += 14999L * itemDto.getAmount();
+                priceInCents += itemDto.getPriceInCents() * itemDto.getAmount();
             }
         }
 
