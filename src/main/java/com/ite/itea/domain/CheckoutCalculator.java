@@ -36,7 +36,7 @@ public class CheckoutCalculator {
             text += MessageFormat.format("Picture 14,99\u00A0€ * {0}\n", amountOfPictures);
         }
         if (amountOfChairs > 0) {
-            text += MessageFormat.format("Chair 49,99\u00A0€ * {0}\n", amountOfChairs);
+            text += MessageFormat.format("Chair 149,99\u00A0€ * {0}\n", amountOfChairs);
         }
 
         text += "Total " + formatPrice(priceInCents);
@@ -57,7 +57,7 @@ public class CheckoutCalculator {
             if (itemDto instanceof PicturesDto) {
                 priceInCents += 1499L * itemDto.getAmount();
             } else if (itemDto instanceof ChairsDto) {
-                priceInCents += 4999L * itemDto.getAmount();
+                priceInCents += 14999L * itemDto.getAmount();
             }
         }
 
