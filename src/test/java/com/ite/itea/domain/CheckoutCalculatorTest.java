@@ -1,5 +1,6 @@
 package com.ite.itea.domain;
 
+import com.ite.itea.domain.dto.ChairsDto;
 import com.ite.itea.domain.dto.ItemDto;
 import com.ite.itea.domain.dto.OrderDto;
 import com.ite.itea.domain.dto.PicturesDto;
@@ -22,6 +23,18 @@ class CheckoutCalculatorTest {
 
         then(receipt.priceInCents()).isEqualTo(2998L);
         then(receipt.text()).isEqualTo("itea \nPicture 14,99\u00A0€ * 2\nTotal 29,98\u00A0€");
+    }
+
+    @Test
+    void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithChairs() {
+        CheckoutCalculator checkoutCalculator = new CheckoutCalculator();
+        var orderedChairs = new ChairsDto(2);
+        OrderDto orderDto = new OrderDto(List.of(orderedChairs));
+
+        var receipt = checkoutCalculator.calculatePrice(orderDto);
+
+        then(receipt.priceInCents()).isEqualTo(9998L);
+        then(receipt.text()).isEqualTo("itea \nChair 49,99\u00A0€ * 2\nTotal 99,98\u00A0€");
     }
 
     @Test
