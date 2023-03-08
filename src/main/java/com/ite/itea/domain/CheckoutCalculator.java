@@ -27,16 +27,15 @@ public class CheckoutCalculator {
         for (ItemDto itemDto : orderDto.itemDtos()) {
             if (itemDto instanceof PicturesDto) {
                 amountOfPictures += itemDto.getAmount();
+                if (amountOfPictures > 0) {
+                    text += MessageFormat.format("Picture 14,99\u00A0€ * {0}\n", amountOfPictures);
+                }
             } else if (itemDto instanceof ChairsDto) {
                 amountOfChairs += itemDto.getAmount();
+                if (amountOfChairs > 0) {
+                    text += MessageFormat.format("Chair 149,99\u00A0€ * {0}\n", amountOfChairs);
+                }
             }
-        }
-
-        if (amountOfPictures > 0) {
-            text += MessageFormat.format("Picture 14,99\u00A0€ * {0}\n", amountOfPictures);
-        }
-        if (amountOfChairs > 0) {
-            text += MessageFormat.format("Chair 149,99\u00A0€ * {0}\n", amountOfChairs);
         }
 
         text += "Total " + formatPrice(priceInCents);
