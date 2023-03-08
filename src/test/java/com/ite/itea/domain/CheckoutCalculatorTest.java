@@ -13,9 +13,10 @@ import static org.assertj.core.api.BDDAssertions.then;
 
 class CheckoutCalculatorTest {
 
+    private final CheckoutCalculator checkoutCalculator = new CheckoutCalculator();
+
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithPictures() {
-        CheckoutCalculator checkoutCalculator = new CheckoutCalculator();
         var orderedPicture = new PicturesDto(2);
         OrderDto orderDto = new OrderDto(List.of(orderedPicture));
 
@@ -27,7 +28,6 @@ class CheckoutCalculatorTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithChairs() {
-        CheckoutCalculator checkoutCalculator = new CheckoutCalculator();
         var orderedChairs = new ChairsDto(2);
         OrderDto orderDto = new OrderDto(List.of(orderedChairs));
 
@@ -39,7 +39,6 @@ class CheckoutCalculatorTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithoutItems() {
-        CheckoutCalculator checkoutCalculator = new CheckoutCalculator();
         List<ItemDto> nothingOrdered = new ArrayList<>();
         OrderDto orderDto = new OrderDto(nothingOrdered);
 
