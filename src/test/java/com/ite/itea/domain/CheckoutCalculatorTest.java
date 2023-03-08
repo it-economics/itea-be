@@ -33,8 +33,8 @@ class CheckoutCalculatorTest {
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
 
-        then(receipt.priceInCents()).isEqualTo(9998L);
-        then(receipt.text()).isEqualTo("itea \nChair 49,99\u00A0€ * 2\nTotal 99,98\u00A0€");
+        then(receipt.priceInCents()).isEqualTo(29998L);
+        then(receipt.text()).isEqualTo("itea \nChair 149,99\u00A0€ * 2\nTotal 299,98\u00A0€");
     }
 
     @Test
