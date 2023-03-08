@@ -18,7 +18,7 @@ class CheckoutCalculatorTest {
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithPictures() {
         var orderedPicture = new PicturesDto(2);
-        OrderDto orderDto = createOrder(orderedPicture);
+        var orderDto = createOrder(orderedPicture);
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
 
@@ -29,7 +29,7 @@ class CheckoutCalculatorTest {
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithChairs() {
         var orderedChairs = new ChairsDto(2);
-        OrderDto orderDto = createOrder(orderedChairs);
+        var orderDto = createOrder(orderedChairs);
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
 
@@ -40,7 +40,7 @@ class CheckoutCalculatorTest {
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithoutItems() {
         List<ItemDto> nothingOrdered = new ArrayList<>();
-        OrderDto orderDto = new OrderDto(nothingOrdered);
+        var orderDto = new OrderDto(nothingOrdered);
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
 

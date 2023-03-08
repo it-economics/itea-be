@@ -33,8 +33,8 @@ class CheckoutControllerTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenSendingRequestToController() {
-        var orderPicture = new ItemRequest(ItemNameRequest.Picture, 2);
-        OrderRequest orderRequest = new OrderRequest(List.of((orderPicture)));
+        var orderPicture = createItem(ItemNameRequest.Picture, 2);
+        var orderRequest = createOrder(orderPicture);
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
 
@@ -45,8 +45,8 @@ class CheckoutControllerTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenSendingRequestWithAChairToTheController() {
-        var orderChair = new ItemRequest(ItemNameRequest.Chair, 2);
-        OrderRequest orderRequest = new OrderRequest(List.of((orderChair)));
+        var orderChair = createItem(ItemNameRequest.Chair, 2);
+        var orderRequest = createOrder(orderChair);
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
 
@@ -55,7 +55,6 @@ class CheckoutControllerTest {
         then(entity.getBody().text()).isEqualTo("itea \nChair 149,99\u00A0€ * 2\nTotal 299,98\u00A0€");
     }
 
-
     @Test
     void shouldReturn200WhenSendingRequestToManagementEndpoint() {
         var entity = this.testRestTemplate.getForEntity("http://localhost:" + this.actuatorPort + "/actuator", Map.class);
@@ -63,4 +62,11 @@ class CheckoutControllerTest {
         then(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
+    private OrderRequest createOrder(ItemRequest item) {
+        return new OrderRequest(List.of(item));
+    }
+
+    private ItemRequest createItem(ItemNameRequest name, int amount) {
+        return new ItemRequest(name, amount);
+    }
 }
