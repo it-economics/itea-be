@@ -1,6 +1,8 @@
 package com.ite.itea.domain;
 
-import com.ite.itea.domain.dto.*;
+import com.ite.itea.domain.dto.ItemDto;
+import com.ite.itea.domain.dto.OrderDto;
+import com.ite.itea.domain.dto.ReceiptDto;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -47,11 +49,7 @@ public class CheckoutCalculator {
         var priceInCents = 0L;
 
         for (ItemDto itemDto : orderDto.itemDtos()) {
-            if (itemDto instanceof PicturesDto) {
-                priceInCents += itemDto.getPriceInCents() * itemDto.getAmount();
-            } else if (itemDto instanceof ChairsDto) {
-                priceInCents += itemDto.getPriceInCents() * itemDto.getAmount();
-            }
+            priceInCents += itemDto.getPriceInCents() * itemDto.getAmount();
         }
 
         return priceInCents;
