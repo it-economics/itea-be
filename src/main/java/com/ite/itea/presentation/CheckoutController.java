@@ -43,7 +43,7 @@ public class CheckoutController {
 
         ReceiptDto receiptDto = checkoutCalculator.calculatePrice(new OrderDto(itemDtoList));
 
-        return new ReceiptResponse(receiptDto.price(), receiptDto.text());
+        return new ReceiptResponse(receiptDto.priceInCents(), receiptDto.text());
     }
 
 }
