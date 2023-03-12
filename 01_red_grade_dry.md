@@ -91,6 +91,6 @@ He does not sound happy about it. So lets quickly have a look at the code and re
    1. You should ask yourself the following questions:
       1. Where are `duplications`?
       2. Can you remove the duplication without changing the `tests`?
-      3. Why are duplications so `dangers` here?
+      3. Why are duplications so `dangerous` here?
 
 ---
