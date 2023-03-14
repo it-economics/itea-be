@@ -1,5 +1,5 @@
 package com.ite.itea.domain.dto;
 
-public record ReceiptDto(double price, String text) {
+public record ReceiptDto(long priceInCents, String text) {
 
 }

@@ -20,8 +20,8 @@ class CheckoutCalculatorTest {
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
 
-        then(receipt.price()).isEqualTo(29.98);
-        then(receipt.text()).isEqualTo("itea \nPicture 14.99 * 2\nTotal 29.98");
+        then(receipt.priceInCents()).isEqualTo(2998L);
+        then(receipt.text()).isEqualTo("itea \nPicture 14,99\u00A0€ * 2\nTotal 29,98\u00A0€");
     }
 
     @Test
@@ -32,8 +32,8 @@ class CheckoutCalculatorTest {
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
 
-        then(receipt.price()).isEqualTo(0.0);
-        then(receipt.text()).isEqualTo("itea \nTotal 0.0");
+        then(receipt.priceInCents()).isEqualTo(0L);
+        then(receipt.text()).isEqualTo("itea \nTotal 0,00\u00A0€");
     }
 
 }

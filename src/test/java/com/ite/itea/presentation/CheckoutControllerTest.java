@@ -39,8 +39,8 @@ class CheckoutControllerTest {
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
 
         then(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
-        then(entity.getBody().price()).isEqualTo(29.98);
-        then(entity.getBody().text()).isEqualTo("itea \nPicture 14.99 * 2\nTotal 29.98");
+        then(entity.getBody().priceInCents()).isEqualTo(2998L);
+        then(entity.getBody().text()).isEqualTo("itea \nPicture 14,99\u00A0€ * 2\nTotal 29,98\u00A0€");
     }
 
     @Test
