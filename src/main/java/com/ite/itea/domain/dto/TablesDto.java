@@ -1,21 +1,27 @@
 package com.ite.itea.domain.dto;
 
+import com.ite.itea.domain.request.ItemNameRequest;
+
 public class TablesDto extends ItemDto {
 
+    private final ItemNameRequest tablesType;
     private final int amount;
-    private final double legPrice;
-    private final double platePrice;
+    private final long legPrice;
+    private final long platePrice;
+    private String material;
 
-    public TablesDto(int amount, long legPrice, long platePrice) {
+    public TablesDto(ItemNameRequest tablesType, int amount, long legPrice, long platePrice, String material) {
+        this.tablesType = tablesType;
         this.amount = amount;
         this.legPrice = legPrice;
         this.platePrice = platePrice;
+        this.material = material;
         setPrice((long) (4 * legPrice + platePrice));
     }
 
     @Override
     public String getName() {
-        return "Table";
+        return tablesType.name();
     }
 
     @Override

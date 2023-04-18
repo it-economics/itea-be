@@ -1,23 +1,25 @@
 package com.ite.itea.domain.dto;
 
-public class ChairsDto extends TablesDto {
+import com.ite.itea.domain.request.ItemNameRequest;
 
-    private final int amount;
-    private final long chairbackPrice;
+public class ChairsDto extends ItemDto {
 
-    public ChairsDto(int amount, long legPrice, long platePrice, long chairbackPrice) {
-        super(amount, legPrice, platePrice);
+    private final TablesDto table;
+    private long chairbackPrice;
+
+    public ChairsDto(ItemNameRequest chairType, int amount, long legPrice, long platePrice, long chairbackPrice, String material) {
+        table = new TablesDto(chairType, amount, legPrice, platePrice, material);
         this.chairbackPrice = chairbackPrice;
-        this.amount = amount;
-        setPrice(getPriceInCents() + chairbackPrice);
+        setPrice(table.getPriceInCents() + chairbackPrice);
     }
 
+    @Override
     public String getName() {
-        return "Chair";
+        return table.getName();
     }
 
+    @Override
     public int getAmount() {
-        return amount;
+        return table.getAmount();
     }
-
 }

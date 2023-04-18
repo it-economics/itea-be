@@ -32,11 +32,29 @@ public class CheckoutController {
         List<ItemDto> itemDtoList = new ArrayList<>();
 
         for (ItemRequest itemRequest : orderRequest.itemRequests()) {
-            if (ItemNameRequest.Picture.equals(itemRequest.name())) {
-                ItemDto itemDto = new PicturesDto(itemRequest.amount());
+            if (ItemNameRequest.PictureNorway.equals(itemRequest.name())) {
+                ItemDto itemDto = new PicturesDto(itemRequest.name(), itemRequest.amount(), 999L);
                 itemDtoList.add(itemDto);
-            } else if (ItemNameRequest.Chair.equals(itemRequest.name())) {
-                ItemDto itemDto = new ChairsDto(itemRequest.amount(),  2000, 4000, 2999);
+            } else if (ItemNameRequest.PictureSweden.equals(itemRequest.name())) {
+                ItemDto itemDto = new PicturesDto(itemRequest.name(), itemRequest.amount(), 1299L);
+                itemDtoList.add(itemDto);
+            } else if (ItemNameRequest.PictureFinland.equals(itemRequest.name())) {
+                ItemDto itemDto = new PicturesDto(itemRequest.name(), itemRequest.amount(), 1499L);
+                itemDtoList.add(itemDto);
+            } else if (ItemNameRequest.ChairElsa.equals(itemRequest.name())) {
+                ItemDto itemDto = new ChairsDto(itemRequest.name(), itemRequest.amount(), 500, 500, 500, "plastic");
+                itemDtoList.add(itemDto);
+            } else if (ItemNameRequest.ChairKnut.equals(itemRequest.name())) {
+                ItemDto itemDto = new ChairsDto(itemRequest.name(), itemRequest.amount(), 400, 1000, 1500,  "wood");
+                itemDtoList.add(itemDto);
+            } else if (ItemNameRequest.ChairLars.equals(itemRequest.name())) {
+                ItemDto itemDto = new ChairsDto(itemRequest.name(), itemRequest.amount(), 200, 2000, 3000, "metal");
+                itemDtoList.add(itemDto);
+            } else if (ItemNameRequest.TableLotta.equals(itemRequest.name())) {
+                ItemDto itemDto = new TablesDto(itemRequest.name(), itemRequest.amount(), 1000, 1000, "plastic");
+                itemDtoList.add(itemDto);
+            }else if (ItemNameRequest.TableLola.equals(itemRequest.name())) {
+                ItemDto itemDto = new TablesDto(itemRequest.name(), itemRequest.amount(), 3000, 1000, "plastic");
                 itemDtoList.add(itemDto);
             }
         }
