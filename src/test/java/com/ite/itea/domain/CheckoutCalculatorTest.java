@@ -1,9 +1,6 @@
 package com.ite.itea.domain;
 
-import com.ite.itea.domain.dto.ChairsDto;
-import com.ite.itea.domain.dto.ItemDto;
-import com.ite.itea.domain.dto.OrderDto;
-import com.ite.itea.domain.dto.PicturesDto;
+import com.ite.itea.domain.dto.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -28,13 +25,24 @@ class CheckoutCalculatorTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithChairs() {
-        var orderedChairs = new ChairsDto(2);
+        var orderedChairs = new ChairsDto(2, 2000, 4000, 2999);
         var orderDto = createOrder(orderedChairs);
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
 
         then(receipt.priceInCents()).isEqualTo(29998L);
         then(receipt.text()).isEqualTo("itea \nChair 149,99\u00A0€ * 2\nTotal 299,98\u00A0€");
+    }
+
+    @Test
+    void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithTables() {
+        var orderedTables = new TablesDto(2, 1000, 3000);
+        var orderDto = createOrder(orderedTables);
+
+        var receipt = checkoutCalculator.calculatePrice(orderDto);
+
+        then(receipt.priceInCents()).isEqualTo(14000L);
+        then(receipt.text()).isEqualTo("itea \nTable 70,00\u00A0€ * 2\nTotal 140,00\u00A0€");
     }
 
     @Test

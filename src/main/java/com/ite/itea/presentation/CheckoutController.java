@@ -36,7 +36,7 @@ public class CheckoutController {
                 ItemDto itemDto = new PicturesDto(itemRequest.amount());
                 itemDtoList.add(itemDto);
             } else if (ItemNameRequest.Chair.equals(itemRequest.name())) {
-                ItemDto itemDto = new ChairsDto(itemRequest.amount());
+                ItemDto itemDto = new ChairsDto(itemRequest.amount(),  2000, 4000, 2999);
                 itemDtoList.add(itemDto);
             }
         }
