@@ -1,8 +1,8 @@
 package com.ite.itea.domain.dto;
 
 public class TableLotta extends TablesDto{
-    public TableLotta(int amount) {
-        super(amount, 1000L, 3000L, "plastic");
+    public TableLotta() {
+        super( 1000L, 3000L, Material.PLASTIC);
     }
 
     @Override

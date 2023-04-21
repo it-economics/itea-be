@@ -6,8 +6,6 @@ public abstract class ItemDto {
 
     public abstract String getName();
 
-    public abstract int getAmount();
-
     void setPrice(long price) {
         this.price = price;
     }
@@ -15,5 +13,7 @@ public abstract class ItemDto {
     public long getPriceInCents() {
         return this.price;
     }
+
+    public abstract long getPriceInCents(int amount);
 
 }

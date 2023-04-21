@@ -29,14 +29,14 @@ public class CheckoutController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ReceiptResponse calculate(@RequestBody OrderRequest orderRequest) {
-        List<ItemDto> itemDtoList = new ArrayList<>();
+        List<OrderPointDto> itemDtoList = new ArrayList<>();
 
         for (ItemRequest itemRequest : orderRequest.itemRequests()) {
             switch (itemRequest.name()) {
-                case Picture -> itemDtoList.add(new PicturesDto(itemRequest.amount()));
-                case Chair -> itemDtoList.add(getDefaultChair(itemRequest.amount()));
-                case ChairLars -> itemDtoList.add(new ChairLars(itemRequest.amount()));
-                case ChairKnut -> itemDtoList.add(new ChairKnut(itemRequest.amount()));
+                case Picture -> itemDtoList.add(new OrderPointDto(itemRequest.amount(), new PicturesDto(itemRequest.amount()));
+                case Chair -> itemDtoList.add(new OrderPointDto(itemRequest.amount(), getDefaultChair()));
+                case ChairLars -> itemDtoList.add(new OrderPointDto(itemRequest.amount(),new ChairLars()));
+                case ChairKnut -> itemDtoList.add(new OrderPointDto(itemRequest.amount(),new ChairKnut()));
                 case ChairElsa -> itemDtoList.add(new ChairElsa(itemRequest.amount()));
                 case TableLotta -> itemDtoList.add(new TableLotta(itemRequest.amount()));
                 case TableLola -> itemDtoList.add(new TableLola(itemRequest.amount()));
@@ -48,8 +48,8 @@ public class CheckoutController {
         return new ReceiptResponse(receiptDto.priceInCents(), receiptDto.text());
     }
 
-    private static ChairsDto getDefaultChair(int amount) {
-        return new ChairsDto(amount, 2000, 4000, 2999, 4, "wood");
+    private static ChairsDto getDefaultChair() {
+        return new ChairsDto( 2000, 4000, 2999, 4, Material.WOOD);
     }
 
 }

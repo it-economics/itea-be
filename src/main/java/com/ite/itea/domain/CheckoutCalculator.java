@@ -2,6 +2,7 @@ package com.ite.itea.domain;
 
 import com.ite.itea.domain.dto.ItemDto;
 import com.ite.itea.domain.dto.OrderDto;
+import com.ite.itea.domain.dto.OrderPointDto;
 import com.ite.itea.domain.dto.ReceiptDto;
 import org.springframework.stereotype.Service;
 
@@ -21,20 +22,20 @@ public class CheckoutCalculator {
     }
 
     private String getText(OrderDto orderDto, long priceInCents) {
-        var text = "itea \n";
+        StringBuilder text = new StringBuilder("itea \n");
 
-        for (ItemDto itemDto : orderDto.itemDtos()) {
-            text += convertToText(itemDto);
+        for (OrderPointDto orderPointDto : orderDto.itemDtos()) {
+            text.append(convertToText(orderPointDto.getItem()));
         }
 
-        text += "Total " + formatPrice(priceInCents);
+        text.append("Total ").append(formatPrice(priceInCents));
 
-        return text;
+        return text.toString();
     }
 
-    private String convertToText(ItemDto itemDto) {
+    private String convertToText(OrderPointDto itemDto) {
         if (itemDto.getAmount() > 0) {
-            return MessageFormat.format("{0} {1} * {2}\n", itemDto.getName(), formatPrice(itemDto.getPriceInCents()), itemDto.getAmount());
+            return MessageFormat.format("{0} {1} * {2}\n", itemDto.getItem().getName(), formatPrice(itemDto.getItem().getPriceInCents()), itemDto.getAmount());
         }
         return "";
     }
@@ -48,8 +49,8 @@ public class CheckoutCalculator {
     private long getPrice(OrderDto orderDto) {
         var priceInCents = 0L;
 
-        for (ItemDto itemDto : orderDto.itemDtos()) {
-            priceInCents += itemDto.getPriceInCents() * itemDto.getAmount();
+        for (OrderPointDto itemDto : orderDto.itemDtos()) {
+            priceInCents += itemDto.getItem().getPriceInCents() * itemDto.getAmount();
         }
 
         return priceInCents;

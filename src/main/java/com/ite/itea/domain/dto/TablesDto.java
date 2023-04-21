@@ -2,17 +2,14 @@ package com.ite.itea.domain.dto;
 
 public class TablesDto extends ItemDto {
 
-    private final int amount;
-    private final double legPrice;
-    private final double platePrice;
-    private final String material;
+    private final long legPrice;
+    private final long platePrice;
+    private final Material material;
 
-    public TablesDto(int amount, long legPrice, long platePrice, String material) {
-        this.amount = amount;
+    public TablesDto( long legPrice, long platePrice, Material material) {
         this.legPrice = legPrice;
         this.platePrice = platePrice;
         this.material = material;
-        setPrice((long) (4 * legPrice + platePrice));
     }
 
     @Override
@@ -20,8 +17,8 @@ public class TablesDto extends ItemDto {
         return "Table";
     }
 
-    @Override
-    public int getAmount() {
-        return amount;
+    public long getPriceInCents(int amount) {
+        return amount * (4 * legPrice + platePrice);
     }
+
 }
