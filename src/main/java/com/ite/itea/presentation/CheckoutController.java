@@ -32,18 +32,24 @@ public class CheckoutController {
         List<ItemDto> itemDtoList = new ArrayList<>();
 
         for (ItemRequest itemRequest : orderRequest.itemRequests()) {
-            if (ItemNameRequest.Picture.equals(itemRequest.name())) {
-                ItemDto itemDto = new PicturesDto(itemRequest.amount());
-                itemDtoList.add(itemDto);
-            } else if (ItemNameRequest.Chair.equals(itemRequest.name())) {
-                ItemDto itemDto = new ChairsDto(itemRequest.amount(),  2000, 4000, 2999);
-                itemDtoList.add(itemDto);
+            switch (itemRequest.name()) {
+                case Picture -> itemDtoList.add(new PicturesDto(itemRequest.amount()));
+                case Chair -> itemDtoList.add(getDefaultChair(itemRequest.amount()));
+                case ChairLars -> itemDtoList.add(new ChairLars(itemRequest.amount()));
+                case ChairKnut -> itemDtoList.add(new ChairKnut(itemRequest.amount()));
+                case ChairElsa -> itemDtoList.add(new ChairElsa(itemRequest.amount()));
+                case TableLotta -> itemDtoList.add(new TableLotta(itemRequest.amount()));
+                case TableLola -> itemDtoList.add(new TableLola(itemRequest.amount()));
             }
         }
 
         ReceiptDto receiptDto = checkoutCalculator.calculatePrice(new OrderDto(itemDtoList));
 
         return new ReceiptResponse(receiptDto.priceInCents(), receiptDto.text());
+    }
+
+    private static ChairsDto getDefaultChair(int amount) {
+        return new ChairsDto(amount, 2000, 4000, 2999, 4, "wood");
     }
 
 }

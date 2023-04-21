@@ -25,7 +25,7 @@ class CheckoutCalculatorTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithChairs() {
-        var orderedChairs = new ChairsDto(2, 2000, 4000, 2999);
+        var orderedChairs = new ChairsDto(2, 2000, 4000, 2999, 4, "wood");
         var orderDto = createOrder(orderedChairs);
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
@@ -36,7 +36,7 @@ class CheckoutCalculatorTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithTables() {
-        var orderedTables = new TablesDto(2, 1000, 3000);
+        var orderedTables = new TablesDto(2, 1000, 3000, "wood");
         var orderDto = createOrder(orderedTables);
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
