@@ -54,13 +54,7 @@ public class CalculatorGardenBench {
             elementsText = "Elements: 0 of 2 elements is a plant element";
         }
 
-        if(amountPlantElements == 1) {
-            totalLength = length + 60;
-        } else if(amountPlantElements == 2) {
-            totalLength = length + 108;
-        } else {
-            totalLength = length + 16;
-        }
+        totalLength= calculateTotalLength(amountPlantElements, length);
 
         if(hasBackrest) {
             elementsText += ", has a backrest\n";
@@ -115,6 +109,18 @@ public class CalculatorGardenBench {
         productText += "\n";
         // TODO: (later/some day in the future) create PDF with productText
         System.out.println(productText);
+    }
+
+    private int calculateTotalLength(int amountPlantElements, int length) {
+        int calculatedLength=0;
+        if(amountPlantElements == 1) {
+            calculatedLength = length + 60;
+        } else if(amountPlantElements == 2) {
+            calculatedLength = length + 108;
+        } else {
+            calculatedLength = length + 16;
+        }
+        return calculatedLength;
     }
 
     private boolean isExtraLength() {
