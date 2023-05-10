@@ -3,44 +3,19 @@ package com.ite.itea;
 import com.ite.itea.domain.CalculatorGardenBench;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 public class CalculatorGardenBenchTest {
 
-    @Test
-    void shouldReturnCorrectPriceForDefaultBench() {
-        CalculatorGardenBench calculatorGardenBench = new CalculatorGardenBench(1, 165,
-                2, 0, false, false);
-        Assertions.assertEquals(230, calculatorGardenBench.getTotalPrice());
+    @ParameterizedTest
+    @MethodSource("provideBenchConfigurationsWithPrice")
+    void shouldReturnCorrectPriceForConfiguration(CalculatorGardenBench calculatorGardenBench, int price) {
+        Assertions.assertEquals(price, calculatorGardenBench.getTotalPrice());
     }
-
-    @Test
-    void shouldReturnCorrectPriceForDefaultBenchForDelivery() {
-        CalculatorGardenBench calculatorGardenBench = new CalculatorGardenBench(1, 165,
-                2, 0, false, true);
-        Assertions.assertEquals(300, calculatorGardenBench.getTotalPrice());
-    }
-
-    @Test
-    void shouldReturnCorrectPriceForTwoDefaultBenches() {
-        CalculatorGardenBench calculatorGardenBench = new CalculatorGardenBench(2, 165,
-                2, 0, false, false);
-        Assertions.assertEquals(460, calculatorGardenBench.getTotalPrice());
-    }
-
-    @Test
-    void shouldReturnCorrectPriceForOnePlantElementBench() {
-        CalculatorGardenBench calculatorGardenBench = new CalculatorGardenBench(1, 165,
-                1, 1, false, false);
-        Assertions.assertEquals(280, calculatorGardenBench.getTotalPrice());
-    }
-
-    @Test
-    void shouldReturnCorrectPriceForBackrestBench() {
-        CalculatorGardenBench calculatorGardenBench = new CalculatorGardenBench(1, 165,
-                2, 0, true, false);
-        Assertions.assertEquals(280, calculatorGardenBench.getTotalPrice());
-    }
-
 
     @Test
     void shouldReturnCorrectTextForDefaultBench() {
@@ -100,5 +75,82 @@ public class CalculatorGardenBenchTest {
                 "Delivery Type: Product is collected for 0.0 EUR\n" +
                 "Total price (without delivery): 1 * 280.0 EUR = 280.0 EUR\n";
         Assertions.assertEquals(expectedText, calculatorGardenBench.getProductText());
+    }
+
+    private static Stream<Arguments> provideBenchConfigurationsWithPrice() {
+        return Stream.of(
+                // 1:
+                Arguments.of(new CalculatorGardenBench(1,
+                                165,
+                                2,
+                                0,
+                                false,
+                                false),
+                        230),
+                // 2:
+                Arguments.of(new CalculatorGardenBench(1,
+                                165,
+                                2,
+                                0,
+                                false,
+                                true),
+                        300),
+                // 3:
+                Arguments.of(new CalculatorGardenBench(2,
+                                165,
+                                2,
+                                0,
+                                false,
+                                true),
+                        590),
+                // 4:
+                Arguments.of(new CalculatorGardenBench(1,
+                        165,
+                        1,
+                        1,
+                        false,
+                        true),
+                        360),
+                // 5:
+                Arguments.of(new CalculatorGardenBench(1,
+                        165,
+                        2,
+                        0,
+                        true,
+                        true),
+                        350),
+                // 6:
+                Arguments.of(new CalculatorGardenBench(1,
+                                210,
+                                2,
+                                0,
+                                true,
+                                true),
+                        425),
+                // 7:
+                Arguments.of(new CalculatorGardenBench(1,
+                                165,
+                                0,
+                                2,
+                                true,
+                                true),
+                        470),
+                // 8:
+                Arguments.of(new CalculatorGardenBench(1,
+                                210,
+                                1,
+                                1,
+                                false,
+                                true),
+                        435),
+                // 9:
+                Arguments.of(new CalculatorGardenBench(1,
+                                210,
+                                0,
+                                2,
+                                false,
+                                true),
+                        495)
+                );
     }
 }
