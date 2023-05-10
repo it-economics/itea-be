@@ -9,7 +9,9 @@ public class CalculatorGardenBench {
     private static final double PLANT_ELEMENT_PRICE = 130;
     private static final double WOOD_PLATE_PRICE = 70;
     private static final double BACKREST_PRICE = 50;
-    /** 1 euro extra charge for each added cm (if more than 165 cm)*/
+    /**
+     * 1 euro extra charge for each added cm (if more than 165 cm)
+     */
     private static final double LENGTH_PRICE_EXTRA_CHARGE = 1;
 
     private String elementsText;
@@ -42,24 +44,13 @@ public class CalculatorGardenBench {
     private void calculateAndPrint() {
 
 
-        totalLength= calculateTotalLength(amountPlantElements, length);
+        totalLength = calculateTotalLength(amountPlantElements, length);
 
         // text creation for elements composition
-        if(amountPlantElements == 1) {
-            elementsText = "Elements: 1 of 2 elements is a plant element";
-        } else if(amountPlantElements == 2) {
-            elementsText = "Elements: 2 of 2 elements is a plant element";
-        } else {
-            elementsText = "Elements: 0 of 2 elements is a plant element";
-        }
-        if(hasBackrest) {
-            elementsText += ", has a backrest\n";
-        } else {
-            elementsText += ", has no backrest\n";
-        }
+        elementsText= createElementsText(amountPlantElements, hasBackrest);
 
         // price calculation for extra length premium
-        if(isExtraLength(length)) {
+        if (isExtraLength(length)) {
             productPrice += (length - 165) * LENGTH_PRICE_EXTRA_CHARGE;
         }
         // price calculation for elements
@@ -67,31 +58,47 @@ public class CalculatorGardenBench {
         // price calculation for wood plate
         productPrice += WOOD_PLATE_PRICE;
         // price calculation for backrest
-        if(hasBackrest) {
+        if (hasBackrest) {
             productPrice += BACKREST_PRICE;
         }
 
         // price calculation for delivery (dependent on weight and length of product)
-        deliveryPrice=calculateDeliveryPrice(isDelivery, length, amountDefaultElements, amount);
+        deliveryPrice = calculateDeliveryPrice(isDelivery, length, amountDefaultElements, amount);
 
-        deliveryText= createDeliveryText(isDelivery, deliveryPrice);
+        deliveryText = createDeliveryText(isDelivery, deliveryPrice);
 
         productText = "Order for a garden bench:\n";
         productText += elementsText;
         productText += "Total length: " + totalLength + " cm\n";
         productText += deliveryText;
-        productText += "Total price (without delivery): " + amount + " * " + productPrice + " EUR = " + (amount*productPrice) + " EUR";
+        productText += "Total price (without delivery): " + amount + " * " + productPrice + " EUR = " + (amount * productPrice) + " EUR";
         productText += "\n";
         // TODO: (later/some day in the future) create PDF with productText
         System.out.println(productText);
     }
 
-    private String createDeliveryText(boolean isDelivery, double deliveryPrice) {
-        String deliveryText="";
-        if(isDelivery) {
-            deliveryText = "Delivery Type: Product is delivered ";
+    private String createElementsText(int amountPlantElements, boolean hasBackrest) {
+        String elementsText = "";
+        if (amountPlantElements == 1) {
+            elementsText = "Elements: 1 of 2 elements is a plant element";
+        } else if (amountPlantElements == 2) {
+            elementsText = "Elements: 2 of 2 elements is a plant element";
+        } else {
+            elementsText = "Elements: 0 of 2 elements is a plant element";
         }
-        else {
+        if (hasBackrest) {
+            elementsText += ", has a backrest\n";
+        } else {
+            elementsText += ", has no backrest\n";
+        }
+        return elementsText;
+    }
+
+    private String createDeliveryText(boolean isDelivery, double deliveryPrice) {
+        String deliveryText = "";
+        if (isDelivery) {
+            deliveryText = "Delivery Type: Product is delivered ";
+        } else {
             deliveryText = "Delivery Type: Product is collected ";
         }
         deliveryText += "for " + deliveryPrice + " EUR\n";
@@ -99,20 +106,20 @@ public class CalculatorGardenBench {
     }
 
     private int calculateDeliveryPrice(boolean isDelivery, int length, int amountDefaultElements, int amount) {
-        int deliveryPrice=0;
+        int deliveryPrice = 0;
 
-        if(isDelivery) {
-            if(length<=200 && amountDefaultElements==2 && amount==1) {
+        if (isDelivery) {
+            if (length <= 200 && amountDefaultElements == 2 && amount == 1) {
                 deliveryPrice += 70;
-            } else if(length<=200 && amountDefaultElements==1 && amount==1) {
+            } else if (length <= 200 && amountDefaultElements == 1 && amount == 1) {
                 deliveryPrice = 80;
-            } else if(length<=200 && amountDefaultElements==0 && amount==1) {
+            } else if (length <= 200 && amountDefaultElements == 0 && amount == 1) {
                 deliveryPrice = 90;
-            } else if(length>200 && amountDefaultElements==2 && amount==1) {
+            } else if (length > 200 && amountDefaultElements == 2 && amount == 1) {
                 deliveryPrice = 100;
-            } else if(length>200 && amountDefaultElements==1 && amount==1) {
+            } else if (length > 200 && amountDefaultElements == 1 && amount == 1) {
                 deliveryPrice = 110;
-            } else if(length>200 && amountDefaultElements==0 && amount==1) {
+            } else if (length > 200 && amountDefaultElements == 0 && amount == 1) {
                 deliveryPrice = 120;
             } else {
                 deliveryPrice = 130;
@@ -124,10 +131,10 @@ public class CalculatorGardenBench {
     }
 
     private int calculateTotalLength(int amountPlantElements, int length) {
-        int calculatedLength=0;
-        if(amountPlantElements == 1) {
+        int calculatedLength = 0;
+        if (amountPlantElements == 1) {
             calculatedLength = length + 60;
-        } else if(amountPlantElements == 2) {
+        } else if (amountPlantElements == 2) {
             calculatedLength = length + 108;
         } else {
             calculatedLength = length + 16;
