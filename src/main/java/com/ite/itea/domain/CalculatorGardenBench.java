@@ -41,7 +41,7 @@ public class CalculatorGardenBench {
 
     private void calculateAndPrint() {
         // price calculation for extra length premium
-        if(length > 165) {
+        if(isExtraLength()) {
             productPrice += (length - 165) * LENGTH_PRICE_EXTRA_CHARGE;
         }
 
@@ -109,6 +109,10 @@ public class CalculatorGardenBench {
         productText += "\n";
         // TODO: (later/some day in the future) create PDF with productText
         System.out.println(productText);
+    }
+
+    private boolean isExtraLength() {
+        return length > 165;
     }
 
     public String getProductText() {
