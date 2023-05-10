@@ -38,7 +38,7 @@ public class CalculatorGardenBench {
         this.hasBackrest = hasBackrest;
         this.isDelivery = isDelivery;
 
-        getTotalPrice();
+        calculateTotalPrice();
         printProductText();
     }
 
@@ -152,7 +152,7 @@ public class CalculatorGardenBench {
         return productText;
     }
 
-    public double getTotalPrice() {
+    public double calculateTotalPrice() {
         productPrice = calculateProductPrice(length, amountDefaultElements, amountPlantElements, hasBackrest);
         deliveryPrice = calculateDeliveryPrice(isDelivery, length, amountDefaultElements, amount);
         return amount * productPrice + deliveryPrice;

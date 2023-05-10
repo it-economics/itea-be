@@ -10,35 +10,35 @@ public class CalculatorGardenBenchTest {
     void shouldReturnCorrectPriceForDefaultBench() {
         CalculatorGardenBench calculatorGardenBench = new CalculatorGardenBench(1, 165,
                 2, 0, false, false);
-        Assertions.assertEquals(230, calculatorGardenBench.getTotalPrice());
+        Assertions.assertEquals(230, calculatorGardenBench.calculateTotalPrice());
     }
 
     @Test
     void shouldReturnCorrectPriceForDefaultBenchForDelivery() {
         CalculatorGardenBench calculatorGardenBench = new CalculatorGardenBench(1, 165,
                 2, 0, false, true);
-        Assertions.assertEquals(300, calculatorGardenBench.getTotalPrice());
+        Assertions.assertEquals(300, calculatorGardenBench.calculateTotalPrice());
     }
 
     @Test
     void shouldReturnCorrectPriceForTwoDefaultBenches() {
         CalculatorGardenBench calculatorGardenBench = new CalculatorGardenBench(2, 165,
                 2, 0, false, false);
-        Assertions.assertEquals(460, calculatorGardenBench.getTotalPrice());
+        Assertions.assertEquals(460, calculatorGardenBench.calculateTotalPrice());
     }
 
     @Test
     void shouldReturnCorrectPriceForOnePlantElementBench() {
         CalculatorGardenBench calculatorGardenBench = new CalculatorGardenBench(1, 165,
                 1, 1, false, false);
-        Assertions.assertEquals(280, calculatorGardenBench.getTotalPrice());
+        Assertions.assertEquals(280, calculatorGardenBench.calculateTotalPrice());
     }
 
     @Test
     void shouldReturnCorrectPriceForBackrestBench() {
         CalculatorGardenBench calculatorGardenBench = new CalculatorGardenBench(1, 165,
                 2, 0, true, false);
-        Assertions.assertEquals(280, calculatorGardenBench.getTotalPrice());
+        Assertions.assertEquals(280, calculatorGardenBench.calculateTotalPrice());
     }
 
 
