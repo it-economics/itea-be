@@ -5,11 +5,12 @@ package com.ite.itea.domain;
  */
 public class CalculatorGardenBench {
 
-    private static final double defaultElementPrice = 80;
-    private static final double plantElementPrice = 130;
-    private static final double woodPlatePrice = 70;
-    private static final double backrestPrice = 50;
-    private static final double lengthPriceExtraCharge = 1; // 1 euro extra charge for each added cm (if more than 165 cm)
+    private static final double DEFAULT_ELEMENT_PRICE = 80;
+    private static final double PLANT_ELEMENT_PRICE = 130;
+    private static final double WOOD_PLATE_PRICE = 70;
+    private static final double BACKREST_PRICE = 50;
+    /** 1 euro extra charge for each added cm (if more than 165 cm)*/
+    private static final double LENGTH_PRICE_EXTRA_CHARGE = 1;
 
     private String elementsText;
     private String deliveryText;
@@ -41,7 +42,7 @@ public class CalculatorGardenBench {
     private void calculateAndPrint() {
         // price calculation for extra length premium
         if(length > 165) {
-            productPrice += (length - 165) * lengthPriceExtraCharge;
+            productPrice += (length - 165) * LENGTH_PRICE_EXTRA_CHARGE;
         }
 
         // text creation for elements composition
@@ -62,12 +63,12 @@ public class CalculatorGardenBench {
         }
 
         // price calculation for elements
-        productPrice += (amountDefaultElements * defaultElementPrice) + (amountPlantElements * plantElementPrice);
+        productPrice += (amountDefaultElements * DEFAULT_ELEMENT_PRICE) + (amountPlantElements * PLANT_ELEMENT_PRICE);
         // price calculation for wood plate
-        productPrice += woodPlatePrice;
+        productPrice += WOOD_PLATE_PRICE;
         // price calculation for backrest
         if(hasBackrest) {
-            productPrice += backrestPrice;
+            productPrice += BACKREST_PRICE;
         }
 
         // price calculation for delivery (dependent on weight and length of product)

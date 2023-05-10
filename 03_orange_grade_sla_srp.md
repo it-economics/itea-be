@@ -31,9 +31,9 @@ The product can be shipped (for extra charge) or collected. Here are some exampl
 In a first step the company wants to calculate the price with given information and print out a sheet of paper with 
 information of the product so the product can easily be produced in a factory.
 
-Oh no, this is going to be complicated. It will take hours to calculate the price. Happily, Joe, the last intern of the company already started with the implementation in the software for the product. Sadly,
-Joe left the company, so it was decided that it is your job to complete it. No, problem, you think. Then you look into the code
-and realize that you can't work on it like this. Therefore, today, your task for today is to clean up the code.
+Oh no, this is going to be complicated. It will take hours to calculate the price. Happily, Joe, the last intern of the 
+company already started with the implementation of the product. Sadly, Joe left the company, so it was decided that it 
+is your job to complete it. No, problem, you think. Then you look into the code ...
 
 -----
 Here are the tasks that you have to implement for this Kata:
@@ -43,7 +43,7 @@ Here are the tasks that you have to implement for this Kata:
 ### First Task to implement:
 
 'Optimize method calculateAndPrint() in CalculatorGardenBench' 
-   1. Refactor the method so the method only calls other methods (apply SLA)
+   1. Refactor the method bringing all steps to the same level of abstraction (so the method only calls other methods)
    2. Why hasn't Joe (the intern) made use of the SLA principle in the first place? What might be the main reason?
    3. How can you persuade people in the future (e.g. new interns) to apply the SLA principle? What are the main benefits?
 
@@ -64,4 +64,4 @@ If you have still time left you can try to do even more refactoring or do the bo
 'Price Change'
 
 A market analysis conducted by your companies predicts an extremely high demand in the summer for the garden bench at the current price.
-Therefore, the management wants to increase the price by 20%. What do you do? Implement your ideal solution. 
+Therefore, the management wants to increase the price by 10 to 20% (depending of the day of the week: monday to thursday 10%, fr and sat 20%). What do you do? Implement your ideal solution. 
