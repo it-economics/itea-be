@@ -43,13 +43,13 @@ public class CalculatorGardenBench {
 
     private void calculateAndPrint() {
 
-        //TODO: do i need this class vars or should i restrict their visibility?
-        totalLength = calculateTotalLength(amountPlantElements, length);
-        elementsText = createElementsText(amountPlantElements, hasBackrest);
+        //TODO: refactoring: get rid of implicit variable initialization
+        int totalLength = calculateTotalLength(amountPlantElements, length);
+        String elementsText = createElementsText(amountPlantElements, hasBackrest);
         productPrice = calculateProductPrice(length, amountDefaultElements, amountPlantElements, hasBackrest);
 
         deliveryPrice = calculateDeliveryPrice(isDelivery, length, amountDefaultElements, amount);
-        deliveryText = createDeliveryText(isDelivery, deliveryPrice);
+        String deliveryText = createDeliveryText(isDelivery, deliveryPrice);
 
         productText= calculateProductText(elementsText, totalLength, deliveryText, amount, productPrice);
         // TODO: (later/some day in the future) create PDF with productText
