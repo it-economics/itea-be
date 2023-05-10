@@ -42,27 +42,34 @@ public class CalculatorGardenBench {
     }
 
     private void calculateAndPrint() {
+
+        //TODO: do i need this class vars or should i restrict their visibility?
         totalLength = calculateTotalLength(amountPlantElements, length);
         elementsText = createElementsText(amountPlantElements, hasBackrest);
-        productPrice= calculateProductPrice(length, amountDefaultElements, amountPlantElements, hasBackrest);
+        productPrice = calculateProductPrice(length, amountDefaultElements, amountPlantElements, hasBackrest);
 
         deliveryPrice = calculateDeliveryPrice(isDelivery, length, amountDefaultElements, amount);
         deliveryText = createDeliveryText(isDelivery, deliveryPrice);
 
-        productText = "Order for a garden bench:\n";
+        productText= calculateProductText(elementsText, totalLength, deliveryText, amount, productPrice);
+        // TODO: (later/some day in the future) create PDF with productText
+        System.out.println(productText);
+    }
+
+    private String calculateProductText(String elementsText, int totalLength, String deliveryText, int amount, double productPrice) {
+        String productText = "Order for a garden bench:\n";
         productText += elementsText;
         productText += "Total length: " + totalLength + " cm\n";
         productText += deliveryText;
         productText += "Total price (without delivery): " + amount + " * " + productPrice + " EUR = " + (amount * productPrice) + " EUR";
         productText += "\n";
-        // TODO: (later/some day in the future) create PDF with productText
-        System.out.println(productText);
+        return productText;
     }
 
     private double calculateProductPrice(int length, int amountDefaultElements, int amountPlantElements, boolean hasBackrest) {
-        double productPrice;
+        double productPrice=0.0;
         if (isExtraLength(length)) {
-            productPrice = (length - 165) * LENGTH_PRICE_EXTRA_CHARGE;
+            productPrice += (length - 165) * LENGTH_PRICE_EXTRA_CHARGE;
         }
         // price calculation for elements
         productPrice += (amountDefaultElements * DEFAULT_ELEMENT_PRICE) + (amountPlantElements * PLANT_ELEMENT_PRICE);
