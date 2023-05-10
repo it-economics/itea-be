@@ -40,10 +40,9 @@ public class CalculatorGardenBench {
     }
 
     private void calculateAndPrint() {
-        // price calculation for extra length premium
-        if(isExtraLength(length)) {
-            productPrice += (length - 165) * LENGTH_PRICE_EXTRA_CHARGE;
-        }
+
+
+        totalLength= calculateTotalLength(amountPlantElements, length);
 
         // text creation for elements composition
         if(amountPlantElements == 1) {
@@ -53,15 +52,16 @@ public class CalculatorGardenBench {
         } else {
             elementsText = "Elements: 0 of 2 elements is a plant element";
         }
-
-        totalLength= calculateTotalLength(amountPlantElements, length);
-
         if(hasBackrest) {
             elementsText += ", has a backrest\n";
         } else {
             elementsText += ", has no backrest\n";
         }
 
+        // price calculation for extra length premium
+        if(isExtraLength(length)) {
+            productPrice += (length - 165) * LENGTH_PRICE_EXTRA_CHARGE;
+        }
         // price calculation for elements
         productPrice += (amountDefaultElements * DEFAULT_ELEMENT_PRICE) + (amountPlantElements * PLANT_ELEMENT_PRICE);
         // price calculation for wood plate
@@ -72,6 +72,30 @@ public class CalculatorGardenBench {
         }
 
         // price calculation for delivery (dependent on weight and length of product)
+        deliveryPrice=calculateDeliveryPrice(isDelivery, length, amountDefaultElements, amount);
+
+        // text creation for delivery
+        if(isDelivery) {
+            deliveryText = "Delivery Type: Product is delivered ";
+        }
+        else {
+            deliveryText = "Delivery Type: Product is collected ";
+        }
+        deliveryText += "for " + deliveryPrice + " EUR\n";
+
+        productText = "Order for a garden bench:\n";
+        productText += elementsText;
+        productText += "Total length: " + totalLength + " cm\n";
+        productText += deliveryText;
+        productText += "Total price (without delivery): " + amount + " * " + productPrice + " EUR = " + (amount*productPrice) + " EUR";
+        productText += "\n";
+        // TODO: (later/some day in the future) create PDF with productText
+        System.out.println(productText);
+    }
+
+    private int calculateDeliveryPrice(boolean isDelivery, int length, int amountDefaultElements, int amount) {
+        int deliveryPrice=0;
+
         if(isDelivery) {
             if(length<=200 && amountDefaultElements==2 && amount==1) {
                 deliveryPrice += 70;
@@ -91,24 +115,7 @@ public class CalculatorGardenBench {
         } else {
             deliveryPrice = 0;
         }
-
-        // text creation for delivery
-        if(isDelivery) {
-            deliveryText = "Delivery Type: Product is delivered ";
-        }
-        else {
-            deliveryText = "Delivery Type: Product is collected ";
-        }
-        deliveryText += "for " + deliveryPrice + " EUR\n";
-
-        productText = "Order for a garden bench:\n";
-        productText += elementsText;
-        productText += "Total length: " + totalLength + " cm\n";
-        productText += deliveryText;
-        productText += "Total price (without delivery): " + amount + " * " + productPrice + " EUR = " + (amount*productPrice) + " EUR";
-        productText += "\n";
-        // TODO: (later/some day in the future) create PDF with productText
-        System.out.println(productText);
+        return deliveryPrice;
     }
 
     private int calculateTotalLength(int amountPlantElements, int length) {
