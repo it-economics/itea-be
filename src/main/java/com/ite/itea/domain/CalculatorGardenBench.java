@@ -14,13 +14,10 @@ public class CalculatorGardenBench {
      */
     private static final double LENGTH_PRICE_EXTRA_CHARGE = 1;
 
-    private String elementsText;
-    private String deliveryText;
     private String productText;
 
     private int amount;
     private int length;
-    private int totalLength;
 
     private int amountDefaultElements;
     private int amountPlantElements;
