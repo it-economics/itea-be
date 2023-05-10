@@ -41,7 +41,7 @@ public class CalculatorGardenBench {
 
     private void calculateAndPrint() {
         // price calculation for extra length premium
-        if(isExtraLength()) {
+        if(isExtraLength(length)) {
             productPrice += (length - 165) * LENGTH_PRICE_EXTRA_CHARGE;
         }
 
@@ -123,7 +123,7 @@ public class CalculatorGardenBench {
         return calculatedLength;
     }
 
-    private boolean isExtraLength() {
+    private boolean isExtraLength(int length) {
         return length > 165;
     }
 
