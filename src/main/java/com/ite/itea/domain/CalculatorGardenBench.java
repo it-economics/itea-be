@@ -48,14 +48,20 @@ public class CalculatorGardenBench {
         // text creation for elements composition
         if(amountPlantElements == 1) {
             elementsText = "Elements: 1 of 2 elements is a plant element";
-            totalLength = length + 60;
         } else if(amountPlantElements == 2) {
             elementsText = "Elements: 2 of 2 elements is a plant element";
-            totalLength = length + 108;
         } else {
             elementsText = "Elements: 0 of 2 elements is a plant element";
+        }
+
+        if(amountPlantElements == 1) {
+            totalLength = length + 60;
+        } else if(amountPlantElements == 2) {
+            totalLength = length + 108;
+        } else {
             totalLength = length + 16;
         }
+
         if(hasBackrest) {
             elementsText += ", has a backrest\n";
         } else {
