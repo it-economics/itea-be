@@ -74,14 +74,7 @@ public class CalculatorGardenBench {
         // price calculation for delivery (dependent on weight and length of product)
         deliveryPrice=calculateDeliveryPrice(isDelivery, length, amountDefaultElements, amount);
 
-        // text creation for delivery
-        if(isDelivery) {
-            deliveryText = "Delivery Type: Product is delivered ";
-        }
-        else {
-            deliveryText = "Delivery Type: Product is collected ";
-        }
-        deliveryText += "for " + deliveryPrice + " EUR\n";
+        deliveryText= createDeliveryText(isDelivery, deliveryPrice);
 
         productText = "Order for a garden bench:\n";
         productText += elementsText;
@@ -91,6 +84,18 @@ public class CalculatorGardenBench {
         productText += "\n";
         // TODO: (later/some day in the future) create PDF with productText
         System.out.println(productText);
+    }
+
+    private String createDeliveryText(boolean isDelivery, double deliveryPrice) {
+        String deliveryText="";
+        if(isDelivery) {
+            deliveryText = "Delivery Type: Product is delivered ";
+        }
+        else {
+            deliveryText = "Delivery Type: Product is collected ";
+        }
+        deliveryText += "for " + deliveryPrice + " EUR\n";
+        return deliveryText;
     }
 
     private int calculateDeliveryPrice(boolean isDelivery, int length, int amountDefaultElements, int amount) {
