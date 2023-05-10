@@ -38,22 +38,14 @@ public class CalculatorGardenBench {
         this.hasBackrest = hasBackrest;
         this.isDelivery = isDelivery;
 
-        calculateAndPrint();
+        productPrice = calculateProductPrice(length, amountDefaultElements, amountPlantElements, hasBackrest);
+        deliveryPrice = calculateDeliveryPrice(isDelivery, length, amountDefaultElements, amount);
+        printProductText();
     }
 
-    private void calculateAndPrint() {
-
-        //TODO: refactoring: get rid of implicit variable initialization
-        int totalLength = calculateTotalLength(amountPlantElements, length);
-        String elementsText = createElementsText(amountPlantElements, hasBackrest);
-        productPrice = calculateProductPrice(length, amountDefaultElements, amountPlantElements, hasBackrest);
-
-        deliveryPrice = calculateDeliveryPrice(isDelivery, length, amountDefaultElements, amount);
-        String deliveryText = createDeliveryText(isDelivery, deliveryPrice);
-
-        productText= calculateProductText(elementsText, totalLength, deliveryText, amount, productPrice);
+    private void printProductText() {
         // TODO: (later/some day in the future) create PDF with productText
-        System.out.println(productText);
+        System.out.println(getProductText());
     }
 
     private String calculateProductText(String elementsText, int totalLength, String deliveryText, int amount, double productPrice) {
@@ -67,7 +59,7 @@ public class CalculatorGardenBench {
     }
 
     private double calculateProductPrice(int length, int amountDefaultElements, int amountPlantElements, boolean hasBackrest) {
-        double productPrice=0.0;
+        double productPrice = 0.0;
         if (isExtraLength(length)) {
             productPrice += (length - 165) * LENGTH_PRICE_EXTRA_CHARGE;
         }
@@ -152,6 +144,12 @@ public class CalculatorGardenBench {
     }
 
     public String getProductText() {
+        if (productText==null || productText.isEmpty()) {
+            int totalLength = calculateTotalLength(amountPlantElements, length);
+            String elementsText = createElementsText(amountPlantElements, hasBackrest);
+            String deliveryText = createDeliveryText(isDelivery, deliveryPrice);
+            productText = calculateProductText(elementsText, totalLength, deliveryText, amount, productPrice);
+        }
         return productText;
     }
 
