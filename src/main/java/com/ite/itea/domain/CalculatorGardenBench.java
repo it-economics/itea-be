@@ -42,29 +42,11 @@ public class CalculatorGardenBench {
     }
 
     private void calculateAndPrint() {
-
-
         totalLength = calculateTotalLength(amountPlantElements, length);
+        elementsText = createElementsText(amountPlantElements, hasBackrest);
+        productPrice= calculateProductPrice(length, amountDefaultElements, amountPlantElements, hasBackrest);
 
-        // text creation for elements composition
-        elementsText= createElementsText(amountPlantElements, hasBackrest);
-
-        // price calculation for extra length premium
-        if (isExtraLength(length)) {
-            productPrice += (length - 165) * LENGTH_PRICE_EXTRA_CHARGE;
-        }
-        // price calculation for elements
-        productPrice += (amountDefaultElements * DEFAULT_ELEMENT_PRICE) + (amountPlantElements * PLANT_ELEMENT_PRICE);
-        // price calculation for wood plate
-        productPrice += WOOD_PLATE_PRICE;
-        // price calculation for backrest
-        if (hasBackrest) {
-            productPrice += BACKREST_PRICE;
-        }
-
-        // price calculation for delivery (dependent on weight and length of product)
         deliveryPrice = calculateDeliveryPrice(isDelivery, length, amountDefaultElements, amount);
-
         deliveryText = createDeliveryText(isDelivery, deliveryPrice);
 
         productText = "Order for a garden bench:\n";
@@ -75,6 +57,22 @@ public class CalculatorGardenBench {
         productText += "\n";
         // TODO: (later/some day in the future) create PDF with productText
         System.out.println(productText);
+    }
+
+    private double calculateProductPrice(int length, int amountDefaultElements, int amountPlantElements, boolean hasBackrest) {
+        double productPrice;
+        if (isExtraLength(length)) {
+            productPrice = (length - 165) * LENGTH_PRICE_EXTRA_CHARGE;
+        }
+        // price calculation for elements
+        productPrice += (amountDefaultElements * DEFAULT_ELEMENT_PRICE) + (amountPlantElements * PLANT_ELEMENT_PRICE);
+        // price calculation for wood plate
+        productPrice += WOOD_PLATE_PRICE;
+        // price calculation for backrest
+        if (hasBackrest) {
+            productPrice += BACKREST_PRICE;
+        }
+        return productPrice;
     }
 
     private String createElementsText(int amountPlantElements, boolean hasBackrest) {
