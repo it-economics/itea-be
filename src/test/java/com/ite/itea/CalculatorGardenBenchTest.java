@@ -3,47 +3,43 @@ package com.ite.itea;
 import com.ite.itea.domain.CalculatorGardenBench;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
 public class CalculatorGardenBenchTest {
 
     @Test
     void shouldReturnCorrectPriceForDefaultBench() {
         CalculatorGardenBench calculatorGardenBench = new CalculatorGardenBench(1, 165,
                 2, 0, false, false);
-        Assertions.assertEquals(230,calculatorGardenBench.getTotalPrice());
+        Assertions.assertEquals(230, calculatorGardenBench.getTotalPrice());
     }
 
     @Test
     void shouldReturnCorrectPriceForDefaultBenchForDelivery() {
         CalculatorGardenBench calculatorGardenBench = new CalculatorGardenBench(1, 165,
                 2, 0, false, true);
-        Assertions.assertEquals(300,calculatorGardenBench.getTotalPrice());
+        Assertions.assertEquals(300, calculatorGardenBench.getTotalPrice());
     }
 
     @Test
     void shouldReturnCorrectPriceForTwoDefaultBenches() {
         CalculatorGardenBench calculatorGardenBench = new CalculatorGardenBench(2, 165,
                 2, 0, false, false);
-        Assertions.assertEquals(460,calculatorGardenBench.getTotalPrice());
+        Assertions.assertEquals(460, calculatorGardenBench.getTotalPrice());
     }
 
     @Test
     void shouldReturnCorrectPriceForOnePlantElementBench() {
         CalculatorGardenBench calculatorGardenBench = new CalculatorGardenBench(1, 165,
                 1, 1, false, false);
-        Assertions.assertEquals(280,calculatorGardenBench.getTotalPrice());
+        Assertions.assertEquals(280, calculatorGardenBench.getTotalPrice());
     }
 
     @Test
     void shouldReturnCorrectPriceForBackrestBench() {
         CalculatorGardenBench calculatorGardenBench = new CalculatorGardenBench(1, 165,
                 2, 0, true, false);
-        Assertions.assertEquals(280,calculatorGardenBench.getTotalPrice());
+        Assertions.assertEquals(280, calculatorGardenBench.getTotalPrice());
     }
-
-
 
 
     @Test
@@ -55,7 +51,7 @@ public class CalculatorGardenBenchTest {
                 "Total length: 181 cm\n" +
                 "Delivery Type: Product is collected for 0.0 EUR\n" +
                 "Total price (without delivery): 1 * 230.0 EUR = 230.0 EUR\n";
-        Assertions.assertEquals(expectedText,calculatorGardenBench.getProductText());
+        Assertions.assertEquals(expectedText, calculatorGardenBench.getProductText());
     }
 
     @Test
@@ -67,7 +63,7 @@ public class CalculatorGardenBenchTest {
                 "Total length: 181 cm\n" +
                 "Delivery Type: Product is delivered for 70.0 EUR\n" +
                 "Total price (without delivery): 1 * 230.0 EUR = 230.0 EUR\n";
-        Assertions.assertEquals(expectedText,calculatorGardenBench.getProductText());
+        Assertions.assertEquals(expectedText, calculatorGardenBench.getProductText());
     }
 
     @Test
@@ -79,7 +75,7 @@ public class CalculatorGardenBenchTest {
                 "Total length: 181 cm\n" +
                 "Delivery Type: Product is collected for 0.0 EUR\n" +
                 "Total price (without delivery): 2 * 230.0 EUR = 460.0 EUR\n";
-        Assertions.assertEquals(expectedText,calculatorGardenBench.getProductText());
+        Assertions.assertEquals(expectedText, calculatorGardenBench.getProductText());
     }
 
     @Test
@@ -91,7 +87,7 @@ public class CalculatorGardenBenchTest {
                 "Total length: 225 cm\n" +
                 "Delivery Type: Product is collected for 0.0 EUR\n" +
                 "Total price (without delivery): 1 * 280.0 EUR = 280.0 EUR\n";
-        Assertions.assertEquals(expectedText,calculatorGardenBench.getProductText());
+        Assertions.assertEquals(expectedText, calculatorGardenBench.getProductText());
     }
 
     @Test
@@ -103,6 +99,6 @@ public class CalculatorGardenBenchTest {
                 "Total length: 181 cm\n" +
                 "Delivery Type: Product is collected for 0.0 EUR\n" +
                 "Total price (without delivery): 1 * 280.0 EUR = 280.0 EUR\n";
-        Assertions.assertEquals(expectedText,calculatorGardenBench.getProductText());
+        Assertions.assertEquals(expectedText, calculatorGardenBench.getProductText());
     }
 }
