@@ -13,6 +13,7 @@ public class CalculatorGardenBench {
      * 1 euro extra charge for each added cm (if more than 165 cm)
      */
     private static final double LENGTH_PRICE_EXTRA_CHARGE_IN_EUR = 1;
+    public static final int STANDARD_LENGTH_IN_CM = 165;
 
     private String productText;
 
@@ -57,7 +58,7 @@ public class CalculatorGardenBench {
     private double calculateProductPrice(int length, int amountDefaultElements, int amountPlantElements, boolean hasBackrest) {
         double productPrice = 0.0;
         if (isExtraLength(length)) {
-            productPrice += (length - 165) * LENGTH_PRICE_EXTRA_CHARGE_IN_EUR;
+            productPrice += (length - STANDARD_LENGTH_IN_CM) * LENGTH_PRICE_EXTRA_CHARGE_IN_EUR;
         }
         // price calculation for elements
         productPrice += (amountDefaultElements * DEFAULT_ELEMENT_PRICE_IN_EUR) + (amountPlantElements * PLANT_ELEMENT_PRICE_IN_EUR);
@@ -136,7 +137,7 @@ public class CalculatorGardenBench {
     }
 
     private boolean isExtraLength(int length) {
-        return length > 165;
+        return length > STANDARD_LENGTH_IN_CM;
     }
 
     public String getProductText() {
