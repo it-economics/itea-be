@@ -45,7 +45,11 @@ public class CalculatorGardenBench {
         System.out.println(getProductText());
     }
 
-    private String calculateProductText(String elementsText, int totalLength, String deliveryText, int amount, double productPrice) {
+    private String calculateProductText(int amount, double productPrice, double deliveryPrice, int amountPlantElements, int length, boolean hasBackrest, boolean isDelivery) {
+        int totalLength = calculateTotalLength(amountPlantElements, length);
+        String elementsText = createElementsText(amountPlantElements, hasBackrest);
+        String deliveryText = createDeliveryText(isDelivery, deliveryPrice);
+
         String productText = "Order for a garden bench:\n";
         productText += elementsText;
         productText += "Total length: " + totalLength + " cm\n";
@@ -142,10 +146,7 @@ public class CalculatorGardenBench {
 
     public String getProductText() {
         if (productText==null || productText.isEmpty()) {
-            int totalLength = calculateTotalLength(amountPlantElements, length);
-            String elementsText = createElementsText(amountPlantElements, hasBackrest);
-            String deliveryText = createDeliveryText(isDelivery, deliveryPrice);
-            productText = calculateProductText(elementsText, totalLength, deliveryText, amount, productPrice);
+            productText = calculateProductText(amount, productPrice, deliveryPrice, amountPlantElements, length, hasBackrest, isDelivery);
         }
         return productText;
     }
