@@ -54,21 +54,8 @@ public class CalculatorGardenBench {
         }
 
         // text creation for elements composition
-        if (amountPlantElements == 1) {
-            elementsText = "Elements: 1 of 2 elements is a plant element";
-            totalLength = length + 60;
-        } else if (amountPlantElements == 2) {
-            elementsText = "Elements: 2 of 2 elements is a plant element";
-            totalLength = length + 108;
-        } else {
-            elementsText = "Elements: 0 of 2 elements is a plant element";
-            totalLength = length + 16;
-        }
-        if (hasBackrest) {
-            elementsText += ", has a backrest\n";
-        } else {
-            elementsText += ", has no backrest\n";
-        }
+        generateElementText();
+        adjustTotalLength();
 
         // price calculation for elements
         productPrice = productPrice.add((new BigDecimal(amountDefaultElements).multiply(DEFAULT_ELEMENT_PRICE)).add((new BigDecimal(amountPlantElements).multiply(PLANT_ELEMENT_PRICE))));
@@ -116,6 +103,21 @@ public class CalculatorGardenBench {
         productText += "\n";
         // TODO: (later/some day in the future) create PDF with productText
         System.out.println(productText);
+    }
+
+    private void adjustTotalLength() {
+        if (amountPlantElements == 1) {
+            totalLength = length + 60;
+        } else if (amountPlantElements == 2) {
+            totalLength = length + 108;
+        } else {
+            totalLength = length + 16;
+        }
+    }
+
+    private void generateElementText() {
+        String hasBackrestText = hasBackrest ? "a" : "no";
+        elementsText = "Elements: " + amountPlantElements + " of 2 elements is a plant element, has " + hasBackrestText + " backrest\n";
     }
 
     public String getProductText() {
