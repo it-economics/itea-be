@@ -101,12 +101,8 @@ public class CalculatorGardenBench {
     }
 
     private void generateDeliveryText() {
-        if (isDelivery) {
-            deliveryText = "Delivery Type: Product is delivered ";
-        } else {
-            deliveryText = "Delivery Type: Product is collected ";
-        }
-        deliveryText += "for " + deliveryPrice + " EUR\n";
+        String deliveredOrCollected = (isDelivery) ? "delivered" : "collected";
+        deliveryText = "Delivery Type: Product is " + deliveredOrCollected + " for " + deliveryPrice + " EUR\n";
     }
 
     private void adjustTotalLength() {
