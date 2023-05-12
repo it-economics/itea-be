@@ -88,12 +88,7 @@ public class CalculatorGardenBench {
         }
 
         // text creation for delivery
-        if (isDelivery) {
-            deliveryText = "Delivery Type: Product is delivered ";
-        } else {
-            deliveryText = "Delivery Type: Product is collected ";
-        }
-        deliveryText += "for " + deliveryPrice + " EUR\n";
+        generateDeliveryText();
 
         productText = "Order for a garden bench:\n";
         productText += elementsText;
@@ -103,6 +98,15 @@ public class CalculatorGardenBench {
         productText += "\n";
         // TODO: (later/some day in the future) create PDF with productText
         System.out.println(productText);
+    }
+
+    private void generateDeliveryText() {
+        if (isDelivery) {
+            deliveryText = "Delivery Type: Product is delivered ";
+        } else {
+            deliveryText = "Delivery Type: Product is collected ";
+        }
+        deliveryText += "for " + deliveryPrice + " EUR\n";
     }
 
     private void adjustTotalLength() {
