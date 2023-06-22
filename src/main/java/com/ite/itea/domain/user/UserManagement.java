@@ -1,44 +1,24 @@
 package com.ite.itea.domain.user;
 
 import com.ite.itea.domain.dto.UserDto;
+import com.ite.itea.persistence.UserRepository;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class UserManagement {
 
     private final File file;
 
-    public UserManagement(File file) {
+    private final UserRepository userRepository;
+
+    public UserManagement(File file, UserRepository userRepository) {
         this.file = file;
+        this.userRepository = userRepository;
     }
 
     public List<UserDto> getAllUsers() {
-        List<UserDto> users = new ArrayList<>();
-
-        try (BufferedReader br = new BufferedReader(new FileReader(this.file))) {
-            String line = br.readLine();
-
-            while (line != null) {
-                String[] userFromFile = line.split(" ");
-                String[] ordersFromFile = userFromFile[2].split(",");
-
-                var user = new UserDto(userFromFile[0], userFromFile[1], Arrays.stream(ordersFromFile).toList());
-
-                users.add(user);
-
-                line = br.readLine();
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        return users;
+        return userRepository.getAllUsers();
     }
 
     public void printAllUsers() {

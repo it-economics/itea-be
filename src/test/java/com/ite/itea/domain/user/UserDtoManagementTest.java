@@ -1,5 +1,6 @@
 package com.ite.itea.domain.user;
 
+import com.ite.itea.persistence.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,44 +15,20 @@ class UserDtoManagementTest {
 
     private File file;
 
+    private UserRepository userRepository;
+
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
     @BeforeEach
     public void setUp() {
         System.setOut(new PrintStream(outContent));
         file = new File(Objects.requireNonNull(getClass().getClassLoader().getResource("usersWithOrders/users.txt")).getFile());
-    }
-
-    @Test
-    void shouldReturnCaptainHookWhenAUserWithTheNameHookIsSearched() {
-        var userManagement = new UserManagement(file);
-
-        var user = userManagement.getUserByLastname("Hook");
-
-        then(user.firstname()).isEqualTo("Captain");
-        then(user.lastname()).isEqualTo("Hook");
-    }
-
-    @Test
-    void shouldReturnAllUsersWhenAllUsersAreRequested() {
-        var userManagement = new UserManagement(file);
-
-        var users = userManagement.getAllUsers();
-
-        then(users.size()).isEqualTo(4);
-        then(users.get(0).firstname()).isEqualTo("Peter");
-        then(users.get(0).lastname()).isEqualTo("Pan");
-        then(users.get(1).firstname()).isEqualTo("Captain");
-        then(users.get(1).lastname()).isEqualTo("Hook");
-        then(users.get(2).firstname()).isEqualTo("Tinker");
-        then(users.get(2).lastname()).isEqualTo("Bell");
-        then(users.get(3).firstname()).isEqualTo("Lost");
-        then(users.get(3).lastname()).isEqualTo("Boys");
+        userRepository = new UserRepository(file);
     }
 
     @Test
     void shouldPrintAllUsersAsAString() {
-        var userManagement = new UserManagement(file);
+        var userManagement = new UserManagement(file, userRepository);
 
         userManagement.printAllUsers();
 
