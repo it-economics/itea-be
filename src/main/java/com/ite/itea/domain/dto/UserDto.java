@@ -7,4 +7,8 @@ public record UserDto(String firstname, String lastname, List<String> purchasedI
     public String formatUserToString() {
         return firstname() + " " + lastname();
     }
+
+    public List<String> getOrdersFromUser(UserDto userDto) {
+        return userDto.purchasedItems();
+    }
 }

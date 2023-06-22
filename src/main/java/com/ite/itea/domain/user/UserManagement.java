@@ -65,10 +65,4 @@ public class UserManagement {
         return userResult.orElseGet(() -> new UserDto(null, null, null));
     }
 
-
-    public List<String> getOrdersFromUser(UserDto userDto) {
-        return userDto.purchasedItems();
-    }
-
-
 }
