@@ -1,6 +1,5 @@
 package com.ite.itea.persistence;
 
-import com.ite.itea.domain.user.UserManagement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -39,6 +38,14 @@ class UserRepositoryTest {
         then(users.get(2).lastname()).isEqualTo("Bell");
         then(users.get(3).firstname()).isEqualTo("Lost");
         then(users.get(3).lastname()).isEqualTo("Boys");
+    }
+
+    @Test
+    void shouldReturnCaptainHookWhenAUserWithTheNameHookIsSearched() {
+        var user = userRepository.getUserByLastname("Hook");
+
+        then(user.firstname()).isEqualTo("Captain");
+        then(user.lastname()).isEqualTo("Hook");
     }
 
 }

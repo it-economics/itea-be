@@ -41,4 +41,14 @@ public class UserRepository {
         return users;
     }
 
+    public UserDto getUserByLastname(String lastname) {
+        List<UserDto> users = getAllUsers();
+
+        var userResult = users.stream()
+                .filter(user -> user.lastname().equals(lastname))
+                .findFirst();
+
+        return userResult.orElseGet(() -> new UserDto(null, null, null));
+    }
+
 }
