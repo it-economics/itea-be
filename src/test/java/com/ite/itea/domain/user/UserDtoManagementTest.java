@@ -18,7 +18,7 @@ class UserDtoManagementTest {
 
     @BeforeEach
     public void setUp() {
-        System.setOut(new PrintStream(outContent)); // TODO solution: should not be here. It is only used in one test. And this test should be in an printer class.
+        System.setOut(new PrintStream(outContent));
         file = new File(Objects.requireNonNull(getClass().getClassLoader().getResource("usersWithOrders/users.txt")).getFile());
     }
 

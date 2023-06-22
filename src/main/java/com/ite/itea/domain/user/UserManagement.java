@@ -49,13 +49,11 @@ public class UserManagement {
         for (var user : users) {
             formattedUsers
                     .append(this.formatUserToString(user))
-                    .append("\n"); // TODO: solution: method should be in User user.getAsString()
+                    .append("\n");
         }
 
-        System.out.println(formattedUsers); // TODO: solution: split formatting and printing so you can test the formatting better
+        System.out.println(formattedUsers);
     }
-    // TODO solution: put this method in a class that do everything with printing and formatting
-    // TODO solution: pass users as a parameter
 
     public UserDto getUserByLastname(String lastname) {
         List<UserDto> users = getAllUsers();
@@ -66,9 +64,6 @@ public class UserManagement {
 
         return userResult.orElseGet(() -> new UserDto(null, null, null));
     }
-    // TODO: solution: extract the File calls to a different class
-    // TODO: solution: Perhaps separate the call and the filtering
-    // TODO: solution: create entity Object
 
     public String formatUserToString(UserDto userDto) {
         return userDto.firstname() + " " + userDto.lastname();
