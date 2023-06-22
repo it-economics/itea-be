@@ -16,13 +16,16 @@ class UserRepositoryTest {
 
     private UserRepository userRepository;
 
+    private ConverterEntityToDto converterEntityToDto;
+
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
     @BeforeEach
     public void setUp() {
         System.setOut(new PrintStream(outContent));
         file = new File(Objects.requireNonNull(getClass().getClassLoader().getResource("usersWithOrders/users.txt")).getFile());
-        userRepository = new UserRepository(file);
+        converterEntityToDto = new ConverterEntityToDto();
+        userRepository = new UserRepository(file, converterEntityToDto);
     }
 
     @Test

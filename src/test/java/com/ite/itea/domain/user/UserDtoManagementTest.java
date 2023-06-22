@@ -1,6 +1,7 @@
 package com.ite.itea.domain.user;
 
 import com.ite.itea.domain.Printer;
+import com.ite.itea.persistence.ConverterEntityToDto;
 import com.ite.itea.persistence.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,11 +21,13 @@ class UserDtoManagementTest {
     private UserRepository userRepository;
 
     private UserManagement userManagement;
+    private ConverterEntityToDto converterEntityToDto;
 
     @BeforeEach
     public void setUp() {
         file = new File(Objects.requireNonNull(getClass().getClassLoader().getResource("usersWithOrders/users.txt")).getFile());
-        userRepository = new UserRepository(file);
+        converterEntityToDto = new ConverterEntityToDto();
+        userRepository = new UserRepository(file, converterEntityToDto);
         userManagement = new UserManagement(printer, userRepository);
     }
 

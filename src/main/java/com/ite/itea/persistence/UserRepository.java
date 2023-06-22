@@ -15,22 +15,25 @@ public class UserRepository {
 
     private final File file;
 
-    public UserRepository(File file) {
+    private final ConverterEntityToDto converterEntityToDto;
+
+    public UserRepository(File file, ConverterEntityToDto converterEntityToDto) {
         this.file = file;
+        this.converterEntityToDto = converterEntityToDto;
     }
 
     public List<UserDto> getAllUsers() {
         List<UserEntity> userEntities = getAllUserEntities();
 
         return userEntities.stream()
-                .map(this::convertUserEntityToUserDto)
+                .map(converterEntityToDto::convertUserEntityToUserDto)
                 .toList();
     }
 
     public UserDto getUserByLastname(String lastname) {
         UserEntity userEntity = getUserEntityByLastname(lastname);
 
-        return convertUserEntityToUserDto(userEntity);
+        return converterEntityToDto.convertUserEntityToUserDto(userEntity);
     }
 
 
@@ -65,10 +68,6 @@ public class UserRepository {
         }
 
         return users;
-    }
-
-    private UserDto convertUserEntityToUserDto(UserEntity userEntity) {
-        return new UserDto(userEntity.firstname(), userEntity.lastname(), userEntity.purchasedItems());
     }
 
 }
