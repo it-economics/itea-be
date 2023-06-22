@@ -1,6 +1,7 @@
 package com.ite.itea.persistence;
 
 import com.ite.itea.domain.dto.UserDto;
+import com.ite.itea.persistence.entities.UserEntity;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -19,7 +20,7 @@ public class UserRepository {
     }
 
     public List<UserDto> getAllUsers() {
-        List<UserDto> users = new ArrayList<>();
+        List<UserEntity> users = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(this.file))) {
             String line = br.readLine();
@@ -28,7 +29,7 @@ public class UserRepository {
                 String[] userFromFile = line.split(" ");
                 String[] ordersFromFile = userFromFile[2].split(",");
 
-                var user = new UserDto(userFromFile[0], userFromFile[1], Arrays.stream(ordersFromFile).toList());
+                var user = new UserEntity(userFromFile[0], userFromFile[1], Arrays.stream(ordersFromFile).toList());
 
                 users.add(user);
 
@@ -38,7 +39,9 @@ public class UserRepository {
             throw new RuntimeException(e);
         }
 
-        return users;
+        return users.stream()
+                .map(this::convertUserEntityToUserDto)
+                .toList();
     }
 
     public UserDto getUserByLastname(String lastname) {
@@ -49,6 +52,10 @@ public class UserRepository {
                 .findFirst();
 
         return userResult.orElseGet(() -> new UserDto(null, null, null));
+    }
+
+    private UserDto convertUserEntityToUserDto(UserEntity userEntity) {
+        return new UserDto(userEntity.firstname(), userEntity.lastname(), userEntity.purchasedItems());
     }
 
 }
