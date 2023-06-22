@@ -1,5 +1,6 @@
 package com.ite.itea.domain.user;
 
+import com.ite.itea.domain.Printer;
 import com.ite.itea.domain.dto.UserDto;
 import com.ite.itea.persistence.UserRepository;
 
@@ -7,9 +8,11 @@ import java.util.List;
 
 public class UserManagement {
 
+    private final Printer printer;
     private final UserRepository userRepository;
 
-    public UserManagement(UserRepository userRepository) {
+    public UserManagement(Printer printer, UserRepository userRepository) {
+        this.printer = printer;
         this.userRepository = userRepository;
     }
 
@@ -24,15 +27,7 @@ public class UserManagement {
     public void printAllUsers() {
         var users = getAllUsers();
 
-        StringBuilder formattedUsers = new StringBuilder();
-
-        for (var user : users) {
-            formattedUsers
-                    .append(user.formatUserToString())
-                    .append("\n");
-        }
-
-        System.out.println(formattedUsers);
+        printer.printUsers(users);
     }
 
 }
