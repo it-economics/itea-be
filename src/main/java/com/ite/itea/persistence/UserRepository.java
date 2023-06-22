@@ -20,6 +20,31 @@ public class UserRepository {
     }
 
     public List<UserDto> getAllUsers() {
+        List<UserEntity> userEntities = getAllUserEntities();
+
+        return userEntities.stream()
+                .map(this::convertUserEntityToUserDto)
+                .toList();
+    }
+
+    public UserDto getUserByLastname(String lastname) {
+        UserEntity userEntity = getUserEntityByLastname(lastname);
+
+        return convertUserEntityToUserDto(userEntity);
+    }
+
+
+    private UserEntity getUserEntityByLastname(String lastname) {
+        List<UserEntity> users = getAllUserEntities();
+
+        var userResult = users.stream()
+                .filter(user -> user.lastname().equals(lastname))
+                .findFirst();
+
+        return userResult.orElseGet(() -> new UserEntity(null, null, null));
+    }
+
+    private List<UserEntity> getAllUserEntities() {
         List<UserEntity> users = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(this.file))) {
@@ -39,19 +64,7 @@ public class UserRepository {
             throw new RuntimeException(e);
         }
 
-        return users.stream()
-                .map(this::convertUserEntityToUserDto)
-                .toList();
-    }
-
-    public UserDto getUserByLastname(String lastname) {
-        List<UserDto> users = getAllUsers();
-
-        var userResult = users.stream()
-                .filter(user -> user.lastname().equals(lastname))
-                .findFirst();
-
-        return userResult.orElseGet(() -> new UserDto(null, null, null));
+        return users;
     }
 
     private UserDto convertUserEntityToUserDto(UserEntity userEntity) {
