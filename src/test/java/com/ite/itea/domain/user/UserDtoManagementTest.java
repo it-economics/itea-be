@@ -1,11 +1,13 @@
 package com.ite.itea.domain.user;
 
+import com.ite.itea.domain.dto.UserDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.PrintStream;
+import java.util.List;
 import java.util.Objects;
 
 import static org.assertj.core.api.BDDAssertions.then;
@@ -51,12 +53,9 @@ class UserDtoManagementTest {
 
     @Test
     void shouldReturnUserAsFormatFirstnameAndLastname() {
-        var userManagement = new UserManagement(file);
-        var userFromManagement = userManagement.getUserByLastname("Pan");
+        UserDto user = new UserDto("Peter", "Pan", List.of("Pans"));
 
-        var user = userManagement.formatUserToString(userFromManagement);
-
-        then(user).isEqualTo("Peter Pan");
+        then(user.formatUserToString()).isEqualTo("Peter Pan");
     }
 
     @Test

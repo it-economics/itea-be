@@ -48,7 +48,7 @@ public class UserManagement {
 
         for (var user : users) {
             formattedUsers
-                    .append(this.formatUserToString(user))
+                    .append(user.formatUserToString())
                     .append("\n");
         }
 
@@ -65,9 +65,6 @@ public class UserManagement {
         return userResult.orElseGet(() -> new UserDto(null, null, null));
     }
 
-    public String formatUserToString(UserDto userDto) {
-        return userDto.firstname() + " " + userDto.lastname();
-    }
 
     public List<String> getOrdersFromUser(UserDto userDto) {
         return userDto.purchasedItems();
