@@ -19,7 +19,8 @@ class UserDtoManagementTest {
     @BeforeEach
     public void setUp() {
         System.setOut(new PrintStream(outContent));
-        file = new File(Objects.requireNonNull(getClass().getClassLoader().getResource("usersWithOrders/users.txt")).getFile());
+        String fileURL = Objects.requireNonNull(getClass().getClassLoader().getResource("usersWithOrders/users.txt")).getFile().replace("%20", " ");
+        file = new File(fileURL);
     }
 
     @Test
