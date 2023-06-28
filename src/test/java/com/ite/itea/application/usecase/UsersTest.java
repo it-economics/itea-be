@@ -1,9 +1,9 @@
-package com.ite.itea.domain.user;
+package com.ite.itea.application.usecase;
 
-import com.ite.itea.application.usecase.Users;
 import com.ite.itea.domain.Printer;
-import com.ite.itea.persistence.user.UserMapper;
+import com.ite.itea.domain.user.UserRepository;
 import com.ite.itea.persistence.user.FileSystemUserRepository;
+import com.ite.itea.persistence.user.UserMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +16,7 @@ import java.util.Objects;
 import static org.assertj.core.api.BDDAssertions.then;
 
 
-class UserDtoManagementTest {
+class UsersUseCaseTest {
 
     private File file;
 
