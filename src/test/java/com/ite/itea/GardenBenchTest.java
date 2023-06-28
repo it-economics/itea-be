@@ -1,6 +1,6 @@
 package com.ite.itea;
 
-import com.ite.itea.domain.GardenBench;
+import com.ite.itea.domain.retail.GardenBench;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

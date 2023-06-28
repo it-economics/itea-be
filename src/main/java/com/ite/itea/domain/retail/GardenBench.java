@@ -1,4 +1,4 @@
-package com.ite.itea.domain;
+package com.ite.itea.domain.retail;
 
 /*
     Class that calculates price of garden bench AND prints details of the product
