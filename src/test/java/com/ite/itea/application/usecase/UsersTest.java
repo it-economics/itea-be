@@ -1,6 +1,5 @@
 package com.ite.itea.application.usecase;
 
-import com.ite.itea.domain.Printer;
 import com.ite.itea.domain.user.UserRepository;
 import com.ite.itea.persistence.user.FileSystemUserRepository;
 import com.ite.itea.persistence.user.UserMapper;
@@ -16,25 +15,18 @@ import java.util.Objects;
 import static org.assertj.core.api.BDDAssertions.then;
 
 
-class UsersUseCaseTest {
-
-    private File file;
-
-    private Printer printer;
-
-    private UserRepository userRepository;
+class UsersTest {
 
     private Users users;
-    private UserMapper userMapper;
 
     @BeforeEach
     public void setUp() {
         URL usersFileURL = getClass().getClassLoader().getResource("usersWithOrders/users.txt");
         String usersFilePath = Objects.requireNonNull(usersFileURL).getFile();
-        file = new File(URLDecoder.decode(usersFilePath, StandardCharsets.UTF_8));
-        userMapper = new UserMapper();
-        userRepository = new FileSystemUserRepository(file, userMapper);
-        users = new Users(printer, userRepository);
+        File file = new File(URLDecoder.decode(usersFilePath, StandardCharsets.UTF_8));
+        UserMapper userMapper = new UserMapper();
+        UserRepository userRepository = new FileSystemUserRepository(file, userMapper);
+        users = new Users(userRepository);
     }
 
     @Test
