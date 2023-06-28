@@ -30,12 +30,11 @@ class PrinterTest {
 
         printer.printUsers(users);
 
-        then(outContent.toString()).isEqualTo(
-                """
-                        Peter Pan
-                        Captain Hook
-                                                
-                        """);
+        // We remove the trailing whitespace from the stream contents, because the output stream
+        // seems to be pushing platform-specific line endings to the stream when flushing.
+        final var strippedOutContent = outContent.toString().stripTrailing();
+
+        then(strippedOutContent).isEqualTo("Peter Pan\nCaptain Hook");
     }
 
 }
