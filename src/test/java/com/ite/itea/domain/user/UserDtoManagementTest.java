@@ -1,5 +1,6 @@
 package com.ite.itea.domain.user;
 
+import com.ite.itea.application.usecase.Users;
 import com.ite.itea.domain.Printer;
 import com.ite.itea.persistence.user.UserMapper;
 import com.ite.itea.persistence.user.FileSystemUserRepository;
@@ -23,7 +24,7 @@ class UserDtoManagementTest {
 
     private UserRepository userRepository;
 
-    private UserManagement userManagement;
+    private Users users;
     private UserMapper userMapper;
 
     @BeforeEach
@@ -33,12 +34,12 @@ class UserDtoManagementTest {
         file = new File(URLDecoder.decode(usersFilePath, StandardCharsets.UTF_8));
         userMapper = new UserMapper();
         userRepository = new FileSystemUserRepository(file, userMapper);
-        userManagement = new UserManagement(printer, userRepository);
+        users = new Users(printer, userRepository);
     }
 
     @Test
     void shouldReturnAllUsersWhenAllUsersAreRequested() {
-        var users = userManagement.getAllUsers();
+        var users = this.users.getAllUsers();
 
         then(users.size()).isEqualTo(4);
         then(users.get(0).firstname()).isEqualTo("Peter");
@@ -53,7 +54,7 @@ class UserDtoManagementTest {
 
     @Test
     void shouldReturnCaptainHookWhenAUserWithTheNameHookIsSearched() {
-        var user = userManagement.getUserByLastname("Hook");
+        var user = users.getUserByLastname("Hook");
 
         then(user.firstname()).isEqualTo("Captain");
         then(user.lastname()).isEqualTo("Hook");
