@@ -48,7 +48,8 @@ class UsersTest {
     void shouldReturnCaptainHookWhenAUserWithTheNameHookIsSearched() {
         var user = users.findByLastName("Hook");
 
-        then(user.firstname()).isEqualTo("Captain");
-        then(user.lastname()).isEqualTo("Hook");
+        then(user).isPresent();
+        then(user.get().firstname()).isEqualTo("Captain");
+        then(user.get().lastname()).isEqualTo("Hook");
     }
 }

@@ -4,6 +4,7 @@ import com.ite.itea.application.dto.UserDto;
 import com.ite.itea.domain.user.UserRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public class Users {
 
@@ -17,7 +18,7 @@ public class Users {
         return userRepository.all();
     }
 
-    public UserDto findByLastName(String lastName) {
-        return userRepository.byLastName(lastName);
+    public Optional<UserDto> findByLastName(String lastName) {
+        return Optional.ofNullable(userRepository.byLastName(lastName));
     }
 }
