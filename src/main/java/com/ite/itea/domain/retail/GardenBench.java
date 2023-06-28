@@ -13,36 +13,29 @@ public class GardenBench {
      * 1 euro extra charge for each added cm (if more than 165 cm)
      */
     private static final double LENGTH_PRICE_EXTRA_CHARGE_IN_EUR = 1;
-    public static final int STANDARD_LENGTH_IN_CM = 165;
+    private static final int STANDARD_LENGTH_IN_CM = 165;
+
+    private final int amount;
+    private final int length;
+
+    private final int amountPlantElements;
+    private final boolean hasBackrest;
+    private final boolean isDelivery;
+
+    private final double productPrice;
+    private final double deliveryPrice;
 
     private String productText;
-
-    private int amount;
-    private int length;
-
-    private int amountDefaultElements;
-    private int amountPlantElements;
-    private boolean hasBackrest;
-    private boolean isDelivery;
-
-    private double productPrice;
-    private double deliveryPrice = 0;
 
     public GardenBench(int amount, int length, int amountDefaultElements, int amountPlantElements, boolean hasBackrest, boolean isDelivery) {
         this.amount = amount;
         this.length = length;
-        this.amountDefaultElements = amountDefaultElements;
         this.amountPlantElements = amountPlantElements;
         this.hasBackrest = hasBackrest;
         this.isDelivery = isDelivery;
 
         productPrice = calculateProductPrice(length, amountDefaultElements, amountPlantElements, hasBackrest);
         deliveryPrice = calculateDeliveryPrice(isDelivery, length, amountDefaultElements, amount);
-    }
-
-    private void printProductText() {
-        // TODO: (later/some day in the future) create PDF with productText
-        System.out.println(getProductText());
     }
 
     private String calculateProductText(int amount, double productPrice, double deliveryPrice, int amountPlantElements, int length, boolean hasBackrest, boolean isDelivery) {
