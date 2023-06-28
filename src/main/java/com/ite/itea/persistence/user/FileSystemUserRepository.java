@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class FileSystemUserRepository implements UserRepository {
 
@@ -30,10 +31,10 @@ public class FileSystemUserRepository implements UserRepository {
                 .toList();
     }
 
-    public UserDto byLastName(String lastName) {
+    public Optional<UserDto> byLastName(String lastName) {
         UserEntity userEntity = getUserEntityByLastname(lastName);
 
-        return userMapper.convertUserEntityToUserDto(userEntity);
+        return Optional.ofNullable(userMapper.convertUserEntityToUserDto(userEntity));
     }
 
 

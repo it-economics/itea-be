@@ -19,6 +19,6 @@ public class Users {
     }
 
     public Optional<UserDto> findByLastName(String lastName) {
-        return Optional.ofNullable(userRepository.byLastName(lastName));
+        return userRepository.byLastName(lastName);
     }
 }

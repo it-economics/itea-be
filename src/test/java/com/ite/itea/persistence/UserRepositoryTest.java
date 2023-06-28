@@ -55,8 +55,9 @@ class UserRepositoryTest {
     void shouldReturnCaptainHookWhenAUserWithTheNameHookIsSearched() {
         var user = userRepository.byLastName("Hook");
 
-        then(user.firstname()).isEqualTo("Captain");
-        then(user.lastname()).isEqualTo("Hook");
+        then(user).isPresent();
+        then(user.get().firstname()).isEqualTo("Captain");
+        then(user.get().lastname()).isEqualTo("Hook");
     }
 
 }
