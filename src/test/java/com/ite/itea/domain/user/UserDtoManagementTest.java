@@ -7,6 +7,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.net.URL;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 import static org.assertj.core.api.BDDAssertions.then;
@@ -25,7 +28,9 @@ class UserDtoManagementTest {
 
     @BeforeEach
     public void setUp() {
-        file = new File(Objects.requireNonNull(getClass().getClassLoader().getResource("usersWithOrders/users.txt")).getFile());
+        URL usersFileURL = getClass().getClassLoader().getResource("usersWithOrders/users.txt");
+        String usersFilePath = Objects.requireNonNull(usersFileURL).getFile();
+        file = new File(URLDecoder.decode(usersFilePath, StandardCharsets.UTF_8));
         converterEntityToDto = new ConverterEntityToDto();
         userRepository = new UserRepository(file, converterEntityToDto);
         userManagement = new UserManagement(printer, userRepository);

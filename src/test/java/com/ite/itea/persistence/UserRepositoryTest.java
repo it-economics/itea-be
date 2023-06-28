@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.PrintStream;
+import java.net.URL;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 import static org.assertj.core.api.BDDAssertions.then;
@@ -23,7 +26,9 @@ class UserRepositoryTest {
     @BeforeEach
     public void setUp() {
         System.setOut(new PrintStream(outContent));
-        file = new File(Objects.requireNonNull(getClass().getClassLoader().getResource("usersWithOrders/users.txt")).getFile());
+        URL usersFileURL = getClass().getClassLoader().getResource("usersWithOrders/users.txt");
+        String usersFilePath = Objects.requireNonNull(usersFileURL).getFile();
+        file = new File(URLDecoder.decode(usersFilePath, StandardCharsets.UTF_8));
         converterEntityToDto = new ConverterEntityToDto();
         userRepository = new UserRepository(file, converterEntityToDto);
     }
