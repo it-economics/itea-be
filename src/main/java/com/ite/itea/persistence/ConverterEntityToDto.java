@@ -1,6 +1,6 @@
 package com.ite.itea.persistence;
 
-import com.ite.itea.domain.dto.UserDto;
+import com.ite.itea.application.dto.UserDto;
 import com.ite.itea.persistence.entities.UserEntity;
 
 public class ConverterEntityToDto {

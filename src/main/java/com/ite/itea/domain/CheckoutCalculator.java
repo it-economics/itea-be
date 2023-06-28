@@ -1,8 +1,8 @@
 package com.ite.itea.domain;
 
-import com.ite.itea.domain.dto.ItemDto;
-import com.ite.itea.domain.dto.OrderDto;
-import com.ite.itea.domain.dto.ReceiptDto;
+import com.ite.itea.application.dto.ItemDto;
+import com.ite.itea.application.dto.OrderDto;
+import com.ite.itea.application.dto.ReceiptDto;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;

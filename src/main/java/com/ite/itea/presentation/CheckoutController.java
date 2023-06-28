@@ -1,7 +1,11 @@
 package com.ite.itea.presentation;
 
+import com.ite.itea.application.dto.ChairsDto;
+import com.ite.itea.application.dto.ItemDto;
+import com.ite.itea.application.dto.PicturesDto;
+import com.ite.itea.application.dto.TablesDto;
 import com.ite.itea.domain.CheckoutCalculator;
-import com.ite.itea.domain.dto.*;
+import com.ite.itea.application.dto.*;
 import com.ite.itea.domain.request.ItemNameRequest;
 import com.ite.itea.domain.request.ItemRequest;
 import com.ite.itea.domain.request.OrderRequest;

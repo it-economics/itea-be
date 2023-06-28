@@ -1,4 +1,4 @@
-package com.ite.itea.domain.dto;
+package com.ite.itea.application.dto;
 
 import org.junit.jupiter.api.Test;
 

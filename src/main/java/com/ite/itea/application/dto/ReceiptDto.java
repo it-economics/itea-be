@@ -1,4 +1,4 @@
-package com.ite.itea.domain.dto;
+package com.ite.itea.application.dto;
 
 public record ReceiptDto(long priceInCents, String text) {
 

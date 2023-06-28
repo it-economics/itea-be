@@ -1,6 +1,6 @@
 package com.ite.itea.domain;
 
-import com.ite.itea.domain.dto.*;
+import com.ite.itea.application.dto.*;
 import com.ite.itea.domain.request.ItemNameRequest;
 import org.junit.jupiter.api.Test;
 

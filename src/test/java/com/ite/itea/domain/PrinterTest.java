@@ -1,6 +1,6 @@
 package com.ite.itea.domain;
 
-import com.ite.itea.domain.dto.UserDto;
+import com.ite.itea.application.dto.UserDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
