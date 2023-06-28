@@ -38,7 +38,7 @@ class UserRepositoryTest {
 
     @Test
     void shouldReturnAllUsersWhenAllUsersAreRequested() {
-        var users = userRepository.getAllUsers();
+        var users = userRepository.all();
 
         then(users.size()).isEqualTo(4);
         then(users.get(0).firstname()).isEqualTo("Peter");
@@ -53,7 +53,7 @@ class UserRepositoryTest {
 
     @Test
     void shouldReturnCaptainHookWhenAUserWithTheNameHookIsSearched() {
-        var user = userRepository.getUserByLastname("Hook");
+        var user = userRepository.byLastName("Hook");
 
         then(user.firstname()).isEqualTo("Captain");
         then(user.lastname()).isEqualTo("Hook");

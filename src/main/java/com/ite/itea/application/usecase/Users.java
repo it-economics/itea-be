@@ -13,11 +13,11 @@ public class Users {
         this.userRepository = userRepository;
     }
 
-    public List<UserDto> getAllUsers() {
-        return userRepository.getAllUsers();
+    public List<UserDto> findAll() {
+        return userRepository.all();
     }
 
-    public UserDto getUserByLastname(String lastname) {
-        return userRepository.getUserByLastname(lastname);
+    public UserDto findByLastName(String lastName) {
+        return userRepository.byLastName(lastName);
     }
 }

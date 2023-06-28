@@ -22,7 +22,7 @@ public class FileSystemUserRepository implements UserRepository {
         this.userMapper = userMapper;
     }
 
-    public List<UserDto> getAllUsers() {
+    public List<UserDto> all() {
         List<UserEntity> userEntities = getAllUserEntities();
 
         return userEntities.stream()
@@ -30,8 +30,8 @@ public class FileSystemUserRepository implements UserRepository {
                 .toList();
     }
 
-    public UserDto getUserByLastname(String lastname) {
-        UserEntity userEntity = getUserEntityByLastname(lastname);
+    public UserDto byLastName(String lastName) {
+        UserEntity userEntity = getUserEntityByLastname(lastName);
 
         return userMapper.convertUserEntityToUserDto(userEntity);
     }

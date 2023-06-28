@@ -31,7 +31,7 @@ class UsersTest {
 
     @Test
     void shouldReturnAllUsersWhenAllUsersAreRequested() {
-        var users = this.users.getAllUsers();
+        var users = this.users.findAll();
 
         then(users.size()).isEqualTo(4);
         then(users.get(0).firstname()).isEqualTo("Peter");
@@ -46,7 +46,7 @@ class UsersTest {
 
     @Test
     void shouldReturnCaptainHookWhenAUserWithTheNameHookIsSearched() {
-        var user = users.getUserByLastname("Hook");
+        var user = users.findByLastName("Hook");
 
         then(user.firstname()).isEqualTo("Captain");
         then(user.lastname()).isEqualTo("Hook");

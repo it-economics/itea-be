@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface UserRepository {
 
-    List<UserDto> getAllUsers();
-    UserDto getUserByLastname(String lastname);
+    List<UserDto> all();
+    UserDto byLastName(String lastName);
 }
