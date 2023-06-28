@@ -1,6 +1,5 @@
 package com.ite.itea.persistence.user;
 
-import com.ite.itea.application.dto.UserDto;
 import com.ite.itea.domain.user.User;
 import com.ite.itea.domain.user.UserRepository;
 
@@ -21,22 +20,13 @@ public class FileSystemUserRepository implements UserRepository {
         this.file = file;
     }
 
-    public List<UserDto> all() {
-        List<User> userEntities = getAllUserEntities();
-
-        return userEntities.stream()
-                .map(this::mapToDto)
-                .toList();
+    public List<User> all() {
+        return getAllUserEntities();
     }
 
-    public Optional<UserDto> byLastName(String lastName) {
+    public Optional<User> byLastName(String lastName) {
         User user = getUserEntityByLastname(lastName);
-
-        return Optional.of(mapToDto(user));
-    }
-
-    private UserDto mapToDto(User user) {
-        return new UserDto(user.firstname(), user.lastname(), user.purchasedItems());
+        return Optional.of(user);
     }
 
     private User getUserEntityByLastname(String lastname) {

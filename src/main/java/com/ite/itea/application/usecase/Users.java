@@ -1,6 +1,6 @@
 package com.ite.itea.application.usecase;
 
-import com.ite.itea.application.dto.UserDto;
+import com.ite.itea.domain.user.User;
 import com.ite.itea.domain.user.UserRepository;
 
 import java.util.List;
@@ -14,11 +14,11 @@ public class Users {
         this.userRepository = userRepository;
     }
 
-    public List<UserDto> findAll() {
+    public List<User> findAll() {
         return userRepository.all();
     }
 
-    public Optional<UserDto> findByLastName(String lastName) {
+    public Optional<User> findByLastName(String lastName) {
         return userRepository.byLastName(lastName);
     }
 }
