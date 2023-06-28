@@ -3,7 +3,7 @@ package com.ite.itea.domain;
 /*
     Class that calculates price of garden bench AND prints details of the product
  */
-public class CalculatorGardenBench {
+public class GardenBench {
 
     private static final double DEFAULT_ELEMENT_PRICE_IN_EUR = 80;
     private static final double PLANT_ELEMENT_PRICE_IN_EUR = 130;
@@ -28,7 +28,7 @@ public class CalculatorGardenBench {
     private double productPrice;
     private double deliveryPrice = 0;
 
-    public CalculatorGardenBench(int amount, int length, int amountDefaultElements, int amountPlantElements, boolean hasBackrest, boolean isDelivery) {
+    public GardenBench(int amount, int length, int amountDefaultElements, int amountPlantElements, boolean hasBackrest, boolean isDelivery) {
         this.amount = amount;
         this.length = length;
         this.amountDefaultElements = amountDefaultElements;
