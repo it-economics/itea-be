@@ -1,7 +1,7 @@
-package com.ite.itea.persistence;
+package com.ite.itea.persistence.user;
 
 import com.ite.itea.application.dto.UserDto;
-import com.ite.itea.persistence.entities.UserEntity;
+import com.ite.itea.domain.user.UserRepository;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,29 +11,29 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class UserRepository {
+public class FileSystemUserRepository implements UserRepository {
 
     private final File file;
 
-    private final ConverterEntityToDto converterEntityToDto;
+    private final UserMapper userMapper;
 
-    public UserRepository(File file, ConverterEntityToDto converterEntityToDto) {
+    public FileSystemUserRepository(File file, UserMapper userMapper) {
         this.file = file;
-        this.converterEntityToDto = converterEntityToDto;
+        this.userMapper = userMapper;
     }
 
     public List<UserDto> getAllUsers() {
         List<UserEntity> userEntities = getAllUserEntities();
 
         return userEntities.stream()
-                .map(converterEntityToDto::convertUserEntityToUserDto)
+                .map(userMapper::convertUserEntityToUserDto)
                 .toList();
     }
 
     public UserDto getUserByLastname(String lastname) {
         UserEntity userEntity = getUserEntityByLastname(lastname);
 
-        return converterEntityToDto.convertUserEntityToUserDto(userEntity);
+        return userMapper.convertUserEntityToUserDto(userEntity);
     }
 
 

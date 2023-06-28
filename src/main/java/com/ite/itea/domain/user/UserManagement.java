@@ -1,8 +1,7 @@
 package com.ite.itea.domain.user;
 
-import com.ite.itea.domain.Printer;
 import com.ite.itea.application.dto.UserDto;
-import com.ite.itea.persistence.UserRepository;
+import com.ite.itea.domain.Printer;
 
 import java.util.List;
 

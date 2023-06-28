@@ -1,4 +1,4 @@
-package com.ite.itea.persistence.entities;
+package com.ite.itea.persistence.user;
 
 import java.util.List;
 

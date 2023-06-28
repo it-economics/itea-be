@@ -1,5 +1,8 @@
 package com.ite.itea.persistence;
 
+import com.ite.itea.domain.user.UserRepository;
+import com.ite.itea.persistence.user.UserMapper;
+import com.ite.itea.persistence.user.FileSystemUserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +22,7 @@ class UserRepositoryTest {
 
     private UserRepository userRepository;
 
-    private ConverterEntityToDto converterEntityToDto;
+    private UserMapper userMapper;
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
@@ -29,8 +32,8 @@ class UserRepositoryTest {
         URL usersFileURL = getClass().getClassLoader().getResource("usersWithOrders/users.txt");
         String usersFilePath = Objects.requireNonNull(usersFileURL).getFile();
         file = new File(URLDecoder.decode(usersFilePath, StandardCharsets.UTF_8));
-        converterEntityToDto = new ConverterEntityToDto();
-        userRepository = new UserRepository(file, converterEntityToDto);
+        userMapper = new UserMapper();
+        userRepository = new FileSystemUserRepository(file, userMapper);
     }
 
     @Test
