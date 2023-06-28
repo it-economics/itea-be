@@ -1,7 +1,7 @@
 package com.ite.itea.domain;
 
 import com.ite.itea.application.dto.*;
-import com.ite.itea.domain.request.ItemNameRequest;
+import com.ite.itea.presentation.request.ItemNameRequest;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

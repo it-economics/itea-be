@@ -1,6 +1,6 @@
 package com.ite.itea.application.dto;
 
-import com.ite.itea.domain.request.ItemNameRequest;
+import com.ite.itea.presentation.request.ItemNameRequest;
 
 public class TablesDto extends ItemDto {
 

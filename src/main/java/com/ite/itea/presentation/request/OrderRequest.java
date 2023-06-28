@@ -1,4 +1,4 @@
-package com.ite.itea.domain.request;
+package com.ite.itea.presentation.request;
 
 import java.util.List;
 
