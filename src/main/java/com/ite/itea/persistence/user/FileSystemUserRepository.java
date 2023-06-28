@@ -1,6 +1,7 @@
 package com.ite.itea.persistence.user;
 
 import com.ite.itea.application.dto.UserDto;
+import com.ite.itea.domain.user.User;
 import com.ite.itea.domain.user.UserRepository;
 
 import java.io.BufferedReader;
@@ -21,35 +22,35 @@ public class FileSystemUserRepository implements UserRepository {
     }
 
     public List<UserDto> all() {
-        List<UserEntity> userEntities = getAllUserEntities();
+        List<User> userEntities = getAllUserEntities();
 
         return userEntities.stream()
-                .map(this::convertUserEntityToUserDto)
+                .map(this::mapToDto)
                 .toList();
     }
 
     public Optional<UserDto> byLastName(String lastName) {
-        UserEntity userEntity = getUserEntityByLastname(lastName);
+        User user = getUserEntityByLastname(lastName);
 
-        return Optional.of(convertUserEntityToUserDto(userEntity));
+        return Optional.of(mapToDto(user));
     }
 
-    private UserDto convertUserEntityToUserDto(UserEntity userEntity) {
-        return new UserDto(userEntity.firstname(), userEntity.lastname(), userEntity.purchasedItems());
+    private UserDto mapToDto(User user) {
+        return new UserDto(user.firstname(), user.lastname(), user.purchasedItems());
     }
 
-    private UserEntity getUserEntityByLastname(String lastname) {
-        List<UserEntity> users = getAllUserEntities();
+    private User getUserEntityByLastname(String lastname) {
+        List<User> users = getAllUserEntities();
 
         var userResult = users.stream()
                 .filter(user -> user.lastname().equals(lastname))
                 .findFirst();
 
-        return userResult.orElseGet(() -> new UserEntity(null, null, null));
+        return userResult.orElseGet(() -> new User(null, null, null));
     }
 
-    private List<UserEntity> getAllUserEntities() {
-        List<UserEntity> users = new ArrayList<>();
+    private List<User> getAllUserEntities() {
+        List<User> users = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(this.file))) {
             String line = br.readLine();
@@ -58,7 +59,7 @@ public class FileSystemUserRepository implements UserRepository {
                 String[] userFromFile = line.split(" ");
                 String[] ordersFromFile = userFromFile[2].split(",");
 
-                var user = new UserEntity(userFromFile[0], userFromFile[1], Arrays.stream(ordersFromFile).toList());
+                var user = new User(userFromFile[0], userFromFile[1], Arrays.stream(ordersFromFile).toList());
 
                 users.add(user);
 
