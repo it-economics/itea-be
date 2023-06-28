@@ -16,27 +16,27 @@ public class FileSystemUserRepository implements UserRepository {
 
     private final File file;
 
-    private final UserMapper userMapper;
-
-    public FileSystemUserRepository(File file, UserMapper userMapper) {
+    public FileSystemUserRepository(File file) {
         this.file = file;
-        this.userMapper = userMapper;
     }
 
     public List<UserDto> all() {
         List<UserEntity> userEntities = getAllUserEntities();
 
         return userEntities.stream()
-                .map(userMapper::convertUserEntityToUserDto)
+                .map(this::convertUserEntityToUserDto)
                 .toList();
     }
 
     public Optional<UserDto> byLastName(String lastName) {
         UserEntity userEntity = getUserEntityByLastname(lastName);
 
-        return Optional.ofNullable(userMapper.convertUserEntityToUserDto(userEntity));
+        return Optional.of(convertUserEntityToUserDto(userEntity));
     }
 
+    private UserDto convertUserEntityToUserDto(UserEntity userEntity) {
+        return new UserDto(userEntity.firstname(), userEntity.lastname(), userEntity.purchasedItems());
+    }
 
     private UserEntity getUserEntityByLastname(String lastname) {
         List<UserEntity> users = getAllUserEntities();

@@ -1,7 +1,6 @@
 package com.ite.itea.persistence;
 
 import com.ite.itea.domain.user.UserRepository;
-import com.ite.itea.persistence.user.UserMapper;
 import com.ite.itea.persistence.user.FileSystemUserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,11 +17,7 @@ import static org.assertj.core.api.BDDAssertions.then;
 
 class UserRepositoryTest {
 
-    private File file;
-
     private UserRepository userRepository;
-
-    private UserMapper userMapper;
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
@@ -31,9 +26,8 @@ class UserRepositoryTest {
         System.setOut(new PrintStream(outContent));
         URL usersFileURL = getClass().getClassLoader().getResource("usersWithOrders/users.txt");
         String usersFilePath = Objects.requireNonNull(usersFileURL).getFile();
-        file = new File(URLDecoder.decode(usersFilePath, StandardCharsets.UTF_8));
-        userMapper = new UserMapper();
-        userRepository = new FileSystemUserRepository(file, userMapper);
+        File file = new File(URLDecoder.decode(usersFilePath, StandardCharsets.UTF_8));
+        userRepository = new FileSystemUserRepository(file);
     }
 
     @Test

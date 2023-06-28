@@ -2,7 +2,6 @@ package com.ite.itea.application.usecase;
 
 import com.ite.itea.domain.user.UserRepository;
 import com.ite.itea.persistence.user.FileSystemUserRepository;
-import com.ite.itea.persistence.user.UserMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -24,8 +23,7 @@ class UsersTest {
         URL usersFileURL = getClass().getClassLoader().getResource("usersWithOrders/users.txt");
         String usersFilePath = Objects.requireNonNull(usersFileURL).getFile();
         File file = new File(URLDecoder.decode(usersFilePath, StandardCharsets.UTF_8));
-        UserMapper userMapper = new UserMapper();
-        UserRepository userRepository = new FileSystemUserRepository(file, userMapper);
+        UserRepository userRepository = new FileSystemUserRepository(file);
         users = new Users(userRepository);
     }
 
