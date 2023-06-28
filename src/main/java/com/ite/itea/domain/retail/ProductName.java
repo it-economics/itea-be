@@ -1,5 +1,5 @@
-package com.ite.itea.presentation.request;
+package com.ite.itea.domain.retail;
 
-public enum ItemNameRequest {
+public enum ProductName {
     PictureFinland, PictureNorway, PictureSweden, ChairElsa, ChairLars, ChairKnut, TableLotta, TableLola
 }

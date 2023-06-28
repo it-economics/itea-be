@@ -1,6 +1,6 @@
 package com.ite.itea.presentation;
 
-import com.ite.itea.presentation.request.ItemNameRequest;
+import com.ite.itea.domain.retail.ProductName;
 import com.ite.itea.presentation.request.ItemRequest;
 import com.ite.itea.presentation.request.OrderRequest;
 import com.ite.itea.presentation.response.ReceiptResponse;
@@ -33,7 +33,7 @@ class CheckoutControllerTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenSendingRequestWithAPictureNorwayToTheController() {
-        var orderPictureNorway = createItem(ItemNameRequest.PictureNorway, 2,999);
+        var orderPictureNorway = createItem(ProductName.PictureNorway, 2,999);
         var orderRequest = createOrder(orderPictureNorway);
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
@@ -45,7 +45,7 @@ class CheckoutControllerTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenSendingRequestWithAPictureSwedenToTheController() {
-        var orderPictureSweden = createItem(ItemNameRequest.PictureSweden, 2, 1299);
+        var orderPictureSweden = createItem(ProductName.PictureSweden, 2, 1299);
         var orderRequest = createOrder(orderPictureSweden);
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
@@ -57,7 +57,7 @@ class CheckoutControllerTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenSendingRequestWithAPictureFinlandToTheController() {
-        var orderPictureFinland = createItem(ItemNameRequest.PictureFinland, 2, 1499);
+        var orderPictureFinland = createItem(ProductName.PictureFinland, 2, 1499);
         var orderRequest = createOrder(orderPictureFinland);
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
@@ -69,7 +69,7 @@ class CheckoutControllerTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenSendingRequestWithAChairElsaToTheController() {
-        var orderChairElsa = createItem(ItemNameRequest.ChairElsa, 2, 3000);
+        var orderChairElsa = createItem(ProductName.ChairElsa, 2, 3000);
         var orderRequest = createOrder(orderChairElsa);
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
@@ -81,7 +81,7 @@ class CheckoutControllerTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenSendingRequestWithAChairKnutToTheController() {
-        var orderChairKnut = createItem(ItemNameRequest.ChairKnut, 2, 4100);
+        var orderChairKnut = createItem(ProductName.ChairKnut, 2, 4100);
         var orderRequest = createOrder(orderChairKnut);
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
@@ -93,7 +93,7 @@ class CheckoutControllerTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenSendingRequestWithAChairLarsToTheController() {
-        var orderChairLars = createItem(ItemNameRequest.ChairLars, 2, 5800);
+        var orderChairLars = createItem(ProductName.ChairLars, 2, 5800);
         var orderRequest = createOrder(orderChairLars);
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
@@ -105,7 +105,7 @@ class CheckoutControllerTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenSendingRequestWithATableLottaToTheController() {
-        var orderTableLotta = createItem(ItemNameRequest.TableLotta, 2, 500);
+        var orderTableLotta = createItem(ProductName.TableLotta, 2, 500);
         var orderRequest = createOrder(orderTableLotta);
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
@@ -117,7 +117,7 @@ class CheckoutControllerTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenSendingRequestWithATableLolaToTheController() {
-        var orderTableLola = createItem(ItemNameRequest.TableLola, 2, 1300);
+        var orderTableLola = createItem(ProductName.TableLola, 2, 1300);
         var orderRequest = createOrder(orderTableLola);
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
@@ -138,7 +138,7 @@ class CheckoutControllerTest {
         return new OrderRequest(List.of(item));
     }
 
-    private ItemRequest createItem(ItemNameRequest name, int amount, long price) {
+    private ItemRequest createItem(ProductName name, int amount, long price) {
         return new ItemRequest(name, amount, price);
     }
 }

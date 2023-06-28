@@ -6,7 +6,7 @@ import com.ite.itea.application.dto.PicturesDto;
 import com.ite.itea.application.dto.TablesDto;
 import com.ite.itea.domain.CheckoutCalculator;
 import com.ite.itea.application.dto.*;
-import com.ite.itea.presentation.request.ItemNameRequest;
+import com.ite.itea.domain.retail.ProductName;
 import com.ite.itea.presentation.request.ItemRequest;
 import com.ite.itea.presentation.request.OrderRequest;
 import com.ite.itea.presentation.response.ReceiptResponse;
@@ -36,28 +36,28 @@ public class CheckoutController {
         List<ItemDto> itemDtoList = new ArrayList<>();
 
         for (ItemRequest itemRequest : orderRequest.itemRequests()) {
-            if (ItemNameRequest.PictureNorway.equals(itemRequest.name())) {
+            if (ProductName.PictureNorway.equals(itemRequest.name())) {
                 ItemDto itemDto = new PicturesDto(itemRequest.name(), itemRequest.amount(), 999L);
                 itemDtoList.add(itemDto);
-            } else if (ItemNameRequest.PictureSweden.equals(itemRequest.name())) {
+            } else if (ProductName.PictureSweden.equals(itemRequest.name())) {
                 ItemDto itemDto = new PicturesDto(itemRequest.name(), itemRequest.amount(), 1299L);
                 itemDtoList.add(itemDto);
-            } else if (ItemNameRequest.PictureFinland.equals(itemRequest.name())) {
+            } else if (ProductName.PictureFinland.equals(itemRequest.name())) {
                 ItemDto itemDto = new PicturesDto(itemRequest.name(), itemRequest.amount(), 1499L);
                 itemDtoList.add(itemDto);
-            } else if (ItemNameRequest.ChairElsa.equals(itemRequest.name())) {
+            } else if (ProductName.ChairElsa.equals(itemRequest.name())) {
                 ItemDto itemDto = new ChairsDto(itemRequest.name(), itemRequest.amount(), 500, 500, 500, "plastic");
                 itemDtoList.add(itemDto);
-            } else if (ItemNameRequest.ChairKnut.equals(itemRequest.name())) {
+            } else if (ProductName.ChairKnut.equals(itemRequest.name())) {
                 ItemDto itemDto = new ChairsDto(itemRequest.name(), itemRequest.amount(), 400, 1000, 1500,  "wood");
                 itemDtoList.add(itemDto);
-            } else if (ItemNameRequest.ChairLars.equals(itemRequest.name())) {
+            } else if (ProductName.ChairLars.equals(itemRequest.name())) {
                 ItemDto itemDto = new ChairsDto(itemRequest.name(), itemRequest.amount(), 200, 2000, 3000, "metal");
                 itemDtoList.add(itemDto);
-            } else if (ItemNameRequest.TableLotta.equals(itemRequest.name())) {
+            } else if (ProductName.TableLotta.equals(itemRequest.name())) {
                 ItemDto itemDto = new TablesDto(itemRequest.name(), itemRequest.amount(), 1000, 1000, "plastic");
                 itemDtoList.add(itemDto);
-            }else if (ItemNameRequest.TableLola.equals(itemRequest.name())) {
+            }else if (ProductName.TableLola.equals(itemRequest.name())) {
                 ItemDto itemDto = new TablesDto(itemRequest.name(), itemRequest.amount(), 3000, 1000, "plastic");
                 itemDtoList.add(itemDto);
             }

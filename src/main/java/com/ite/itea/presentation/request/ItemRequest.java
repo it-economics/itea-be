@@ -1,5 +1,7 @@
 package com.ite.itea.presentation.request;
 
-public record ItemRequest(ItemNameRequest name, int amount, long price) {
+import com.ite.itea.domain.retail.ProductName;
+
+public record ItemRequest(ProductName name, int amount, long price) {
 
 }

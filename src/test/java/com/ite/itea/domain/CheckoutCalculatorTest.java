@@ -1,7 +1,7 @@
 package com.ite.itea.domain;
 
 import com.ite.itea.application.dto.*;
-import com.ite.itea.presentation.request.ItemNameRequest;
+import com.ite.itea.domain.retail.ProductName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ class CheckoutCalculatorTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithPictureNorway() {
-        var orderedPicturesNorway = new PicturesDto(ItemNameRequest.PictureNorway, 2, 999L);
+        var orderedPicturesNorway = new PicturesDto(ProductName.PictureNorway, 2, 999L);
         var orderDto = createOrder(orderedPicturesNorway);
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
@@ -26,7 +26,7 @@ class CheckoutCalculatorTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithPictureSweden() {
-        var orderedPicturesSweden = new PicturesDto(ItemNameRequest.PictureSweden,2, 1299L);
+        var orderedPicturesSweden = new PicturesDto(ProductName.PictureSweden,2, 1299L);
         var orderDto = createOrder(orderedPicturesSweden);
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
@@ -37,7 +37,7 @@ class CheckoutCalculatorTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithPictureFinland() {
-        var orderedPicturesFinland = new PicturesDto(ItemNameRequest.PictureFinland,2, 1499L);
+        var orderedPicturesFinland = new PicturesDto(ProductName.PictureFinland,2, 1499L);
         var orderDto = createOrder(orderedPicturesFinland);
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
@@ -48,7 +48,7 @@ class CheckoutCalculatorTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithChairElsa() {
-        var orderedChairElsa = new ChairsDto(ItemNameRequest.ChairElsa, 2, 500, 500, 500, "plastic");
+        var orderedChairElsa = new ChairsDto(ProductName.ChairElsa, 2, 500, 500, 500, "plastic");
         var orderDto = createOrder(orderedChairElsa);
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
@@ -59,7 +59,7 @@ class CheckoutCalculatorTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithChairKnut() {
-        var orderedChairKnut = new ChairsDto(ItemNameRequest.ChairKnut, 2, 400, 1000, 1500,  "wood");
+        var orderedChairKnut = new ChairsDto(ProductName.ChairKnut, 2, 400, 1000, 1500,  "wood");
         var orderDto = createOrder(orderedChairKnut);
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
@@ -70,7 +70,7 @@ class CheckoutCalculatorTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithChairLars() {
-        var orderedChairLars = new ChairsDto(ItemNameRequest.ChairLars, 2, 200, 2000, 3000, "metal");
+        var orderedChairLars = new ChairsDto(ProductName.ChairLars, 2, 200, 2000, 3000, "metal");
         var orderDto = createOrder(orderedChairLars);
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
@@ -81,7 +81,7 @@ class CheckoutCalculatorTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithTableLotta() {
-        var orderedTablesLotta = new TablesDto(ItemNameRequest.TableLotta, 2, 1000, 3000, "plastic");
+        var orderedTablesLotta = new TablesDto(ProductName.TableLotta, 2, 1000, 3000, "plastic");
         var orderDto = createOrder(orderedTablesLotta);
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
@@ -92,7 +92,7 @@ class CheckoutCalculatorTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithTableLola() {
-        var orderedTablesLola = new TablesDto(ItemNameRequest.TableLola, 2, 2000, 5000, "wood");
+        var orderedTablesLola = new TablesDto(ProductName.TableLola, 2, 2000, 5000, "wood");
         var orderDto = createOrder(orderedTablesLola);
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
