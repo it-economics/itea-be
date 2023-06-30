@@ -6,17 +6,11 @@ public class TablesDTO extends ProductDTO {
 
     private final ProductName tablesType;
     private final int amount;
-    private final long legPrice;
-    private final long platePrice;
-    private String material;
 
     public TablesDTO(ProductName tablesType, int amount, long legPrice, long platePrice, String material) {
         this.tablesType = tablesType;
         this.amount = amount;
-        this.legPrice = legPrice;
-        this.platePrice = platePrice;
-        this.material = material;
-        setPrice((long) (4 * legPrice + platePrice));
+        setPrice(4 * legPrice + platePrice);
     }
 
     @Override
