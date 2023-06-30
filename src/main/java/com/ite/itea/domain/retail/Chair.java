@@ -1,20 +1,22 @@
 package com.ite.itea.domain.retail;
 
+import com.ite.itea.domain.core.EuroPrice;
+
 public final class Chair extends Product {
 
-    private final long legPriceInCents;
-    private final long seatPriceInCents;
-    private final long backRestPriceInCents;
+    private final EuroPrice legPrice;
+    private final EuroPrice seatPrice;
+    private final EuroPrice backRestPrice;
 
-    public Chair(ProductId id, String name, long legPriceInCents, long seatPriceInCents, long backRestPriceInCents) {
+    public Chair(ProductId id, String name, EuroPrice legPrice, EuroPrice seatPrice, EuroPrice backRestPrice) {
         super(id, name);
-        this.legPriceInCents = legPriceInCents;
-        this.seatPriceInCents = seatPriceInCents;
-        this.backRestPriceInCents = backRestPriceInCents;
+        this.legPrice = legPrice;
+        this.seatPrice = seatPrice;
+        this.backRestPrice = backRestPrice;
     }
 
     @Override
-    public long priceInCents() {
-        return 4 * legPriceInCents + seatPriceInCents + backRestPriceInCents;
+    public EuroPrice price() {
+        return legPrice.times(4).plus(seatPrice).plus(backRestPrice);
     }
 }

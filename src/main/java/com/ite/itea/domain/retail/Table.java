@@ -1,18 +1,20 @@
 package com.ite.itea.domain.retail;
 
+import com.ite.itea.domain.core.EuroPrice;
+
 public final class Table extends Product {
 
-    private final long legPriceInCents;
-    private final long tableTopPriceInCents;
+    private final EuroPrice legPrice;
+    private final EuroPrice tableTopPrice;
 
-    public Table(ProductId id, String name, long legPriceInCents, long tableTopPriceInCents) {
+    public Table(ProductId id, String name, EuroPrice legPrice, EuroPrice tableTopPrice) {
         super(id, name);
-        this.legPriceInCents = legPriceInCents;
-        this.tableTopPriceInCents = tableTopPriceInCents;
+        this.legPrice = legPrice;
+        this.tableTopPrice = tableTopPrice;
     }
 
     @Override
-    public long priceInCents() {
-        return 4 * legPriceInCents + tableTopPriceInCents;
+    public EuroPrice price() {
+        return legPrice.times(4).plus(tableTopPrice);
     }
 }

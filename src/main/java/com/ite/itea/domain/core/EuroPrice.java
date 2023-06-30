@@ -14,6 +14,18 @@ public final class EuroPrice {
         return new EuroPrice(cents);
     }
 
+    public static EuroPrice zero() {
+        return new EuroPrice(0);
+    }
+
+    public EuroPrice plus(EuroPrice tableTopPrice) {
+        return new EuroPrice(cents + tableTopPrice.cents);
+    }
+
+    public EuroPrice times(int i) {
+        return new EuroPrice(cents * i);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

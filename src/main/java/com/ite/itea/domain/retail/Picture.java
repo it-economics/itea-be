@@ -1,16 +1,18 @@
 package com.ite.itea.domain.retail;
 
+import com.ite.itea.domain.core.EuroPrice;
+
 public final class Picture extends Product {
 
-    private final long priceInCents;
+    private final EuroPrice price;
 
-    public Picture(ProductId id, String name, long priceInCents) {
+    public Picture(ProductId id, String name, EuroPrice price) {
         super(id, name);
-        this.priceInCents = priceInCents;
+        this.price = price;
     }
 
     @Override
-    public long priceInCents() {
-        return priceInCents;
+    public EuroPrice price() {
+        return price;
     }
 }

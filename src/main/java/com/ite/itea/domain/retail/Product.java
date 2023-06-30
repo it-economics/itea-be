@@ -1,5 +1,7 @@
 package com.ite.itea.domain.retail;
 
+import com.ite.itea.domain.core.EuroPrice;
+
 public abstract class Product {
 
     private final ProductId id;
@@ -18,5 +20,5 @@ public abstract class Product {
         return name;
     }
 
-    public abstract long priceInCents();
+    public abstract EuroPrice price();
 }

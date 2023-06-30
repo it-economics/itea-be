@@ -1,5 +1,6 @@
 package com.ite.itea.persistence;
 
+import com.ite.itea.domain.core.EuroPrice;
 import com.ite.itea.domain.retail.*;
 
 import java.util.Map;
@@ -16,7 +17,7 @@ public class InMemoryProductRepository implements ProductRepository {
                             new Picture(
                                     new ProductId(ProductName.PictureFinland.name()),
                                     ProductName.PictureFinland.name(),
-                                    1499
+                                    EuroPrice.ofCents(1499)
                             )
                     ),
                     entry(
@@ -24,7 +25,7 @@ public class InMemoryProductRepository implements ProductRepository {
                             new Picture(
                                     new ProductId(ProductName.PictureNorway.name()),
                                     ProductName.PictureNorway.name(),
-                                    999
+                                    EuroPrice.ofCents(999)
                             )
                     ),
                     entry(
@@ -32,7 +33,7 @@ public class InMemoryProductRepository implements ProductRepository {
                             new Picture(
                                     new ProductId(ProductName.PictureSweden.name()),
                                     ProductName.PictureSweden.name(),
-                                    1299
+                                    EuroPrice.ofCents(1299)
                             )
                     ),
                     entry(
@@ -40,8 +41,8 @@ public class InMemoryProductRepository implements ProductRepository {
                             new Table(
                                     new ProductId(ProductName.TableLola.name()),
                                     ProductName.TableLola.name(),
-                                    3000,
-                                    1000
+                                    EuroPrice.ofCents(3000),
+                                    EuroPrice.ofCents(1000)
                             )
                     ),
                     entry(
@@ -49,8 +50,8 @@ public class InMemoryProductRepository implements ProductRepository {
                             new Table(
                                     new ProductId(ProductName.TableLotta.name()),
                                     ProductName.TableLotta.name(),
-                                    1000,
-                                    1000
+                                    EuroPrice.ofCents(1000),
+                                    EuroPrice.ofCents(1000)
                             )
                     ),
                     entry(
@@ -58,9 +59,9 @@ public class InMemoryProductRepository implements ProductRepository {
                             new Chair(
                                     new ProductId(ProductName.ChairElsa.name()),
                                     ProductName.ChairElsa.name(),
-                                    500,
-                                    500,
-                                    500
+                                    EuroPrice.ofCents(500),
+                                    EuroPrice.ofCents(500),
+                                    EuroPrice.ofCents(500)
                             )
                     ),
                     entry(
@@ -68,9 +69,9 @@ public class InMemoryProductRepository implements ProductRepository {
                             new Chair(
                                     new ProductId(ProductName.ChairKnut.name()),
                                     ProductName.ChairKnut.name(),
-                                    400,
-                                    1000,
-                                    1500
+                                    EuroPrice.ofCents(400),
+                                    EuroPrice.ofCents(1000),
+                                    EuroPrice.ofCents(1500)
                             )
                     ),
                     entry(
@@ -78,9 +79,9 @@ public class InMemoryProductRepository implements ProductRepository {
                             new Chair(
                                     new ProductId(ProductName.ChairElsa.name()),
                                     ProductName.ChairElsa.name(),
-                                    200,
-                                    2000,
-                                    3000
+                                    EuroPrice.ofCents(200),
+                                    EuroPrice.ofCents(2000),
+                                    EuroPrice.ofCents(3000)
                             )
                     )
             );
