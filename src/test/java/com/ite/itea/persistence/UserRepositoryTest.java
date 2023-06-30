@@ -1,7 +1,6 @@
 package com.ite.itea.persistence;
 
 import com.ite.itea.domain.user.UserRepository;
-import com.ite.itea.persistence.user.FileSystemUserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

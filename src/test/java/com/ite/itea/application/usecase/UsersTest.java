@@ -1,7 +1,7 @@
 package com.ite.itea.application.usecase;
 
 import com.ite.itea.domain.user.UserRepository;
-import com.ite.itea.persistence.user.FileSystemUserRepository;
+import com.ite.itea.persistence.FileSystemUserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

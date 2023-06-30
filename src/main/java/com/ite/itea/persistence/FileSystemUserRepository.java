@@ -1,4 +1,4 @@
-package com.ite.itea.persistence.user;
+package com.ite.itea.persistence;
 
 import com.ite.itea.domain.user.User;
 import com.ite.itea.domain.user.UserRepository;
