@@ -1,4 +1,4 @@
-package com.ite.itea.presentation.response;
+package com.ite.itea.application.dto;
 
 public record ReceiptResponse(long priceInCents, String text) {
 

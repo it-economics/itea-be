@@ -1,9 +1,9 @@
 package com.ite.itea.presentation;
 
 import com.ite.itea.domain.retail.ProductName;
-import com.ite.itea.presentation.request.ItemRequest;
-import com.ite.itea.presentation.request.OrderRequest;
-import com.ite.itea.presentation.response.ReceiptResponse;
+import com.ite.itea.application.dto.ItemRequest;
+import com.ite.itea.application.dto.OrderRequest;
+import com.ite.itea.application.dto.ReceiptResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
