@@ -1,6 +1,6 @@
 package com.ite.itea.application.dto;
 
-public abstract class ItemDto {
+public abstract class ProductDTO {
 
     private long price;
 

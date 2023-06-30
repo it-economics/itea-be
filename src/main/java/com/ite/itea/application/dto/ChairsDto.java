@@ -2,7 +2,7 @@ package com.ite.itea.application.dto;
 
 import com.ite.itea.domain.retail.ProductName;
 
-public class ChairsDto extends ItemDto {
+public class ChairsDto extends ProductDTO {
 
     private final TablesDto table;
     private long chairbackPrice;

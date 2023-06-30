@@ -2,6 +2,6 @@ package com.ite.itea.application.dto;
 
 import java.util.List;
 
-public record OrderDto(List<ItemDto> itemDtos) {
+public record OrderDto(List<ProductDTO> productDTOs) {
 
 }

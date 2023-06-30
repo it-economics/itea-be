@@ -103,7 +103,7 @@ class CheckoutCalculatorTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithoutItems() {
-        List<ItemDto> nothingOrdered = new ArrayList<>();
+        List<ProductDTO> nothingOrdered = new ArrayList<>();
         var orderDto = new OrderDto(nothingOrdered);
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
@@ -112,7 +112,7 @@ class CheckoutCalculatorTest {
         then(receipt.text()).isEqualTo("itea \nTotal 0,00\u00A0€");
     }
 
-    private OrderDto createOrder(ItemDto orderedItem) {
+    private OrderDto createOrder(ProductDTO orderedItem) {
         return new OrderDto(List.of(orderedItem));
     }
 

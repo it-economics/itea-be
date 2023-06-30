@@ -25,37 +25,37 @@ public class CheckoutController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ReceiptResponse calculate(@RequestBody OrderRequest orderRequest) {
-        List<ItemDto> itemDtoList = new ArrayList<>();
+        List<ProductDTO> productDTOList = new ArrayList<>();
 
         for (ItemRequest itemRequest : orderRequest.itemRequests()) {
             if (ProductName.PictureNorway.equals(itemRequest.name())) {
-                ItemDto itemDto = new PicturesDto(itemRequest.name(), itemRequest.amount(), 999L);
-                itemDtoList.add(itemDto);
+                ProductDTO productDTO = new PicturesDto(itemRequest.name(), itemRequest.amount(), 999L);
+                productDTOList.add(productDTO);
             } else if (ProductName.PictureSweden.equals(itemRequest.name())) {
-                ItemDto itemDto = new PicturesDto(itemRequest.name(), itemRequest.amount(), 1299L);
-                itemDtoList.add(itemDto);
+                ProductDTO productDTO = new PicturesDto(itemRequest.name(), itemRequest.amount(), 1299L);
+                productDTOList.add(productDTO);
             } else if (ProductName.PictureFinland.equals(itemRequest.name())) {
-                ItemDto itemDto = new PicturesDto(itemRequest.name(), itemRequest.amount(), 1499L);
-                itemDtoList.add(itemDto);
+                ProductDTO productDTO = new PicturesDto(itemRequest.name(), itemRequest.amount(), 1499L);
+                productDTOList.add(productDTO);
             } else if (ProductName.ChairElsa.equals(itemRequest.name())) {
-                ItemDto itemDto = new ChairsDto(itemRequest.name(), itemRequest.amount(), 500, 500, 500, "plastic");
-                itemDtoList.add(itemDto);
+                ProductDTO productDTO = new ChairsDto(itemRequest.name(), itemRequest.amount(), 500, 500, 500, "plastic");
+                productDTOList.add(productDTO);
             } else if (ProductName.ChairKnut.equals(itemRequest.name())) {
-                ItemDto itemDto = new ChairsDto(itemRequest.name(), itemRequest.amount(), 400, 1000, 1500,  "wood");
-                itemDtoList.add(itemDto);
+                ProductDTO productDTO = new ChairsDto(itemRequest.name(), itemRequest.amount(), 400, 1000, 1500,  "wood");
+                productDTOList.add(productDTO);
             } else if (ProductName.ChairLars.equals(itemRequest.name())) {
-                ItemDto itemDto = new ChairsDto(itemRequest.name(), itemRequest.amount(), 200, 2000, 3000, "metal");
-                itemDtoList.add(itemDto);
+                ProductDTO productDTO = new ChairsDto(itemRequest.name(), itemRequest.amount(), 200, 2000, 3000, "metal");
+                productDTOList.add(productDTO);
             } else if (ProductName.TableLotta.equals(itemRequest.name())) {
-                ItemDto itemDto = new TablesDto(itemRequest.name(), itemRequest.amount(), 1000, 1000, "plastic");
-                itemDtoList.add(itemDto);
+                ProductDTO productDTO = new TablesDto(itemRequest.name(), itemRequest.amount(), 1000, 1000, "plastic");
+                productDTOList.add(productDTO);
             }else if (ProductName.TableLola.equals(itemRequest.name())) {
-                ItemDto itemDto = new TablesDto(itemRequest.name(), itemRequest.amount(), 3000, 1000, "plastic");
-                itemDtoList.add(itemDto);
+                ProductDTO productDTO = new TablesDto(itemRequest.name(), itemRequest.amount(), 3000, 1000, "plastic");
+                productDTOList.add(productDTO);
             }
         }
 
-        ReceiptDto receiptDto = calculateTotalPriceUseCase.execute(new OrderDto(itemDtoList));
+        ReceiptDto receiptDto = calculateTotalPriceUseCase.execute(new OrderDto(productDTOList));
 
         return new ReceiptResponse(receiptDto.priceInCents(), receiptDto.text());
     }

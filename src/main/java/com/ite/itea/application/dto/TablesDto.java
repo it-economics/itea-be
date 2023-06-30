@@ -2,7 +2,7 @@ package com.ite.itea.application.dto;
 
 import com.ite.itea.domain.retail.ProductName;
 
-public class TablesDto extends ItemDto {
+public class TablesDto extends ProductDTO {
 
     private final ProductName tablesType;
     private final int amount;

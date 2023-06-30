@@ -2,7 +2,7 @@ package com.ite.itea.application.dto;
 
 import com.ite.itea.domain.retail.ProductName;
 
-public class PicturesDto extends ItemDto {
+public class PicturesDto extends ProductDTO {
 
     private final int amount;
     private final ProductName pictureType;
