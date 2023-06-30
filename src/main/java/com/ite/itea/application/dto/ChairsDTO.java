@@ -5,12 +5,10 @@ import com.ite.itea.domain.retail.ProductName;
 public class ChairsDTO extends ProductDTO {
 
     private final TablesDTO table;
-    private long chairbackPrice;
 
-    public ChairsDTO(ProductName chairType, int amount, long legPrice, long platePrice, long chairbackPrice, String material) {
+    public ChairsDTO(ProductName chairType, int amount, long legPrice, long platePrice, long backRestPrice, String material) {
         table = new TablesDTO(chairType, amount, legPrice, platePrice, material);
-        this.chairbackPrice = chairbackPrice;
-        setPrice(table.getPriceInCents() + chairbackPrice);
+        setPrice(table.getPriceInCents() + backRestPrice);
     }
 
     @Override
