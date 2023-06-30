@@ -1,8 +1,8 @@
 package com.ite.itea.domain;
 
 import com.ite.itea.application.dto.ProductDTO;
-import com.ite.itea.application.dto.OrderDto;
-import com.ite.itea.application.dto.ReceiptDto;
+import com.ite.itea.application.dto.OrderDTO;
+import com.ite.itea.application.dto.ReceiptDTO;
 
 import java.math.BigDecimal;
 import java.text.MessageFormat;
@@ -11,14 +11,14 @@ import java.util.Locale;
 
 public class CheckoutCalculator {
 
-    public ReceiptDto calculatePrice(OrderDto orderDto) {
+    public ReceiptDTO calculatePrice(OrderDTO orderDto) {
         var price = getPrice(orderDto);
         var text = getText(orderDto, price);
 
-        return new ReceiptDto(price, text);
+        return new ReceiptDTO(price, text);
     }
 
-    private String getText(OrderDto orderDto, long priceInCents) {
+    private String getText(OrderDTO orderDto, long priceInCents) {
         var text = "itea \n";
 
         for (ProductDTO productDTO : orderDto.productDTOs()) {
@@ -43,7 +43,7 @@ public class CheckoutCalculator {
         return currencyFormat.format(decimalPrice);
     }
 
-    private long getPrice(OrderDto orderDto) {
+    private long getPrice(OrderDTO orderDto) {
         var priceInCents = 0L;
 
         for (ProductDTO productDTO : orderDto.productDTOs()) {

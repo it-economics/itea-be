@@ -2,12 +2,12 @@ package com.ite.itea.application.dto;
 
 import com.ite.itea.domain.retail.ProductName;
 
-public class PicturesDto extends ProductDTO {
+public class PicturesDTO extends ProductDTO {
 
     private final int amount;
     private final ProductName pictureType;
 
-    public PicturesDto(ProductName pictureType, int amount, Long price) {
+    public PicturesDTO(ProductName pictureType, int amount, Long price) {
         setPrice(price);
         this.pictureType = pictureType;
         this.amount = amount;

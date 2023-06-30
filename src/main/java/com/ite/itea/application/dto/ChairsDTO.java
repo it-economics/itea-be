@@ -2,13 +2,13 @@ package com.ite.itea.application.dto;
 
 import com.ite.itea.domain.retail.ProductName;
 
-public class ChairsDto extends ProductDTO {
+public class ChairsDTO extends ProductDTO {
 
-    private final TablesDto table;
+    private final TablesDTO table;
     private long chairbackPrice;
 
-    public ChairsDto(ProductName chairType, int amount, long legPrice, long platePrice, long chairbackPrice, String material) {
-        table = new TablesDto(chairType, amount, legPrice, platePrice, material);
+    public ChairsDTO(ProductName chairType, int amount, long legPrice, long platePrice, long chairbackPrice, String material) {
+        table = new TablesDTO(chairType, amount, legPrice, platePrice, material);
         this.chairbackPrice = chairbackPrice;
         setPrice(table.getPriceInCents() + chairbackPrice);
     }

@@ -6,11 +6,11 @@ import java.util.List;
 
 import static org.assertj.core.api.BDDAssertions.then;
 
-class UserDtoTest {
+class UserDTOTest {
 
     @Test
     void shouldReturnUserAsFormatFirstnameAndLastname() {
-        UserDto user = new UserDto("Peter", "Pan", List.of("Pans"));
+        UserDTO user = new UserDTO("Peter", "Pan", List.of("Pans"));
 
         then(user.formatUserToString()).isEqualTo("Peter Pan");
     }

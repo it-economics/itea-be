@@ -2,7 +2,7 @@ package com.ite.itea.application.dto;
 
 import com.ite.itea.domain.retail.ProductName;
 
-public class TablesDto extends ProductDTO {
+public class TablesDTO extends ProductDTO {
 
     private final ProductName tablesType;
     private final int amount;
@@ -10,7 +10,7 @@ public class TablesDto extends ProductDTO {
     private final long platePrice;
     private String material;
 
-    public TablesDto(ProductName tablesType, int amount, long legPrice, long platePrice, String material) {
+    public TablesDTO(ProductName tablesType, int amount, long legPrice, long platePrice, String material) {
         this.tablesType = tablesType;
         this.amount = amount;
         this.legPrice = legPrice;
