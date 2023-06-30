@@ -1,11 +1,7 @@
 package com.ite.itea.presentation;
 
-import com.ite.itea.application.dto.ChairsDto;
-import com.ite.itea.application.dto.ItemDto;
-import com.ite.itea.application.dto.PicturesDto;
-import com.ite.itea.application.dto.TablesDto;
-import com.ite.itea.domain.CheckoutCalculator;
 import com.ite.itea.application.dto.*;
+import com.ite.itea.application.usecase.CalculateTotalPriceUseCase;
 import com.ite.itea.domain.retail.ProductName;
 import com.ite.itea.presentation.request.ItemRequest;
 import com.ite.itea.presentation.request.OrderRequest;
@@ -22,11 +18,7 @@ import java.util.List;
 @Controller
 public class CheckoutController {
 
-    private final CheckoutCalculator checkoutCalculator;
-
-    public CheckoutController(CheckoutCalculator checkoutCalculator) {
-        this.checkoutCalculator = checkoutCalculator;
-    }
+    private final CalculateTotalPriceUseCase calculateTotalPriceUseCase = new CalculateTotalPriceUseCase();
 
     @ResponseBody
     @PostMapping(path = "/checkout",
@@ -63,9 +55,8 @@ public class CheckoutController {
             }
         }
 
-        ReceiptDto receiptDto = checkoutCalculator.calculatePrice(new OrderDto(itemDtoList));
+        ReceiptDto receiptDto = calculateTotalPriceUseCase.execute(new OrderDto(itemDtoList));
 
         return new ReceiptResponse(receiptDto.priceInCents(), receiptDto.text());
     }
-
 }

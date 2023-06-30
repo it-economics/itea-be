@@ -3,14 +3,12 @@ package com.ite.itea.domain;
 import com.ite.itea.application.dto.ItemDto;
 import com.ite.itea.application.dto.OrderDto;
 import com.ite.itea.application.dto.ReceiptDto;
-import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.text.MessageFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-@Service
 public class CheckoutCalculator {
 
     public ReceiptDto calculatePrice(OrderDto orderDto) {
