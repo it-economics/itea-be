@@ -1,4 +1,4 @@
-package com.ite.itea.presentation;
+package com.ite.itea.endpoints;
 
 import com.ite.itea.domain.retail.ProductName;
 import com.ite.itea.application.dto.ItemRequest;

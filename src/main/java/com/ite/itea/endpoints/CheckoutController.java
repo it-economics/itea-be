@@ -1,4 +1,4 @@
-package com.ite.itea.presentation;
+package com.ite.itea.endpoints;
 
 import com.ite.itea.application.dto.*;
 import com.ite.itea.application.usecase.CalculateTotalPriceUseCase;
