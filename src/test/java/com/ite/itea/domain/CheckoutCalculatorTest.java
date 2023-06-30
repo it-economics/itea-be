@@ -16,7 +16,7 @@ class CheckoutCalculatorTest {
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithPictureNorway() {
         var orderedPicturesNorway = new PicturesDTO(ProductName.PictureNorway, 2, 999L);
-        var orderDto = createOrder(orderedPicturesNorway);
+        var orderDto = new OrderDTO(List.of(orderedPicturesNorway));
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
 
@@ -27,7 +27,7 @@ class CheckoutCalculatorTest {
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithPictureSweden() {
         var orderedPicturesSweden = new PicturesDTO(ProductName.PictureSweden,2, 1299L);
-        var orderDto = createOrder(orderedPicturesSweden);
+        var orderDto = new OrderDTO(List.of(orderedPicturesSweden));
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
 
@@ -38,7 +38,7 @@ class CheckoutCalculatorTest {
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithPictureFinland() {
         var orderedPicturesFinland = new PicturesDTO(ProductName.PictureFinland,2, 1499L);
-        var orderDto = createOrder(orderedPicturesFinland);
+        var orderDto = new OrderDTO(List.of(orderedPicturesFinland));
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
 
@@ -49,7 +49,7 @@ class CheckoutCalculatorTest {
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithChairElsa() {
         var orderedChairElsa = new ChairsDTO(ProductName.ChairElsa, 2, 500, 500, 500, "plastic");
-        var orderDto = createOrder(orderedChairElsa);
+        var orderDto = new OrderDTO(List.of(orderedChairElsa));
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
 
@@ -60,7 +60,7 @@ class CheckoutCalculatorTest {
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithChairKnut() {
         var orderedChairKnut = new ChairsDTO(ProductName.ChairKnut, 2, 400, 1000, 1500,  "wood");
-        var orderDto = createOrder(orderedChairKnut);
+        var orderDto = new OrderDTO(List.of(orderedChairKnut));
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
 
@@ -71,7 +71,7 @@ class CheckoutCalculatorTest {
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithChairLars() {
         var orderedChairLars = new ChairsDTO(ProductName.ChairLars, 2, 200, 2000, 3000, "metal");
-        var orderDto = createOrder(orderedChairLars);
+        var orderDto = new OrderDTO(List.of(orderedChairLars));
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
 
@@ -82,7 +82,7 @@ class CheckoutCalculatorTest {
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithTableLotta() {
         var orderedTablesLotta = new TablesDTO(ProductName.TableLotta, 2, 1000, 3000, "plastic");
-        var orderDto = createOrder(orderedTablesLotta);
+        var orderDto = new OrderDTO(List.of(orderedTablesLotta));
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
 
@@ -93,7 +93,7 @@ class CheckoutCalculatorTest {
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithTableLola() {
         var orderedTablesLola = new TablesDTO(ProductName.TableLola, 2, 2000, 5000, "wood");
-        var orderDto = createOrder(orderedTablesLola);
+        var orderDto = new OrderDTO(List.of(orderedTablesLola));
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
 
@@ -111,9 +111,4 @@ class CheckoutCalculatorTest {
         then(receipt.priceInCents()).isEqualTo(0L);
         then(receipt.text()).isEqualTo("itea \nTotal 0,00\u00A0€");
     }
-
-    private OrderDTO createOrder(ProductDTO orderedItem) {
-        return new OrderDTO(List.of(orderedItem));
-    }
-
 }
