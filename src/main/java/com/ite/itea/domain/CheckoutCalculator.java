@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.text.MessageFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 public class CheckoutCalculator {
 
@@ -19,15 +20,13 @@ public class CheckoutCalculator {
     }
 
     private String getText(OrderDTO orderDto, long priceInCents) {
-        var text = "itea \n";
+        final var formattedProducts = orderDto.productDTOs().stream()
+                .map(this::convertToText)
+                .collect(Collectors.joining());
 
-        for (ProductDTO productDTO : orderDto.productDTOs()) {
-            text += convertToText(productDTO);
-        }
-
-        text += "Total " + formatPrice(priceInCents);
-
-        return text;
+        return "itea \n"
+                + formattedProducts
+                + "Total " + formatPrice(priceInCents);
     }
 
     private String convertToText(ProductDTO productDTO) {
