@@ -7,7 +7,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.BDDAssertions.then;
@@ -39,7 +38,7 @@ class CheckoutCalculatorTest {
     @ParameterizedTest
     @MethodSource("provideProductsAndExpectedReceipts")
     void shouldReturnCorrectReceipts(ProductDTO product, long expectedTotalPriceInCents, String expectedReceiptText) {
-        var orderDto = new OrderDTO(List.of(product));
+        var orderDto = OrderDTO.of(product);
 
         var receipt = checkoutCalculator.prepareReceipt(orderDto);
 
@@ -49,7 +48,7 @@ class CheckoutCalculatorTest {
 
     @Test
     void shouldReturnCorrectReceiptForEmptyOrder() {
-        var emptyOrder = new OrderDTO(List.of());
+        var emptyOrder = OrderDTO.of();
 
         var receipt = checkoutCalculator.prepareReceipt(emptyOrder);
 
