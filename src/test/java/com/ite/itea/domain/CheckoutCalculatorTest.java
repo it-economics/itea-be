@@ -1,6 +1,7 @@
 package com.ite.itea.domain;
 
 import com.ite.itea.application.dto.*;
+import com.ite.itea.domain.retail.Order;
 import com.ite.itea.domain.retail.ProductName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -38,7 +39,7 @@ class CheckoutCalculatorTest {
     @ParameterizedTest
     @MethodSource("provideProductsAndExpectedReceipts")
     void shouldReturnCorrectReceipts(ProductDTO product, long expectedTotalPriceInCents, String expectedReceiptText) {
-        var orderDto = OrderDTO.of(product);
+        var orderDto = Order.of(product);
 
         var receipt = checkoutCalculator.prepareReceipt(orderDto);
 
@@ -48,7 +49,7 @@ class CheckoutCalculatorTest {
 
     @Test
     void shouldReturnCorrectReceiptForEmptyOrder() {
-        var emptyOrder = OrderDTO.of();
+        var emptyOrder = Order.of();
 
         var receipt = checkoutCalculator.prepareReceipt(emptyOrder);
 

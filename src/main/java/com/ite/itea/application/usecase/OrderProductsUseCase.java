@@ -2,6 +2,7 @@ package com.ite.itea.application.usecase;
 
 import com.ite.itea.application.dto.*;
 import com.ite.itea.domain.CheckoutCalculator;
+import com.ite.itea.domain.retail.Order;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,6 +25,6 @@ public class OrderProductsUseCase {
                 })
                 .collect(Collectors.toList());
 
-        return checkoutCalculator.prepareReceipt(new OrderDTO(productsToOrder));
+        return checkoutCalculator.prepareReceipt(new Order(productsToOrder));
     }
 }

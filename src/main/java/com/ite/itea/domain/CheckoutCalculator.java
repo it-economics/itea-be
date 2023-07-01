@@ -1,7 +1,7 @@
 package com.ite.itea.domain;
 
 import com.ite.itea.application.dto.ProductDTO;
-import com.ite.itea.application.dto.OrderDTO;
+import com.ite.itea.domain.retail.Order;
 import com.ite.itea.application.dto.ReceiptDTO;
 
 import java.math.BigDecimal;
@@ -12,15 +12,15 @@ import java.util.stream.Collectors;
 
 public class CheckoutCalculator {
 
-    public ReceiptDTO prepareReceipt(OrderDTO orderDto) {
-        var price = totalPrice(orderDto);
-        var text = getText(orderDto, price);
+    public ReceiptDTO prepareReceipt(Order order) {
+        var price = totalPrice(order);
+        var text = getText(order, price);
 
         return new ReceiptDTO(price, text);
     }
 
-    private String getText(OrderDTO orderDto, long priceInCents) {
-        final var formattedProducts = orderDto.productDTOs().stream()
+    private String getText(Order order, long priceInCents) {
+        final var formattedProducts = order.productDTOs().stream()
                 .map(this::formatOrderItem)
                 .collect(Collectors.joining());
 
@@ -46,8 +46,8 @@ public class CheckoutCalculator {
         return currencyFormat.format(decimalPrice);
     }
 
-    private long totalPrice(OrderDTO orderDto) {
-        return orderDto.productDTOs().stream()
+    private long totalPrice(Order order) {
+        return order.productDTOs().stream()
                 .mapToLong(product -> product.getAmount() * product.getPriceInCents())
                 .sum();
     }
