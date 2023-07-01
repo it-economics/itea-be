@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class CheckoutCalculator {
 
     public ReceiptDTO calculatePrice(OrderDTO orderDto) {
-        var price = getPrice(orderDto);
+        var price = totalPrice(orderDto);
         var text = getText(orderDto, price);
 
         return new ReceiptDTO(price, text);
@@ -21,7 +21,7 @@ public class CheckoutCalculator {
 
     private String getText(OrderDTO orderDto, long priceInCents) {
         final var formattedProducts = orderDto.productDTOs().stream()
-                .map(this::convertToText)
+                .map(this::formatOrderItem)
                 .collect(Collectors.joining());
 
         return "itea \n"
@@ -29,7 +29,7 @@ public class CheckoutCalculator {
                 + "Total " + formatPrice(priceInCents);
     }
 
-    private String convertToText(ProductDTO productDTO) {
+    private String formatOrderItem(ProductDTO productDTO) {
         if (productDTO.getAmount() <= 0) {
             return "";
         }
@@ -46,7 +46,7 @@ public class CheckoutCalculator {
         return currencyFormat.format(decimalPrice);
     }
 
-    private long getPrice(OrderDTO orderDto) {
+    private long totalPrice(OrderDTO orderDto) {
         return orderDto.productDTOs().stream()
                 .mapToLong(product -> product.getAmount() * product.getPriceInCents())
                 .sum();
