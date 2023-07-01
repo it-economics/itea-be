@@ -77,8 +77,8 @@ public class InMemoryProductRepository implements ProductRepository {
                     entry(
                             ProductName.CHAIR_LARS.name(),
                             new Chair(
-                                    new ProductId(ProductName.CHAIR_ELSA.name()),
-                                    ProductName.CHAIR_ELSA.displayName(),
+                                    new ProductId(ProductName.CHAIR_LARS.name()),
+                                    ProductName.CHAIR_LARS.displayName(),
                                     EuroPrice.ofCents(200),
                                     EuroPrice.ofCents(2000),
                                     EuroPrice.ofCents(3000)

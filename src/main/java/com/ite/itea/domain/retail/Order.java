@@ -1,13 +1,19 @@
 package com.ite.itea.domain.retail;
 
-import com.ite.itea.application.dto.ProductDTO;
-
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-public record Order(List<ProductDTO> productDTOs) {
+public record Order(List<OrderItem> items) {
 
-    public static Order of(ProductDTO... products) {
-        return new Order(Arrays.asList(products));
+    public static Order of(OrderItem... items) {
+        return new Order(Arrays.asList(items));
+    }
+
+    public List<OrderItem> items() {
+        return Collections.unmodifiableList(items);
+    }
+
+    public record OrderItem(Product product, int amount) {
     }
 }

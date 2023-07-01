@@ -1,9 +1,7 @@
 package com.ite.itea.domain;
 
-import com.ite.itea.application.dto.*;
-import com.ite.itea.domain.retail.Order;
-import com.ite.itea.domain.retail.ProductName;
-import org.junit.jupiter.api.Test;
+import com.ite.itea.domain.core.EuroPrice;
+import com.ite.itea.domain.retail.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -19,18 +17,38 @@ class CheckoutCalculatorTest {
     private static Stream<Arguments> provideProductsAndExpectedReceipts() {
         return Stream.of(
                 Arguments.of(
-                        new PicturesDTO(ProductName.PICTURE_NORWAY, 2, 999L),
-                        1998L,
+                        Order.of(),
+                        EuroPrice.zero(),
+                        "itea \nTotal 0,00\u00A0€"
+                ),
+                Arguments.of(
+                        Order.of(
+                                new Order.OrderItem(
+                                        new Picture(ProductId.random(), ProductName.PICTURE_NORWAY.displayName(), EuroPrice.ofCents(999)),
+                                        2
+                                )
+                        ),
+                        EuroPrice.ofCents(1998L),
                         "itea \nPicture \"Norway\" 9,99\u00A0€ * 2\nTotal 19,98\u00A0€"
                 ),
                 Arguments.of(
-                        new ChairsDTO(ProductName.CHAIR_ELSA, 2, 500, 500, 500, "plastic"),
-                        6000L,
+                        Order.of(
+                                new Order.OrderItem(
+                                        new Chair(ProductId.random(), ProductName.CHAIR_ELSA.displayName(), EuroPrice.ofCents(500), EuroPrice.ofCents(500), EuroPrice.ofCents(500)),
+                                        2
+                                )
+                        ),
+                        EuroPrice.ofCents(6000L),
                         "itea \nChair \"Elsa\" 30,00\u00A0€ * 2\nTotal 60,00\u00A0€"
                 ),
                 Arguments.of(
-                        new TablesDTO(ProductName.TABLE_LOLA, 2, 2000, 5000, "wood"),
-                        26000L,
+                        Order.of(
+                                new Order.OrderItem(
+                                        new Table(ProductId.random(), ProductName.TABLE_LOLA.displayName(), EuroPrice.ofCents(2000), EuroPrice.ofCents(5000)),
+                                        2
+                                )
+                        ),
+                        EuroPrice.ofCents(26000L),
                         "itea \nTable \"Lola\" 130,00\u00A0€ * 2\nTotal 260,00\u00A0€"
                 )
         );
@@ -38,22 +56,10 @@ class CheckoutCalculatorTest {
 
     @ParameterizedTest
     @MethodSource("provideProductsAndExpectedReceipts")
-    void shouldReturnCorrectReceipts(ProductDTO product, long expectedTotalPriceInCents, String expectedReceiptText) {
-        var orderDto = Order.of(product);
+    void shouldReturnCorrectReceipts(Order order, EuroPrice expectedTotalPrice, String expectedReceiptText) {
+        var receipt = checkoutCalculator.prepareReceipt(order);
 
-        var receipt = checkoutCalculator.prepareReceipt(orderDto);
-
-        then(receipt.priceInCents()).isEqualTo(expectedTotalPriceInCents);
+        then(receipt.priceInCents()).isEqualTo(expectedTotalPrice.asCents());
         then(receipt.text()).isEqualTo(expectedReceiptText);
-    }
-
-    @Test
-    void shouldReturnCorrectReceiptForEmptyOrder() {
-        var emptyOrder = Order.of();
-
-        var receipt = checkoutCalculator.prepareReceipt(emptyOrder);
-
-        then(receipt.priceInCents()).isEqualTo(0L);
-        then(receipt.text()).isEqualTo("itea \nTotal 0,00\u00A0€");
     }
 }

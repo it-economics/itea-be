@@ -1,5 +1,8 @@
 package com.ite.itea.domain.core;
 
+import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Objects;
 
 public final class EuroPrice {
@@ -24,6 +27,16 @@ public final class EuroPrice {
 
     public EuroPrice times(int i) {
         return new EuroPrice(cents * i);
+    }
+
+    public String formatPrice(Locale locale) {
+        var currencyFormat = NumberFormat.getCurrencyInstance(locale);
+        var decimalPrice = BigDecimal.valueOf(cents).movePointLeft(2);
+        return currencyFormat.format(decimalPrice);
+    }
+
+    public long asCents() {
+        return cents;
     }
 
     @Override
