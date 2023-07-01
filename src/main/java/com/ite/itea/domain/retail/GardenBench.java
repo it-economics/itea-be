@@ -88,20 +88,15 @@ public class GardenBench extends Product {
     }
 
     private String createElementsText(int amountPlantElements, boolean hasBackrest) {
-        String elementsText = "";
-        if (amountPlantElements == 1) {
-            elementsText = "Elements: 1 of 2 elements is a plant element";
-        } else if (amountPlantElements == 2) {
-            elementsText = "Elements: 2 of 2 elements is a plant element";
-        } else {
-            elementsText = "Elements: 0 of 2 elements is a plant element";
-        }
-        if (hasBackrest) {
-            elementsText += ", has a backrest\n";
-        } else {
-            elementsText += ", has no backrest\n";
-        }
-        return elementsText;
+        final var amountPlantElementsText = switch (amountPlantElements) {
+            case 1 -> "Elements: 1 of 2 elements is a plant element";
+            case 2 -> "Elements: 2 of 2 elements is a plant element";
+            default -> "Elements: 0 of 2 elements is a plant element";
+        };
+        final var backRestText = hasBackrest
+                ? ", has a backrest\n"
+                : ", has no backrest\n";
+        return amountPlantElementsText + backRestText;
     }
 
     private String createDeliveryText(boolean isDelivery, double deliveryPrice) {
