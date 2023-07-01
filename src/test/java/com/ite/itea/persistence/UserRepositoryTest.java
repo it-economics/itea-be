@@ -12,7 +12,7 @@ import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
-import static org.assertj.core.api.BDDAssertions.then;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class UserRepositoryTest {
 
@@ -33,24 +33,29 @@ class UserRepositoryTest {
     void shouldReturnAllUsersWhenAllUsersAreRequested() {
         var users = userRepository.all();
 
-        then(users.size()).isEqualTo(4);
-        then(users.get(0).firstname()).isEqualTo("Peter");
-        then(users.get(0).lastname()).isEqualTo("Pan");
-        then(users.get(1).firstname()).isEqualTo("Captain");
-        then(users.get(1).lastname()).isEqualTo("Hook");
-        then(users.get(2).firstname()).isEqualTo("Tinker");
-        then(users.get(2).lastname()).isEqualTo("Bell");
-        then(users.get(3).firstname()).isEqualTo("Lost");
-        then(users.get(3).lastname()).isEqualTo("Boys");
+        assertThat(users.size()).isEqualTo(4);
+
+        assertThat(users.get(0).firstname()).isEqualTo("Peter");
+        assertThat(users.get(0).lastname()).isEqualTo("Pan");
+
+        assertThat(users.get(1).firstname()).isEqualTo("Captain");
+        assertThat(users.get(1).lastname()).isEqualTo("Hook");
+
+        assertThat(users.get(2).firstname()).isEqualTo("Tinker");
+        assertThat(users.get(2).lastname()).isEqualTo("Bell");
+
+        assertThat(users.get(3).firstname()).isEqualTo("Lost");
+        assertThat(users.get(3).lastname()).isEqualTo("Boys");
     }
 
     @Test
     void shouldReturnCaptainHookWhenAUserWithTheNameHookIsSearched() {
         var user = userRepository.byLastName("Hook");
 
-        then(user).isPresent();
-        then(user.get().firstname()).isEqualTo("Captain");
-        then(user.get().lastname()).isEqualTo("Hook");
+        assertThat(user).isPresent();
+
+        assertThat(user.get().firstname()).isEqualTo("Captain");
+        assertThat(user.get().lastname()).isEqualTo("Hook");
     }
 
 }
