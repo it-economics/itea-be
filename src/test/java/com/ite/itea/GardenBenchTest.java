@@ -2,6 +2,7 @@ package com.ite.itea;
 
 import com.ite.itea.domain.core.EuroPrice;
 import com.ite.itea.domain.retail.GardenBench;
+import com.ite.itea.domain.retail.ProductId;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -15,7 +16,7 @@ public class GardenBenchTest {
     private static Stream<Arguments> provideGardenBenchConfigurationsWithRespectivePriceAndDescription() {
         return Stream.of(
                 Arguments.of(
-                        new GardenBench(1, 165, 2, 0, false, false),
+                        new GardenBench(ProductId.random(), 1, 165, 2, 0, false, false),
                         EuroPrice.ofCents(23000),
                         """
                                 Order for a garden bench:
@@ -26,7 +27,7 @@ public class GardenBenchTest {
                                 """
                 ),
                 Arguments.of(
-                        new GardenBench(1, 165, 2, 0, false, true),
+                        new GardenBench(ProductId.random(), 1, 165, 2, 0, false, true),
                         EuroPrice.ofCents(30000),
                         """
                                 Order for a garden bench:
@@ -37,7 +38,7 @@ public class GardenBenchTest {
                                 """
                 ),
                 Arguments.of(
-                        new GardenBench(2, 165, 2, 0, false, false),
+                        new GardenBench(ProductId.random(), 2, 165, 2, 0, false, false),
                         EuroPrice.ofCents(46000),
                         """
                                 Order for a garden bench:
@@ -48,7 +49,7 @@ public class GardenBenchTest {
                                 """
                 ),
                 Arguments.of(
-                        new GardenBench(1, 165, 1, 1, false, false),
+                        new GardenBench(ProductId.random(), 1, 165, 1, 1, false, false),
                         EuroPrice.ofCents(28000),
                         """
                                 Order for a garden bench:
@@ -59,7 +60,7 @@ public class GardenBenchTest {
                                 """
                 ),
                 Arguments.of(
-                        new GardenBench(1, 165, 2, 0, true, false),
+                        new GardenBench(ProductId.random(), 1, 165, 2, 0, true, false),
                         EuroPrice.ofCents(28000),
                         """
                                 Order for a garden bench:

@@ -20,5 +20,10 @@ public abstract class Product {
         return name;
     }
 
+    public String description() {
+        // Empty by default, but subclasses can override.
+        return "";
+    }
+
     public abstract EuroPrice price();
 }

@@ -2,10 +2,7 @@ package com.ite.itea.domain.retail;
 
 import com.ite.itea.domain.core.EuroPrice;
 
-/*
-    Class that calculates price of garden bench AND prints details of the product
- */
-public class GardenBench {
+public class GardenBench extends Product {
 
     private static final double DEFAULT_ELEMENT_PRICE_IN_EUR = 80;
     private static final double PLANT_ELEMENT_PRICE_IN_EUR = 130;
@@ -17,9 +14,9 @@ public class GardenBench {
     private static final double LENGTH_PRICE_EXTRA_CHARGE_IN_EUR = 1;
     private static final int STANDARD_LENGTH_IN_CM = 165;
 
-    private final int amount;
     private final int length;
 
+    private final int amount;
     private final int amountPlantElements;
     private final boolean hasBackrest;
     private final boolean isDelivery;
@@ -29,7 +26,8 @@ public class GardenBench {
 
     private String productText;
 
-    public GardenBench(int amount, int length, int amountDefaultElements, int amountPlantElements, boolean hasBackrest, boolean isDelivery) {
+    public GardenBench(ProductId id, int amount, int length, int amountDefaultElements, int amountPlantElements, boolean hasBackrest, boolean isDelivery) {
+        super(id, "Garden bench");
         this.amount = amount;
         this.length = length;
         this.amountPlantElements = amountPlantElements;
@@ -38,6 +36,30 @@ public class GardenBench {
 
         productPrice = calculateProductPrice(length, amountDefaultElements, amountPlantElements, hasBackrest);
         deliveryPrice = calculateDeliveryPrice(isDelivery, length, amountDefaultElements, amount);
+    }
+
+    @Override
+    public EuroPrice price() {
+        return calculateTotalPrice();
+    }
+
+    @Override
+    public String description() {
+        return getProductText();
+    }
+
+    @Deprecated
+    public String getProductText() {
+        if (productText==null || productText.isEmpty()) {
+            productText = calculateProductText(amount, productPrice, deliveryPrice, amountPlantElements, length, hasBackrest, isDelivery);
+        }
+        return productText;
+    }
+
+    @Deprecated
+    public EuroPrice calculateTotalPrice() {
+        double euros = amount * productPrice + deliveryPrice;
+        return EuroPrice.ofCents((long)(euros * 100));
     }
 
     private String calculateProductText(int amount, double productPrice, double deliveryPrice, int amountPlantElements, int length, boolean hasBackrest, boolean isDelivery) {
@@ -137,16 +159,5 @@ public class GardenBench {
 
     private boolean isExtraLength(int length) {
         return length > STANDARD_LENGTH_IN_CM;
-    }
-
-    public String getProductText() {
-        if (productText==null || productText.isEmpty()) {
-            productText = calculateProductText(amount, productPrice, deliveryPrice, amountPlantElements, length, hasBackrest, isDelivery);
-        }
-        return productText;
-    }
-
-    public EuroPrice calculateTotalPrice() {
-        return EuroPrice.ofCents((long)(amount * 100 * productPrice + 100 * deliveryPrice));
     }
 }
