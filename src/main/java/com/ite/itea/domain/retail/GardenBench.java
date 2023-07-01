@@ -21,9 +21,6 @@ public class GardenBench extends Product {
     private final boolean hasBackrest;
     private final boolean isDelivery;
 
-    private final double productPrice;
-    private final double deliveryPrice;
-
     private String productText;
 
     public GardenBench(ProductId id, int length, int amountDefaultElements, int amountPlantElements, boolean hasBackrest, boolean isDelivery) {
@@ -33,21 +30,21 @@ public class GardenBench extends Product {
         this.amountPlantElements = amountPlantElements;
         this.hasBackrest = hasBackrest;
         this.isDelivery = isDelivery;
-
-        productPrice = calculateProductPrice(length, amountDefaultElements, amountPlantElements, hasBackrest);
-        deliveryPrice = calculateDeliveryPrice(isDelivery, length, amountDefaultElements);
     }
 
     @Override
     public EuroPrice price() {
         final var productPrice = calculateProductPrice(length, amountDefaultElements, amountPlantElements, hasBackrest);
-        double euros = productPrice + deliveryPrice;
+        final var deliveryPrice = calculateDeliveryPrice(isDelivery, length, amountDefaultElements);
+        final double euros = productPrice + deliveryPrice;
         return EuroPrice.ofCents((long)(euros * 100));
     }
 
     @Override
     public String description() {
         if (productText==null || productText.isEmpty()) {
+            final var productPrice = calculateProductPrice(length, amountDefaultElements, amountPlantElements, hasBackrest);
+            final var deliveryPrice = calculateDeliveryPrice(isDelivery, length, amountDefaultElements);
             productText = calculateProductText(productPrice, deliveryPrice, amountPlantElements, length, hasBackrest, isDelivery);
         }
         return productText;
