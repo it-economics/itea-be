@@ -107,28 +107,25 @@ public class GardenBench extends Product {
     }
 
     private int calculateDeliveryPrice(boolean isDelivery, int length, int amountDefaultElements) {
-        int deliveryPrice = 0;
+        if (!isDelivery) {
+            return 0;
+        }
 
-        if (isDelivery) {
-            if (length <= 200 && amountDefaultElements == 2) {
-                deliveryPrice += 70;
-            } else if (length <= 200 && amountDefaultElements == 1) {
-                deliveryPrice = 80;
-            } else if (length <= 200 && amountDefaultElements == 0) {
-                deliveryPrice = 90;
-            } else if (length > 200 && amountDefaultElements == 2) {
-                deliveryPrice = 100;
-            } else if (length > 200 && amountDefaultElements == 1) {
-                deliveryPrice = 110;
-            } else if (length > 200 && amountDefaultElements == 0) {
-                deliveryPrice = 120;
-            } else {
-                deliveryPrice = 130;
+        if (length <= 200) {
+            switch (amountDefaultElements) {
+                case 2: return 70;
+                case 1: return 80;
+                case 0: return 90;
             }
         } else {
-            deliveryPrice = 0;
+            switch (amountDefaultElements) {
+                case 2: return 100;
+                case 1: return 110;
+                case 0: return 120;
+            }
         }
-        return deliveryPrice;
+
+        return 0;
     }
 
     private int calculateTotalLength(int amountPlantElements, int length) {
