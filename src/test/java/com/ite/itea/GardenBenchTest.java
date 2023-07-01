@@ -76,7 +76,7 @@ public class GardenBenchTest {
     @ParameterizedTest
     @MethodSource("provideGardenBenchConfigurationsWithRespectivePriceAndDescription")
     void shouldProvideCorrectPriceAndDescription(GardenBench gardenBench, EuroPrice expectedPrice, String description) {
-        assertThat(gardenBench.calculateTotalPrice()).isEqualTo(expectedPrice);
-        assertThat(gardenBench.getProductText()).isEqualTo(description);
+        assertThat(gardenBench.price()).isEqualTo(expectedPrice);
+        assertThat(gardenBench.description()).isEqualTo(description);
     }
 }

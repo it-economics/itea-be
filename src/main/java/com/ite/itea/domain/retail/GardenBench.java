@@ -40,26 +40,16 @@ public class GardenBench extends Product {
 
     @Override
     public EuroPrice price() {
-        return calculateTotalPrice();
+        double euros = amount * productPrice + deliveryPrice;
+        return EuroPrice.ofCents((long)(euros * 100));
     }
 
     @Override
     public String description() {
-        return getProductText();
-    }
-
-    @Deprecated
-    public String getProductText() {
         if (productText==null || productText.isEmpty()) {
             productText = calculateProductText(amount, productPrice, deliveryPrice, amountPlantElements, length, hasBackrest, isDelivery);
         }
         return productText;
-    }
-
-    @Deprecated
-    public EuroPrice calculateTotalPrice() {
-        double euros = amount * productPrice + deliveryPrice;
-        return EuroPrice.ofCents((long)(euros * 100));
     }
 
     private String calculateProductText(int amount, double productPrice, double deliveryPrice, int amountPlantElements, int length, boolean hasBackrest, boolean isDelivery) {
