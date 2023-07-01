@@ -31,10 +31,14 @@ public class CheckoutCalculator {
     }
 
     private String convertToText(ProductDTO productDTO) {
-        if (productDTO.getAmount() > 0) {
-            return MessageFormat.format("{0} {1} * {2}\n", productDTO.getName(), formatPrice(productDTO.getPriceInCents()), productDTO.getAmount());
+        if (productDTO.getAmount() <= 0) {
+            return "";
         }
-        return "";
+
+        final var productName = productDTO.getName();
+        final var price = formatPrice(productDTO.getPriceInCents());
+        final var amount = productDTO.getAmount();
+        return MessageFormat.format("{0} {1} * {2}\n", productName, price, amount);
     }
 
     private String formatPrice(long priceInCents) {
