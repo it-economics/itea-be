@@ -48,12 +48,8 @@ public class CheckoutCalculator {
     }
 
     private long getPrice(OrderDTO orderDto) {
-        var priceInCents = 0L;
-
-        for (ProductDTO productDTO : orderDto.productDTOs()) {
-            priceInCents += productDTO.getPriceInCents() * productDTO.getAmount();
-        }
-
-        return priceInCents;
+        return orderDto.productDTOs().stream()
+                .mapToLong(product -> product.getAmount() * product.getPriceInCents())
+                .sum();
     }
 }
