@@ -100,14 +100,10 @@ public class GardenBench extends Product {
     }
 
     private String createDeliveryText(boolean isDelivery, double deliveryPrice) {
-        String deliveryText = "";
-        if (isDelivery) {
-            deliveryText = "Delivery Type: Product is delivered ";
-        } else {
-            deliveryText = "Delivery Type: Product is collected ";
-        }
-        deliveryText += "for " + deliveryPrice + " EUR\n";
-        return deliveryText;
+        String deliveryText = isDelivery
+                ? "Delivery Type: Product is delivered "
+                : "Delivery Type: Product is collected ";
+        return deliveryText + "for " + deliveryPrice + " EUR\n";
     }
 
     private int calculateDeliveryPrice(boolean isDelivery, int length, int amountDefaultElements) {
