@@ -16,7 +16,7 @@ public class GardenBench extends Product {
 
     private final int length;
 
-    private final int amount;
+    private final int amountDefaultElements;
     private final int amountPlantElements;
     private final boolean hasBackrest;
     private final boolean isDelivery;
@@ -26,33 +26,34 @@ public class GardenBench extends Product {
 
     private String productText;
 
-    public GardenBench(ProductId id, int amount, int length, int amountDefaultElements, int amountPlantElements, boolean hasBackrest, boolean isDelivery) {
+    public GardenBench(ProductId id, int length, int amountDefaultElements, int amountPlantElements, boolean hasBackrest, boolean isDelivery) {
         super(id, "Garden bench");
-        this.amount = amount;
         this.length = length;
+        this.amountDefaultElements = amountDefaultElements;
         this.amountPlantElements = amountPlantElements;
         this.hasBackrest = hasBackrest;
         this.isDelivery = isDelivery;
 
         productPrice = calculateProductPrice(length, amountDefaultElements, amountPlantElements, hasBackrest);
-        deliveryPrice = calculateDeliveryPrice(isDelivery, length, amountDefaultElements, amount);
+        deliveryPrice = calculateDeliveryPrice(isDelivery, length, amountDefaultElements);
     }
 
     @Override
     public EuroPrice price() {
-        double euros = amount * productPrice + deliveryPrice;
+        final var productPrice = calculateProductPrice(length, amountDefaultElements, amountPlantElements, hasBackrest);
+        double euros = productPrice + deliveryPrice;
         return EuroPrice.ofCents((long)(euros * 100));
     }
 
     @Override
     public String description() {
         if (productText==null || productText.isEmpty()) {
-            productText = calculateProductText(amount, productPrice, deliveryPrice, amountPlantElements, length, hasBackrest, isDelivery);
+            productText = calculateProductText(productPrice, deliveryPrice, amountPlantElements, length, hasBackrest, isDelivery);
         }
         return productText;
     }
 
-    private String calculateProductText(int amount, double productPrice, double deliveryPrice, int amountPlantElements, int length, boolean hasBackrest, boolean isDelivery) {
+    private String calculateProductText(double productPrice, double deliveryPrice, int amountPlantElements, int length, boolean hasBackrest, boolean isDelivery) {
         int totalLength = calculateTotalLength(amountPlantElements, length);
         String elementsText = createElementsText(amountPlantElements, hasBackrest);
         String deliveryText = createDeliveryText(isDelivery, deliveryPrice);
@@ -61,8 +62,15 @@ public class GardenBench extends Product {
         productText += elementsText;
         productText += "Total length: " + totalLength + " cm\n";
         productText += deliveryText;
-        productText += "Total price (without delivery): " + amount + " * " + productPrice + " EUR = " + (amount * productPrice) + " EUR";
-        productText += "\n";
+        if (isDelivery) {
+            productText += "Total price (without delivery): " + productPrice + " EUR";
+            productText += "\n";
+            productText += "Total price (including delivery): " + (productPrice + deliveryPrice) + " EUR";
+            productText += "\n";
+        } else {
+            productText += "Total price: " + productPrice + " EUR";
+            productText += "\n";
+        }
         return productText;
     }
 
@@ -110,21 +118,21 @@ public class GardenBench extends Product {
         return deliveryText;
     }
 
-    private int calculateDeliveryPrice(boolean isDelivery, int length, int amountDefaultElements, int amount) {
+    private int calculateDeliveryPrice(boolean isDelivery, int length, int amountDefaultElements) {
         int deliveryPrice = 0;
 
         if (isDelivery) {
-            if (length <= 200 && amountDefaultElements == 2 && amount == 1) {
+            if (length <= 200 && amountDefaultElements == 2) {
                 deliveryPrice += 70;
-            } else if (length <= 200 && amountDefaultElements == 1 && amount == 1) {
+            } else if (length <= 200 && amountDefaultElements == 1) {
                 deliveryPrice = 80;
-            } else if (length <= 200 && amountDefaultElements == 0 && amount == 1) {
+            } else if (length <= 200 && amountDefaultElements == 0) {
                 deliveryPrice = 90;
-            } else if (length > 200 && amountDefaultElements == 2 && amount == 1) {
+            } else if (length > 200 && amountDefaultElements == 2) {
                 deliveryPrice = 100;
-            } else if (length > 200 && amountDefaultElements == 1 && amount == 1) {
+            } else if (length > 200 && amountDefaultElements == 1) {
                 deliveryPrice = 110;
-            } else if (length > 200 && amountDefaultElements == 0 && amount == 1) {
+            } else if (length > 200 && amountDefaultElements == 0) {
                 deliveryPrice = 120;
             } else {
                 deliveryPrice = 130;
