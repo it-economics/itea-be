@@ -1,6 +1,6 @@
 package com.ite.itea.presentation;
 
-import com.ite.itea.application.dto.ReceiptDTO;
+import com.ite.itea.application.dto.Receipt;
 import com.ite.itea.application.usecase.OrderProductsUseCase;
 import com.ite.itea.domain.core.EuroPrice;
 import com.ite.itea.domain.retail.Order;
@@ -12,11 +12,11 @@ import java.util.stream.Collectors;
 public class ReceiptPresenter implements OrderProductsUseCase.ReceiptPresenter {
 
     @Override
-    public ReceiptDTO prepareReceipt(Order order) {
+    public Receipt prepareReceipt(Order order) {
         final var price = totalPrice(order);
         final var text = getText(order);
 
-        return new ReceiptDTO(price.asCents(), text);
+        return new Receipt(price.asCents(), text);
     }
 
     private String getText(Order order) {

@@ -1,7 +1,7 @@
 package com.ite.itea.application.usecase;
 
 import com.ite.itea.application.dto.OrderRequest;
-import com.ite.itea.application.dto.ReceiptDTO;
+import com.ite.itea.application.dto.Receipt;
 import com.ite.itea.domain.retail.Order;
 import com.ite.itea.domain.retail.ProductId;
 import com.ite.itea.domain.retail.ProductRepository;
@@ -19,7 +19,7 @@ public class OrderProductsUseCase {
         this.receiptPresenter = receiptPresenter;
     }
 
-    public ReceiptDTO execute(OrderRequest orderRequest) {
+    public Receipt execute(OrderRequest orderRequest) {
         final List<Order.OrderItem> orderItems = new ArrayList<>();
 
         for (var itemRequest : orderRequest.itemRequests()) {
@@ -33,6 +33,6 @@ public class OrderProductsUseCase {
     }
 
     public interface ReceiptPresenter {
-        ReceiptDTO prepareReceipt(Order order);
+        Receipt prepareReceipt(Order order);
     }
 }
