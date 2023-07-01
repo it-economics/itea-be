@@ -129,15 +129,11 @@ public class GardenBench extends Product {
     }
 
     private int calculateTotalLength(int amountPlantElements, int length) {
-        int calculatedLength = 0;
-        if (amountPlantElements == 1) {
-            calculatedLength = length + 60;
-        } else if (amountPlantElements == 2) {
-            calculatedLength = length + 108;
-        } else {
-            calculatedLength = length + 16;
-        }
-        return calculatedLength;
+        return switch (amountPlantElements) {
+            case 1 -> length + 60;
+            case 2 -> length + 108;
+            default -> length + 16;
+        };
     }
 
     private boolean isExtraLength(int length) {
