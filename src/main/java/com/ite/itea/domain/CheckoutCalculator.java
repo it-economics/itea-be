@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class CheckoutCalculator {
 
-    public ReceiptDTO calculatePrice(OrderDTO orderDto) {
+    public ReceiptDTO prepareReceipt(OrderDTO orderDto) {
         var price = totalPrice(orderDto);
         var text = getText(orderDto, price);
 
