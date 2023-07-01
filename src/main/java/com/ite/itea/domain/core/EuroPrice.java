@@ -51,4 +51,9 @@ public final class EuroPrice {
     public int hashCode() {
         return Objects.hash(cents);
     }
+
+    @Override
+    public String toString() {
+        return formatPrice(Locale.getDefault());
+    }
 }
