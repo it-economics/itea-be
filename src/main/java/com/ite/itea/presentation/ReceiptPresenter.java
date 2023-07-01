@@ -1,6 +1,7 @@
-package com.ite.itea.domain;
+package com.ite.itea.presentation;
 
 import com.ite.itea.application.dto.ReceiptDTO;
+import com.ite.itea.application.usecase.OrderProductsUseCase;
 import com.ite.itea.domain.core.EuroPrice;
 import com.ite.itea.domain.retail.Order;
 
@@ -8,8 +9,9 @@ import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
-public class CheckoutCalculator {
+public class ReceiptPresenter implements OrderProductsUseCase.ReceiptPresenter {
 
+    @Override
     public ReceiptDTO prepareReceipt(Order order) {
         final var price = totalPrice(order);
         final var text = getText(order);

@@ -2,6 +2,7 @@ package com.ite.itea.domain;
 
 import com.ite.itea.domain.core.EuroPrice;
 import com.ite.itea.domain.retail.*;
+import com.ite.itea.presentation.ReceiptPresenter;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -10,9 +11,9 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.BDDAssertions.then;
 
-class CheckoutCalculatorTest {
+class ReceiptPresenterTest {
 
-    private final CheckoutCalculator checkoutCalculator = new CheckoutCalculator();
+    private final ReceiptPresenter receiptPresenter = new ReceiptPresenter();
 
     private static Stream<Arguments> provideProductsAndExpectedReceipts() {
         return Stream.of(
@@ -57,7 +58,7 @@ class CheckoutCalculatorTest {
     @ParameterizedTest
     @MethodSource("provideProductsAndExpectedReceipts")
     void shouldReturnCorrectReceipts(Order order, EuroPrice expectedTotalPrice, String expectedReceiptText) {
-        var receipt = checkoutCalculator.prepareReceipt(order);
+        var receipt = receiptPresenter.prepareReceipt(order);
 
         then(receipt.priceInCents()).isEqualTo(expectedTotalPrice.asCents());
         then(receipt.text()).isEqualTo(expectedReceiptText);
