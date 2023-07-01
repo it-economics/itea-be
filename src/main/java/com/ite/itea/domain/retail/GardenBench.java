@@ -46,10 +46,8 @@ public class GardenBench extends Product {
     }
 
     private double calculateProductPrice() {
-        final var defaultElementsPrice = amountDefaultElements * DEFAULT_ELEMENT_PRICE_IN_EUR;
-        final var plantElementsPrice = amountPlantElements * PLANT_ELEMENT_PRICE_IN_EUR;
-        return defaultElementsPrice
-                + plantElementsPrice
+        return amountDefaultElements * DEFAULT_ELEMENT_PRICE_IN_EUR
+                + amountPlantElements * PLANT_ELEMENT_PRICE_IN_EUR
                 + extraLengthPrice()
                 + WOOD_PLATE_PRICE_IN_EUR
                 + (hasBackrest ? BACKREST_PRICE_IN_EUR : 0);
