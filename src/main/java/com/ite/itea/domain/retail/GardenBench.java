@@ -1,5 +1,7 @@
 package com.ite.itea.domain.retail;
 
+import com.ite.itea.domain.core.EuroPrice;
+
 /*
     Class that calculates price of garden bench AND prints details of the product
  */
@@ -144,7 +146,7 @@ public class GardenBench {
         return productText;
     }
 
-    public double calculateTotalPrice() {
-        return amount * productPrice + deliveryPrice;
+    public EuroPrice calculateTotalPrice() {
+        return EuroPrice.ofCents((long)(amount * 100 * productPrice + 100 * deliveryPrice));
     }
 }
