@@ -15,90 +15,90 @@ class CheckoutCalculatorTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithPictureNorway() {
-        var orderedPicturesNorway = new PicturesDTO(ProductName.PictureNorway, 2, 999L);
+        var orderedPicturesNorway = new PicturesDTO(ProductName.PICTURE_NORWAY, 2, 999L);
         var orderDto = new OrderDTO(List.of(orderedPicturesNorway));
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
 
         then(receipt.priceInCents()).isEqualTo(1998L);
-        then(receipt.text()).isEqualTo("itea \nPictureNorway 9,99\u00A0€ * 2\nTotal 19,98\u00A0€");
+        then(receipt.text()).isEqualTo("itea \nPicture \"Norway\" 9,99\u00A0€ * 2\nTotal 19,98\u00A0€");
     }
 
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithPictureSweden() {
-        var orderedPicturesSweden = new PicturesDTO(ProductName.PictureSweden,2, 1299L);
+        var orderedPicturesSweden = new PicturesDTO(ProductName.PICTURE_SWEDEN,2, 1299L);
         var orderDto = new OrderDTO(List.of(orderedPicturesSweden));
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
 
         then(receipt.priceInCents()).isEqualTo(2598L);
-        then(receipt.text()).isEqualTo("itea \nPictureSweden 12,99\u00A0€ * 2\nTotal 25,98\u00A0€");
+        then(receipt.text()).isEqualTo("itea \nPicture \"Sweden\" 12,99\u00A0€ * 2\nTotal 25,98\u00A0€");
     }
 
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithPictureFinland() {
-        var orderedPicturesFinland = new PicturesDTO(ProductName.PictureFinland,2, 1499L);
+        var orderedPicturesFinland = new PicturesDTO(ProductName.PICTURE_FINLAND,2, 1499L);
         var orderDto = new OrderDTO(List.of(orderedPicturesFinland));
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
 
         then(receipt.priceInCents()).isEqualTo(2998L);
-        then(receipt.text()).isEqualTo("itea \nPictureFinland 14,99\u00A0€ * 2\nTotal 29,98\u00A0€");
+        then(receipt.text()).isEqualTo("itea \nPicture \"Finland\" 14,99\u00A0€ * 2\nTotal 29,98\u00A0€");
     }
 
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithChairElsa() {
-        var orderedChairElsa = new ChairsDTO(ProductName.ChairElsa, 2, 500, 500, 500, "plastic");
+        var orderedChairElsa = new ChairsDTO(ProductName.CHAIR_ELSA, 2, 500, 500, 500, "plastic");
         var orderDto = new OrderDTO(List.of(orderedChairElsa));
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
 
         then(receipt.priceInCents()).isEqualTo(6000L);
-        then(receipt.text()).isEqualTo("itea \nChairElsa 30,00\u00A0€ * 2\nTotal 60,00\u00A0€");
+        then(receipt.text()).isEqualTo("itea \nChair \"Elsa\" 30,00\u00A0€ * 2\nTotal 60,00\u00A0€");
     }
 
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithChairKnut() {
-        var orderedChairKnut = new ChairsDTO(ProductName.ChairKnut, 2, 400, 1000, 1500,  "wood");
+        var orderedChairKnut = new ChairsDTO(ProductName.CHAIR_KNUT, 2, 400, 1000, 1500,  "wood");
         var orderDto = new OrderDTO(List.of(orderedChairKnut));
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
 
         then(receipt.priceInCents()).isEqualTo(8200L);
-        then(receipt.text()).isEqualTo("itea \nChairKnut 41,00\u00A0€ * 2\nTotal 82,00\u00A0€");
+        then(receipt.text()).isEqualTo("itea \nChair \"Knut\" 41,00\u00A0€ * 2\nTotal 82,00\u00A0€");
     }
 
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithChairLars() {
-        var orderedChairLars = new ChairsDTO(ProductName.ChairLars, 2, 200, 2000, 3000, "metal");
+        var orderedChairLars = new ChairsDTO(ProductName.CHAIR_LARS, 2, 200, 2000, 3000, "metal");
         var orderDto = new OrderDTO(List.of(orderedChairLars));
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
 
         then(receipt.priceInCents()).isEqualTo(11600L);
-        then(receipt.text()).isEqualTo("itea \nChairLars 58,00\u00A0€ * 2\nTotal 116,00\u00A0€");
+        then(receipt.text()).isEqualTo("itea \nChair \"Lars\" 58,00\u00A0€ * 2\nTotal 116,00\u00A0€");
     }
 
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithTableLotta() {
-        var orderedTablesLotta = new TablesDTO(ProductName.TableLotta, 2, 1000, 3000, "plastic");
+        var orderedTablesLotta = new TablesDTO(ProductName.TABLE_LOTTA, 2, 1000, 3000, "plastic");
         var orderDto = new OrderDTO(List.of(orderedTablesLotta));
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
 
         then(receipt.priceInCents()).isEqualTo(14000L);
-        then(receipt.text()).isEqualTo("itea \nTableLotta 70,00\u00A0€ * 2\nTotal 140,00\u00A0€");
+        then(receipt.text()).isEqualTo("itea \nTable \"Lotta\" 70,00\u00A0€ * 2\nTotal 140,00\u00A0€");
     }
 
     @Test
     void shouldReturnCorrectReceiptWhenCalculatingThePriceForAnOrderWithTableLola() {
-        var orderedTablesLola = new TablesDTO(ProductName.TableLola, 2, 2000, 5000, "wood");
+        var orderedTablesLola = new TablesDTO(ProductName.TABLE_LOLA, 2, 2000, 5000, "wood");
         var orderDto = new OrderDTO(List.of(orderedTablesLola));
 
         var receipt = checkoutCalculator.calculatePrice(orderDto);
 
         then(receipt.priceInCents()).isEqualTo(26000L);
-        then(receipt.text()).isEqualTo("itea \nTableLola 130,00\u00A0€ * 2\nTotal 260,00\u00A0€");
+        then(receipt.text()).isEqualTo("itea \nTable \"Lola\" 130,00\u00A0€ * 2\nTotal 260,00\u00A0€");
     }
 
     @Test

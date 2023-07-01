@@ -15,7 +15,7 @@ public class TablesDTO extends ProductDTO {
 
     @Override
     public String getName() {
-        return tablesType.name();
+        return tablesType.displayName();
     }
 
     @Override

@@ -13,10 +13,12 @@ public class PicturesDTO extends ProductDTO {
         this.amount = amount;
     }
 
+    @Override
     public String getName() {
-        return pictureType.name();
+        return pictureType.displayName();
     }
 
+    @Override
     public int getAmount() {
         return amount;
     }
