@@ -4,16 +4,15 @@ import com.ite.itea.domain.core.EuroPrice;
 
 public class GardenBench extends Product {
 
-    private static final double DEFAULT_ELEMENT_PRICE_IN_EUR = 80;
-    private static final double PLANT_ELEMENT_PRICE_IN_EUR = 130;
-    private static final double WOOD_PLATE_PRICE_IN_EUR = 70;
-    private static final double BACKREST_PRICE_IN_EUR = 50;
+    private static final EuroPrice DEFAULT_ELEMENT_PRICE = EuroPrice.ofEuros(80);
+    private static final EuroPrice PLANT_ELEMENT_PRICE = EuroPrice.ofEuros(130);
+    private static final EuroPrice WOOD_PLATE_PRICE = EuroPrice.ofEuros(70);
+    private static final EuroPrice BACKREST_PRICE = EuroPrice.ofEuros(50);
 
     private static final int STANDARD_LENGTH_IN_CM = 165;
-    private static final double LENGTH_PRICE_EXTRA_CHARGE_IN_EUR = 1.0;
+    private static final EuroPrice EXTRA_LENGTH_FEE_PER_CENTIMETER = EuroPrice.ofEuros(1);
 
     private final int lengthInCentimeters;
-
     private final int amountDefaultElements;
     private final int amountPlantElements;
     private final boolean hasBackrest;
@@ -30,18 +29,16 @@ public class GardenBench extends Product {
 
     @Override
     public EuroPrice price() {
-        final var productPrice = calculateProductPrice();
-        final var deliveryPrice = calculateDeliveryPrice();
-        final double euros = productPrice + deliveryPrice;
-        return EuroPrice.ofCents((long)(euros * 100));
+        final EuroPrice productPrice = calculateProductPrice();
+        final EuroPrice deliveryPrice = calculateDeliveryPrice();
+        return productPrice.plus(deliveryPrice);
     }
 
     @Override
     public String description() {
-        final EuroPrice productPrice = EuroPrice.ofCents((long)(calculateProductPrice() * 100L));
-        final EuroPrice deliveryPrice = EuroPrice.ofCents(calculateDeliveryPrice() * 100L);
-        final var totalPriceIncludingDelivery = productPrice.plus(deliveryPrice);
-
+        final EuroPrice productPrice = calculateProductPrice();
+        final EuroPrice deliveryPrice = calculateDeliveryPrice();
+        final EuroPrice totalPriceIncludingDelivery = productPrice.plus(deliveryPrice);
         return "Order for a garden bench:\n"
                 + formatElementsText(amountPlantElements, hasBackrest)
                 + "Total length: " + totalLength(amountPlantElements, lengthInCentimeters) + " cm\n"
@@ -49,41 +46,41 @@ public class GardenBench extends Product {
                 + formatDeliveryPriceText(productPrice, totalPriceIncludingDelivery);
     }
 
-    private double calculateProductPrice() {
-        return amountDefaultElements * DEFAULT_ELEMENT_PRICE_IN_EUR
-                + amountPlantElements * PLANT_ELEMENT_PRICE_IN_EUR
-                + extraLengthPrice()
-                + WOOD_PLATE_PRICE_IN_EUR
-                + (hasBackrest ? BACKREST_PRICE_IN_EUR : 0);
+    private EuroPrice calculateProductPrice() {
+        return DEFAULT_ELEMENT_PRICE.times(amountDefaultElements)
+                .plus(PLANT_ELEMENT_PRICE.times(amountPlantElements))
+                .plus(extraLengthPrice())
+                .plus(WOOD_PLATE_PRICE)
+                .plus(hasBackrest ? BACKREST_PRICE : EuroPrice.zero());
     }
 
-    private int calculateDeliveryPrice() {
+    private EuroPrice calculateDeliveryPrice() {
         if (!isDelivery) {
-            return 0;
+            return EuroPrice.zero();
         }
 
         if (lengthInCentimeters <= 200) {
-            switch (amountDefaultElements) {
-                case 2: return 70;
-                case 1: return 80;
-                case 0: return 90;
-            }
+            return switch (amountDefaultElements) {
+                case 2 -> EuroPrice.ofEuros(70);
+                case 1 -> EuroPrice.ofEuros(80);
+                case 0 -> EuroPrice.ofEuros(90);
+                default -> EuroPrice.ofEuros(130);
+            };
         } else {
-            switch (amountDefaultElements) {
-                case 2: return 100;
-                case 1: return 110;
-                case 0: return 120;
-            }
+            return switch (amountDefaultElements) {
+                case 2 -> EuroPrice.ofEuros(100);
+                case 1 -> EuroPrice.ofEuros(110);
+                case 0 -> EuroPrice.ofEuros(120);
+                default -> EuroPrice.ofEuros(130);
+            };
         }
-
-        return 0;
     }
 
-    private double extraLengthPrice() {
+    private EuroPrice extraLengthPrice() {
         if (lengthInCentimeters > STANDARD_LENGTH_IN_CM) {
-            return (lengthInCentimeters - STANDARD_LENGTH_IN_CM) * LENGTH_PRICE_EXTRA_CHARGE_IN_EUR;
+            return EXTRA_LENGTH_FEE_PER_CENTIMETER.times(lengthInCentimeters - STANDARD_LENGTH_IN_CM);
         }
-        return 0;
+        return EuroPrice.zero();
     }
 
     private String formatElementsText(int amountPlantElements, boolean hasBackrest) {
