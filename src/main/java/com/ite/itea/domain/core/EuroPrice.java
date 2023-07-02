@@ -18,6 +18,9 @@ public final class EuroPrice {
     private final long cents;
 
     private EuroPrice(long cents) {
+        if (cents < 0) {
+            throw new NegativePriceException(cents);
+        }
         this.cents = cents;
     }
 
@@ -73,5 +76,12 @@ public final class EuroPrice {
     @Override
     public String toString() {
         return formatPrice(Locale.getDefault());
+    }
+
+    public static class NegativePriceException extends RuntimeException {
+
+        public NegativePriceException(long amountInCents) {
+            super("Failed to instantiate EuroPrice due to negative amount: " + amountInCents + " cents");
+        }
     }
 }

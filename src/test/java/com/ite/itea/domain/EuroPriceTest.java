@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 public class EuroPriceTest {
 
@@ -79,5 +79,11 @@ public class EuroPriceTest {
     void shouldBeNotEqual() {
         assertThat(EuroPrice.ofEurosAndCents(13, 37))
                 .isNotEqualTo(EuroPrice.ofCents(42));
+    }
+
+    @Test
+    void shouldNotAllowNegativePrices() {
+        assertThatExceptionOfType(EuroPrice.NegativePriceException.class)
+                .isThrownBy(() -> EuroPrice.ofCents(-42));
     }
 }
