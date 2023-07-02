@@ -22,8 +22,8 @@ public class GardenBenchTest {
                                 Order for a garden bench:
                                 Elements: 0 of 2 elements is a plant element, has no backrest
                                 Total length: 181 cm
-                                Delivery Type: Product is collected for 0.0 EUR
-                                Total price: 230.0 EUR
+                                Delivery Type: Product is collected for 0,00\u00A0€
+                                Total price: 230,00\u00A0€
                                 """
                 ),
                 Arguments.of(
@@ -33,9 +33,9 @@ public class GardenBenchTest {
                                 Order for a garden bench:
                                 Elements: 0 of 2 elements is a plant element, has no backrest
                                 Total length: 181 cm
-                                Delivery Type: Product is delivered for 70.0 EUR
-                                Total price (without delivery): 230.0 EUR
-                                Total price (including delivery): 300.0 EUR
+                                Delivery Type: Product is delivered for 70,00\u00A0€
+                                Total price (without delivery): 230,00\u00A0€
+                                Total price (including delivery): 300,00\u00A0€
                                 """
                 ),
                 Arguments.of(
@@ -45,8 +45,8 @@ public class GardenBenchTest {
                                 Order for a garden bench:
                                 Elements: 0 of 2 elements is a plant element, has no backrest
                                 Total length: 181 cm
-                                Delivery Type: Product is collected for 0.0 EUR
-                                Total price: 230.0 EUR
+                                Delivery Type: Product is collected for 0,00\u00A0€
+                                Total price: 230,00\u00A0€
                                 """
                 ),
                 Arguments.of(
@@ -56,8 +56,8 @@ public class GardenBenchTest {
                                 Order for a garden bench:
                                 Elements: 1 of 2 elements is a plant element, has no backrest
                                 Total length: 225 cm
-                                Delivery Type: Product is collected for 0.0 EUR
-                                Total price: 280.0 EUR
+                                Delivery Type: Product is collected for 0,00\u00A0€
+                                Total price: 280,00\u00A0€
                                 """
                 ),
                 Arguments.of(
@@ -67,8 +67,8 @@ public class GardenBenchTest {
                                 Order for a garden bench:
                                 Elements: 0 of 2 elements is a plant element, has a backrest
                                 Total length: 181 cm
-                                Delivery Type: Product is collected for 0.0 EUR
-                                Total price: 280.0 EUR
+                                Delivery Type: Product is collected for 0,00\u00A0€
+                                Total price: 280,00\u00A0€
                                 """
                 )
         );

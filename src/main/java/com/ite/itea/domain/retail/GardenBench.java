@@ -9,6 +9,9 @@ public class GardenBench extends Product {
     private static final double WOOD_PLATE_PRICE_IN_EUR = 70;
     private static final double BACKREST_PRICE_IN_EUR = 50;
 
+    private static final int STANDARD_LENGTH_IN_CM = 165;
+    private static final double LENGTH_PRICE_EXTRA_CHARGE_IN_EUR = 1.0;
+
     private final int lengthInCentimeters;
 
     private final int amountDefaultElements;
@@ -35,14 +38,15 @@ public class GardenBench extends Product {
 
     @Override
     public String description() {
-        final var productPrice = calculateProductPrice();
-        final var deliveryPrice = calculateDeliveryPrice();
+        final EuroPrice productPrice = EuroPrice.ofCents((long)(calculateProductPrice() * 100L));
+        final EuroPrice deliveryPrice = EuroPrice.ofCents(calculateDeliveryPrice() * 100L);
+        final var totalPriceIncludingDelivery = productPrice.plus(deliveryPrice);
 
         return "Order for a garden bench:\n"
                 + formatElementsText(amountPlantElements, hasBackrest)
                 + "Total length: " + totalLength(amountPlantElements, lengthInCentimeters) + " cm\n"
                 + formatDeliveryText(isDelivery, deliveryPrice)
-                + formatDeliveryPriceText(productPrice, deliveryPrice);
+                + formatDeliveryPriceText(productPrice, totalPriceIncludingDelivery);
     }
 
     private double calculateProductPrice() {
@@ -76,10 +80,8 @@ public class GardenBench extends Product {
     }
 
     private double extraLengthPrice() {
-        final double lengthPriceExtraChargeInEur = 1.0;
-        final int standardLengthInCm = 165;
-        if (lengthInCentimeters > standardLengthInCm) {
-            return (lengthInCentimeters - standardLengthInCm) * lengthPriceExtraChargeInEur;
+        if (lengthInCentimeters > STANDARD_LENGTH_IN_CM) {
+            return (lengthInCentimeters - STANDARD_LENGTH_IN_CM) * LENGTH_PRICE_EXTRA_CHARGE_IN_EUR;
         }
         return 0;
     }
@@ -96,19 +98,19 @@ public class GardenBench extends Product {
         return amountPlantElementsText + backRestText;
     }
 
-    private String formatDeliveryText(boolean isDelivery, double deliveryPrice) {
+    private String formatDeliveryText(boolean isDelivery, EuroPrice deliveryPrice) {
         String deliveryText = isDelivery
                 ? "Delivery Type: Product is delivered "
                 : "Delivery Type: Product is collected ";
-        return deliveryText + "for " + deliveryPrice + " EUR\n";
+        return deliveryText + "for " + deliveryPrice.formatPrice() + "\n";
     }
 
-    private String formatDeliveryPriceText(double productPrice, double deliveryPrice) {
+    private String formatDeliveryPriceText(EuroPrice priceWithoutDelivery, EuroPrice priceIncludingDelivery) {
         if (isDelivery) {
-            return "Total price (without delivery): " + productPrice + " EUR\n"
-                    + "Total price (including delivery): " + (productPrice + deliveryPrice) + " EUR\n";
+            return "Total price (without delivery): " + priceWithoutDelivery.formatPrice() + "\n"
+                    + "Total price (including delivery): " + priceIncludingDelivery.formatPrice() + "\n";
         } else {
-            return "Total price: " + productPrice + " EUR\n";
+            return "Total price: " + priceWithoutDelivery.formatPrice() + "\n";
         }
     }
 

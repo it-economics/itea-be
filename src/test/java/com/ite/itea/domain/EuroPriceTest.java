@@ -8,7 +8,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class EuroPriceTest {
 
@@ -82,8 +83,21 @@ public class EuroPriceTest {
     }
 
     @Test
-    void shouldNotAllowNegativePrices() {
+    void shouldFormatCorrectly() {
         assertThatExceptionOfType(EuroPrice.NegativePriceException.class)
                 .isThrownBy(() -> EuroPrice.ofCents(-42));
+    }
+
+    private static Stream<Arguments> providePricesWithExpectedFormattedString() {
+        return Stream.of(
+                Arguments.of(EuroPrice.zero(), "0,00\u00A0€"),
+                Arguments.of(EuroPrice.ofEurosAndCents(13, 37), "13,37\u00A0€")
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("providePricesWithExpectedFormattedString")
+    void shouldFormatCorrectly(EuroPrice price, String expectedFormatted) {
+        assertThat(price.formatPrice()).isEqualTo(expectedFormatted);
     }
 }

@@ -50,8 +50,8 @@ public final class EuroPrice {
         return new EuroPrice(cents * i);
     }
 
-    public String formatPrice(Locale locale) {
-        var currencyFormat = NumberFormat.getCurrencyInstance(locale);
+    public String formatPrice() {
+        var currencyFormat = NumberFormat.getCurrencyInstance(Locale.GERMANY);
         var decimalPrice = BigDecimal.valueOf(cents).movePointLeft(2);
         return currencyFormat.format(decimalPrice);
     }
@@ -75,7 +75,7 @@ public final class EuroPrice {
 
     @Override
     public String toString() {
-        return formatPrice(Locale.getDefault());
+        return formatPrice();
     }
 
     public static class NegativePriceException extends RuntimeException {
