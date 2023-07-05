@@ -42,8 +42,8 @@ public final class EuroPrice {
         return new EuroPrice(totalCents);
     }
 
-    public EuroPrice plus(EuroPrice tableTopPrice) {
-        return new EuroPrice(cents + tableTopPrice.cents);
+    public EuroPrice plus(EuroPrice priceToAdd) {
+        return new EuroPrice(cents + priceToAdd.cents);
     }
 
     public EuroPrice times(int i) {
