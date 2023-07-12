@@ -68,11 +68,11 @@ the domain, but the domain has no dependencies on the infrastructure
 or on application-specific code.
 </details>
 
-#### d) There is a case of an implementation that has the *exact same* name as the interface it implements. How is that possible? Can you find it? Who defines the interface (i.e., *requires* the dependency), and who fulfills the contract?
+#### d) There are cases in the codebase where an implementation has the *exact same* name as the interface it implements. How is that possible? Can you find them? Who defines the interface (i.e., *requires* the dependency), and who fulfills the contract?
 
 <details>
 <summary>Hint</summary>
-It's the `ReceiptPresenter`. If that is a fitting name, there is no need to
+It's the `ReceiptPresenter` and `UserInfoPresenter`. If that is a fitting name, there is no need to
 decrease readability by adding an `Impl` suffix. The `Impl` suffix is not
 needed to indicate an implementation (that would be the generally discouraged
 Hungarian notation, and of course classes are implementations - imagine having
