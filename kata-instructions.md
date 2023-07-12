@@ -11,7 +11,7 @@ them in their digital transformation.
 * Try to apply TDD (test-driven development) as diligently as possible. But *pragmatism > dogma* -- cover business rules, not code lines.
 * Have fun and ask lots of questions!
 
-## Task 1
+## Task 1 - Analysis and Discussion
 
 A common pattern for decoupling the domain model from details of the persistence
 layer (database, file system, etc.) is the repository pattern. A repository lets
@@ -68,7 +68,23 @@ the domain, but the domain has no dependencies on the infrastructure
 or on application-specific code.
 </details>
 
-## Task 2
+#### d) There is a case of an implementation that has the *exact same* name as the interface it implements. How is that possible? Can you find it? Who defines the interface (i.e., *requires* the dependency), and who fulfills the contract?
+
+<details>
+<summary>Hint</summary>
+It's the `ReceiptPresenter`. If that is a fitting name, there is no need to
+decrease readability by adding an `Impl` suffix. The `Impl` suffix is not
+needed to indicate an implementation (that would be the generally discouraged
+Hungarian notation, and of course classes are implementations - imagine having
+`ListImpl` instead of `ArrayList`), but often only because the name must be
+unique and the desired name is already taken by the interface.
+
+So then, how can the class have the same name as its interface in this case?
+Remember: Lower-level layers should depend on higher level interfaces, and
+the dependencies should point inwards towards the application core.
+</details>
+
+## Task 2 - Refactoring Towards Inverted Dependencies
 
 Using safe refactorings (e.g., IDE refactorings) wherever possible,
 refactor the cases identified in Task 1a) and 1b) to apply to the goal identified
