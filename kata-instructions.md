@@ -102,6 +102,9 @@ Track down the flow of control from the `/user/{id}/fullname` endpoint through
 all layers and back to the response. Where are *implicit dependencies*, despite
 all references and the flow of control going in the correct direction?
 
+Once you identified the problem, fix it by renaming the classes and/or methods
+that are on the wrong abstraction level.
+
 <details>
 <summary>Hint</summary>
 The endpoint correctly returns the full name for the given user ID, as
