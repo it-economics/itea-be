@@ -91,3 +91,38 @@ refactor the cases identified in Task 1a) and 1b) to apply to the goal identifie
 described in Task 1c). Make sure to think interface-first, and identify
 which side of the dependency contract *requires* the dependency and which
 side *fulfills* it.
+
+## Task 3 - Implicit Dependencies
+
+Dependencies are not just about "who calls whom", "who holds a reference to
+whom", or injection of implementations via interfaces. There are more
+subtle ways in which classes or modules can depend on each other *implicitly*!
+
+Track down the flow of control from the `/user/{id}/fullname` endpoint through
+all layers and back to the response. Where are *implicit dependencies*, despite
+all references and the flow of control going in the correct direction?
+
+<details>
+<summary>Hint</summary>
+The endpoint correctly returns the full name for the given user ID, as
+indicated by its name and path. It does so by calling the `GetUserInfoUseCase`,
+which then returns the user info in the form of the user's full name.
+But what if, in the future, more user info is added instead of just the
+full name?
+
+This is not about predicting the future, the problem lies
+in the naming: `GetUserInfoUseCase` is simply more abstract than
+`getFullNameByUserId`. If we add something to the "user info", the caller -
+who expects only the full name - is affected. The opposite would be fine:
+A user info endpoint which only intends to return the full name for now
+can specifically request the full name for a given user ID, and if what
+constitutes the user info changes later on, it can choose to invoke a
+different use case).
+
+Low-level details that are close to the infrastructure, like user interfaces
+or web API endpoints, depend on more abstract application-specific use cases,
+but those use cases should not need to know nor care about who calls them
+(HTTP requests, button clicks, CLI commands, Siri voice commands, etc.).
+They just fulfill one of the use cases of the application, i.e., they only
+care about *why* they are invoked.
+</details>
