@@ -86,11 +86,10 @@ the dependencies should point inwards towards the application core.
 
 ## Task 2 - Refactoring Towards Inverted Dependencies
 
-Using safe refactorings (e.g., IDE refactorings) wherever possible,
-refactor the cases identified in Task 1a) and 1b) to apply to the goal identified
-described in Task 1c). Make sure to think interface-first, and identify
-which side of the dependency contract *requires* the dependency and which
-side *fulfills* it.
+Using safe refactorings (e.g., IDE refactorings) wherever possible, refactor
+the cases identified in Task 1a) and 1b) to fix those problems. Make sure
+to think interface-first, and identify which side of the dependency contract
+*requires* the dependency and which side *fulfills* it.
 
 ## Task 3 - Implicit Dependencies
 
