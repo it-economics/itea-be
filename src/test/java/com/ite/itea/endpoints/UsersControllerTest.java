@@ -6,7 +6,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
@@ -19,9 +18,6 @@ class UsersControllerTest {
 
     @LocalServerPort
     private int port;
-
-    @Value("${local.management.port}")
-    private int actuatorPort;
 
     @Autowired
     private TestRestTemplate testRestTemplate;
