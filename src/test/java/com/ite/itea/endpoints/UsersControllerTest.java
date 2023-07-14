@@ -31,7 +31,7 @@ class UsersControllerTest {
         final var endpointPath = "/user/%s/fullname".formatted(userId);
         final var responseEntity = this.testRestTemplate.getForEntity(hostUrl + endpointPath, String.class);
 
-        then(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);;
+        then(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         then(responseEntity.getBody()).isEqualTo(expectedFullName);
     }
 
