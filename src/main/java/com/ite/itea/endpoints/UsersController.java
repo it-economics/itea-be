@@ -2,7 +2,7 @@ package com.ite.itea.endpoints;
 
 import com.ite.itea.application.usecase.GetUserInfoUseCase;
 import com.ite.itea.domain.user.UserId;
-import com.ite.itea.persistence.FileSystemUserRepositoryImpl;
+import com.ite.itea.persistence.CsvFileUserRepository;
 import com.ite.itea.presentation.UserInfoPresenter;
 import java.io.File;
 import java.net.URL;
@@ -19,15 +19,15 @@ import org.springframework.web.server.ResponseStatusException;
 @Controller
 public class UsersController {
 
-    private final GetUserInfoUseCase userInfoUseCase;
+    private final GetUserInfoUseCase getUserInfoUseCase;
 
     UsersController() {
         URL usersFileUrl = getClass().getClassLoader().getResource("users.csv");
         String usersFilePath = Objects.requireNonNull(usersFileUrl).getFile();
-        File file = new File(URLDecoder.decode(usersFilePath, StandardCharsets.UTF_8));
+        File usersFile = new File(URLDecoder.decode(usersFilePath, StandardCharsets.UTF_8));
 
-        userInfoUseCase = new GetUserInfoUseCase(
-                new FileSystemUserRepositoryImpl(file),
+        getUserInfoUseCase = new GetUserInfoUseCase(
+                new CsvFileUserRepository(usersFile),
                 new UserInfoPresenter()
         );
     }
@@ -35,7 +35,7 @@ public class UsersController {
     @GetMapping(path = "/user/{id}/fullname")
     @ResponseBody
     public String getFullNameByUserId(@PathVariable String id) {
-        return userInfoUseCase.execute(new UserId(id))
+        return getUserInfoUseCase.execute(new UserId(id))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
     }
 }

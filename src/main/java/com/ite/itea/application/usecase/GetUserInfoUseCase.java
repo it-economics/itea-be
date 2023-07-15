@@ -2,15 +2,15 @@ package com.ite.itea.application.usecase;
 
 import com.ite.itea.domain.user.User;
 import com.ite.itea.domain.user.UserId;
-import com.ite.itea.persistence.FileSystemUserRepository;
+import com.ite.itea.domain.user.UserRepository;
 import java.util.Optional;
 
 public class GetUserInfoUseCase {
 
-    private final FileSystemUserRepository userRepository;
+    private final UserRepository userRepository;
     private final UserInfoPresenter userInfoPresenter;
 
-    public GetUserInfoUseCase(FileSystemUserRepository userRepository, UserInfoPresenter userInfoPresenter) {
+    public GetUserInfoUseCase(UserRepository userRepository, UserInfoPresenter userInfoPresenter) {
         this.userRepository = userRepository;
         this.userInfoPresenter = userInfoPresenter;
     }

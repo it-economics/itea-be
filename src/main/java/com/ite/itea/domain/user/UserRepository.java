@@ -1,11 +1,9 @@
-package com.ite.itea.persistence;
+package com.ite.itea.domain.user;
 
-import com.ite.itea.domain.user.User;
-import com.ite.itea.domain.user.UserId;
 import java.util.List;
 import java.util.Optional;
 
-public interface FileSystemUserRepository {
+public interface UserRepository {
 
     List<User> all();
     Optional<User> byId(UserId id);

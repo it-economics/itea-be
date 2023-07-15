@@ -1,5 +1,6 @@
 package com.ite.itea.persistence;
 
+import com.ite.itea.domain.user.UserRepository;
 import com.ite.itea.domain.user.User;
 import com.ite.itea.domain.user.UserId;
 import java.io.File;
@@ -9,11 +10,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class FileSystemUserRepositoryImpl implements FileSystemUserRepository {
+public class CsvFileUserRepository implements UserRepository {
 
     private final File usersFile;
 
-    public FileSystemUserRepositoryImpl(File usersFile) {
+    public CsvFileUserRepository(File usersFile) {
         this.usersFile = usersFile;
     }
 
