@@ -7,7 +7,7 @@ import com.ite.itea.domain.user.UserId;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-public class UserInfoPresenterTest {
+public class FullNamePresenterTest {
 
     @ParameterizedTest
     @CsvSource("""
@@ -17,8 +17,8 @@ public class UserInfoPresenterTest {
     void shouldFormatCorrectly(String firstName, String lastName, String expectedFormatted) {
         final var user = new User(UserId.random(), firstName, lastName);
 
-        final var userInfoPresenter = new UserInfoPresenter();
-        final var actual = userInfoPresenter.formatUserInfo(user);
+        final var fullNamePresenter = new FullNamePresenter();
+        final var actual = fullNamePresenter.formatFullName(user);
 
         assertThat(actual).isEqualTo(expectedFormatted);
     }

@@ -5,22 +5,22 @@ import com.ite.itea.domain.user.UserId;
 import com.ite.itea.domain.user.UserRepository;
 import java.util.Optional;
 
-public class GetUserInfoUseCase {
+public class GetFullNameUseCase {
 
     private final UserRepository userRepository;
-    private final UserInfoPresenter userInfoPresenter;
+    private final FullNamePresenter fullNamePresenter;
 
-    public GetUserInfoUseCase(UserRepository userRepository, UserInfoPresenter userInfoPresenter) {
+    public GetFullNameUseCase(UserRepository userRepository, FullNamePresenter fullNamePresenter) {
         this.userRepository = userRepository;
-        this.userInfoPresenter = userInfoPresenter;
+        this.fullNamePresenter = fullNamePresenter;
     }
 
     public Optional<String> execute(UserId id) {
         final var user = userRepository.byId(id);
-        return user.map(userInfoPresenter::formatUserInfo);
+        return user.map(fullNamePresenter::formatFullName);
     }
 
-    public interface UserInfoPresenter {
-        String formatUserInfo(User user);
+    public interface FullNamePresenter {
+        String formatFullName(User user);
     }
 }
