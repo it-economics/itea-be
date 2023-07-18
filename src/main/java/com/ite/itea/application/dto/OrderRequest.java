@@ -1,4 +1,4 @@
-package com.ite.itea.domain.request;
+package com.ite.itea.application.dto;
 
 import java.util.List;
 
