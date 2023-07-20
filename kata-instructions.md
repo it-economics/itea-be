@@ -25,17 +25,17 @@ code they've seen before, rather than intentionally with a specific goal in mind
 
 ### Discuss with your peers:
 
-#### a) In which cases do the use cases know too much about the persistence mechanism in use?
+#### a) Why is it good practice to place the consumer (usecase class) and the needed persistence abstraction in the same package?
 
 <details>
 <summary>Hint</summary>
 A common symptom is when the repository interface (a domain concept) is defined
-in the persistence layer, together with its implementation, which makes it difficult
+in the persistence package, together with its implementation, which makes it difficult
 for developers to conceptually separate those very different concepts.
 </details>
 
 
-#### b) Where do lower-level classes technically implement an interface, but it is Indirection Without Abstraction, resulting in the caller depending on the implementation *despite* the interface, instead of *only on* the interface.
+#### b) Why is it bad practice to name the interface and the implementation the same (or differing only by 'Impl')
 
 <details>
 <summary>Hint</summary>
@@ -54,7 +54,9 @@ need in order to provide their functionality, and the IDE had to fulfill it. The
 IDE would depend on *every* plugin.
 </details>
 
-#### c) In which cases do callers of the repository interface depend only on the domain layer, as intended by the dependency rule, with the implementation being more concrete and in a lower-level layer?
+#### c) How should the three classes depend on each other? In which layers of the application should they be placed?  UseCaseClass, RepositoryInterface, RepositoryImplementation
+
+In which cases do callers of the repository interface depend only on the domain layer, with the implementation being more concrete and in a lower-level layer?
 
 <details>
 <summary>Hint</summary>
@@ -68,7 +70,7 @@ the domain, but the domain has no dependencies on the infrastructure
 or on application-specific code.
 </details>
 
-#### d) There are cases in the codebase where an implementation has the *exact same* name as the interface it implements. How is that possible? Can you find them? Who defines the interface (i.e., *requires* the dependency), and who fulfills the contract?
+#### d) There are two cases in the codebase (ReceiptPresenter and UserInfoPresenter) where an implementation has the *exact same* name as the interface it implements. What are the consequences? Who defines the interface (i.e., *requires* the dependency), and who fulfills the contract?
 
 <details>
 <summary>Hint</summary>
