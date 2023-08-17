@@ -6,7 +6,7 @@ public final class ShoppingCart {
 
     private final ArrayList<CartItem> cartItems = new ArrayList<>();
 
-    public ShoppingCart() {
+    private ShoppingCart() {
     }
 
     public static ShoppingCart empty() {
@@ -18,8 +18,22 @@ public final class ShoppingCart {
     }
 
     public EuroPrice price() {
+        final var totalPriceInCents = totalProductsPrice().asCents() - totalDiscountAmount().asCents();
+        return EuroPrice.ofCents(Math.max(0, totalPriceInCents));
+    }
+
+    private EuroPrice totalProductsPrice() {
         return cartItems.stream()
+                .filter(cartItem -> !(cartItem.product instanceof Voucher))
                 .map(cartItem -> cartItem.product.price())
+                .reduce(EuroPrice.zero(), EuroPrice::plus);
+    }
+
+    private EuroPrice totalDiscountAmount() {
+        return cartItems.stream()
+                .filter(cartItem -> cartItem.product instanceof Voucher)
+                .map(cartItem -> (Voucher) cartItem.product)
+                .map(Voucher::discountAmount)
                 .reduce(EuroPrice.zero(), EuroPrice::plus);
     }
 

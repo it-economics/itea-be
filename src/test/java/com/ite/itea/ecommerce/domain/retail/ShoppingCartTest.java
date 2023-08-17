@@ -22,6 +22,22 @@ public class ShoppingCartTest {
                                 new Picture(ProductId.random(), "An ugly picture", EuroPrice.ofCents(42))
                         ),
                         EuroPrice.ofCents(1379)
+                ),
+                new ProductsAndExpectedPrice(
+                        List.of(
+                                new Picture(ProductId.random(), "Picture 1", EuroPrice.ofEurosAndCents(10, 99)),
+                                new Picture(ProductId.random(), "Picture 2", EuroPrice.ofEurosAndCents(123, 42)),
+                                Voucher.ofValue(EuroPrice.ofEurosAndCents(104, 12))
+                        ),
+                        EuroPrice.ofEurosAndCents(30, 29)
+                ),
+                new ProductsAndExpectedPrice(
+                        List.of(
+                                new Picture(ProductId.random(), "Picture 1", EuroPrice.ofEuros(10)),
+                                Voucher.ofValue(EuroPrice.ofEuros(100))
+                        ),
+                        // Vouchers higher than the price of products cannot reduce the total price below 0.
+                        EuroPrice.zero()
                 )
         );
     }
@@ -29,7 +45,7 @@ public class ShoppingCartTest {
     @ParameterizedTest
     @MethodSource("provideShoppingCartContentsWithExpectedTotalPrice")
     void shoppingCartContentsResultInCorrectTotalPrice(ProductsAndExpectedPrice productsAndExpectedPrice) {
-        final var cart = new ShoppingCart();
+        final var cart = ShoppingCart.empty();
 
         productsAndExpectedPrice.products.forEach(cart::add);
 
