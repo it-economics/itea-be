@@ -60,6 +60,12 @@ public class ShoppingCartTest {
     private record TestCase(
             String description,
             Iterable<Product> products,
+            Iterable<Voucher> vouchers,
             EuroPrice expectedTotalPrice
-    ) { }
+    ) {
+
+        public TestCase(String description, Iterable<Product> products, EuroPrice expectedTotalPrice) {
+            this(description, products, List.of(), expectedTotalPrice);
+        }
+    }
 }
