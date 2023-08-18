@@ -13,8 +13,12 @@ public final class ShoppingCart {
         return new ShoppingCart();
     }
 
-    public void add(Product product) {
+    public void addProduct(Product product) {
         cartItems.add(new CartItem(product));
+    }
+
+    public void addVoucher(Voucher voucher) {
+        addProduct(voucher);
     }
 
     public EuroPrice price() {
