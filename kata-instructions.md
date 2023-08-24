@@ -15,11 +15,13 @@ them in their digital transformation.
 
 Our colleagues have recently started designing the domain model for the shopping  cart (see
 `ShoppingCartTest` and work your way from there). In particular, we can add products to the
-shopping cart, and since recently also vouchers, which are a kind of product. Vouchers could
-be given to customers for example via advertisements, referrals, and other marketing campaigns,
-but this doesn't concern us for now.
+shopping cart, and since recently also vouchers, which are implemented as a kind of product.
+Vouchers could be given to customers for example via advertisements, referrals, and other
+marketing campaigns. Vouchers cannot be bought by customers, only redeemed to get a discount.
 
-### a) Let's have a closer look at this design. Vouchers are considered products, because that is what we can add to the shopping cart. Any problems with this?
+### a) Let's have a closer look at this design. Vouchers are implemented as products, because that is what we can add to the shopping cart. Any problems with this?
+
+Tip: Consider drawing a diagram if it helps with understanding and discussing the situation.
 
 <details>
 <summary>Hint 1</summary>
@@ -37,9 +39,7 @@ it is a voucher, because vouchers have neither a product ID nor a price. Instead
 a discount amount or percentage, which the products do not have.
 </details>
 
-### b) How can we fix this problem?
-
-Once we found a better design, let's start refactoring.
+### b) How can we fix this problem? Once we found a better design, let's start refactoring.
 
 **Note:** Remember to change the tests first, if necessary, and run them often. Where possible, try to
 keep existing functionality intact while gradually refactoring to the improved design, instead of
