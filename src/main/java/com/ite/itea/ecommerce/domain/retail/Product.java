@@ -24,4 +24,9 @@ public abstract class Product {
     }
 
     public abstract EuroPrice price();
+
+    @Override
+    public String toString() {
+        return "Product { %s }".formatted(name);
+    }
 }
