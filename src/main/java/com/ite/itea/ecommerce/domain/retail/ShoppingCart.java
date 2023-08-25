@@ -1,10 +1,12 @@
 package com.ite.itea.ecommerce.domain.retail;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public final class ShoppingCart {
 
-    private final ArrayList<CartItem> cartItems = new ArrayList<>();
+    private final List<CartItem> cartItems = new ArrayList<>();
+    private final List<Voucher> vouchers = new ArrayList<>();
 
     private ShoppingCart() {
     }
@@ -13,8 +15,12 @@ public final class ShoppingCart {
         return new ShoppingCart();
     }
 
-    public void add(Product product) {
+    public void addProduct(Product product) {
         cartItems.add(new CartItem(product));
+    }
+
+    public void addVoucher(Voucher voucher) {
+        vouchers.add(voucher);
     }
 
     public EuroPrice price() {
@@ -24,15 +30,12 @@ public final class ShoppingCart {
 
     private EuroPrice totalProductsPrice() {
         return cartItems.stream()
-                .filter(cartItem -> !(cartItem.product instanceof Voucher))
                 .map(cartItem -> cartItem.product.price())
                 .reduce(EuroPrice.zero(), EuroPrice::plus);
     }
 
     private EuroPrice totalDiscountAmount() {
-        return cartItems.stream()
-                .filter(cartItem -> cartItem.product instanceof Voucher)
-                .map(cartItem -> (Voucher) cartItem.product)
+        return vouchers.stream()
                 .map(Voucher::discountAmount)
                 .reduce(EuroPrice.zero(), EuroPrice::plus);
     }

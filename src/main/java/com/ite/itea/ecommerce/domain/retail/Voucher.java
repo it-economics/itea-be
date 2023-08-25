@@ -1,11 +1,10 @@
 package com.ite.itea.ecommerce.domain.retail;
 
-public class Voucher extends Product {
+public class Voucher {
 
     private final EuroPrice discountAmount;
 
     private Voucher(EuroPrice discountAmount) {
-        super(null, null);
         this.discountAmount = discountAmount;
     }
 
@@ -15,11 +14,5 @@ public class Voucher extends Product {
 
     public EuroPrice discountAmount() {
         return discountAmount;
-    }
-
-    @Override
-    public EuroPrice price() {
-        throw new UnsupportedOperationException("Vouchers do not have a price, since they are not " +
-                "for sale. Instead, they have a discount amount or percentage.");
     }
 }
