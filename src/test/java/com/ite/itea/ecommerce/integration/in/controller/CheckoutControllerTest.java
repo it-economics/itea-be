@@ -33,8 +33,8 @@ class CheckoutControllerTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenSendingRequestWithAPictureNorwayToTheController() {
-        var orderPictureNorway = createItem(ProductName.PICTURE_NORWAY, 2,999);
-        var orderRequest = createOrder(orderPictureNorway);
+        var orderPictureNorway = new ItemRequest(ProductName.PICTURE_NORWAY, 2, 999);
+        var orderRequest = new OrderRequest(List.of(orderPictureNorway));
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
 
@@ -45,8 +45,8 @@ class CheckoutControllerTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenSendingRequestWithAPictureSwedenToTheController() {
-        var orderPictureSweden = createItem(ProductName.PICTURE_SWEDEN, 2, 1299);
-        var orderRequest = createOrder(orderPictureSweden);
+        var orderPictureSweden = new ItemRequest(ProductName.PICTURE_SWEDEN, 2, 1299);
+        var orderRequest = new OrderRequest(List.of(orderPictureSweden));
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
 
@@ -57,8 +57,8 @@ class CheckoutControllerTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenSendingRequestWithAPictureFinlandToTheController() {
-        var orderPictureFinland = createItem(ProductName.PICTURE_FINLAND, 2, 1499);
-        var orderRequest = createOrder(orderPictureFinland);
+        var orderPictureFinland = new ItemRequest(ProductName.PICTURE_FINLAND, 2, 1499);
+        var orderRequest = new OrderRequest(List.of(orderPictureFinland));
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
 
@@ -69,8 +69,8 @@ class CheckoutControllerTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenSendingRequestWithAChairElsaToTheController() {
-        var orderChairElsa = createItem(ProductName.CHAIR_ELSA, 2, 3000);
-        var orderRequest = createOrder(orderChairElsa);
+        var orderChairElsa = new ItemRequest(ProductName.CHAIR_ELSA, 2, 3000);
+        var orderRequest = new OrderRequest(List.of(orderChairElsa));
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
 
@@ -81,8 +81,8 @@ class CheckoutControllerTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenSendingRequestWithAChairKnutToTheController() {
-        var orderChairKnut = createItem(ProductName.CHAIR_KNUT, 2, 4100);
-        var orderRequest = createOrder(orderChairKnut);
+        var orderChairKnut = new ItemRequest(ProductName.CHAIR_KNUT, 2, 4100);
+        var orderRequest = new OrderRequest(List.of(orderChairKnut));
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
 
@@ -93,8 +93,8 @@ class CheckoutControllerTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenSendingRequestWithAChairLarsToTheController() {
-        var orderChairLars = createItem(ProductName.CHAIR_LARS, 2, 5800);
-        var orderRequest = createOrder(orderChairLars);
+        var orderChairLars = new ItemRequest(ProductName.CHAIR_LARS, 2, 5800);
+        var orderRequest = new OrderRequest(List.of(orderChairLars));
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
 
@@ -105,8 +105,8 @@ class CheckoutControllerTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenSendingRequestWithATableLottaToTheController() {
-        var orderTableLotta = createItem(ProductName.TABLE_LOTTA, 2, 500);
-        var orderRequest = createOrder(orderTableLotta);
+        var orderTableLotta = new ItemRequest(ProductName.TABLE_LOTTA, 2, 500);
+        var orderRequest = new OrderRequest(List.of(orderTableLotta));
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
 
@@ -117,8 +117,8 @@ class CheckoutControllerTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenSendingRequestWithATableLolaToTheController() {
-        var orderTableLola = createItem(ProductName.TABLE_LOLA, 2, 1300);
-        var orderRequest = createOrder(orderTableLola);
+        var orderTableLola = new ItemRequest(ProductName.TABLE_LOLA, 2, 1300);
+        var orderRequest = new OrderRequest(List.of(orderTableLola));
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
 
@@ -132,13 +132,5 @@ class CheckoutControllerTest {
         var entity = this.testRestTemplate.getForEntity("http://localhost:" + this.actuatorPort + "/actuator", Map.class);
 
         then(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
-    }
-
-    private OrderRequest createOrder(ItemRequest item) {
-        return new OrderRequest(List.of(item));
-    }
-
-    private ItemRequest createItem(ProductName name, int amount, long price) {
-        return new ItemRequest(name, amount, price);
     }
 }
