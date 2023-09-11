@@ -33,7 +33,7 @@ class CheckoutControllerTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenSendingRequestWithAPictureNorwayToTheController() {
-        var orderPictureNorway = new ItemRequest(ProductName.PICTURE_NORWAY, 2, 999);
+        var orderPictureNorway = new ItemRequest(ProductName.PICTURE_NORWAY, 2);
         var orderRequest = new OrderRequest(List.of(orderPictureNorway));
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
@@ -45,7 +45,7 @@ class CheckoutControllerTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenSendingRequestWithAPictureSwedenToTheController() {
-        var orderPictureSweden = new ItemRequest(ProductName.PICTURE_SWEDEN, 2, 1299);
+        var orderPictureSweden = new ItemRequest(ProductName.PICTURE_SWEDEN, 2);
         var orderRequest = new OrderRequest(List.of(orderPictureSweden));
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
@@ -57,7 +57,7 @@ class CheckoutControllerTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenSendingRequestWithAPictureFinlandToTheController() {
-        var orderPictureFinland = new ItemRequest(ProductName.PICTURE_FINLAND, 2, 1499);
+        var orderPictureFinland = new ItemRequest(ProductName.PICTURE_FINLAND, 2);
         var orderRequest = new OrderRequest(List.of(orderPictureFinland));
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
@@ -69,7 +69,7 @@ class CheckoutControllerTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenSendingRequestWithAChairOlafToTheController() {
-        var orderChairOlaf = new ItemRequest(ProductName.CHAIR_OLAF, 2, 3000);
+        var orderChairOlaf = new ItemRequest(ProductName.CHAIR_OLAF, 2);
         var orderRequest = new OrderRequest(List.of(orderChairOlaf));
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
@@ -81,7 +81,7 @@ class CheckoutControllerTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenSendingRequestWithAChairKnutToTheController() {
-        var orderChairKnut = new ItemRequest(ProductName.CHAIR_KNUT, 2, 4100);
+        var orderChairKnut = new ItemRequest(ProductName.CHAIR_KNUT, 2);
         var orderRequest = new OrderRequest(List.of(orderChairKnut));
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
@@ -93,7 +93,7 @@ class CheckoutControllerTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenSendingRequestWithAChairLarsToTheController() {
-        var orderChairLars = new ItemRequest(ProductName.CHAIR_LARS, 2, 5800);
+        var orderChairLars = new ItemRequest(ProductName.CHAIR_LARS, 2);
         var orderRequest = new OrderRequest(List.of(orderChairLars));
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
@@ -105,7 +105,7 @@ class CheckoutControllerTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenSendingRequestWithATableLottaToTheController() {
-        var orderTableLotta = new ItemRequest(ProductName.TABLE_LOTTA, 2, 500);
+        var orderTableLotta = new ItemRequest(ProductName.TABLE_LOTTA, 2);
         var orderRequest = new OrderRequest(List.of(orderTableLotta));
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
@@ -117,7 +117,7 @@ class CheckoutControllerTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenSendingRequestWithATableLolaToTheController() {
-        var orderTableLola = new ItemRequest(ProductName.TABLE_LOLA, 2, 1300);
+        var orderTableLola = new ItemRequest(ProductName.TABLE_LOLA, 2);
         var orderRequest = new OrderRequest(List.of(orderTableLola));
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
