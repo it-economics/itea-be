@@ -2,12 +2,13 @@ package com.ite.itea.ecommerce.adapters.out;
 
 import com.ite.itea.ecommerce.adapters.out.presenter.ReceiptPresenter;
 import com.ite.itea.ecommerce.domain.retail.*;
-import org.assertj.core.api.BDDAssertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class ReceiptPresenterTest {
 
@@ -58,7 +59,7 @@ class ReceiptPresenterTest {
     void shouldReturnCorrectReceipts(Order order, EuroPrice expectedTotalPrice, String expectedReceiptText) {
         var receipt = receiptPresenter.prepareReceipt(order);
 
-        BDDAssertions.then(receipt.priceInCents()).isEqualTo(expectedTotalPrice.asCents());
-        BDDAssertions.then(receipt.text()).isEqualTo(expectedReceiptText);
+        assertThat(receipt.priceInCents()).isEqualTo(expectedTotalPrice.asCents());
+        assertThat(receipt.text()).isEqualTo(expectedReceiptText);
     }
 }

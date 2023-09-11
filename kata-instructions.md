@@ -1,4 +1,4 @@
-# ITEA 06 - Yellow Grade: Liskov Substitution Principle (LSP)
+# ITEA 07 - Green Grade: Open-Closed Principle (OCP)
 
 ### Introduction
 
@@ -11,48 +11,64 @@ them in their digital transformation.
 * Try to apply TDD (test-driven development) as diligently as possible. But *pragmatism > dogma* -- cover business rules, not code lines.
 * Have fun and ask lots of questions!
 
-## Task 1 - Shopping Cart and Discounts
+## Task 1 - Analysis and Discussion
 
-Our colleagues have recently started designing the domain model for the shopping  cart (see
-`ShoppingCartTest` and work your way from there). In particular, we can add products to the
-shopping cart, and since recently also vouchers, which are implemented as a kind of product.
-Vouchers could be given to customers for example via advertisements, referrals, and other
-marketing campaigns. Vouchers cannot be bought by customers, only redeemed to get a discount.
+While we don't want to predict which future changes *might* happen and prepare for every possibility in advance – most
+of them will never happen after all – we can still sometimes be pretty sure about *certain kinds of changes*.
+We call these *expected variation*, and we want to make these changes as simple  and efficient as possible, with little
+risk of breaking existing code and without having to make changes in many parts of the code base.
 
-### a) Let's have a closer look at this design. Vouchers are implemented as products, because that is what we can add to the shopping cart. Any problems with this?
+Let's open the enum type `ProductName`. Looking at where and how this enum type is used:
 
-Tip: Consider drawing a diagram if it helps with understanding and discussing the situation.
-
-<details>
-<summary>Hint 1</summary>
-Vouchers are not actually products that the customers can order, even though they might add them
-to the shopping cart, so the code does not really match the domain. But that is only the
-second-biggest problem. What do we do with the products once they are added to the shopping cart,
-and what do we do with the vouchers?
-</details>
-
-<details>
-<summary>Hint 2</summary>
-The problem is that vouchers are not used like products. They only extend `Product` so that
-they can be added to the shopping cart, but the shopping cart has to check at runtime whether
-it is a voucher, because vouchers have neither a product ID nor a price. Instead, they have
-a discount amount or percentage, which the products do not have.
-</details>
-
-### b) How can we fix this problem? Once we found a better design, let's start refactoring.
-
-**Note:** Remember to change the tests first, if necessary, and run them often. Where possible, try to
-keep existing functionality intact while gradually refactoring to the improved design, instead of
-"replacing", i.e., rewriting the whole design at once.
+- Which kind of *expected variation* will cause changes to propagate through the code base?
+- Where are different classes (possibly including tests) coupled together via this enum type?
+- Which kind of change that should not affect the tests would break certain unit tests?<br>
+  (Note: Regularly breaking unit tests via changes that should not affect them is a typical symptom of an OCP violation.)
 
 <details>
 <summary>Hint</summary>
-Here is one suggested solution:<br/>
-Instead of treating vouchers as products just so we can add them to the shopping cart, we
-can simply allow adding vouchers in addition to products (e.g., `addProduct(productId)` and
-`addVoucher(voucher)`). That way we can still have the shopping cart determine the total price
-for us with a simple API that encapsulates most of the details, but we can avoid this type
-hierarchy where the caller needs to know about the specific subtypes.
+- To add a new product (almost certainly going to happen) we want to ideally only do that, add the product,
+  without also having to change other existing files and potentially breaking existing behavior. Also, the product
+  name should just be data.<br>
+- To change (e.g., rename) an existing product, we want to just change the respective product data, and not also
+  fix tests that should not be coupled to concrete product data.
 </details>
 
-### c) How easy was it to change the tests compared to changing the implementation? Why?
+## Task 2 - Experiencing the Pain
+
+### a) Add a new product, wardrobe "Ingeborg" for 249,99&nbsp;€.
+
+- How easy was that?
+- How obvious was it what needs to change?
+- How far did the changes propagate?
+- Did you break anything in the process?
+
+### b) Rename chair "Elsa" to "Olaf".
+
+- How easy was that?
+- How obvious was it what needs to change?
+- How far did the changes propagate?
+- Did you break anything in the process?
+
+## Task 3 - Refactoring
+
+After thinking about the changes that will definitely be happening regularly during the application's lifetime,
+can we find a way to limit these expected changes to certain parts of the code base? We call this a *strategic closure*,
+which acts like a "barrier" for how far changes can propagate. Who likes to make changes throughout many files,
+possibly breaking stuff unknowingly, each time we make a small change?
+
+## Task 4 - Expected Variation
+
+### a) Add a new product, closet "Ragnarök" for 329,99&nbsp;€.
+
+- How easy was that?
+- How obvious was it what needs to change?
+- How far did the changes propagate?
+- Did you break anything in the process?
+
+### b) Rename picture "Norway" to "Oslo".
+
+- How easy was that?
+- How obvious was it what needs to change?
+- How far did the changes propagate?
+- Did you break anything in the process?

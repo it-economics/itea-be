@@ -14,15 +14,15 @@ public class GardenBench extends Product {
     private final int amountDefaultElements;
     private final int amountPlantElements;
     private final boolean hasBackrest;
-    private final boolean isDelivery;
+    private final boolean shouldBeDelivered;
 
-    public GardenBench(ProductId id, int lengthInCentimeters, int amountDefaultElements, int amountPlantElements, boolean hasBackrest, boolean isDelivery) {
+    public GardenBench(ProductId id, int lengthInCentimeters, int amountDefaultElements, int amountPlantElements, boolean hasBackrest, boolean shouldBeDelivered) {
         super(id, "Garden bench");
         this.lengthInCentimeters = lengthInCentimeters;
         this.amountDefaultElements = amountDefaultElements;
         this.amountPlantElements = amountPlantElements;
         this.hasBackrest = hasBackrest;
-        this.isDelivery = isDelivery;
+        this.shouldBeDelivered = shouldBeDelivered;
     }
 
     @Override
@@ -40,7 +40,7 @@ public class GardenBench extends Product {
         return "Order for a garden bench:\n"
                 + formatElementsText(amountPlantElements, hasBackrest)
                 + "Total length: " + totalLength(amountPlantElements, lengthInCentimeters) + " cm\n"
-                + formatDeliveryText(isDelivery, deliveryPrice)
+                + formatDeliveryText(shouldBeDelivered, deliveryPrice)
                 + formatDeliveryPriceText(productPrice, totalPriceIncludingDelivery);
     }
 
@@ -53,7 +53,7 @@ public class GardenBench extends Product {
     }
 
     private EuroPrice calculateDeliveryPrice() {
-        if (!isDelivery) {
+        if (!shouldBeDelivered) {
             return EuroPrice.zero();
         }
 
@@ -101,7 +101,7 @@ public class GardenBench extends Product {
     }
 
     private String formatDeliveryPriceText(EuroPrice priceWithoutDelivery, EuroPrice priceIncludingDelivery) {
-        if (isDelivery) {
+        if (shouldBeDelivered) {
             return "Total price (without delivery): " + priceWithoutDelivery.formatPrice() + "\n"
                     + "Total price (including delivery): " + priceIncludingDelivery.formatPrice() + "\n";
         } else {
