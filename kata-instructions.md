@@ -25,9 +25,50 @@ Let's open the enum type `ProductName`. Looking at where and how this enum type 
 - Which kind of change that should not affect the tests would break certain unit tests?<br>
   (Note: Regularly breaking unit tests via changes that should not affect them is a typical symptom of an OCP violation.)
 
-## Task 2 - Refactoring
+<details>
+<summary>Hint</summary>
+- To add a new product (almost certainly going to happen) we want to ideally only do that, add the product,
+  without also having to change other existing files and potentially breaking existing behavior. Also, the product
+  name should just be data.<br>
+- To change (e.g., rename) an existing product, we want to just change the respective product data, and not also
+  fix tests that should not be coupled to concrete product data.
+</details>
+
+## Task 2 - Experiencing the Pain
+
+### a) Add a new product, wardrobe "Ingeborg" for 249,99&nbsp;€.
+
+- How easy was that?
+- How obvious was it what needs to change?
+- How far did the changes propagate?
+- Did you break anything in the process?
+
+### b) Rename chair "Elsa" to "Olaf".
+
+- How easy was that?
+- How obvious was it what needs to change?
+- How far did the changes propagate?
+- Did you break anything in the process?
+
+## Task 3 - Refactoring
 
 After thinking about the changes that will definitely be happening regularly during the application's lifetime,
 can we find a way to limit these expected changes to certain parts of the code base? We call this a *strategic closure*,
 which acts like a "barrier" for how far changes can propagate. Who likes to make changes throughout many files,
 possibly breaking stuff unknowingly, each time we make a small change?
+
+## Task 4 - Expected Variation
+
+### a) Add a new product, closet "Ragnarök" for 329,99&nbsp;€.
+
+- How easy was that?
+- How obvious was it what needs to change?
+- How far did the changes propagate?
+- Did you break anything in the process?
+
+### b) Rename picture "Norway" to "Oslo".
+
+- How easy was that?
+- How obvious was it what needs to change?
+- How far did the changes propagate?
+- Did you break anything in the process?
