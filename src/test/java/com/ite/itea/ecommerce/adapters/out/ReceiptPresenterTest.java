@@ -34,12 +34,12 @@ class ReceiptPresenterTest {
                 Arguments.of(
                         Order.of(
                                 new Order.OrderItem(
-                                        new Chair(ProductId.random(), ProductName.CHAIR_ELSA.displayName(), EuroPrice.ofCents(500), EuroPrice.ofCents(500), EuroPrice.ofCents(500)),
+                                        new Chair(ProductId.random(), ProductName.CHAIR_OLAF.displayName(), EuroPrice.ofCents(500), EuroPrice.ofCents(500), EuroPrice.ofCents(500)),
                                         2
                                 )
                         ),
                         EuroPrice.ofCents(6000L),
-                        "itea \nChair \"Elsa\" 30,00\u00A0€ * 2\nTotal 60,00\u00A0€"
+                        "itea \nChair \"Olaf\" 30,00\u00A0€ * 2\nTotal 60,00\u00A0€"
                 ),
                 Arguments.of(
                         Order.of(

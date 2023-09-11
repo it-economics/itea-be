@@ -68,15 +68,15 @@ class CheckoutControllerTest {
     }
 
     @Test
-    void shouldReturnCorrectReceiptWhenSendingRequestWithAChairElsaToTheController() {
-        var orderChairElsa = new ItemRequest(ProductName.CHAIR_ELSA, 2, 3000);
-        var orderRequest = new OrderRequest(List.of(orderChairElsa));
+    void shouldReturnCorrectReceiptWhenSendingRequestWithAChairOlafToTheController() {
+        var orderChairOlaf = new ItemRequest(ProductName.CHAIR_OLAF, 2, 3000);
+        var orderRequest = new OrderRequest(List.of(orderChairOlaf));
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
 
         then(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
         then(entity.getBody().priceInCents()).isEqualTo(6000L);
-        then(entity.getBody().text()).isEqualTo("itea \nChair \"Elsa\" 30,00\u00A0€ * 2\nTotal 60,00\u00A0€");
+        then(entity.getBody().text()).isEqualTo("itea \nChair \"Olaf\" 30,00\u00A0€ * 2\nTotal 60,00\u00A0€");
     }
 
     @Test
