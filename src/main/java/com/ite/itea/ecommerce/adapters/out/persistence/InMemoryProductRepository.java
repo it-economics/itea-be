@@ -84,6 +84,14 @@ public class InMemoryProductRepository implements ProductRepository {
                                     EuroPrice.ofCents(2000),
                                     EuroPrice.ofCents(3000)
                             )
+                    ),
+                    entry(
+                            ProductName.WARDROBE_INGEBORG.name(),
+                            new Wardrobe(
+                                    new ProductId(ProductName.WARDROBE_INGEBORG.name()),
+                                    ProductName.WARDROBE_INGEBORG.displayName(),
+                                    EuroPrice.ofEurosAndCents(249, 99)
+                            )
                     )
             );
 

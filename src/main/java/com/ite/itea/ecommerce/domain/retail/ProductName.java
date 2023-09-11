@@ -8,7 +8,8 @@ public enum ProductName {
     CHAIR_LARS("Chair \"Lars\""),
     CHAIR_KNUT("Chair \"Knut\""),
     TABLE_LOTTA("Table \"Lotta\""),
-    TABLE_LOLA("Table \"Lola\"");
+    TABLE_LOLA("Table \"Lola\""),
+    WARDROBE_INGEBORG("Wardrobe \"Ingeborg\"");
 
     private final String displayName;
 
