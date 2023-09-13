@@ -127,6 +127,18 @@ class CheckoutControllerTest {
     }
 
     @Test
+    void shouldReturnCorrectReceiptWhenSendingRequestWithAClosetRagnarokToTheController() {
+        var order = new ItemRequest("10", 4);
+        var orderRequest = new OrderRequest(List.of(order));
+
+        var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
+
+        then(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        then(entity.getBody().priceInCents()).isEqualTo(131996);
+        then(entity.getBody().text()).isEqualTo("itea \nCloset \"Ragnarök\" 329,99\u00A0€ * 4\nTotal 1.319,96\u00A0€");
+    }
+
+    @Test
     void shouldReturn200WhenSendingRequestToManagementEndpoint() {
         var entity = this.testRestTemplate.getForEntity("http://localhost:" + this.actuatorPort + "/actuator", Map.class);
 

@@ -60,6 +60,11 @@ public class InMemoryProductRepository implements ProductRepository {
                     new ProductId("9"),
                     "Wardrobe \"Ingeborg\"",
                     EuroPrice.ofEurosAndCents(249, 99)
+            ),
+            new Closet(
+                    new ProductId("10"),
+                    "Closet \"Ragnarök\"",
+                    EuroPrice.ofEurosAndCents(329, 99)
             )
     );
 
