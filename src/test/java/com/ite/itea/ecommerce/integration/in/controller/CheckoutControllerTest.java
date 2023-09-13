@@ -31,15 +31,15 @@ class CheckoutControllerTest {
     private TestRestTemplate testRestTemplate;
 
     @Test
-    void shouldReturnCorrectReceiptWhenSendingRequestWithAPictureNorwayToTheController() {
-        var orderPictureNorway = new ItemRequest("2", 2);
-        var orderRequest = new OrderRequest(List.of(orderPictureNorway));
+    void shouldReturnCorrectReceiptWhenSendingRequestWithAPictureOsloToTheController() {
+        var orderPictureOslo = new ItemRequest("2", 2);
+        var orderRequest = new OrderRequest(List.of(orderPictureOslo));
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
 
         then(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
         then(entity.getBody().priceInCents()).isEqualTo(1998L);
-        then(entity.getBody().text()).isEqualTo("itea \nPicture \"Norway\" 9,99\u00A0€ * 2\nTotal 19,98\u00A0€");
+        then(entity.getBody().text()).isEqualTo("itea \nPicture \"Oslo\" 9,99\u00A0€ * 2\nTotal 19,98\u00A0€");
     }
 
     @Test

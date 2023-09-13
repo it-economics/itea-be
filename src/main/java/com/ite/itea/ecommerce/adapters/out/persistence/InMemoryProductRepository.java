@@ -15,7 +15,7 @@ public class InMemoryProductRepository implements ProductRepository {
             ),
             new Picture(
                     new ProductId("2"),
-                    "Picture \"Norway\"",
+                    "Picture \"Oslo\"",
                     EuroPrice.ofCents(999)
             ),
             new Picture(
