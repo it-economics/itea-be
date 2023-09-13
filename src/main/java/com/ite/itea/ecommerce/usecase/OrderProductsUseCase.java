@@ -24,7 +24,7 @@ public class OrderProductsUseCase {
         final List<Order.OrderItem> orderItems = new ArrayList<>();
 
         for (var itemRequest : orderRequest.itemRequests()) {
-            var productId = new ProductId(itemRequest.name().name());
+            var productId = new ProductId(itemRequest.productId());
             var product = productRepository.byId(productId);
             product.ifPresent(value ->
                     orderItems.add(new Order.OrderItem(value, itemRequest.amount())));
