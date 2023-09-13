@@ -24,7 +24,7 @@ class ReceiptPresenterTest {
                 Arguments.of(
                         Order.of(
                                 new Order.OrderItem(
-                                        new Picture(ProductId.random(), ProductName.PICTURE_NORWAY.displayName(), EuroPrice.ofCents(999)),
+                                        new Picture(ProductId.random(), "Picture \"Norway\"", EuroPrice.ofCents(999)),
                                         2
                                 )
                         ),
@@ -34,7 +34,7 @@ class ReceiptPresenterTest {
                 Arguments.of(
                         Order.of(
                                 new Order.OrderItem(
-                                        new Chair(ProductId.random(), ProductName.CHAIR_OLAF.displayName(), EuroPrice.ofCents(500), EuroPrice.ofCents(500), EuroPrice.ofCents(500)),
+                                        new Chair(ProductId.random(), "Chair \"Olaf\"", EuroPrice.ofCents(500), EuroPrice.ofCents(500), EuroPrice.ofCents(500)),
                                         2
                                 )
                         ),
@@ -44,7 +44,7 @@ class ReceiptPresenterTest {
                 Arguments.of(
                         Order.of(
                                 new Order.OrderItem(
-                                        new Table(ProductId.random(), ProductName.TABLE_LOLA.displayName(), EuroPrice.ofCents(2000), EuroPrice.ofCents(5000)),
+                                        new Table(ProductId.random(), "Table \"Lola\"", EuroPrice.ofCents(2000), EuroPrice.ofCents(5000)),
                                         2
                                 )
                         ),
@@ -54,7 +54,7 @@ class ReceiptPresenterTest {
                 Arguments.of(
                         Order.of(
                                 new Order.OrderItem(
-                                        new Wardrobe(ProductId.random(), ProductName.WARDROBE_INGEBORG.displayName(), EuroPrice.ofEurosAndCents(249, 99)),
+                                        new Wardrobe(ProductId.random(), "Wardrobe \"Ingeborg\"", EuroPrice.ofEurosAndCents(249, 99)),
                                         2
                                 )
                         ),
