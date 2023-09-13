@@ -60,8 +60,17 @@ class ReceiptPresenterTest {
                         ),
                         EuroPrice.ofEurosAndCents(499, 98),
                         "itea \nWardrobe \"Ingeborg\" 249,99\u00A0€ * 2\nTotal 499,98\u00A0€"
+                ),
+                Arguments.of(
+                        Order.of(
+                                new Order.OrderItem(
+                                        new Closet(ProductId.random(), "A closet", EuroPrice.ofEurosAndCents(127, 69)),
+                                        3
+                                )
+                        ),
+                        EuroPrice.ofEurosAndCents(383, 07),
+                        "itea \nA closet 127,69\u00A0€ * 3\nTotal 383,07\u00A0€"
                 )
-
         );
     }
 
