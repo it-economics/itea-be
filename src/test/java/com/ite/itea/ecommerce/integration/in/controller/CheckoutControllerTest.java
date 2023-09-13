@@ -32,8 +32,7 @@ class CheckoutControllerTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenSendingRequestWithAPictureOsloToTheController() {
-        var orderPictureOslo = new ItemRequest("2", 2);
-        var orderRequest = new OrderRequest(List.of(orderPictureOslo));
+        var orderRequest = new OrderRequest(List.of(new ItemRequest("2", 2)));
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
 
@@ -44,8 +43,7 @@ class CheckoutControllerTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenSendingRequestWithAPictureSwedenToTheController() {
-        var orderPictureSweden = new ItemRequest("3", 2);
-        var orderRequest = new OrderRequest(List.of(orderPictureSweden));
+        var orderRequest = new OrderRequest(List.of(new ItemRequest("3", 2)));
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
 
@@ -56,8 +54,7 @@ class CheckoutControllerTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenSendingRequestWithAPictureFinlandToTheController() {
-        var orderPictureFinland = new ItemRequest("1", 2);
-        var orderRequest = new OrderRequest(List.of(orderPictureFinland));
+        var orderRequest = new OrderRequest(List.of(new ItemRequest("1", 2)));
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
 
@@ -68,8 +65,7 @@ class CheckoutControllerTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenSendingRequestWithAChairOlafToTheController() {
-        var orderChairOlaf = new ItemRequest("6", 2);
-        var orderRequest = new OrderRequest(List.of(orderChairOlaf));
+        var orderRequest = new OrderRequest(List.of(new ItemRequest("6", 2)));
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
 
@@ -80,8 +76,7 @@ class CheckoutControllerTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenSendingRequestWithAChairKnutToTheController() {
-        var orderChairKnut = new ItemRequest("7", 2);
-        var orderRequest = new OrderRequest(List.of(orderChairKnut));
+        var orderRequest = new OrderRequest(List.of(new ItemRequest("7", 2)));
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
 
@@ -92,8 +87,7 @@ class CheckoutControllerTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenSendingRequestWithAChairLarsToTheController() {
-        var orderChairLars = new ItemRequest("8", 2);
-        var orderRequest = new OrderRequest(List.of(orderChairLars));
+        var orderRequest = new OrderRequest(List.of(new ItemRequest("8", 2)));
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
 
@@ -104,8 +98,7 @@ class CheckoutControllerTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenSendingRequestWithATableLottaToTheController() {
-        var orderTableLotta = new ItemRequest("5", 2);
-        var orderRequest = new OrderRequest(List.of(orderTableLotta));
+        var orderRequest = new OrderRequest(List.of(new ItemRequest("5", 2)));
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
 
@@ -116,8 +109,7 @@ class CheckoutControllerTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenSendingRequestWithATableLolaToTheController() {
-        var orderTableLola = new ItemRequest("4", 2);
-        var orderRequest = new OrderRequest(List.of(orderTableLola));
+        var orderRequest = new OrderRequest(List.of(new ItemRequest("4", 2)));
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
 
@@ -128,8 +120,7 @@ class CheckoutControllerTest {
 
     @Test
     void shouldReturnCorrectReceiptWhenSendingRequestWithAClosetRagnarokToTheController() {
-        var order = new ItemRequest("10", 4);
-        var orderRequest = new OrderRequest(List.of(order));
+        var orderRequest = new OrderRequest(List.of(new ItemRequest("10", 4)));
 
         var entity = this.testRestTemplate.postForEntity("http://localhost:" + this.port + "/checkout", orderRequest, ReceiptResponse.class);
 
