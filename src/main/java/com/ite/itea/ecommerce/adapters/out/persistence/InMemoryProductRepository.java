@@ -10,55 +10,55 @@ public class InMemoryProductRepository implements ProductRepository {
     private final List<Product> entries = List.of(
             new Picture(
                     new ProductId("1"),
-                    ProductName.PICTURE_FINLAND.displayName(),
+                    "Picture \"Finland\"",
                     EuroPrice.ofCents(1499)
             ),
             new Picture(
                     new ProductId("2"),
-                    ProductName.PICTURE_NORWAY.displayName(),
+                    "Picture \"Norway\"",
                     EuroPrice.ofCents(999)
             ),
             new Picture(
                     new ProductId("3"),
-                    ProductName.PICTURE_SWEDEN.displayName(),
+                    "Picture \"Sweden\"",
                     EuroPrice.ofCents(1299)
             ),
             new Table(
                     new ProductId("4"),
-                    ProductName.TABLE_LOLA.displayName(),
+                    "Table \"Lola\"",
                     EuroPrice.ofCents(3000),
                     EuroPrice.ofCents(1000)
             ),
             new Table(
                     new ProductId("5"),
-                    ProductName.TABLE_LOTTA.displayName(),
+                    "Table \"Lotta\"",
                     EuroPrice.ofCents(1000),
                     EuroPrice.ofCents(1000)
             ),
             new Chair(
                     new ProductId("6"),
-                    ProductName.CHAIR_OLAF.displayName(),
+                    "Chair \"Olaf\"",
                     EuroPrice.ofCents(500),
                     EuroPrice.ofCents(500),
                     EuroPrice.ofCents(500)
             ),
             new Chair(
                     new ProductId("7"),
-                    ProductName.CHAIR_KNUT.displayName(),
+                    "Chair \"Knut\"",
                     EuroPrice.ofCents(400),
                     EuroPrice.ofCents(1000),
                     EuroPrice.ofCents(1500)
             ),
             new Chair(
                     new ProductId("8"),
-                    ProductName.CHAIR_LARS.displayName(),
+                    "Chair \"Lars\"",
                     EuroPrice.ofCents(200),
                     EuroPrice.ofCents(2000),
                     EuroPrice.ofCents(3000)
             ),
             new Wardrobe(
                     new ProductId("9"),
-                    ProductName.WARDROBE_INGEBORG.displayName(),
+                    "Wardrobe \"Ingeborg\"",
                     EuroPrice.ofEurosAndCents(249, 99)
             )
     );
