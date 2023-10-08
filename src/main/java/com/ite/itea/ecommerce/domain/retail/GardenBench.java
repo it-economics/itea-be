@@ -1,5 +1,7 @@
 package com.ite.itea.ecommerce.domain.retail;
 
+import com.ite.itea.ecommerce.domain.core.EuroPrice;
+
 public class GardenBench extends Product {
 
     private static final EuroPrice DEFAULT_ELEMENT_PRICE = EuroPrice.ofEuros(80);

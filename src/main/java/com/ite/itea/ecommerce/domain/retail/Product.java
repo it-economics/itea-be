@@ -1,5 +1,7 @@
 package com.ite.itea.ecommerce.domain.retail;
 
+import com.ite.itea.ecommerce.domain.core.EuroPrice;
+
 public abstract class Product {
 
     private final ProductId id;

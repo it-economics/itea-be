@@ -1,4 +1,4 @@
-package com.ite.itea.ecommerce.domain.retail;
+package com.ite.itea.ecommerce.domain.core;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;

@@ -1,6 +1,7 @@
 package com.ite.itea.ecommerce.adapters.out;
 
 import com.ite.itea.ecommerce.adapters.out.presenter.ReceiptPresenter;
+import com.ite.itea.ecommerce.domain.core.EuroPrice;
 import com.ite.itea.ecommerce.domain.retail.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

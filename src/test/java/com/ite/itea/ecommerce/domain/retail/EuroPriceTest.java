@@ -1,5 +1,6 @@
 package com.ite.itea.ecommerce.domain.retail;
 
+import com.ite.itea.ecommerce.domain.core.EuroPrice;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;

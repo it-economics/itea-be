@@ -1,6 +1,6 @@
 package com.ite.itea.ecommerce.domain.invoicing;
 
-import com.ite.itea.ecommerce.domain.retail.EuroPrice;
+import com.ite.itea.ecommerce.domain.core.EuroPrice;
 
 class InvoiceService {
 
