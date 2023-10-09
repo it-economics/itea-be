@@ -11,6 +11,10 @@ class InvoiceService {
      * Calculate the total gross price, i.e., including VAT.
      */
     public EuroPrice calculateGrossPrice(Invoice invoice) {
+        return grossPrice(invoice);
+    }
+
+    private static EuroPrice grossPrice(Invoice invoice) {
         var sum = EuroPrice.zero();
         for (var lineItem : invoice.getLineItems()) {
             sum = sum.plus(lineItem.unitPriceGross().times(lineItem.quantity().value));
