@@ -23,11 +23,8 @@ public class InvoicePriceTest {
         );
         invoice.addLineItem(eightDiningChairs);
 
-        var invoiceService = new InvoiceService();
-        var grossPrice = invoiceService.calculateGrossPrice(invoice);
-
         // The total gross price, with VAT included by default.
-        assertThat(grossPrice).isEqualTo(EuroPrice.ofEurosAndCents(659, 90));
+        assertThat(invoice.grossPrice()).isEqualTo(EuroPrice.ofEurosAndCents(659, 90));
     }
 
     @Test
@@ -46,10 +43,7 @@ public class InvoicePriceTest {
         );
         invoice.addLineItem(eightDiningChairs);
 
-        var invoiceService = new InvoiceService();
-        var netPrice = invoiceService.calculateNetPrice(invoice);
-
         // The total price excluding 19 % VAT, rounded to the nearest cent.
-        assertThat(netPrice).isEqualTo(EuroPrice.ofEurosAndCents(554, 54));
+        assertThat(invoice.netPrice()).isEqualTo(EuroPrice.ofEurosAndCents(554, 54));
     }
 }
