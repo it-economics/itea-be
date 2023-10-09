@@ -1,6 +1,7 @@
 package com.ite.itea.ecommerce.domain.invoicing;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 class Invoice {
@@ -16,7 +17,11 @@ class Invoice {
         return vatPercentage;
     }
 
-    public List<LineItem> getLineItems() {
-        return lineItems;
+    public Iterable<LineItem> getLineItems() {
+        return Collections.unmodifiableList(lineItems);
+    }
+
+    public void addLineItem(LineItem lineItem) {
+        lineItems.add(lineItem);
     }
 }
