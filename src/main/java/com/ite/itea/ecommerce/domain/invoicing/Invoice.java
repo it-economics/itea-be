@@ -1,5 +1,7 @@
 package com.ite.itea.ecommerce.domain.invoicing;
 
+import com.ite.itea.ecommerce.domain.core.EuroPrice;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,7 +15,15 @@ class Invoice {
         this.vatPercentage = vatPercentage;
     }
 
-    public VatPercentage getVatPercentage() {
+    EuroPrice grossPrice() {
+        var sum = EuroPrice.zero();
+        for (var lineItem : lineItems) {
+            sum = sum.plus(lineItem.unitPriceGross().times(lineItem.quantity().value));
+        }
+        return sum;
+    }
+
+    VatPercentage getVatPercentage() {
         return vatPercentage;
     }
 
