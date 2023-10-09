@@ -2,6 +2,8 @@ package com.ite.itea.ecommerce.domain.invoicing;
 
 import com.ite.itea.ecommerce.domain.core.EuroPrice;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +16,10 @@ class Invoice {
         this.vatPercentage = vatPercentage;
     }
 
+    void addLineItem(LineItem lineItem) {
+        lineItems.add(lineItem);
+    }
+
     EuroPrice grossPrice() {
         var sum = EuroPrice.zero();
         for (var lineItem : lineItems) {
@@ -22,11 +28,16 @@ class Invoice {
         return sum;
     }
 
-    VatPercentage getVatPercentage() {
-        return vatPercentage;
-    }
+    EuroPrice netPrice() {
+        final var grossPriceInCents = grossPrice().asCents();
 
-    public void addLineItem(LineItem lineItem) {
-        lineItems.add(lineItem);
+        final var grossPercent = 100 + vatPercentage.value;
+        final var vatFactor = BigDecimal.valueOf(grossPercent, 2)
+                .divide(BigDecimal.valueOf(100, 2), RoundingMode.UNNECESSARY);
+        final var netPriceInCents = BigDecimal.valueOf(grossPriceInCents, 2)
+                .divide(vatFactor, RoundingMode.HALF_EVEN)
+                .multiply(BigDecimal.valueOf(100));
+
+        return EuroPrice.ofCents(netPriceInCents.intValue());
     }
 }
