@@ -18,6 +18,10 @@ class InvoiceService {
      * Calculate the total net price, i.e., before taxes.
      */
     public EuroPrice calculateNetPrice(Invoice invoice) {
+        return netPrice(invoice);
+    }
+
+    private EuroPrice netPrice(Invoice invoice) {
         final var grossPriceInCents = calculateGrossPrice(invoice).asCents();
 
         final var grossPercent = 100 + invoice.getVatPercentage().value;
