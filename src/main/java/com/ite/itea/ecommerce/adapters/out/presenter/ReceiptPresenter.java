@@ -1,7 +1,7 @@
 package com.ite.itea.ecommerce.adapters.out.presenter;
 
 import com.ite.itea.ecommerce.domain.retail.Order;
-import com.ite.itea.ecommerce.domain.retail.EuroPrice;
+import com.ite.itea.ecommerce.domain.core.EuroPrice;
 import com.ite.itea.ecommerce.usecase.dto.Receipt;
 
 import java.text.MessageFormat;
