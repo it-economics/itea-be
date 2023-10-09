@@ -5,7 +5,16 @@ import java.util.List;
 
 class Invoice {
 
-    private List<LineItem> lineItems = new ArrayList<>();
+    private final VatPercentage vatPercentage;
+    private final List<LineItem> lineItems = new ArrayList<>();
+
+    Invoice(VatPercentage vatPercentage) {
+        this.vatPercentage = vatPercentage;
+    }
+
+    public VatPercentage getVatPercentage() {
+        return vatPercentage;
+    }
 
     public List<LineItem> getLineItems() {
         return lineItems;
