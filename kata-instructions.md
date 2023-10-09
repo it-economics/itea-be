@@ -1,4 +1,4 @@
-# ITEA 07 - Green Grade: Open-Closed Principle (OCP)
+# ITEA 08 - Green Grade: Tell, Don't Ask and Law of Demeter
 
 ### Introduction
 
@@ -8,67 +8,43 @@ them in their digital transformation.
 
 ### Rules
 
-* Try to apply TDD (test-driven development) as diligently as possible. But *pragmatism > dogma* -- cover business rules, not code lines.
+* Try to apply TDD (test-driven development) as diligently as possible. But *pragmatism > dogma* -- cover business rules,
+  not code lines.
 * Have fun and ask lots of questions!
 
 ## Task 1 - Analysis and Discussion
 
-While we don't want to predict which future changes *might* happen and prepare for every possibility in advance – most
-of them will never happen after all – we can still sometimes be pretty sure about *certain kinds of changes*.
-We call these *expected variation*, and we want to make these changes as simple  and efficient as possible, with little
-risk of breaking existing code and without having to make changes in many parts of the code base.
+Let's have a look into the `invoicing` package.
 
-Let's open the enum type `ProductName`. Looking at where and how this enum type is used:
+### a) **Tell, Don't Ask**<br/>
+Where do objects access other objects' internals to do something with it that the object owning the information could
+easily do itself? Why can this be problematic? (This is sometimes described as walking a dog by commanding its legs to
+move instead of commanding the dog.)
 
-- Which kind of *expected variation* will cause changes to propagate through the code base?
-- Where are different classes (possibly including tests) coupled together via this enum type?
-- Which kind of change that should not affect the tests would break certain unit tests?<br>
-  (Note: Regularly breaking unit tests via changes that should not affect them is a typical symptom of an OCP violation.)
+### b) **Law of Demeter**<br/>
+Where can we reduce coupling to implementation details by avoiding access to "internals of internals"? Which potential
+problems do you see?
+
+The Law of Demeter is sometimes simplified as "only one dot", e.g., `a.b();` instead of `a.b().c()`.
+Why is this an oversimplification? In which cases is it perfectly fine to chain method calls together? Does saving each
+return value into a local variable solve the problem that the Law of Demeter is concerned with?
 
 <details>
 <summary>Hint</summary>
-- To add a new product (almost certainly going to happen) we want to ideally only do that, add the product,
-  without also having to change other existing files and potentially breaking existing behavior. Also, the product
-  name should just be data.<br>
-- To change (e.g., rename) an existing product, we want to just change the respective product data, and not also
-  fix tests that should not be coupled to concrete product data.
+It is about "accessing internals". Can you find examples where a chain of method calls stays on the same abstraction level?
 </details>
 
-## Task 2 - Experiencing the Pain
+<details>
+<summary>Solution</summary>
+Examples where a chain of method calls does not violate the Law of Demeter include fluent interfaces like streams (in Java),
+LINQ (in C#), builder pattern, and others. These interfaces often provide a domain-specific language without giving access
+to implementation details.
+</details>
 
-### a) Add a new product, wardrobe "Ingeborg" for 249,99&nbsp;€.
+## Task 2 - Improving the Design
 
-- How easy was that?
-- How obvious was it what needs to change?
-- How far did the changes propagate?
-- Did you break anything in the process?
+Let's refactor towards a better design. We try to hide the details while emphasizing the higher-level concepts, i.e.,
+we try to find good abstractions in the language of the domain.
 
-### b) Rename chair "Elsa" to "Olaf".
-
-- How easy was that?
-- How obvious was it what needs to change?
-- How far did the changes propagate?
-- Did you break anything in the process?
-
-## Task 3 - Refactoring
-
-After thinking about the changes that will definitely be happening regularly during the application's lifetime,
-can we find a way to limit these expected changes to certain parts of the code base? We call this a *strategic closure*,
-which acts like a "barrier" for how far changes can propagate. Who likes to make changes throughout many files,
-possibly breaking stuff unknowingly, each time we make a small change?
-
-## Task 4 - Expected Variation
-
-### a) Add a new product, closet "Ragnarök" for 329,99&nbsp;€.
-
-- How easy was that?
-- How obvious was it what needs to change?
-- How far did the changes propagate?
-- Did you break anything in the process?
-
-### b) Rename picture "Norway" to "Oslo".
-
-- How easy was that?
-- How obvious was it what needs to change?
-- How far did the changes propagate?
-- Did you break anything in the process?
+*Remember that these changes should not be done for personal taste, but to keep the code flexible and easy to understand.
+These goals stand above specific principles, which are always context dependent.*
