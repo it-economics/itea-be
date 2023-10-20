@@ -24,7 +24,7 @@ public class InvoiceServiceTest {
         invoice.addLineItems(eightDiningChairs);
 
         var invoiceService = new InvoiceService();
-        var grossPrice = invoiceService.calculateGrossPrice(invoice);
+        var grossPrice = invoice.calculateGrossPrice();
 
         // The total gross price, with VAT included by default.
         assertThat(grossPrice).isEqualTo(EuroPrice.ofEurosAndCents(659, 90));
