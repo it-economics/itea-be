@@ -15,13 +15,13 @@ public class InvoiceServiceTest {
                 EuroPrice.ofEurosAndCents(129, 99),
                 Quantity.of(2)
         );
-        invoice.getLineItems().add(twoDiningTables);
+        invoice.addLineItems(twoDiningTables);
         var eightDiningChairs = new LineItem(
                 "Some dining chair or whatever",
                 EuroPrice.ofEurosAndCents(49, 99),
                 Quantity.of(8)
         );
-        invoice.getLineItems().add(eightDiningChairs);
+        invoice.addLineItems(eightDiningChairs);
 
         var invoiceService = new InvoiceService();
         var grossPrice = invoiceService.calculateGrossPrice(invoice);
@@ -38,13 +38,13 @@ public class InvoiceServiceTest {
                 EuroPrice.ofEurosAndCents(129, 99),
                 Quantity.of(2)
         );
-        invoice.getLineItems().add(twoDiningTables);
+        invoice.addLineItems(twoDiningTables);
         var eightDiningChairs = new LineItem(
                 "Some dining chair or whatever",
                 EuroPrice.ofEurosAndCents(49, 99),
                 Quantity.of(8)
         );
-        invoice.getLineItems().add(eightDiningChairs);
+        invoice.addLineItems(eightDiningChairs);
 
         var invoiceService = new InvoiceService();
         var netPrice = invoiceService.calculateNetPrice(invoice);
