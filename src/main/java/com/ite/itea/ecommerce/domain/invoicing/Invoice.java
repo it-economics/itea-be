@@ -19,4 +19,8 @@ class Invoice {
     public List<LineItem> getLineItems() {
         return lineItems;
     }
+
+    public void addLineItems(final LineItem lineItem) {
+        lineItems.add(lineItem);
+    }
 }
