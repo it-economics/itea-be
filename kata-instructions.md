@@ -56,12 +56,11 @@ The current bank account service uses an in-memory database for simplicity. The 
 
 ### Provided Code Base
 
-- The existing bank account service code with in-memory database implementation.
-- Tests covering the basic functionalities of the service.
+- The existing InMemoryProductRepository code with in-memory database implementation.
 
 ### Your Task
 
-- Refactor the service to allow easy replacement of the data storage mechanism.
+- Add additional repository to allow easy replacement of the data storage mechanism.
 - Ensure the core application logic remains unchanged while swapping storage solutions.
 - Write tests to demonstrate that the refactoring doesn't affect the existing functionalities.
 
