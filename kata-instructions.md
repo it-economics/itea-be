@@ -1,69 +1,109 @@
-# ITEA 09 - Blue Grade: Hexagonal Architecture with Spring Boot
+# ITEA 10 - Blue Grade: YAGNI Principle in Hexagonal Architecture
 
 ### Introduction
 
-In this Coding Dojo session, we'll be diving into hexagonal architecture within a Spring Boot environment. This hands-on challenge will help us internalize the principles of clean code's blue belt, specifically focusing on the separation of design and implementation and ensuring the implementation reflects the design.
+The ***itea furniture store*** is a new startup that primarily sells furniture
+and home decoration in their stores. You have been hired as a consultant to
+help them in their digital transformation.
 
-### Hexagonal Architecture in Spring Boot
+### Understanding YAGNI
 
-Hexagonal architecture encourages us to separate the core logic of our application (the business rules) from the way it interacts with the outside world (databases, web interfaces, etc.). In a Spring Boot application, this translates to defining clear 'ports' for our core domain logic to interact with external 'adapters', which are the implementation details. The framework's dependency injection and aspect-oriented programming capabilities align well with hexagonal architecture, allowing us to maintain this clean separation.
+This time we're exploring the YAGNI (You Ain't Gonna Need It) principle within
+the context of hexagonal architecture. YAGNI is a critical aspect of Agile and
+Clean Code practices, emphasizing the importance of not adding functionality
+until it's deemed necessary.
+
+YAGNI is about avoiding over-engineering and focusing on what is necessary at
+the moment. It encourages simplicity and minimalism in code design, ensuring
+that we only spend time on things that bring immediate value (but without
+compromizing on quality).
+
+### Hexagonal Architecture and YAGNI
+
+In hexagonal architecture, the separation of core logic from external components
+through ports and adapters enables us to apply YAGNI in choosing our data
+storage solutions. We can start with simple solutions like JSON files or
+in-memory databases and evolve to more complex databases only if needed.
 
 ### Rules
 
-- Apply the principles of hexagonal architecture within the context of Spring Boot.
-- Adhere to clean coding practices and blue belt principles.
-- Focus on creating clear, maintainable code structures.
+- Focus on implementing the YAGNI principle in the context of our ITEA
+  application.
+- Remember to keep your implementations simple and only add what is necessary.
+- You're encouraged to use the hexagonal architecture to your advantage when
+  applying YAGNI.
 
-## Task 1 - Discussing Hexagonal Architecture Principles
+## Task 1 - Discussing YAGNI in the Context of Hexagonal Architecture
 
-Before jumping into code, let's align our understanding of how hexagonal architecture manifests in a Spring Boot application.
+Before diving into the coding challenge, let's discuss how hexagonal
+architecture can help with the effective application of YAGNI.
 
-### a) **Design and Implementation don’t overlap**<br/>
+### a) **Simplicity in Design**<br/>
 
-Discuss how the separation of concerns is achieved in hexagonal architecture and the benefits of keeping design and implementation separate in a Spring Boot application.
+**Question:** How does hexagonal architecture help maintain simplicity in the
+design of our e-commerce application? Discuss the benefits of starting with
+simpler data storage solutions.
 
-### Answer <br/>
+<details>
+<summary>Solution</summary>
 
-In the context of hexagonal architecture, the principle that "Design and Implementation don’t overlap" is about maintaining a clear separation between the high-level policy (the design) and the low-level details (the implementation).
+- Hexagonal architecture aids in maintaining simplicity by segregating the core
+  business logic from external interfaces like data storage, using ports and
+  adapters.
+- This separation ensures that the core logic is not coupled with
+  storage-specific details, keeping it simple and focused.
+- Starting with simpler storage solutions like in-memory databases reduces
+  initial complexity and facilitates easier testing and flexibility for future
+  changes.
+</details>
 
-Design in this case refers to the core business logic or the application's domain model. It's the high-level blueprint that captures the business rules, use cases, and the data model. In hexagonal architecture, this design is encapsulated within the application, isolated from external concerns.
+### b) **Evolving the System**<br/>
 
-Implementation, on the other hand, involves the concrete details of how the design interfaces with the outside world, such as databases, user interfaces, and third-party services. This is achieved through 'ports', which are interfaces that define what services the application needs or offers, and 'adapters', which implement these interfaces to interact with the outside world.
+**Question:** Explore how the system can evolve from using simple data storage
+to more complex ones using the YAGNI principle. Discuss the ease of making such
+changes in a hexagonal architecture setup.
 
-By keeping design and implementation separate, the application’s core logic stays protected from changes in external services and remains easier to test and maintain. This separation aligns with the blue belt principle by ensuring that the design is not muddled by implementation details, leading to cleaner, more modular code.
+<details>
+<summary>Solution</summary>
 
-### b) **Implementation reflects Design**<br/>
+- When applying YAGNI, the system evolves to include complex components only as
+  needed, avoiding unnecessary initial work.
+- Hexagonal architecture allows for smooth transitions in data storage without
+  impacting the core logic, by simply replacing or extending adapters.
+- For instance, upgrading from an in-memory database to a persistent storage
+  solution can be done by introducing a new adapter, with no changes required in
+  the core application.
+</details>
 
-Explore how the implementation in a Spring Boot application can and should reflect the underlying design, ensuring that the codebase is intuitive and maintainable.
 
-### Answer <br/>
+## Task 2 - Coding Challenge: Evolving Data Storage
 
-The principle "Implementation reflects Design" speaks to the idea that the actual code written (implementation) should closely follow the structure and intent of the design without any unnecessary deviations.
+The current `ProductRepository` implementation uses an in-memory "database" for
+simplicity, with hardcoded product data -- maybe good enough for a PoC. The
+challenge is to make it easier for ITEA employees to add new products, without
+requiring them to ask a developer to make changes to the code.
 
-In hexagonal architecture, the implementation is a reflection of the design when the code structure visibly embodies the business rules and use cases laid out in the design. Each adapter at the boundary of the application should serve a clear purpose that corresponds to a port, which in turn represents a design decision. For example, if the design dictates that the application should be able to send notifications, then there should be a corresponding port for sending messages and an adapter that could be for email, SMS, or another messaging service.
+We currently have a relatively small number of products, and they are only read,
+never written to (except occasionally when an employee adds a new product).
+Do we need a full-blown relational database with ORM for that, especially at
+this stage of the development? Remember to apply the YAGNI principle.
 
-This direct correspondence ensures that the design's intent is preserved in the implementation. It makes the code more intuitive and aligned with business concepts, which is the essence of the blue belt principle. It means that anyone looking at the implementation can understand the underlying design, making it easier to extend, refactor, and maintain.
+### Provided Code Base
 
-Both principles are about ensuring that the code remains clean, understandable, and maintainable, which are central themes in the Clean Code Developer movement that the blue belt represents. By adhering to these principles, developers create systems that are not only functional but also resilient to change and technical debt.
-
-## Task 2 - Coding Challenge: Spring Boot Inventory Management System
-
-We will be using a simplified version of the project from Jivimberg's blog post as our starting point. The project is a basic inventory management system implemented in Spring Boot, utilizing hexagonal architecture.
-
-### Provided Starter Project
-
-- Project structure and class definitions, following the blog's example.
-- Domain entities and their implementations.
+- The existing InMemoryProductRepository code with in-memory database implementation.
 
 ### Your Task
 
-- Define the necessary ports that your application's core logic requires to interact with external services (e.g., persistence, web interfaces).
-- Implement the adapters that will interact with the Spring Boot framework, fulfilling the contracts defined by your ports.
-- Ensure that the adapters are correctly wired into the application using Spring Boot's dependency injection.
-- Discuss pros and cons of current implementation of BankAccount class. If you see any advantage of changing the structure, then you are encouraged to refactor it.
+- Add another repository implementation with a different data storage mechanism
+  that suits the current needs.
+- Ensure the core application logic remains unchanged while swapping storage solutions.
+- Consider writing tests to demonstrate that the replacement of the repository
+  implementation doesn't break the functionality. What kind of automated tests is
+  suitable for that?
 
-### Focus Points
+### Discuss the Result
 
-- Maintain a clear separation between the application's core logic and the adapters.
-- Use Spring Boot's features to keep your adapters decoupled from the core logic.
-- Keep the business rules within the application's domain services, free from external concerns.
+- How do these changes align with the YAGNI principle?
+- Which potential future extensions can be made, keeping YAGNI in mind?
+- Propose a scenario where transitioning to a more complex database would be
+  necessary. Discuss how the hexagonal architecture would facilitate this transition.
