@@ -41,7 +41,7 @@ architecture can help with the effective application of YAGNI.
 ### a) **Simplicity in Design**<br/>
 
 **Question:** How does hexagonal architecture help maintain simplicity in the
-design of our bank account service? Discuss the benefits of starting with
+design of our e-commerce application? Discuss the benefits of starting with
 simpler data storage solutions.
 
 <details>
@@ -55,35 +55,38 @@ simpler data storage solutions.
 - Starting with simpler storage solutions like in-memory databases reduces
   initial complexity and facilitates easier testing and flexibility for future
   changes.
-
 </details>
 
 ### b) **Evolving the System**<br/>
 
 **Question:** Explore how the system can evolve from using simple data storage
-to more complex ones under the YAGNI principle. Discuss the ease of making such
+to more complex ones using the YAGNI principle. Discuss the ease of making such
 changes in a hexagonal architecture setup.
 
 <details>
 <summary>Solution</summary>
 
-- Under YAGNI, the system evolves to include complex components only as needed,
-  avoiding unnecessary initial work.
+- When applying YAGNI, the system evolves to include complex components only as
+  needed, avoiding unnecessary initial work.
 - Hexagonal architecture allows for smooth transitions in data storage without
   impacting the core logic, by simply replacing or extending adapters.
 - For instance, upgrading from an in-memory database to a persistent storage
   solution can be done by introducing a new adapter, with no changes required in
   the core application.
-
 </details>
-
 
 
 ## Task 2 - Coding Challenge: Evolving Data Storage
 
-The current bank account service uses an in-memory database for simplicity. The
-challenge is to refactor the code to allow easy swapping of the data storage
-solution, adhering to the YAGNI principle.
+The current `ProductRepository` implementation uses an in-memory "database" for
+simplicity, with hardcoded product data -- maybe good enough for a PoC. The
+challenge is to make it easier for ITEA employees to add new products, without
+requiring them to ask a developer to make changes to the code.
+
+We currently have a relatively small number of products, and they are only read,
+never written to (except occasionally when an employee adds a new product).
+Do we need a full-blown relational database with ORM for that, especially at
+this stage of the development? Remember to apply the YAGNI principle.
 
 ### Provided Code Base
 
@@ -91,17 +94,16 @@ solution, adhering to the YAGNI principle.
 
 ### Your Task
 
-- Add additional repository to allow easy replacement of the data storage mechanism.
+- Add another repository implementation with a different data storage mechanism
+  that suits the current needs.
 - Ensure the core application logic remains unchanged while swapping storage solutions.
-- Write tests to demonstrate that the refactoring doesn't affect the existing functionalities.
+- Consider writing tests to demonstrate that the replacement of the repository
+  implementation doesn't break the functionality. What kind of automated tests is
+  suitable for that?
 
-### Focus Points
+### Discuss the Result
 
-- Keep the refactoring minimal and straightforward.
-- Demonstrate how your changes align with the YAGNI principle.
-- Discuss the potential future extensions that can be made, keeping YAGNI in mind.
-
-## Optional Task
-
-- Propose a scenario where transitioning to a more complex database would be necessary.
-- Discuss how the hexagonal architecture would facilitate this transition.
+- How do these changes align with the YAGNI principle?
+- Which potential future extensions can be made, keeping YAGNI in mind?
+- Propose a scenario where transitioning to a more complex database would be
+  necessary. Discuss how the hexagonal architecture would facilitate this transition.
