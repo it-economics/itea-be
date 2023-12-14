@@ -2,13 +2,16 @@
 
 ### Introduction
 
-This week, we're exploring the YAGNI (You Ain't Gonna Need It) principle within
-the context of hexagonal architecture using our Spring Boot-based bank account
-service. YAGNI is a critical aspect of Agile and Clean Code practices,
-emphasizing the importance of not adding functionality until it's deemed
-necessary.
+The ***itea furniture store*** is a new startup that primarily sells furniture
+and home decoration in their stores. You have been hired as a consultant to
+help them in their digital transformation.
 
 ### Understanding YAGNI
+
+This time we're exploring the YAGNI (You Ain't Gonna Need It) principle within
+the context of hexagonal architecture. YAGNI is a critical aspect of Agile and
+Clean Code practices, emphasizing the importance of not adding functionality
+until it's deemed necessary.
 
 YAGNI is about avoiding over-engineering and focusing on what is necessary at
 the moment. It encourages simplicity and minimalism in code design, ensuring
