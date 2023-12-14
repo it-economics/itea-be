@@ -27,10 +27,11 @@ in-memory databases and evolve to more complex databases only if needed.
 
 ### Rules
 
-- Focus on implementing the YAGNI principle in the context of our existing bank
-  account service.
+- Focus on implementing the YAGNI principle in the context of our ITEA
+  application.
 - Remember to keep your implementations simple and only add what is necessary.
-- Aim for a clear demonstration of how hexagonal architecture supports YAGNI.
+- You're encouraged to use the hexagonal architecture to your advantage when
+  applying YAGNI.
 
 ## Task 1 - Discussing YAGNI in the Context of Hexagonal Architecture
 
