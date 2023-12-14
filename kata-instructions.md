@@ -36,7 +36,7 @@ in-memory databases and evolve to more complex databases only if needed.
 ## Task 1 - Discussing YAGNI in the Context of Hexagonal Architecture
 
 Before diving into the coding challenge, let's discuss how hexagonal
-architecture enables the application of the YAGNI principle effectively.
+architecture can help with the effective application of YAGNI.
 
 ### a) **Simplicity in Design**<br/>
 
