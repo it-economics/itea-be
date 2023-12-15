@@ -16,7 +16,7 @@ until it's deemed necessary.
 YAGNI is about avoiding over-engineering and focusing on what is necessary at
 the moment. It encourages simplicity and minimalism in code design, ensuring
 that we only spend time on things that bring immediate value (but without
-compromizing on quality).
+compromising on quality).
 
 ### Hexagonal Architecture and YAGNI
 
@@ -79,7 +79,7 @@ changes in a hexagonal architecture setup.
 ## Task 2 - Coding Challenge: Evolving Data Storage
 
 The current `ProductRepository` implementation uses an in-memory "database" for
-simplicity, with hardcoded product data -- maybe good enough for a PoC. The
+simplicity, with hardcoded product data -- maybe good enough for a Proof of Concept. The
 challenge is to make it easier for ITEA employees to add new products, without
 requiring them to ask a developer to make changes to the code.
 
