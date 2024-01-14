@@ -5,10 +5,6 @@ class Quantity {
     public final int value;
 
     private Quantity(int value) {
-        if (value < 0) {
-            throw new NegativeQuantityException();
-        }
-
         this.value = value;
     }
 
