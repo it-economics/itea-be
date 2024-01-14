@@ -17,23 +17,6 @@ Endpoints:
 
 `localhost:9000/checkout`
 
-The `checkout` Endpoint gets an Order. A Order contains a List of Items that are purchased by the customer.
-The return type is an `Receipt` with the total price and a text with all purchased items.
-
-To Test this Endpoint you have to send a `post Request`. It is recommended to use [Postman](https://www.postman.com/) for that.
-
-Here is an example Request:
-```
-{
-	"itemRequests": [
-        {
-            "name": "Picture",
-            "amount": 1
-        }
-    ]
-}
-```
-
 ## Prerequisites
 * Java 17
 * Maven
