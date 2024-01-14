@@ -7,9 +7,9 @@ import com.ite.itea.ecommerce.usecase.port.UserRepository;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class CsvFileUserRepository implements UserRepository {
 
@@ -38,10 +38,12 @@ public class CsvFileUserRepository implements UserRepository {
 
     private List<User> parseUsersFromFile(File usersFile) {
         try {
-            final var lines = Files.readAllLines(usersFile.toPath());
-            return lines.stream()
-                    .map(this::parseUserFromCsv)
-                    .collect(Collectors.toList());
+            final List<String> lines = Files.readAllLines(usersFile.toPath());
+            List<User> result = new ArrayList<>();
+            for (int i = 0; i < lines.size() - 1; i++) {
+                result.add(this.parseUserFromCsv(lines.get(i)));
+            }
+            return result;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

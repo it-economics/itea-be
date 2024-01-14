@@ -24,7 +24,8 @@ class UsersControllerTest {
 
     @ParameterizedTest
     @CsvSource("""
-            52be6639-8e24-4bdc-84e6-bda07a9aaaf0, Full name: John Wick
+            52be6639-8e24-4bdc-84e6-bda07a9aaaf0, Full name: John Wick,
+            f9844648-dcec-418c-9f22-b07b3aec2d46, Full name: James Bond,
             """)
     void shouldReturnCorrectFullName(String userId, String expectedFullName) {
         final var hostUrl = "http://localhost:" + this.port;
