@@ -1,4 +1,4 @@
-# ITEA 10 - Blue Grade: YAGNI Principle in Hexagonal Architecture
+# ITEA 11 - Red Grade: Root Cause Analysis
 
 ### Introduction
 
@@ -6,104 +6,100 @@ The ***itea furniture store*** is a new startup that primarily sells furniture
 and home decoration in their stores. You have been hired as a consultant to
 help them in their digital transformation.
 
-### Understanding YAGNI
+After the Christmas holidays, you came back to work.
+You are full of energy, so you want to start with cool new features.
+You also saw some nice functions for your programming language in a magazine that you would like to test out.
+Unfortunately, you only see bugs in the current sprint. "What happened here?" you think. It was not Santa, this is sure!
+You figure out that the colleagues, that were working between the years, made some big mistakes. And now you have to fix them.
+So let's go to it.
 
-This time we're exploring the YAGNI (You Ain't Gonna Need It) principle within
-the context of hexagonal architecture. YAGNI is a critical aspect of Agile and
-Clean Code practices, emphasizing the importance of not adding functionality
-until it's deemed necessary.
+### Task 1 - Look through the code and spot the bugs and smash them 🐛
 
-YAGNI is about avoiding over-engineering and focusing on what is necessary at
-the moment. It encourages simplicity and minimalism in code design, ensuring
-that we only spend time on things that bring immediate value (but without
-compromising on quality).
+1. What is a bug in general?
 
-### Hexagonal Architecture and YAGNI
+Discuss your opinions in the Group
+<details>
+<summary>Solution</summary>
+History:
+The term "bug" was used in an account by computer pioneer Grace Hopper, who publicized the cause of a malfunction in an early electromechanical computer. A typical version of the story is:
 
-In hexagonal architecture, the separation of core logic from external components
-through ports and adapters enables us to apply YAGNI in choosing our data
-storage solutions. We can start with simple solutions like JSON files or
-in-memory databases and evolve to more complex databases only if needed.
+    In 1946, when Hopper was released from active duty, she joined the Harvard Faculty at the Computation Laboratory where she continued her work on the Mark II and Mark III.
+    Operators traced an error in the Mark II to a moth trapped in a relay, coining the term bug. This bug was carefully removed and taped to the log book.
+    Stemming from the first bug, today we call errors or glitches in a program a bug.
+</details>
 
-### Rules
+--
+2. What is a bug in the code and Why? 
 
-- Focus on implementing the YAGNI principle in the context of our ITEA
-  application.
-- Remember to keep your implementations simple and only add what is necessary.
-- You're encouraged to use the hexagonal architecture to your advantage when
-  applying YAGNI.
+Discuss every bug in the Group and answer the Question: Why does this bug got into the code?
 
-## Task 1 - Discussing YAGNI in the Context of Hexagonal Architecture
+<details>
+<summary>Hint</summary>
 
-Before diving into the coding challenge, let's discuss how hexagonal
-architecture can help with the effective application of YAGNI.
+1. You do not have to look in a java class for this one. Maybe there are to many line somewhere.
+2. One bug ticket has the following description: "After we implemented the 'return Qualities' feature the Qualities are negative sometimes"
+</details>
+<details>
+<summary>Solution</summary>
 
-### a) **Simplicity in Design**<br/>
+1. user.csv has a bug
+2. A validation is missing in the `Quantity` class
+</details>
 
-**Question:** How does hexagonal architecture help maintain simplicity in the
-design of our e-commerce application? Discuss the benefits of starting with
-simpler data storage solutions.
+--
+3. Is it a technical issue or a misunderstanding of the Requirements?
+
+What are the different and why is it important?
+<details>
+<summary>Solution</summary>
+
+1. user.csv has a bug - Technical issue
+2. A validation is missing in the `Quantity` class - Requirements (The old logic should stay but should be extended not replaced with a new logic)
+</details>
+
+--
+4. How would you fix the bugs?
 
 <details>
 <summary>Solution</summary>
 
-- Hexagonal architecture aids in maintaining simplicity by segregating the core
-  business logic from external interfaces like data storage, using ports and
-  adapters.
-- This separation ensures that the core logic is not coupled with
-  storage-specific details, keeping it simple and focused.
-- Starting with simpler storage solutions like in-memory databases reduces
-  initial complexity and facilitates easier testing and flexibility for future
-  changes.
+1. user.csv has a bug - Remove the last line of the csv file that is not used?
+2. A validation is missing in the `Quantity` class - Add the validation and have a thought how you would implement the `return Quantity` feature. Instead of allowing negative Quantities.
 </details>
 
-### b) **Evolving the System**<br/>
+--- 
 
-**Question:** Explore how the system can evolve from using simple data storage
-to more complex ones using the YAGNI principle. Discuss the ease of making such
-changes in a hexagonal architecture setup.
+### Task 2 - Smash the bugs 🐛
+
+
+5. Fix the error in the users.csv files
 
 <details>
 <summary>Solution</summary>
-
-- When applying YAGNI, the system evolves to include complex components only as
-  needed, avoiding unnecessary initial work.
-- Hexagonal architecture allows for smooth transitions in data storage without
-  impacting the core logic, by simply replacing or extending adapters.
-- For instance, upgrading from an in-memory database to a persistent storage
-  solution can be done by introducing a new adapter, with no changes required in
-  the core application.
+There is an additional new line in the end of the csv file that can be removed but does this fix the problem?
+Have a look at the tests. Do they really test the complete csv file?
 </details>
 
 
-## Task 2 - Coding Challenge: Evolving Data Storage
+--
+6. Is the bug really fixed or did you only eliminate symptoms but not the root cause?
+<details>
+<summary>Solution</summary>
+The real bug is in the CsvFileUserRepository class.
+Instead of using a stream the developer uses an indexed for loop. 
+That is not the problem either but in the line `43` the end range is not correct.
+Insted of going to the end of the list with `i < lines.size()` the developer added a `-1`.
+Perhabs the developer wanted to have something like this `i <= lines.size() -1` to go through the list of elements.
+Unfortenatly, the developer forgot the equals symbol and the algorithm is wrong.
+Instead of investigating the mistake an additional line was added in the users.csv file.
+This just postpones the bug until someone creates a new csv file or updates the existing one.
+</details>
 
-The current `ProductRepository` implementation uses an in-memory "database" for
-simplicity, with hardcoded product data -- maybe good enough for a Proof of Concept. The
-challenge is to make it easier for ITEA employees to add new products, without
-requiring them to ask a developer to make changes to the code.
 
-We currently have a relatively small number of products, and they are only read,
-never written to (except occasionally when an employee adds a new product).
-Do we need a full-blown relational database with ORM for that, especially at
-this stage of the development? Remember to apply the YAGNI principle.
+### Root Cause Analysis
 
-### Provided Code Base
-
-- The existing InMemoryProductRepository code with in-memory database implementation.
-
-### Your Task
-
-- Add another repository implementation with a different data storage mechanism
-  that suits the current needs.
-- Ensure the core application logic remains unchanged while swapping storage solutions.
-- Consider writing tests to demonstrate that the replacement of the repository
-  implementation doesn't break the functionality. What kind of automated tests is
-  suitable for that?
-
-### Discuss the Result
-
-- How do these changes align with the YAGNI principle?
-- Which potential future extensions can be made, keeping YAGNI in mind?
-- Propose a scenario where transitioning to a more complex database would be
-  necessary. Discuss how the hexagonal architecture would facilitate this transition.
+A rule from the very first day as a CCD should be to always search for the root cause of an issue.
+Clean code developer do not consider themselves satisfied with healing symptoms. 
+Example:\ Sorting data in memory is too slow. A symptom cure would strive for speed up single instructions or instruction blocks.
+Maybe unsafe code or parallelization becomes an option. A thorough root cause analysis would have shown that the chosen sort algorithm is the real culprit.
+Hard to understand low level optimizations hence can be avoided by choosing a better algorithm.
