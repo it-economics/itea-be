@@ -8,9 +8,9 @@ help them in their digital transformation.
 
 After the Christmas holidays, you came back to work.
 You are full of energy, so you want to start with cool new features.
-You also saw some nice functions for your programming language in a magazine that you would like to test out.
-Unfortunately, you only see bugs in the current sprint. "What happened here?" you think. It was not Santa, this is sure!
-You figure out that the colleagues, that were working between the years, made some big mistakes. And now you have to fix them.
+You also saw some nice features for your programming language in a magazine that you would like to test out.
+Unfortunately, you only see bug tickets in the current sprint. "What happened here?" you think. It was not Santa, this is sure!
+You figure out that the colleagues, that were working between the holidays, made some big mistakes. And now you have to fix them.
 So let's go to it.
 
 ### Task 1 - Look through the code and spot the bugs and smash them 🐛
@@ -28,16 +28,17 @@ The term "bug" was used in an account by computer pioneer Grace Hopper, who publ
     Stemming from the first bug, today we call errors or glitches in a program a bug.
 </details>
 
---
+---
+
 2. What is a bug in the code and Why? 
 
-Discuss every bug in the Group and answer the Question: Why does this bug got into the code?
+Discuss every bug with your group and answer the Question: Why does this bug got into the code?
 
 <details>
 <summary>Hint</summary>
 
-1. You do not have to look in a java class for this one. Maybe there are to many line somewhere.
-2. One bug ticket has the following description: "After we implemented the 'return Qualities' feature the Qualities are negative sometimes"
+1. You do not have to look in a java class for this one. Maybe there are too many lines somewhere?
+2. One bug ticket has the following description: "After we implemented the 'return Quantities' feature the Quantities are negative sometimes"
 </details>
 <details>
 <summary>Solution</summary>
@@ -46,18 +47,19 @@ Discuss every bug in the Group and answer the Question: Why does this bug got in
 2. A validation is missing in the `Quantity` class
 </details>
 
---
-3. Is it a technical issue or a misunderstanding of the Requirements?
+---
+
+3. Is it a technical issue or a misunderstanding of the requirements?
 
 What are the different and why is it important?
 <details>
 <summary>Solution</summary>
 
-1. user.csv has a bug - Technical issue
-2. A validation is missing in the `Quantity` class - Requirements (The old logic should stay but should be extended not replaced with a new logic)
+1. user.csv has a bug => Technical issue
+2. A validation is missing in the `Quantity` class => Requirements (The old logic should stay but should be extended, not replaced with a new logic)
 </details>
 
---
+---
 4. How would you fix the bugs?
 
 <details>
@@ -80,9 +82,10 @@ There is an additional new line in the end of the csv file that can be removed b
 Have a look at the tests. Do they really test the complete csv file?
 </details>
 
+---
 
---
 6. Is the bug really fixed or did you only eliminate symptoms but not the root cause?
+
 <details>
 <summary>Solution</summary>
 The real bug is in the CsvFileUserRepository class.
@@ -90,7 +93,7 @@ Instead of using a stream the developer uses an indexed for loop.
 That is not the problem either but in the line `43` the end range is not correct.
 Insted of going to the end of the list with `i < lines.size()` the developer added a `-1`.
 Perhabs the developer wanted to have something like this `i <= lines.size() -1` to go through the list of elements.
-Unfortenatly, the developer forgot the equals symbol and the algorithm is wrong.
+Unfortunately, the developer forgot the equals symbol and the algorithm is wrong.
 Instead of investigating the mistake an additional line was added in the users.csv file.
 This just postpones the bug until someone creates a new csv file or updates the existing one.
 </details>
@@ -99,7 +102,7 @@ This just postpones the bug until someone creates a new csv file or updates the 
 ### Root Cause Analysis
 
 A rule from the very first day as a CCD should be to always search for the root cause of an issue.
-Clean code developer do not consider themselves satisfied with healing symptoms. 
-Example:\ Sorting data in memory is too slow. A symptom cure would strive for speed up single instructions or instruction blocks.
+Clean code developers do not consider themselves satisfied with healing symptoms. 
+Example: Sorting data in memory is too slow. A symptom cure would strive to speed up single instructions or instruction blocks.
 Maybe unsafe code or parallelization becomes an option. A thorough root cause analysis would have shown that the chosen sort algorithm is the real culprit.
 Hard to understand low level optimizations hence can be avoided by choosing a better algorithm.
