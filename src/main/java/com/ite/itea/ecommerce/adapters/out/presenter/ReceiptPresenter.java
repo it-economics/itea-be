@@ -36,7 +36,7 @@ public class ReceiptPresenter implements com.ite.itea.ecommerce.usecase.port.Rec
         final var productName = product.name();
         final var price = product.price().formatPrice();
         final var amount = orderItem.amount();
-        return MessageFormat.format("{0} {1} * {2}\n", productName, amount, price);
+        return MessageFormat.format("{0} {1} * {2}\n", productName, price, amount);
     }
 
     private EuroPrice totalPrice(Order order) {
