@@ -27,21 +27,21 @@ public class RecieptPresenter implements com.ite.itea.ecommerce.usecase.port.Rec
                 + "Total " + totalPrice(order).formatPrice();
     }
 
-    private String formatOrderItem(Order.OrderItem orderItem){
-       if(orderItem.amount() == 0){
-           return "";
-       }
+    private String formatOrderItem(Order.OrderItem orderItem) {
+        if (orderItem.amount() == 0) {
+            return "";
+        }
 
-       final var product = orderItem.product();
-       final var productName = product.name();
-       final var price = product.price().formatPrice();
-       final var amount = orderItem.amount();
-       return MessageFormat.format("{0} {1} * {2}\n", productName, amount, price);
+        final var product = orderItem.product();
+        final var productName = product.name();
+        final var price = product.price().formatPrice();
+        final var amount = orderItem.amount();
+        return MessageFormat.format("{0} {1} * {2}\n", productName, price, amount);
     }
 
     private EuroPrice totalPrice(Order order) {
-       return order.items().stream()
-               .map(orderItem -> orderItem.product().price().times(orderItem.amount()))
-               .reduce(EuroPrice.zero(), EuroPrice::plus);
+        return order.items().stream()
+                .map(orderItem -> orderItem.product().price().times(orderItem.amount()))
+                .reduce(EuroPrice.zero(), EuroPrice::plus);
     }
 }
