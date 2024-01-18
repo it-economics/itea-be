@@ -1,6 +1,6 @@
 package com.ite.itea.ecommerce.adapters.out;
 
-import com.ite.itea.ecommerce.adapters.out.presenter.ReceiptPresenter;
+import com.ite.itea.ecommerce.adapters.out.presenter.RecieptPresenter;
 import com.ite.itea.ecommerce.domain.core.EuroPrice;
 import com.ite.itea.ecommerce.domain.retail.*;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class ReceiptPresenterTest {
 
-    private final ReceiptPresenter receiptPresenter = new ReceiptPresenter();
+    private final RecieptPresenter receiptPresenter = new RecieptPresenter();
 
     private static Stream<Arguments> provideProductsAndExpectedReceipts() {
         return Stream.of(

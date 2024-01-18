@@ -1,7 +1,7 @@
 package com.ite.itea.ecommerce.adapters.in.controller;
 
 import com.ite.itea.ecommerce.adapters.out.persistence.InMemoryProductRepository;
-import com.ite.itea.ecommerce.adapters.out.presenter.ReceiptPresenter;
+import com.ite.itea.ecommerce.adapters.out.presenter.RecieptPresenter;
 import com.ite.itea.ecommerce.usecase.OrderProductsUseCase;
 import com.ite.itea.ecommerce.usecase.dto.OrderRequest;
 import com.ite.itea.ecommerce.usecase.dto.Receipt;
@@ -17,7 +17,7 @@ public class CheckoutController {
 
     private final OrderProductsUseCase orderProductsUseCase = new OrderProductsUseCase(
             new InMemoryProductRepository(),
-            new ReceiptPresenter()
+            new RecieptPresenter()
     );
 
     @ResponseBody
