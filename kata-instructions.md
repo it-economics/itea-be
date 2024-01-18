@@ -98,6 +98,11 @@ Instead of investigating the mistake an additional line was added in the users.c
 This just postpones the bug until someone creates a new csv file or updates the existing one.
 </details>
 
+### Task 3 - Merge conflicts
+
+Commit aa57406 is a merge commit where a conflict has been resolved.
+What caused that conflict? What may have caused the cause of the conflict?
+How could similar merge conflicts be prevented in the future?
 
 ### Root Cause Analysis
 
