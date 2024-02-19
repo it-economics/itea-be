@@ -83,14 +83,14 @@ public class GardenBenchTest {
                 ),
                 Arguments.of(
                         new GardenBench(ProductId.random(), 200, 2, 0, true, true),
-                        EuroPrice.ofCents(41500),
+                        EuroPrice.ofCents(38500),
                         """
                                 Order for a garden bench:
                                 Elements: 0 of 2 elements is a plant element, has a backrest
                                 Total length: 216 cm
-                                Delivery Type: Product is delivered for 100,00\u00A0€
+                                Delivery Type: Product is delivered for 70,00\u00A0€
                                 Total price (without delivery): 315,00\u00A0€
-                                Total price (including delivery): 415,00\u00A0€
+                                Total price (including delivery): 385,00\u00A0€
                                 """
                 )
 
