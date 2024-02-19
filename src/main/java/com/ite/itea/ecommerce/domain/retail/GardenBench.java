@@ -59,7 +59,7 @@ public class GardenBench extends Product {
             return EuroPrice.zero();
         }
 
-        if (lengthInCentimeters <= 200) {
+        if (lengthInCentimeters <= 200) { // Mutation that was removed with the new test
             return switch (amountDefaultElements) {
                 case 2 -> EuroPrice.ofEuros(70);
                 case 1 -> EuroPrice.ofEuros(80);

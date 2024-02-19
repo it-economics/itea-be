@@ -68,7 +68,33 @@ public class GardenBenchTest {
                                 Delivery Type: Product is collected for 0,00\u00A0€
                                 Total price: 280,00\u00A0€
                                 """
+                ),
+                Arguments.of(
+                        new GardenBench(ProductId.random(), 201, 2, 0, true, true),
+                        EuroPrice.ofCents(41600),
+                        """
+                                Order for a garden bench:
+                                Elements: 0 of 2 elements is a plant element, has a backrest
+                                Total length: 217 cm
+                                Delivery Type: Product is delivered for 100,00\u00A0€
+                                Total price (without delivery): 316,00\u00A0€
+                                Total price (including delivery): 416,00\u00A0€
+                                """
+                ),
+                Arguments.of(
+                        new GardenBench(ProductId.random(), 200, 2, 0, true, true),
+                        EuroPrice.ofCents(41500),
+                        """
+                                Order for a garden bench:
+                                Elements: 0 of 2 elements is a plant element, has a backrest
+                                Total length: 216 cm
+                                Delivery Type: Product is delivered for 100,00\u00A0€
+                                Total price (without delivery): 315,00\u00A0€
+                                Total price (including delivery): 415,00\u00A0€
+                                """
                 )
+
+
         );
     }
 
