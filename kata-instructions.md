@@ -106,3 +106,36 @@ and which ones are just indirection disguised as abstraction?
    public interface CloudStorageProvider { ... }
    public class DropboxAdapter implements CloudStorageProvider { ... }
    ```
+   
+## Task 2: Applying SLAP
+
+Let's have a look into the `Invoice` class. There's a very long method there
+with abstraction levels all over the place.
+
+a) How easy or hard is it to understand what's happening here?
+
+b) Similar to task 1, let's try to identify which lines/statements/types
+are at different levels of abstraction.
+
+c) How can a monster of a method like this be prevented, other than "refactoring
+when it's finished"?
+
+<details>
+<summary>Reveal answer</summary>
+Thinking about the problem at a higher level (the "problem level") and trying to
+communicate that through the code, making it work through implementation details.
+Techniques like TDD can help, but more generally it's about the way of thinking
+more than specific approaches.
+</details>
+
+d) Since this is a public method, we probably expect the highest abstraction
+level here. Using pseudocode, try to sketch roughly which steps you would expect
+at the highest abstraction level.
+
+e) Refactor to a single level of abstraction in that public method. The goal is
+to end up with something similar to the pseudocode from d). The result should be
+readable almost like a story. Don't forget to regularly run the tests.<br>
+Note: If you choose to extract methods, each of these should again be on a
+single abstraction level (although a lower one) and read like a (more detailed)
+story, but let's focus on that highest level first. We can then further
+"push down" detail from that lower level.
