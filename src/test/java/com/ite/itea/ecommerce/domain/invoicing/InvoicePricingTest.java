@@ -19,10 +19,16 @@ public class InvoicePricingTest {
             Quantity.of(8),
             VatRate.STANDARD
     );
+    private final LineItem threeStoreRestaurantMenus = new LineItem(
+            "Store Restaurant Menu: 2 hot dogs and a soda",
+            EuroPrice.ofEurosAndCents(12, 79),
+            Quantity.of(3),
+            VatRate.REDUCED
+    );
 
     @Test
-    void calculatesGrossPriceCorrectly() {
-        var invoice = new Invoice(VatPercentage.of(19));
+    void calculatesCorrectGrossPriceWithStandardTaxRate() {
+        var invoice = new Invoice();
         invoice.addLineItem(twoDiningTables);
         invoice.addLineItem(eightDiningChairs);
 
@@ -31,12 +37,43 @@ public class InvoicePricingTest {
     }
 
     @Test
-    void calculatesNetPriceCorrectly() {
-        var invoice = new Invoice(VatPercentage.of(19));
+    void calculatesCorrectNetPriceWithStandardTaxRate() {
+        var invoice = new Invoice();
         invoice.addLineItem(twoDiningTables);
         invoice.addLineItem(eightDiningChairs);
 
-        // The total price excluding 19 % VAT, rounded to the nearest cent.
-        assertThat(invoice.netPrice()).isEqualTo(EuroPrice.ofEurosAndCents(554, 54));
+        // The total price excluding 19 % VAT, rounded per item to the nearest cent.
+        assertThat(invoice.netPrice()).isEqualTo(EuroPrice.ofEurosAndCents(554, 56));
+    }
+
+    @Test
+    void calculatesCorrectGrossPriceForVatReducedItems() {
+        var invoice = new Invoice();
+        invoice.addLineItem(threeStoreRestaurantMenus);
+
+        // The total gross price including VAT.
+        assertThat(invoice.grossPrice()).isEqualTo(EuroPrice.ofEurosAndCents(38, 37));
+    }
+
+    @Test
+    void calculatesCorrectNetPriceForVatReducedItems() {
+        var invoice = new Invoice();
+        invoice.addLineItem(threeStoreRestaurantMenus);
+
+        // The total price excluding 7 % VAT, i.e., the reduced VAT rate for food and groceries,
+        // rounded per item to the nearest cent.
+        assertThat(invoice.netPrice()).isEqualTo(EuroPrice.ofEurosAndCents(35, 85));
+    }
+
+    @Test
+    void calculatesCorrectNetPriceForMixedVatRates() {
+        var invoice = new Invoice();
+        invoice.addLineItem(threeStoreRestaurantMenus);
+        invoice.addLineItem(twoDiningTables);
+        invoice.addLineItem(eightDiningChairs);
+
+        // The total price excluding 7 % VAT, i.e., the reduced VAT rate for food and groceries,
+        // rounded per item to the nearest cent.
+        assertThat(invoice.netPrice()).isEqualTo(EuroPrice.ofEurosAndCents(590, 41));
     }
 }
