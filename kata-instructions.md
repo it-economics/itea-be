@@ -1,113 +1,141 @@
-# ITEA 11 - Red Grade: Root Cause Analysis
+# ITEA 13 - Orange Grade: Single Level of Abstraction Principle (SLAP)
 
-### Introduction
+## Intro
 
-The ***itea furniture store*** is a new startup that primarily sells furniture
+### Background story
+
+The ***ITEA Furniture Store*** is a company that primarily sells furniture
 and home decoration in their stores. You have been hired as a consultant to
 help them in their digital transformation.
 
-After the Christmas holidays, you came back to work.
-You are full of energy, so you want to start with cool new features.
-You also saw some nice features for your programming language in a magazine that you would like to test out.
-Unfortunately, you only see bug tickets in the current sprint. "What happened here?" you think. It was not Santa, this is sure!
-You figure out that the colleagues, that were working between the holidays, made some big mistakes. And now you have to fix them.
-So let's go to it.
+<img src="assets/images/ITEA.jpg" width="400" alt="Photo of the ITEA headquarters" />
 
-### Task 1 - Look through the code and spot the bugs and smash them 🐛
+In past projects you had to deal with really messy legacy code. Some of your
+colleagues regularly complained about the *lack of* abstraction, while others always
+whined about there being *too much* abstraction. After learning more about
+abstractions and design principles, you realized that the problem was actually
+*indirection without abstraction*, and different abstraction levels being mixed,
+rather than the total "amount of abstraction", whatever that means.
 
-1. What is a bug in general?
+You decided that this project will be different—with the help of SLAP!
 
-Discuss your opinions in the Group
+### SLAP - Single Level of Abstraction Principle
+
+The Single Level of Abstraction Principle (SLAP, or SLA principle) is a design
+principle for making code easier to understand and reduce the reader's cognitive
+load. To understand the principle let's first look at an **analogy**:
+
+You bought today's newspaper. Since you're a big football fan, you open the
+sports section. You skim the headings, looking for football-related articles.
+"Something about Manuel Neuer", "Toni Kroos joins national team (again)",
+"Ronaldo almost scores goal against titan Oliver Kahn". That last one sounds
+interesting and relevant, so you skim the article's section titles and then read
+the detailed text of the interesting parts.
+
+The newspaper is structured at different levels of detail
+(or levels of abstraction):
+1. The sports section.
+2. The article headings.
+3. The article section titles.
+4. The detailed text.
+
+You quickly find what you're looking for, because you can "zoom in" from one
+level to the next. The sections are typically kept on the same abstraction level,
+so you might have newspaper sections like
+- Politics
+- Sports
+- Entertainment
+- Finance
+
+You generally won't find a newspaper with the sections
+- Politics
+- Sports
+- Leonardo DiCaprio again without Oscar at 2024 Academy Awards
+- Finance
+
+Drawing the connection back to code and programming languages, does this
+remind you of something? What is (roughly) the equivalent of sections, articles,
+headings, etc. in code?
+
+## Task 1: Abstractions – Warm-up and Intuition
+
+<img src="assets/images/coding-dojo-literally.jpg" width="300" alt="Coding dojo taken too literally" />
+
+a) Order the following types by their level of abstraction.
+
+- `List<Product>`
+- `Product[]`
+- `ShoppingCart`
+- `AbstractProductListWrapper`
+- `ArrayList<Product>`
+
+b) Order the following statements by their level of abstraction.
+
+1. ```
+   float grossPrice = 1.19f * netPrice;
+   ```
+
+2. ```
+   Money grossPrice = netPrice.taxedAs(VatRate.STANDARD);
+   ```
+
+3. ```
+   float grossPrice = FloatUtils.addNineteenPercent(netPrice);
+   ```
+
+4. ```
+   float grossPrice = netToGrossByStandardRate(netPrice);
+   ```
+
+5. ```
+   float grossPrice = MoneyUtils.addVat(netPrice, 19.0f);
+   ```
+
+c) Out of the following code snippets, which ones show real abstractions
+and which ones are just indirection disguised as abstraction?
+
+1. ```
+   public interface CloudStorageProvider { ... }
+   public class CloudStorageProviderImpl implements CloudStorageProvider { ... }
+   ```
+2. ```
+   public interface DropboxAdapter { ... }
+   public class DropboxAdapterImpl implements DropboxAdapter { ... }
+   ```
+3. ```
+   public interface CloudStorageProvider { ... }
+   public class DropboxAdapter implements CloudStorageProvider { ... }
+   ```
+   
+## Task 2: Applying SLAP
+
+Let's have a look into the `Invoice` class. There's a very long method there
+with abstraction levels all over the place.
+
+a) How easy or hard is it to understand what's happening here?
+
+b) Similar to task 1, let's try to identify which lines/statements/types
+are at different levels of abstraction.
+
+c) How can a monster of a method like this be prevented, other than "refactoring
+when it's finished"?
+
 <details>
-<summary>Solution</summary>
-History:
-The term "bug" was used in an account by computer pioneer Grace Hopper, who publicized the cause of a malfunction in an early electromechanical computer. A typical version of the story is:
-
-    In 1946, when Hopper was released from active duty, she joined the Harvard Faculty at the Computation Laboratory where she continued her work on the Mark II and Mark III.
-    Operators traced an error in the Mark II to a moth trapped in a relay, coining the term bug. This bug was carefully removed and taped to the log book.
-    Stemming from the first bug, today we call errors or glitches in a program a bug.
+<summary>Reveal answer</summary>
+Thinking about the problem at a higher level (the "problem level") and trying to
+communicate that through the code, making it work through implementation details.
+Techniques like TDD can help, but more generally it's about the way of thinking
+more than specific approaches.
 </details>
 
----
+d) Since this is a public method, we probably expect the highest abstraction
+level here. Using pseudocode, try to sketch roughly which steps you would expect
+at the highest abstraction level.
 
-2. What is a bug in the code and Why? 
-
-Discuss every bug with your group and answer the Question: Why does this bug got into the code?
-
-<details>
-<summary>Hint</summary>
-
-1. You do not have to look in a java class for this one. Maybe there are too many lines somewhere?
-2. One bug ticket has the following description: "After we implemented the 'return Quantities' feature the Quantities are negative sometimes"
-</details>
-<details>
-<summary>Solution</summary>
-
-1. user.csv has a bug
-2. A validation is missing in the `Quantity` class
-</details>
-
----
-
-3. Is it a technical issue or a misunderstanding of the requirements?
-
-What are the different and why is it important?
-<details>
-<summary>Solution</summary>
-
-1. user.csv has a bug => Technical issue
-2. A validation is missing in the `Quantity` class => Requirements (The old logic should stay but should be extended, not replaced with a new logic)
-</details>
-
----
-4. How would you fix the bugs?
-
-<details>
-<summary>Solution</summary>
-
-1. user.csv has a bug - Remove the last line of the csv file that is not used?
-2. A validation is missing in the `Quantity` class - Add the validation and have a thought how you would implement the `return Quantity` feature. Instead of allowing negative Quantities.
-</details>
-
---- 
-
-### Task 2 - Smash the bugs 🐛
-
-
-5. Fix the error in the users.csv files
-
-<details>
-<summary>Solution</summary>
-There is an additional new line in the end of the csv file that can be removed but does this fix the problem?
-Have a look at the tests. Do they really test the complete csv file?
-</details>
-
----
-
-6. Is the bug really fixed or did you only eliminate symptoms but not the root cause?
-
-<details>
-<summary>Solution</summary>
-The real bug is in the CsvFileUserRepository class.
-Instead of using a stream the developer uses an indexed for loop. 
-That is not the problem either but in the line `43` the end range is not correct.
-Insted of going to the end of the list with `i < lines.size()` the developer added a `-1`.
-Perhabs the developer wanted to have something like this `i <= lines.size() -1` to go through the list of elements.
-Unfortunately, the developer forgot the equals symbol and the algorithm is wrong.
-Instead of investigating the mistake an additional line was added in the users.csv file.
-This just postpones the bug until someone creates a new csv file or updates the existing one.
-</details>
-
-### Task 3 - Merge conflicts
-
-Commit aa57406 is a merge commit where a conflict has been resolved.
-What caused that conflict? What may have caused the cause of the conflict?
-How could similar merge conflicts be prevented in the future?
-
-### Root Cause Analysis
-
-A rule from the very first day as a CCD should be to always search for the root cause of an issue.
-Clean code developers do not consider themselves satisfied with healing symptoms. 
-Example: Sorting data in memory is too slow. A symptom cure would strive to speed up single instructions or instruction blocks.
-Maybe unsafe code or parallelization becomes an option. A thorough root cause analysis would have shown that the chosen sort algorithm is the real culprit.
-Hard to understand low level optimizations hence can be avoided by choosing a better algorithm.
+e) Refactor to a single level of abstraction in that public method. The goal is
+to end up with something similar to the pseudocode from d). The result should be
+readable almost like a story. Don't forget to regularly run the tests.<br>
+Note: If you choose to extract methods, each of these should again be on a
+single abstraction level (although a lower one) and read like a (more detailed)
+story, but let's focus on that highest level first. We can then further
+"push down" detail from that lower level.
