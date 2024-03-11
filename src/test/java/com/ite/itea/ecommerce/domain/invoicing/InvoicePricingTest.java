@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class InvoicePriceTest {
+public class InvoicePricingTest {
 
     private final LineItem twoDiningTables = new LineItem(
             "Some dining table or whatever",
@@ -24,7 +24,7 @@ public class InvoicePriceTest {
         invoice.addLineItem(twoDiningTables);
         invoice.addLineItem(eightDiningChairs);
 
-        // The total gross price, with VAT included by default.
+        // The total gross price including VAT.
         assertThat(invoice.grossPrice()).isEqualTo(EuroPrice.ofEurosAndCents(659, 90));
     }
 
