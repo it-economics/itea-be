@@ -56,3 +56,53 @@ You generally won't find a newspaper with the sections
 Drawing the connection back to code and programming languages, does this
 remind you of something? What is (roughly) the equivalent of sections, articles,
 headings, etc. in code?
+
+## Task 1: Abstractions – Warm-up and Intuition
+
+<img src="assets/images/coding-dojo-literally.jpg" width="300" alt="Coding dojo taken too literally" />
+
+a) Order the following types by their level of abstraction.
+
+- `List<Product>`
+- `Product[]`
+- `ShoppingCart`
+- `AbstractProductListWrapper`
+- `ArrayList<Product>`
+
+b) Order the following statements by their level of abstraction.
+
+1. ```
+   float grossPrice = 1.19f * netPrice;
+   ```
+
+2. ```
+   Money grossPrice = netPrice.taxedAs(VatRate.STANDARD);
+   ```
+
+3. ```
+   float grossPrice = FloatUtils.addNineteenPercent(netPrice);
+   ```
+
+4. ```
+   float grossPrice = netToGrossByStandardRate(netPrice);
+   ```
+
+5. ```
+   float grossPrice = MoneyUtils.addVat(netPrice, 19.0f);
+   ```
+
+c) Out of the following code snippets, which ones show real abstractions
+and which ones are just indirection disguised as abstraction?
+
+1. ```
+   public interface CloudStorageProvider { ... }
+   public class CloudStorageProviderImpl implements CloudStorageProvider { ... }
+   ```
+2. ```
+   public interface DropboxAdapter { ... }
+   public class DropboxAdapterImpl implements DropboxAdapter { ... }
+   ```
+3. ```
+   public interface CloudStorageProvider { ... }
+   public class DropboxAdapter implements CloudStorageProvider { ... }
+   ```
