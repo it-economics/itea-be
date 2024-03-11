@@ -10,12 +10,14 @@ public class InvoicePricingTest {
     private final LineItem twoDiningTables = new LineItem(
             "Some dining table or whatever",
             EuroPrice.ofEurosAndCents(129, 99),
-            Quantity.of(2)
+            Quantity.of(2),
+            VatRate.STANDARD
     );
     private final LineItem eightDiningChairs = new LineItem(
             "Some dining chair or whatever",
             EuroPrice.ofEurosAndCents(49, 99),
-            Quantity.of(8)
+            Quantity.of(8),
+            VatRate.STANDARD
     );
 
     @Test
