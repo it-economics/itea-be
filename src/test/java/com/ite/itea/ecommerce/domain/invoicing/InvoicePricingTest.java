@@ -72,7 +72,7 @@ public class InvoicePricingTest {
         invoice.addLineItem(twoDiningTables);
         invoice.addLineItem(eightDiningChairs);
 
-        // The total price excluding 7 % VAT, i.e., the reduced VAT rate for food and groceries,
+        // The total price excluding VAT, with different VAT rates per item and
         // rounded per item to the nearest cent.
         assertThat(invoice.netPrice()).isEqualTo(EuroPrice.ofEurosAndCents(590, 41));
     }
