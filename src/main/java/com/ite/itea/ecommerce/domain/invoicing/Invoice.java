@@ -21,12 +21,9 @@ class Invoice {
     }
 
     EuroPrice netPrice() {
-        var sumOfNetPricesInCents = EuroPrice.zero();
-
-        for (var lineItem : lineItems) {
-            sumOfNetPricesInCents = sumOfNetPricesInCents.plus(lineItem.netPrice());
-        }
-
-        return sumOfNetPricesInCents;
+        return lineItems.parallelStream()
+                .map(LineItem::netPrice)
+                .reduce(EuroPrice::plus)
+                .orElse(EuroPrice.zero());
     }
 }
