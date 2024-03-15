@@ -44,35 +44,33 @@ class Invoice {
             }
         }
 
-        var netPriceForStandardVatItemsInCents = 0;
+        var sumOfNetPricesInCents = 0;
 
         for (var lineItem : map.get(VatRate.STANDARD)) {
             for (int i = 0; i < lineItem.quantity().value; i++) {
-                final var grossPercent = 100 + getVatRate(VatRate.STANDARD);
+                final var grossPercent = 100 + getVatRate(lineItem.vatRate());
                 final var vatFactor = BigDecimal.valueOf(grossPercent, 2)
                         .divide(BigDecimal.valueOf(100, 2), RoundingMode.UNNECESSARY);
                 final var netPriceInCents = BigDecimal.valueOf(lineItem.unitPriceGross().asCents(), 2)
                         .divide(vatFactor, RoundingMode.HALF_EVEN)
                         .multiply(BigDecimal.valueOf(100));
-                netPriceForStandardVatItemsInCents += netPriceInCents.intValue();
+                sumOfNetPricesInCents += netPriceInCents.intValue();
             }
         }
-
-        var netPriceForVatReducedItemsInCents = 0;
 
         for (var lineItem : map.get(VatRate.REDUCED)) {
             for (int i = 0; i < lineItem.quantity().value; i++) {
-                final var grossPercent = 100 + getVatRate(VatRate.REDUCED);
+                final var grossPercent = 100 + getVatRate(lineItem.vatRate());
                 final var vatFactor = BigDecimal.valueOf(grossPercent, 2)
                         .divide(BigDecimal.valueOf(100, 2), RoundingMode.UNNECESSARY);
                 final var netPriceInCents = BigDecimal.valueOf(lineItem.unitPriceGross().asCents(), 2)
                         .divide(vatFactor, RoundingMode.HALF_EVEN)
                         .multiply(BigDecimal.valueOf(100));
-                netPriceForVatReducedItemsInCents += netPriceInCents.intValue();
+                sumOfNetPricesInCents += netPriceInCents.intValue();
             }
         }
 
-        return EuroPrice.ofCents(netPriceForStandardVatItemsInCents + netPriceForVatReducedItemsInCents);
+        return EuroPrice.ofCents(sumOfNetPricesInCents);
     }
 
     private int getVatRate(VatRate vatRate) {
