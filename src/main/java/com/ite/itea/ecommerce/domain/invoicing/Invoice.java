@@ -46,19 +46,7 @@ class Invoice {
 
         var sumOfNetPricesInCents = 0;
 
-        for (var lineItem : map.get(VatRate.STANDARD)) {
-            for (int i = 0; i < lineItem.quantity().value; i++) {
-                final var grossPercent = 100 + getVatRate(lineItem.vatRate());
-                final var vatFactor = BigDecimal.valueOf(grossPercent, 2)
-                        .divide(BigDecimal.valueOf(100, 2), RoundingMode.UNNECESSARY);
-                final var netPriceInCents = BigDecimal.valueOf(lineItem.unitPriceGross().asCents(), 2)
-                        .divide(vatFactor, RoundingMode.HALF_EVEN)
-                        .multiply(BigDecimal.valueOf(100));
-                sumOfNetPricesInCents += netPriceInCents.intValue();
-            }
-        }
-
-        for (var lineItem : map.get(VatRate.REDUCED)) {
+        for (var lineItem : lineItems) {
             for (int i = 0; i < lineItem.quantity().value; i++) {
                 final var grossPercent = 100 + getVatRate(lineItem.vatRate());
                 final var vatFactor = BigDecimal.valueOf(grossPercent, 2)
