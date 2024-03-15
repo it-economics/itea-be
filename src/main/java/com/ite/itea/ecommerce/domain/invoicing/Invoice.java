@@ -25,25 +25,6 @@ class Invoice {
     }
 
     EuroPrice netPrice() {
-        Map<VatRate, LineItem[]> map = new HashMap<>();
-
-        map.put(VatRate.STANDARD, new LineItem[0]);
-        map.put(VatRate.REDUCED, new LineItem[0]);
-
-        for (var lineItem : lineItems) {
-            if (lineItem.vatRate() == VatRate.STANDARD) {
-                var newArray = new LineItem[map.get(VatRate.STANDARD).length + 1];
-                System.arraycopy(map.get(VatRate.STANDARD), 0, newArray, 0, map.get(VatRate.STANDARD).length);
-                newArray[newArray.length - 1] = lineItem;
-                map.put(VatRate.STANDARD, newArray);
-            } else if (lineItem.vatRate() == VatRate.REDUCED) {
-                var newArray = new LineItem[map.get(VatRate.REDUCED).length + 1];
-                System.arraycopy(map.get(VatRate.REDUCED), 0, newArray, 0, map.get(VatRate.REDUCED).length);
-                newArray[newArray.length - 1] = lineItem;
-                map.put(VatRate.REDUCED, newArray);
-            }
-        }
-
         var sumOfNetPricesInCents = 0;
 
         for (var lineItem : lineItems) {
