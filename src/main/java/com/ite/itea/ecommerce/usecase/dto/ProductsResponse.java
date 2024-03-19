@@ -2,6 +2,8 @@ package com.ite.itea.ecommerce.usecase.dto;
 
 import com.ite.itea.ecommerce.domain.retail.Product;
 
-public record ProductResponse(Product product) {
+import java.util.List;
+
+public record ProductsResponse(List<Product> products) {
 
 }
