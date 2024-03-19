@@ -1,10 +1,13 @@
 package com.ite.itea.ecommerce.domain.retail;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ite.itea.ecommerce.domain.core.EuroPrice;
 
 public abstract class Product {
 
+    @JsonProperty
     private final ProductId id;
+    @JsonProperty
     private final String name;
 
     public Product(ProductId id, String name) {
@@ -25,6 +28,7 @@ public abstract class Product {
         return "";
     }
 
+    @JsonProperty
     public abstract EuroPrice price();
 
     @Override

@@ -4,7 +4,8 @@ import com.ite.itea.ecommerce.domain.core.EuroPrice;
 import com.ite.itea.ecommerce.domain.retail.*;
 import com.ite.itea.ecommerce.usecase.port.ProductRepository;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 public class InMemoryProductRepository implements ProductRepository {
 
@@ -74,5 +75,10 @@ public class InMemoryProductRepository implements ProductRepository {
         return entries.stream()
                 .filter(entry -> entry.id().equals(id))
                 .findFirst();
+    }
+
+    @Override
+    public List<Product> getAll() {
+        return entries;
     }
 }

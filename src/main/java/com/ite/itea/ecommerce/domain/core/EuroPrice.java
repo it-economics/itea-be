@@ -1,5 +1,7 @@
 package com.ite.itea.ecommerce.domain.core;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -15,6 +17,7 @@ public final class EuroPrice {
      * example, and how many decimal places we want to support (i.e., fractional cents) depends on
      * the domain (i.e., the business rules).
      */
+    @JsonProperty
     private final long cents;
 
     private EuroPrice(long cents) {
