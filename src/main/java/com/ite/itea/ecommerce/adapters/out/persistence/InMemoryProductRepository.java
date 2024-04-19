@@ -13,33 +13,39 @@ public class InMemoryProductRepository implements ProductRepository {
             new Picture(
                     new ProductId("1"),
                     "Picture \"Finland\"",
+                    "pictureFinland.jpeg",
                     EuroPrice.ofCents(1499)
             ),
             new Picture(
                     new ProductId("2"),
                     "Picture \"Oslo\"",
+                    "pictureOslo.jpeg",
                     EuroPrice.ofCents(999)
             ),
             new Picture(
                     new ProductId("3"),
                     "Picture \"Sweden\"",
+                    "pictureSweden.jpeg",
                     EuroPrice.ofCents(1299)
             ),
             new Table(
                     new ProductId("4"),
                     "Table \"Lola\"",
+                    "tableLola.png",
                     EuroPrice.ofCents(3000),
                     EuroPrice.ofCents(1000)
             ),
             new Table(
                     new ProductId("5"),
                     "Table \"Lotta\"",
+                    "tableLotta.png",
                     EuroPrice.ofCents(1000),
                     EuroPrice.ofCents(1000)
             ),
             new Chair(
                     new ProductId("6"),
                     "Chair \"Olaf\"",
+                    "chairOlaf.png",
                     EuroPrice.ofCents(500),
                     EuroPrice.ofCents(500),
                     EuroPrice.ofCents(500)
@@ -47,6 +53,7 @@ public class InMemoryProductRepository implements ProductRepository {
             new Chair(
                     new ProductId("7"),
                     "Chair \"Knut\"",
+                    "chairKnut.png",
                     EuroPrice.ofCents(400),
                     EuroPrice.ofCents(1000),
                     EuroPrice.ofCents(1500)
@@ -54,6 +61,7 @@ public class InMemoryProductRepository implements ProductRepository {
             new Chair(
                     new ProductId("8"),
                     "Chair \"Lars\"",
+                    "chairLars.png",
                     EuroPrice.ofCents(200),
                     EuroPrice.ofCents(2000),
                     EuroPrice.ofCents(3000)
@@ -61,11 +69,13 @@ public class InMemoryProductRepository implements ProductRepository {
             new Wardrobe(
                     new ProductId("9"),
                     "Wardrobe \"Ingeborg\"",
+                    "wardrobeIngeborg.png",
                     EuroPrice.ofEurosAndCents(249, 99)
             ),
             new Closet(
                     new ProductId("10"),
                     "Closet \"Ragnarök\"",
+                    "closetRagnarok.png",
                     EuroPrice.ofEurosAndCents(329, 99)
             )
     );
