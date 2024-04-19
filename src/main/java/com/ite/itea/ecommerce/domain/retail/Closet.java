@@ -6,8 +6,8 @@ public final class Closet extends Product {
 
     private final EuroPrice price;
 
-    public Closet(ProductId id, String name, EuroPrice price) {
-        super(id, name);
+    public Closet(ProductId id, String name, String imageName, EuroPrice price) {
+        super(id, name, imageName);
         this.price = price;
     }
 

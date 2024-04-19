@@ -8,8 +8,8 @@ public final class Chair extends Product {
     private final EuroPrice seatPrice;
     private final EuroPrice backRestPrice;
 
-    public Chair(ProductId id, String name, EuroPrice legPrice, EuroPrice seatPrice, EuroPrice backRestPrice) {
-        super(id, name);
+    public Chair(ProductId id, String name, String imageName, EuroPrice legPrice, EuroPrice seatPrice, EuroPrice backRestPrice) {
+        super(id, name, imageName);
         this.legPrice = legPrice;
         this.seatPrice = seatPrice;
         this.backRestPrice = backRestPrice;
