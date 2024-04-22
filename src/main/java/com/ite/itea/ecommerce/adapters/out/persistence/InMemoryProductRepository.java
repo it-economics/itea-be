@@ -13,19 +13,19 @@ public class InMemoryProductRepository implements ProductRepository {
             new Picture(
                     new ProductId("1"),
                     "Picture \"Finland\"",
-                    "pictureFinland.jpeg",
+                    "pictureFinland.png",
                     EuroPrice.ofCents(1499)
             ),
             new Picture(
                     new ProductId("2"),
                     "Picture \"Oslo\"",
-                    "pictureOslo.jpeg",
+                    "pictureOslo.png",
                     EuroPrice.ofCents(999)
             ),
             new Picture(
                     new ProductId("3"),
                     "Picture \"Sweden\"",
-                    "pictureSweden.jpeg",
+                    "pictureSweden.png",
                     EuroPrice.ofCents(1299)
             ),
             new Table(
