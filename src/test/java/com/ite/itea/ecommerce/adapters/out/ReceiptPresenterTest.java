@@ -69,7 +69,7 @@ class ReceiptPresenterTest {
                                         3
                                 )
                         ),
-                        EuroPrice.ofEurosAndCents(383, 07),
+                        EuroPrice.ofEurosAndCents(383, 7),
                         "itea \nA closet 127,69\u00A0€ * 3\nTotal 383,07\u00A0€"
                 )
         );
