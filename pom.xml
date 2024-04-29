@@ -119,7 +119,7 @@
                         <artifactId>openapi-generator-maven-plugin</artifactId>
                         <version>5.3.0</version>
                         <executions>
-                            <execution>
+                            <!--<execution>
                                 <id>generate-client-angular</id>
                                 <phase>post-integration-test</phase>
                                 <goals>
@@ -128,7 +128,7 @@
                                 <configuration>
                                     <inputSpec>${project.basedir}/target/apidoc/itea-openapi.json</inputSpec>
                                     <generatorName>typescript-angular</generatorName>
-                                    <!-- https://openapi-generator.tech/docs/generators/typescript-angular/-->
+                                    &lt;!&ndash; https://openapi-generator.tech/docs/generators/typescript-angular/&ndash;&gt;
                                     <configOptions>
                                         <apiModulePrefix>Itea</apiModulePrefix>
                                         <enumNameSuffix>Itea</enumNameSuffix>
@@ -138,22 +138,22 @@
                                     </configOptions>
                                     <output>${project.basedir}/target/generated-client/angular/</output>
                                 </configuration>
-                            </execution>
+                            </execution>-->
                             <execution>
-                                <id>generate-client-jxjs</id>
+                                <id>generate-client-tsfetch</id>
                                 <phase>post-integration-test</phase>
                                 <goals>
                                     <goal>generate</goal>
                                 </goals>
                                 <configuration>
                                     <inputSpec>${project.basedir}/target/apidoc/itea-openapi.json</inputSpec>
-                                    <generatorName>typescript-rxjs</generatorName>
-                                    <!-- https://openapi-generator.tech/docs/generators/typescript-rxjs/-->
+                                    <generatorName>typescript-fetch</generatorName>
+                                    <!-- https://openapi-generator.tech/docs/generators/typescript-fetch/-->
                                     <configOptions>
                                         <enumNameSuffix>Itea</enumNameSuffix>
                                         <nullSafeAdditionalProps>true</nullSafeAdditionalProps>
                                     </configOptions>
-                                    <output>${project.basedir}/target/generated-client/rxjs/</output>
+                                    <output>${project.basedir}/target/generated-client/itea-client-tsfetch/</output>
                                 </configuration>
                             </execution>
                         </executions>
