@@ -10,7 +10,7 @@ public abstract class Product {
     @JsonProperty
     private final String name;
     @JsonProperty
-    public final String imageName;
+    private final String imageName;
 
     public Product(ProductId id, String name) {
         this.id = id;
@@ -29,6 +29,10 @@ public abstract class Product {
 
     public String name() {
         return name;
+    }
+
+    public String imageName() {
+        return imageName;
     }
 
     public String description() {
