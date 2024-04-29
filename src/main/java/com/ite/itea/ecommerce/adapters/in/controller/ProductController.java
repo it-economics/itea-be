@@ -1,6 +1,5 @@
 package com.ite.itea.ecommerce.adapters.in.controller;
 
-import com.ite.itea.ecommerce.adapters.out.persistence.InMemoryProductRepository;
 import com.ite.itea.ecommerce.domain.retail.Product;
 import com.ite.itea.ecommerce.domain.retail.ProductId;
 import com.ite.itea.ecommerce.usecase.FindAProductUseCase;
@@ -24,14 +23,14 @@ import java.util.Optional;
 @Tag(name = "Product")
 public class ProductController {
 
-    private final GetProductsUseCase getProductsUseCase = new GetProductsUseCase(
-            new InMemoryProductRepository()
-    );
+    private final GetProductsUseCase getProductsUseCase;
 
-    private final FindAProductUseCase findAProductUseCase = new FindAProductUseCase(
-            new InMemoryProductRepository()
-    );
+    private final FindAProductUseCase findAProductUseCase;
 
+    public ProductController(FindAProductUseCase findAProductUseCase, GetProductsUseCase getProductsUseCase) {
+        this.findAProductUseCase = findAProductUseCase;
+        this.getProductsUseCase = getProductsUseCase;
+    }
 
     @Operation(summary = "returns all products", description = "returns all products from the data store")
     @ResponseBody

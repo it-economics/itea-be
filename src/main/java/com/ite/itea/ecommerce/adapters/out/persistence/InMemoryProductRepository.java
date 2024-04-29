@@ -3,10 +3,12 @@ package com.ite.itea.ecommerce.adapters.out.persistence;
 import com.ite.itea.ecommerce.domain.core.EuroPrice;
 import com.ite.itea.ecommerce.domain.retail.*;
 import com.ite.itea.ecommerce.usecase.port.ProductRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class InMemoryProductRepository implements ProductRepository {
 
     private final List<Product> entries = List.of(
