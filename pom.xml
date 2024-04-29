@@ -64,6 +64,12 @@
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.32</version>
+            <optional>true</optional>
+        </dependency>
 
     </dependencies>
 
@@ -91,6 +97,12 @@
                                 <SPRING_APPLICATION_ADMIN_ENABLED>true</SPRING_APPLICATION_ADMIN_ENABLED>
                                 <SERVER_PORT>9000</SERVER_PORT>
                             </environmentVariables>
+                            <excludes>
+                                <exclude>
+                                    <groupId>org.projectlombok</groupId>
+                                    <artifactId>lombok</artifactId>
+                                </exclude>
+                            </excludes>
                         </configuration>
                         <executions>
                             <execution>

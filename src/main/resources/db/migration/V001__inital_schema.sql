@@ -1,37 +1,38 @@
 CREATE TABLE PRODUCT_TYPE
 (
-    id   INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(250) NOT NULL
+    ID   INT AUTO_INCREMENT PRIMARY KEY,
+    NAME VARCHAR(250) NOT NULL
 );
 
 CREATE TABLE PRODUCT
 (
-    id              INT AUTO_INCREMENT PRIMARY KEY,
-    name            VARCHAR(250) NOT NULL,
-    imageName       VARCHAR(250),
-    description     TEXT,
-    product_type_id INT          NOT NULL,
-    FOREIGN KEY (product_type_id) REFERENCES PRODUCT_TYPE (id)
+    ID              INT AUTO_INCREMENT PRIMARY KEY,
+    NAME            VARCHAR(250) NOT NULL,
+    IMAGE_NAME       VARCHAR(250),
+    DESCRIPTION     CLOB,
+    PRODUCT_TYPE_ID INT          NOT NULL,
+    FOREIGN KEY (PRODUCT_TYPE_ID) REFERENCES PRODUCT_TYPE (id)
 );
 
 CREATE TABLE PART
 (
-    id    INT AUTO_INCREMENT PRIMARY KEY,
-    name  VARCHAR(250)   NOT NULL,
-    price DECIMAL(10, 2) NOT NULL
+    ID    INT AUTO_INCREMENT PRIMARY KEY,
+    NAME  VARCHAR(250)   NOT NULL,
+    PRICE DECIMAL(10, 2) NOT NULL
 );
 
 CREATE TABLE PRODUCT_PARTS
 (
-    product_id INT NOT NULL,
-    part_id    INT NOT NULL,
-    quantity   INT NOT NULL,
-    FOREIGN KEY (product_id) REFERENCES PRODUCT (id),
-    FOREIGN KEY (part_id) REFERENCES PART (id)
+    PRODUCT_ID INT NOT NULL,
+    PART_ID    INT NOT NULL,
+    QUANTITY   INT NOT NULL,
+    FOREIGN KEY (PRODUCT_ID) REFERENCES PRODUCT (id),
+    FOREIGN KEY (PART_ID) REFERENCES PART (id),
+    PRIMARY KEY (PRODUCT_ID, PART_ID)
 );
 
 
-INSERT INTO PRODUCT_TYPE (id, name) VALUES
+INSERT INTO PRODUCT_TYPE (ID, NAME) VALUES
     (1,'Picture'),
     (2,'Table'),
     (3,'Chair'),
@@ -39,7 +40,7 @@ INSERT INTO PRODUCT_TYPE (id, name) VALUES
     (5,'Closet'),
     (6, 'others');
 
-INSERT INTO PRODUCT (id, name, imageName, product_type_id, description) VALUES
+INSERT INTO PRODUCT (ID, NAME, IMAGE_NAME, PRODUCT_TYPE_ID, DESCRIPTION) VALUES
     (1, 'Picture "Finland"', 'pictureFinland.png', 1, 'The ''Picture of Finland'' is more than just a piece of art; it''s a window to a world of tranquility and wonder.\n\nWhether you''re looking to add a touch of Nordic charm to your living room, bedroom, or office, this exquisite artwork is the perfect choice. Its vibrant colors and intricate design will effortlessly complement any décor style, adding a sense of sophistication and elegance to your space.\n\nTransform your home into a sanctuary of beauty and serenity with the ''Picture of Finland'' – where every glance is a journey into the captivating landscapes of this enchanting country.'),
     (2, 'Picture "Oslo"', 'pictureOslo.png', 1, 'Introducing our newest masterpiece, a captivating portrayal of Oslo''s allure captured in every brushstroke. This exquisite picture invites you to immerse yourself in the vibrant essence of Norway''s capital city, where modernity meets timeless charm.\n\nAs a destination for premium home furnishings, we take pride in curating pieces that elevate your living space. Our Oslo-inspired picture is no exception, offering a window into the city''s dynamic streets, iconic landmarks, and picturesque waterfront.\n\nWhether adorning your living room, study, or hallway, this artwork adds a touch of cosmopolitan elegance to any room. Its rich colors and intricate details evoke a sense of wanderlust and sophistication, making it a conversation piece that ignites your imagination and sparks curiosity.\n\nElevate your home decor with the allure of Oslo – where every glance at this captivating picture is a journey through the heart of Norway''s captivating capital.'),
     (3, 'Picture "Sweden"', 'pictureSweden.png', 1, 'Introducing our newest addition, a captivating depiction of Sweden''s enchanting landscapes and vibrant culture. This exquisite picture invites you to explore the beauty and charm of this Scandinavian gem from the comfort of your home.\n\nAs purveyors of premium home furnishings, we curate pieces that inspire and elevate your living space. Our Sweden-inspired picture captures the essence of the country''s lush forests, serene lakes, and historic architecture, transporting you to a world of natural beauty and timeless elegance.\n\nWhether displayed in your living room, bedroom, or office, this artwork adds a touch of Scandinavian sophistication to any setting. Its harmonious blend of colors and intricate details creates a captivating focal point that sparks conversation and invites admiration.\n\nTransform your home into a sanctuary of Scandinavian style and tranquility with our Sweden-inspired picture – a tribute to the captivating allure of this enchanting country.'),
@@ -52,7 +53,7 @@ INSERT INTO PRODUCT (id, name, imageName, product_type_id, description) VALUES
     (10, 'Closet "Ragnarök"', 'closetRagnarok.png', 5, 'Embark on a journey through time and myth with Ragnarok, our extraordinary closet that channels the mystique of ancient gods and legends. Its design transports you to a bygone era, where the whispers of old gods and the echoes of epic tales linger in every detail.\n\nRagnarok isn''t just a closet; it''s a living artifact that captures the essence of ancient craftsmanship and mythical allure. With its intricate design and robust structure, Ragnarok stands as a testament to enduring strength and timeless elegance.\n\nWhile some may speak of whispers and legends, Ragnarok is a symbol of sophistication and functionality, offering ample storage space while adding a touch of mythical charm to your living space.\n\nEmbrace the mystic aura of Ragnarok, where the lines between reality and myth blur, inviting you to store your belongings in a piece that feels like a relic from a forgotten age.'),
     (11, 'Surprise', 'surprise.png', 6, 'What it will be?');
 
-INSERT INTO PART (id, name, price) VALUES
+INSERT INTO PART (ID, NAME, PRICE) VALUES
         (1, 'Picture "Finland"', 14.99),
         (2, 'Picture "Oslo"', 9.99),
         (3, 'Picture "Sweden"', 12.99),
@@ -75,7 +76,7 @@ INSERT INTO PART (id, name, price) VALUES
         (20, 'Surprise 2', 7.77);
 
 
-INSERT INTO PRODUCT_PARTS (product_id, part_id, quantity) VALUES
+INSERT INTO PRODUCT_PARTS (PRODUCT_ID, PART_ID, QUANTITY) VALUES
         (1, 1, 1),
         (2,2,1),
         (3,3,1),
