@@ -18,20 +18,20 @@ public class JpaProductRepositoryImpl implements ProductRepository {
 
     private final JpaProductDatabaseRepository jpaProductDatabaseRepository;
 
-    public JpaProductRepositoryImpl(JpaProductDatabaseRepository jpaProductDbRepository) {
+    public JpaProductRepositoryImpl(final JpaProductDatabaseRepository jpaProductDbRepository) {
         this.jpaProductDatabaseRepository = jpaProductDbRepository;
     }
 
     @Override
     public Optional<Product> byId(ProductId id) {
         final Optional<ProductDBO> productDbo = this.jpaProductDatabaseRepository.findOneById(Long.parseLong(id.internalID()));
-        return productDbo.isPresent() ? toProduct(productDbo.get()) : Optional.empty();
+        return productDbo.flatMap(JpaProductRepositoryImpl::toProduct);
     }
     @Override
     public List<Product> getAll() {
         return this.jpaProductDatabaseRepository.findAll()
                 .stream()
-                .map(productDbo -> toProduct(productDbo))
+                .map(JpaProductRepositoryImpl::toProduct)
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toList());
@@ -45,7 +45,7 @@ public class JpaProductRepositoryImpl implements ProductRepository {
                 productDbo.getDescription());
         product.setProductParts(productDbo.getProductParts()
                 .stream()
-                .map(productPart -> toProductPart(productPart))
+                .map(JpaProductRepositoryImpl::toProductPart)
                 .collect(Collectors.toList()));
         return Optional.of(product);
     }
