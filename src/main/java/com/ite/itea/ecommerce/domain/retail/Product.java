@@ -11,6 +11,8 @@ public abstract class Product {
     private final String name;
     @JsonProperty
     private final String imageName;
+    @JsonProperty
+    protected String description = "";
 
     public Product(ProductId id, String name) {
         this.id = id;
@@ -36,10 +38,8 @@ public abstract class Product {
     }
 
     public String description() {
-        // Empty by default, but subclasses can override.
-        return "";
+        return description;
     }
-
 
     @JsonProperty
     public abstract EuroPrice price();

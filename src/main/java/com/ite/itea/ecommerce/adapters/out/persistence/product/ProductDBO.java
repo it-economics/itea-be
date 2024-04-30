@@ -6,10 +6,15 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
-import java.util.Set;
+import lombok.NoArgsConstructor;
+import java.util.List;
 
-
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Entity
 @Table(name = "PRODUCT")
@@ -23,7 +28,7 @@ class ProductDBO {
     private String imageName;
 
     @OneToMany(mappedBy = "productId")
-    private Set<ProductPartsDBO> productParts;
+    private List<ProductPartsDBO> productParts;
 
     @ManyToOne
     private ProductTypeDBO productType;

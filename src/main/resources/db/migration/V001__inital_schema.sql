@@ -37,8 +37,8 @@ INSERT INTO PRODUCT_TYPE (ID, NAME) VALUES
     (2,'Table'),
     (3,'Chair'),
     (4,'Wardrobe'),
-    (5,'Closet'),
-    (6, 'others');
+    (5,'Closet');
+
 
 INSERT INTO PRODUCT (ID, NAME, IMAGE_NAME, PRODUCT_TYPE_ID, DESCRIPTION) VALUES
     (1, 'Picture "Finland"', 'pictureFinland.png', 1, 'The ''Picture of Finland'' is more than just a piece of art; it''s a window to a world of tranquility and wonder.\n\nWhether you''re looking to add a touch of Nordic charm to your living room, bedroom, or office, this exquisite artwork is the perfect choice. Its vibrant colors and intricate design will effortlessly complement any décor style, adding a sense of sophistication and elegance to your space.\n\nTransform your home into a sanctuary of beauty and serenity with the ''Picture of Finland'' – where every glance is a journey into the captivating landscapes of this enchanting country.'),
@@ -50,8 +50,7 @@ INSERT INTO PRODUCT (ID, NAME, IMAGE_NAME, PRODUCT_TYPE_ID, DESCRIPTION) VALUES
     (7, 'Chair "Knut"', 'chairKnut.png', 3, 'Step into the future of seating comfort with Knut, a chair that seamlessly blends modern design with ergonomic excellence. Its sleek, rounded silhouette gives it an appearance that''s perfectly suited for contemporary spaces, while its innovative leg structure, reminiscent of a tripod but with four legs, adds a touch of architectural intrigue.\n\nKnut isn''t just a chair; it''s a statement of forward-thinking style and functionality. Its unique design not only catches the eye but also provides stability and support, making it a comfortable seating option for long hours of relaxation or work.\n\nExperience the harmony of form and function with Knut, where every curve and angle is crafted to enhance your seating experience. Whether placed in a living room, office, or study, Knut adds a touch of modern sophistication while ensuring unparalleled comfort for every sitter.'),
     (8, 'Chair "Lars"','chairLars.png', 3,'Introducing Lars, the epitome of Viking-inspired luxury in our chair collection. With its ancient yet regal appearance, Lars exudes a sense of Nordic grandeur, blending traditional Viking style with modern comfort.\n\nCrafted with a generous amount of colored fur, Lars is not just a chair; it''s a statement piece that commands attention and admiration. Its unique design captures the essence of Viking culture, offering a luxurious seating experience that transports you to a world of rugged beauty and timeless charm.\n\nWhether placed in a cozy reading nook, a majestic study, or as a standout piece in your living room, Lars adds a touch of Nordic elegance and warmth to your home decor. Embrace the spirit of the Vikings with Lars, where comfort meets heritage in a chair that embodies strength, style, and sophistication.'),
     (9, 'Wardrobe "Ingeborg"', 'wardrobeIngeborg.png', 4, 'Discover the epitome of practicality and style with Ingeborg, our versatile wardrobe designed to meet your storage needs with ease. Featuring six smaller compartments and two larger cases, Ingeborg combines functionality with a sleek, minimalist aesthetic, making it a perfect addition to any modern living space.\n\nIngeborg isn''t just a wardrobe; it''s a storage solution that embodies practical elegance. Its clean lines and well-organized compartments offer ample space to keep your clothes, accessories, and essentials neatly arranged and easily accessible.\n\nExperience the convenience and sophistication of Ingeborg, where practicality meets contemporary design to elevate your storage experience. Say goodbye to clutter and hello to a well-organized, stylish space that reflects your impeccable taste.'),
-    (10, 'Closet "Ragnarök"', 'closetRagnarok.png', 5, 'Embark on a journey through time and myth with Ragnarok, our extraordinary closet that channels the mystique of ancient gods and legends. Its design transports you to a bygone era, where the whispers of old gods and the echoes of epic tales linger in every detail.\n\nRagnarok isn''t just a closet; it''s a living artifact that captures the essence of ancient craftsmanship and mythical allure. With its intricate design and robust structure, Ragnarok stands as a testament to enduring strength and timeless elegance.\n\nWhile some may speak of whispers and legends, Ragnarok is a symbol of sophistication and functionality, offering ample storage space while adding a touch of mythical charm to your living space.\n\nEmbrace the mystic aura of Ragnarok, where the lines between reality and myth blur, inviting you to store your belongings in a piece that feels like a relic from a forgotten age.'),
-    (11, 'Surprise', 'surprise.png', 6, 'What it will be?');
+    (10, 'Closet "Ragnarök"', 'closetRagnarok.png', 5, 'Embark on a journey through time and myth with Ragnarok, our extraordinary closet that channels the mystique of ancient gods and legends. Its design transports you to a bygone era, where the whispers of old gods and the echoes of epic tales linger in every detail.\n\nRagnarok isn''t just a closet; it''s a living artifact that captures the essence of ancient craftsmanship and mythical allure. With its intricate design and robust structure, Ragnarok stands as a testament to enduring strength and timeless elegance.\n\nWhile some may speak of whispers and legends, Ragnarok is a symbol of sophistication and functionality, offering ample storage space while adding a touch of mythical charm to your living space.\n\nEmbrace the mystic aura of Ragnarok, where the lines between reality and myth blur, inviting you to store your belongings in a piece that feels like a relic from a forgotten age.');
 
 INSERT INTO PART (ID, NAME, PRICE) VALUES
         (1, 'Picture "Finland"', 14.99),
@@ -71,9 +70,7 @@ INSERT INTO PART (ID, NAME, PRICE) VALUES
         (15, 'Chair "Lars" seat', 20.00),
         (16, 'Chair "Lars" back rest', 30.00),
         (17, 'Wardrobe "Ingeborg"', 249.99),
-        (18, 'Closet "Ragnarök"', 329.99),
-        (19, 'Surprise 1', 3.33),
-        (20, 'Surprise 2', 7.77);
+        (18, 'Closet "Ragnarök"', 329.99);
 
 
 INSERT INTO PRODUCT_PARTS (PRODUCT_ID, PART_ID, QUANTITY) VALUES
@@ -94,9 +91,7 @@ INSERT INTO PRODUCT_PARTS (PRODUCT_ID, PART_ID, QUANTITY) VALUES
         (8,15,1),
         (8,16,1),
         (9,17,1),
-        (10,18,1),
-        (11,19,2),
-        (11,20,2);
+        (10,18,1);
 
 
 
