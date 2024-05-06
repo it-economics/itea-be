@@ -43,7 +43,7 @@ public class JpaProductRepositoryImpl implements ProductRepository {
                 productDbo.getName(),
                 productDbo.getImageName(),
                 productDbo.getDescription());
-        product.setProductParts(productDbo.getProductParts()
+        product.addProductParts(productDbo.getProductParts()
                 .stream()
                 .map(JpaProductRepositoryImpl::toProductPart)
                 .collect(Collectors.toList()));

@@ -2,7 +2,7 @@ INSERT INTO PRODUCT_TYPE (ID, NAME) VALUES
     (5555, 'Surprises');
 
 INSERT INTO PRODUCT (ID, NAME, IMAGE_NAME, PRODUCT_TYPE_ID, DESCRIPTION) VALUES
-    (9999, 'Surprise', 'surprise.png', 5555, 'What it will be?');
+    (9999, 'Surprise', 'surprise.png', 5555, 'What will it be?');
 
 INSERT INTO PART (ID, NAME, PRICE) VALUES
    (6666, 'Surprise 1', 3.50),

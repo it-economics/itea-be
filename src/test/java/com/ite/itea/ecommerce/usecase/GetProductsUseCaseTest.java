@@ -1,12 +1,17 @@
 package com.ite.itea.ecommerce.usecase;
 
+import com.ite.itea.ecommerce.domain.retail.Product;
 import com.ite.itea.ecommerce.usecase.port.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import java.util.Collection;
+import java.util.HashSet;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class GetProductsUseCaseTest {
@@ -23,9 +28,10 @@ class GetProductsUseCaseTest {
 
     @Test
     void shouldGetProductFromRepository() {
-        sut.execute();
+        final Collection<Product> resultMock = mock(HashSet.class);
+        when(productRepository.getAll()).thenReturn(resultMock);
 
-        Mockito.verify(productRepository).getAll();
+        assertThat(sut.execute()).isEqualTo(resultMock);
     }
 
 }

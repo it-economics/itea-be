@@ -11,6 +11,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.BDDAssertions.then;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 @TestPropertySource(properties = {
         "spring.flyway.locations=classpath:db/migration,classpath:db/test_migration"
@@ -30,12 +31,14 @@ class GetOneProductTest {
         var surpriseProductId = 9999L;
         final ResponseEntity<String> response = this.testRestTemplate.getForEntity("http://localhost:" + this.port + "/product/" + surpriseProductId, String.class);
 
-        then(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        then(response.getBody()).contains("\"id\":{\"internalID\":\"9999\"}");
-        then(response.getBody()).contains("\"name\":\"Surprise\"");
-        then(response.getBody()).contains("\"imageName\":\"surprise.png\"");
-        then(response.getBody()).contains("\"description\":\"What it will be?\"");
-        then(response.getBody()).contains("\"price\":{\"cents\":2000}");
+        assertAll("Response",
+                () -> then(response.getStatusCode()).isEqualTo(HttpStatus.OK),
+                () -> then(response.getBody()).contains("\"id\":{\"internalID\":\"9999\"}"),
+                () -> then(response.getBody()).contains("\"name\":\"Surprise\""),
+                () -> then(response.getBody()).contains("\"imageName\":\"surprise.png\""),
+                () -> then(response.getBody()).contains("\"description\":\"What will it be?\""),
+                () -> then(response.getBody()).contains("\"price\":{\"cents\":2000}")
+        );
 
     }
 

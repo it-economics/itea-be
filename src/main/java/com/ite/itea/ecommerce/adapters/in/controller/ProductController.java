@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.util.List;
+import java.util.Collection;
 import java.util.Optional;
 
 @Controller
@@ -37,7 +36,7 @@ public class ProductController {
     @GetMapping(path = "/products",
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ProductsResponse findAllProducts() {
-        final List<Product> products = getProductsUseCase.execute();
+        final Collection<Product> products = getProductsUseCase.execute();
         return new ProductsResponse(products);
     }
 

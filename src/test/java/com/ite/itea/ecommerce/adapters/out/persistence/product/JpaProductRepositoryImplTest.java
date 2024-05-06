@@ -4,6 +4,7 @@ import com.ite.itea.ecommerce.domain.core.EuroPrice;
 import com.ite.itea.ecommerce.domain.retail.CustomProduct;
 import com.ite.itea.ecommerce.domain.retail.Product;
 import com.ite.itea.ecommerce.domain.retail.ProductId;
+import com.ite.itea.ecommerce.domain.retail.ProductPart;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -62,21 +64,17 @@ class JpaProductRepositoryImplTest {
 
         final var customProduct = (CustomProduct) product;
 
-        assertThat(customProduct.id()).isEqualTo(new ProductId("3"));
-        assertThat(customProduct.name()).isEqualTo("Product Name");
-        assertThat(customProduct.description()).isEqualTo("Product Description");
-        assertThat(customProduct.imageName()).isEqualTo("Product Image Name");
+        assertAll("Product",
+                () -> assertThat(customProduct.id()).isEqualTo(new ProductId("3")),
+                () -> assertThat(customProduct.name()).isEqualTo("Product Name"),
+                () -> assertThat(customProduct.description()).isEqualTo("Product Description"),
+                () -> assertThat(customProduct.imageName()).isEqualTo("Product Image Name"),
+                () -> assertThat(customProduct.getProductParts()).containsExactlyInAnyOrder(
+                        new ProductPart(EuroPrice.ofCents(250), 2, "Part1 Name"),
+                        new ProductPart(EuroPrice.ofCents(500), 3, "Part2 Name")
+                )
+        );
 
-        assertThat(customProduct.getProductParts()).hasSize(2);
-        final var part1 = customProduct.getProductParts().get(0);
-        assertThat(part1.name()).isEqualTo("Part1 Name");
-        assertThat(part1.price()).isEqualTo(EuroPrice.ofCents(250));
-        assertThat(part1.quantity()).isEqualTo(2);
-
-        final var part2 = customProduct.getProductParts().get(1);
-        assertThat(part2.name()).isEqualTo("Part2 Name");
-        assertThat(part2.price()).isEqualTo(EuroPrice.ofCents(500));
-        assertThat(part2.quantity()).isEqualTo(3);
     }
 
     private ProductDBO buildTestDatabaseProduct() {

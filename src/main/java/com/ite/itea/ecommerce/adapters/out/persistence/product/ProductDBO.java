@@ -10,7 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import java.util.List;
+import java.util.Collection;
 
 @Builder
 @NoArgsConstructor
@@ -28,7 +28,7 @@ class ProductDBO {
     private String imageName;
 
     @OneToMany(mappedBy = "productId")
-    private List<ProductPartsDBO> productParts;
+    private Collection<ProductPartsDBO> productParts;
 
     @ManyToOne
     private ProductTypeDBO productType;

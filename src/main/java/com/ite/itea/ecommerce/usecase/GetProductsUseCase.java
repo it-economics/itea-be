@@ -3,8 +3,7 @@ package com.ite.itea.ecommerce.usecase;
 import com.ite.itea.ecommerce.domain.retail.Product;
 import com.ite.itea.ecommerce.usecase.port.ProductRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import java.util.Collection;
 
 @Service
 public class GetProductsUseCase {
@@ -15,7 +14,7 @@ public class GetProductsUseCase {
         this.productRepository = productRepository;
     }
 
-    public List<Product> execute() {
+    public Collection<Product> execute() {
         return productRepository.getAll();
     }
 }
