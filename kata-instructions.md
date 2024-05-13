@@ -12,14 +12,19 @@ help them in their digital transformation.
 
 InMemory database
 
-### Tasks
+## Tasks
 
-## Task 1: how to persist
-## Task 2: model data structure
-## Task 3: JPA Repository
-## Task 4: create database structure and insert data / versioning 
-## Task 5: settings - versioning vs. jpa 
+### Task 1: how to persist
 
+### Task 2: model data structure
+
+### Task 3: JPA Repository
+
+### Task 4: create database structure and insert data / versioning
+
+### Task 5: settings - versioning vs. jpa
+
+## Needful Things
 
 ### dependencies
 
@@ -60,6 +65,7 @@ InMemory database
 ```
 
 ### Application Properties
+
 ```properties
 #can be accessed via localhost:9000/h2-console
 spring.h2.console.enabled=true
@@ -77,5 +83,50 @@ spring.jpa.hibernate.ddl-auto=validate
 spring.flyway.url=jdbc:h2:mem:testdb
 spring.flyway.user=sa
 spring.flyway.password=
+```
+
+
+### MongoDB Product Database Sample
+```json
+[
+  {
+    "_id": "18f164b2-ecec-4eb7-8c3f-1ea4cf6a3a0e",
+    "name": "Chair \"Olaf\"",
+    "imageName": "chairOlaf.png",
+    "description": "description of chair Olaf, its quite beautiful and really comfortable.",
+    "parts": [ 
+        {
+          "count": 4,
+          "price": "5.00",
+          "name": "Leg"
+        },
+        {
+          "count": 1,
+          "price": "5.00",
+          "name": "Seat"
+        },
+        {
+          "count": 1,
+          "price": "5.00",
+          "name": "BackRest"
+        }
+    ],
+    "_class": "com.ite.itea.ecommerce.adapters.out.persistence.product.ProductDBO"
+  },
+  {
+    "_id": "2df1845a-55ec-4e39-9b90-7d4dca60c47b",
+    "name": "Picture \"Finland\"",
+    "imageName": "pictureFinland.png",
+    "description": "description of Picture Finland, its really worth seeing.",
+    "parts": [
+      {
+        "count": 1,
+        "price": "14.99",
+        "name": "Picture"
+      }
+    ],
+    "_class": "com.ite.itea.ecommerce.adapters.out.persistence.product.ProductDBO"
+  }
+]
 ```
 
