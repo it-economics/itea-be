@@ -21,23 +21,23 @@ public class ShoppingCartTest {
                 new TestCase(
                         "A cart with multiple products has a total price equal to the sum of their prices.",
                         List.of(
-                                new Picture(ProductId.random(), "A beautiful picture", EuroPrice.ofCents(1337)),
-                                new Picture(ProductId.random(), "An ugly picture", EuroPrice.ofCents(42))
+                                new Picture(ProductId.random(), "A beautiful picture", "imageName", EuroPrice.ofCents(1337)),
+                                new Picture(ProductId.random(), "An ugly picture", "imageName",EuroPrice.ofCents(42))
                         ),
                         EuroPrice.ofCents(1379)
                 ),
                 new TestCase(
                         "A voucher reduces the total price by the respective discount amount.",
                         List.of(
-                                new Picture(ProductId.random(), "Picture 1", EuroPrice.ofEurosAndCents(10, 99)),
-                                new Picture(ProductId.random(), "Picture 2", EuroPrice.ofEurosAndCents(123, 42))
+                                new Picture(ProductId.random(), "Picture 1","imageName", EuroPrice.ofEurosAndCents(10, 99)),
+                                new Picture(ProductId.random(), "Picture 2","imageName", EuroPrice.ofEurosAndCents(123, 42))
                         ),
                         List.of(Voucher.ofValue(EuroPrice.ofEurosAndCents(104, 12))),
                         EuroPrice.ofEurosAndCents(30, 29)
                 ),
                 new TestCase(
                         "Vouchers higher than the sum of the products' prices cannot reduce the total price below 0.",
-                        List.of(new Picture(ProductId.random(), "Picture 1", EuroPrice.ofEuros(10))),
+                        List.of(new Picture(ProductId.random(), "Picture 1", "imageName", EuroPrice.ofEuros(10))),
                         List.of(Voucher.ofValue(EuroPrice.ofEuros(100))),
                         EuroPrice.zero()
                 )
