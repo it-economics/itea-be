@@ -1,6 +1,5 @@
 package com.ite.itea.ecommerce.adapters.in.controller;
 
-import com.ite.itea.ecommerce.adapters.out.persistence.InMemoryProductRepository;
 import com.ite.itea.ecommerce.domain.retail.Product;
 import com.ite.itea.ecommerce.domain.retail.ProductId;
 import com.ite.itea.ecommerce.usecase.FindAProductUseCase;
@@ -16,29 +15,28 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.util.List;
+import java.util.Collection;
 import java.util.Optional;
 
 @Controller
 @Tag(name = "Product")
 public class ProductController {
 
-    private final GetProductsUseCase getProductsUseCase = new GetProductsUseCase(
-            new InMemoryProductRepository()
-    );
+    private final GetProductsUseCase getProductsUseCase;
 
-    private final FindAProductUseCase findAProductUseCase = new FindAProductUseCase(
-            new InMemoryProductRepository()
-    );
+    private final FindAProductUseCase findAProductUseCase;
 
+    public ProductController(FindAProductUseCase findAProductUseCase, GetProductsUseCase getProductsUseCase) {
+        this.findAProductUseCase = findAProductUseCase;
+        this.getProductsUseCase = getProductsUseCase;
+    }
 
     @Operation(summary = "returns all products", description = "returns all products from the data store")
     @ResponseBody
     @GetMapping(path = "/products",
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ProductsResponse findAllProducts() {
-        final List<Product> products = getProductsUseCase.execute();
+        final Collection<Product> products = getProductsUseCase.execute();
         return new ProductsResponse(products);
     }
 
