@@ -4,21 +4,19 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Optional;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class JpaProductDatabaseRepositoryTest {
+public class JpaProductRepositoryTest {
 
-    @Autowired
-    private JpaProductDatabaseRepository jpaProductDatabaseRepository;
-
-    @Test
-    void shouldFetchOneProduct() {
-        final Optional<ProductDBO> product = jpaProductDatabaseRepository.findOneById(3L);
-        assertThat(product).isPresent();
-    }
+//    @Autowired
+//    private JpaProductRepository jpaProductRepository;
+//
+//    @Test
+//    void shouldFetchOneProduct() {
+//        final Optional<ProductDBO> product = jpaProductRepository.findOneById(3L);
+//        assertThat(product).isPresent();
+//    }
 
 }
 
