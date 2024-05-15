@@ -10,13 +10,26 @@ help them in their digital transformation.
 
 <img src="assets/images/ITEA.jpg" width="400" alt="Photo of the ITEA headquarters" />
 
-InMemory database
+Please only consider the persistence layer and think about the repository. There is a hexagonal architecture means that there will be an adapter later which transfers the read product from the persistence in our internal domain object. We can ignore this for now. But make sure that we are able to store all the relevant data in an efficient way.
 
 ## Tasks
 
 ### Task 1: how to persist
+Please discuss the different possibilities to persist the data. Some buzzwords and options:
+- CSV
+- plain text
+- json
+- Sql
+- NoSql
+- separate database server
+- NoSql MongoDB: you can find a MongoDB sample implementation in branch '15_product_data-persistence_mongoDB' and a sample how MongoDB saves the data structure in the Cheat Sheet below.
+- Repository != Database / Repository ≠ Database
+
+<b>Please decide for SQL and H2 In-Memory database at the end.</b>
 
 ### Task 2: model data structure
+
+Please model and normalize the data structure. Consider only the products from the current InMemoryProductRepository.java (com.ite.itea.ecommerce.adapters.out.persistence)
 
 ### Task 3: JPA Repository
 
