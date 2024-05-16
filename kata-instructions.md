@@ -10,6 +10,8 @@ help them in their digital transformation.
 
 <img src="assets/images/ITEA.jpg" width="400" alt="Photo of the ITEA headquarters" />
 
+Task: There is a hardcoded InMemoryRepository to hava a dataset of some products. This was a first quick and good step to provide some products for the product endpoints. Our developers raised the wish to implement this a bit more professional. Please follow the different Tasks and discuss your Ideas and solution in a small team.
+
 Please only consider the persistence layer and think about the repository. There is a hexagonal architecture means that there will be an adapter later which transfers the read product from the persistence in our internal domain object. We can ignore this for now. But make sure that we are able to store all the relevant data in an efficient way.
 
 ## Tasks
@@ -68,14 +70,24 @@ class EntityDBO {
 
 ```java
 interface RepositoryName extends JpaRepository<EntityDBO, Long> {
-    //interface, no implementation needed for standard findBy[Attribute]
+    //interface, no implementation needed for standard findBy[Attribute], findOneBy[Attribute], deleteBy[Attribute]
     //Attribute needs to be defined in EntityClass
-    findById(Long id); 
-    findByName(String name); //Name is not defined in sample above
+    Optional<EntityDBO> findOneById(Long id); 
+    List<EntityDBO> findByName(String name); //Name is not defined in sample above
+
+    List<EntityDBO> findByNameAndDescription(String name, String Description); //supports AND and OR operator  
+  
+    deleteById(Long id);
+  
+    //not needed, comes with CrudRepository
+    save(EntityDBO entity);
+    deleteAll(); //comes from CrudRepository
 }
 ```
- 
-<img src="assets/images/repository-class.png" width="400" alt="repository" />
+
+JpaRepository > extends ListCrudRepository > extends CrudRepository
+
+<img src="assets/images/repository-class.png" width="600" alt="repository" />
 
 ### Task 4: create database structure and insert data / versioning
 - Maven Flyway dependency needed
@@ -155,6 +167,7 @@ spring.flyway.password=
 
 
 ### MongoDB Product Database Sample
+
 ```json
 [
   {
@@ -162,24 +175,24 @@ spring.flyway.password=
     "name": "Chair \"Olaf\"",
     "imageName": "chairOlaf.png",
     "description": "description of chair Olaf, its quite beautiful and really comfortable.",
-    "parts": [ 
-        {
-          "count": 4,
-          "price": "5.00",
-          "name": "Leg"
-        },
-        {
-          "count": 1,
-          "price": "5.00",
-          "name": "Seat"
-        },
-        {
-          "count": 1,
-          "price": "5.00",
-          "name": "BackRest"
-        }
+    "parts": [
+      {
+        "count": 4,
+        "price": "5.00",
+        "name": "Leg"
+      },
+      {
+        "count": 1,
+        "price": "5.00",
+        "name": "Seat"
+      },
+      {
+        "count": 1,
+        "price": "5.00",
+        "name": "BackRest"
+      }
     ],
-    "_class": "com.ite.itea.ecommerce.adapters.out.persistence.product.ProductDBO"
+    "_class": "com.ite.itea.ecommerce.adapters.out.persistence.product.ChairDBO"
   },
   {
     "_id": "2df1845a-55ec-4e39-9b90-7d4dca60c47b",
@@ -193,7 +206,18 @@ spring.flyway.password=
         "name": "Picture"
       }
     ],
-    "_class": "com.ite.itea.ecommerce.adapters.out.persistence.product.ProductDBO"
+    "_class": "com.ite.itea.ecommerce.adapters.out.persistence.product.PictureDBO"
+  },
+  {
+    "_id": "2df1845a-55ec-4e39-9b90-876788",
+    "name": "Garden Bench \"Tobi\"",
+    "imageName": "tobi.png",
+    "lengthInCentimeters": 300,
+    "amountDefaultElements": 2,
+    "amountPlantElements": 4,
+    "hasBackrest": true,
+    "pricePerCentimeters": "0.12",
+    "_class": "com.ite.itea.ecommerce.adapters.out.persistence.product.GardenBenchDBO"
   }
 ]
 ```
