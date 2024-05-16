@@ -10,7 +10,7 @@ help them in their digital transformation.
 
 <img src="assets/images/ITEA.jpg" width="400" alt="Photo of the ITEA headquarters" />
 
-Task: There is a hardcoded InMemoryRepository to hava a dataset of some products. This was a first quick and good step to provide some products for the product endpoints. Our developers raised the wish to implement this a bit more professional. Please follow the different Tasks and discuss your Ideas and solution in a small team.
+Task: There is a hardcoded InMemoryRepository to hava a dataset of some products. This was a first quick and good step to provide some products for the product and products endpoints. Our developers raised the wish to implement this a bit more professional. Please follow the different Tasks and discuss your Ideas and solution in a small team.
 
 Please only consider the persistence layer and think about the repository. There is a hexagonal architecture means that there will be an adapter later which transfers the read product from the persistence in our internal domain object. We can ignore this for now. But make sure that we are able to store all the relevant data in an efficient way.
 
