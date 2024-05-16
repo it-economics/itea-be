@@ -199,13 +199,7 @@ spring.flyway.password=
     "name": "Picture \"Finland\"",
     "imageName": "pictureFinland.png",
     "description": "description of Picture Finland, its really worth seeing.",
-    "parts": [
-      {
-        "count": 1,
-        "price": "14.99",
-        "name": "Picture"
-      }
-    ],
+    "price": "14.99",
     "_class": "com.ite.itea.ecommerce.adapters.out.persistence.product.PictureDBO"
   },
   {
