@@ -32,10 +32,62 @@ Please discuss the different possibilities to persist the data. Some buzzwords a
 Please model and normalize the data structure. Consider only the products from the current InMemoryProductRepository.java (com.ite.itea.ecommerce.adapters.out.persistence)
 
 ### Task 3: JPA Repository
+- Maven JPA dependency
+- Maven H2 dependency
+- Maven Hibernate Validators dependency
+- Maven Lombok dependency
+- Repository Properties
+
+```java
+
+//lombok.*
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+
+//jakarta.*
+@Entity
+@Table(name = "EntityTableName")
+class EntityDBO {
+
+    @Id
+    private Long id;
+    @Column(name="ColumnName")
+    private String varCharString; // EntityTableName.ColumnName
+    @Lob //H2 specific
+    private String textField; //EntityTableName.TEXT_FIELD
+    
+    @OneToMany(mappedBy = "priceId")
+    private Collection<PriceDBO> prices;
+
+    @ManyToOne
+    private TypeDBO type;
+}
+```
+
+```java
+interface RepositoryName extends JpaRepository<EntityDBO, Long> {
+    //interface, no implementation needed for standard findBy[Attribute]
+    //Attribute needs to be defined in EntityClass
+    findById(Long id); 
+    findByName(String name); //Name is not defined in sample above
+}
+```
 
 ### Task 4: create database structure and insert data / versioning
+- Maven Flyway dependency needed
+- Flyway Properties needed
+- create folder resources/db/migration
+  - create sql script with naming pattern 'V[version]__[description].sql' e.g. 'V1__create_table.sql'
+  
 
 ### Task 5: settings - versioning vs. jpa
+- spring.jpa.hibernate.ddl-auto=
+    - none
+    - <b>validate</b>
+    - update
+    - create-drop
 
 ## Needful Things
 
@@ -80,6 +132,7 @@ Please model and normalize the data structure. Consider only the products from t
 ### Application Properties
 
 ```properties
+#Repository properties
 #can be accessed via localhost:9000/h2-console
 spring.h2.console.enabled=true
 spring.datasource.url=jdbc:h2:mem:testdb
@@ -87,10 +140,10 @@ spring.datasource.driverClassName=org.h2.Driver
 spring.datasource.username=sa
 spring.datasource.password=
 spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
-
 #none, validate, update, create-drop
 spring.jpa.hibernate.ddl-auto=validate
 
+#Flyway properties
 #flyway default folder 'resources/db/migration'
 #flyway default name pattern 'V[version]__[description].sql' e.g. 'V1__create_table.sql'
 spring.flyway.url=jdbc:h2:mem:testdb
