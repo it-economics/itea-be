@@ -74,6 +74,8 @@ interface RepositoryName extends JpaRepository<EntityDBO, Long> {
     findByName(String name); //Name is not defined in sample above
 }
 ```
+ 
+<img src="assets/images/repository-class.png" width="400" alt="repository" />
 
 ### Task 4: create database structure and insert data / versioning
 - Maven Flyway dependency needed
