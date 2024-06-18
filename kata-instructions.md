@@ -1,4 +1,4 @@
-# ITEA 15 - Product Data Persistence
+# ITEA 16 - Mutation Testing
 
 ## Intro
 
@@ -10,190 +10,107 @@ help them in their digital transformation.
 
 <img src="assets/images/ITEA.jpg" width="400" alt="Photo of the ITEA headquarters" />
 
-Please only consider the persistence layer and think about the repository. There is a hexagonal architecture means that there will be an adapter later which transfers the read product from the persistence in our internal domain object. We can ignore this for now. But make sure that we are able to store all the relevant data in an efficient way.
+### What is Mutation Testing?
 
-## Tasks
+How do we know if our test suite is good?
+If we have high<sup>1)</sup> test coverage and make a mistake while changing the implementation,
+we expect our tests to alert us about the mistake. Mutation testing systematically introduces
+changes ("mutations") in the code by inverting conditions, changing return values, etc.,
+and then runs the test suite on the mutated code ("mutant"). A good test suite "kills" the
+majority or all of the mutants. We can then use the information about surviving mutants to
+decide where we might want to add additional tests or improve existing tests.
 
-### Task 1: how to persist
-Please discuss the different possibilities to persist the data. Some buzzwords and options:
-- CSV
-- plain text
-- json
-- Sql
-- NoSql
-- separate database server
-- NoSql MongoDB: you can find a MongoDB sample implementation in branch '15_product_data-persistence_mongoDB' and a sample how MongoDB saves the data structure in the Cheat Sheet below.
-- Repository != Database / Repository ≠ Database
+<sub>1) By "high coverage" we don't mean a certain percentage, but having tests for everything
+we consider worth testing. The actual percentage depends on many factors and usually shouldn't
+be a target.</sub> 
 
-<b>Please decide for SQL and H2 In-Memory database at the end.</b>
+## Exercises
 
-### Task 2: model data structure
+⚠️ *Make sure everyone has IntelliJ Community Edition (or equivalent) installed. Now is the time to
+start the download/installation so that it can be installed during the discussion exercise.*
 
-Please model and normalize the data structure. Consider only the products from the current InMemoryProductRepository.java (com.ite.itea.ecommerce.adapters.out.persistence)
-<img src="assets/images/product-db-shema.png" width="400" alt="product db shema" />
+### Exercise 1: Discussion
 
-### Task 3: JPA Repository
-- Maven JPA dependency
-- Maven H2 dependency
-- Maven Hibernate Validators dependency
-- Maven Lombok dependency
-- Repository Properties
+- Why does line coverage alone not guarantee that there are no bugs? (line coverage = lines
+  that are executed by at least one test)
+- How high (in percent) should the code coverage be?
+- Mutation tests are typically much slower than unit tests. Should we run them in the
+  CI pipeline on every check-in?
 
-```java
+### Exercise 2: Install, run, and discuss the mutation test result
 
-//lombok.*
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
+*Recommended: Each participant tries it on their own machine. The group helps in case of problems.*
 
-//jakarta.*
-@Entity
-@Table(name = "EntityTableName")
-class EntityDBO {
+We will explore mutation testing using PIT in Java, but the focus is not on
+the tool specifics, but the conceptual understanding. Still, we will look
+at some of the features that PIT provides and treat it as a proxy for mutation
+testing tools in general.
 
-    @Id
-    private Long id;
-    @Column(name="ColumnName")
-    private String varCharString; // EntityTableName.ColumnName
-    @Lob //H2 specific
-    private String textField; //EntityTableName.TEXT_FIELD
-    
-    @OneToMany(mappedBy = "priceId")
-    private Collection<PriceDBO> prices;
+1. Install PIT, a mutation testing tool for Java (similar tools exist for other languages).
+   Add the following to your pom.xml, within `<build><plugins>`:
+   ```
+    <plugin>
+        <groupId>org.pitest</groupId>
+        <artifactId>pitest-maven</artifactId>
+        <version>1.16.1</version>
+        <dependencies>
+            <dependency>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-junit5-plugin</artifactId>
+                <version>1.2.1</version>
+            </dependency>
+        </dependencies>
+    </plugin>
+   ```
+2. Run the Maven goal `mvn test-compile org.pitest:pitest-maven:mutationCoverage`.
+3. Find the mutation test report in `target/pit-reports/index.html`.
+   Discuss.
+   - Are there any surprising or interesting insights?
+   - Which mutations might be worth fixing? (We will do that in a later exercise.)
+   - Is it worth trying to get all 3 coverage metrics to 100 %?
+4. Run the Maven goal `mvn -DwithHistory test-compile org.pitest:pitest-maven:mutationCoverage`
+   and see how the `withHistory` parameter affects the duration of the mutation
+   test run (this is purely for speeding up repeated runs on the same codebase).
+   Note: It might be necessary to run it twice to see the actual difference in duration,
+   since the history will be generated on the first run.
+5. Run the Maven command once via each of the following options:
+   - directly from this markdown file (if your IDE integrates a run button into the rendered markdown)
+   - via the CLI
+   - via the Maven UI within your IDE (if available)
+   
+   It's good to be familiar with all 3 options.
 
-    @ManyToOne
-    private TypeDBO type;
-}
-```
+### Exercise 3: Improve the test suite
 
-```java
-interface RepositoryName extends JpaRepository<EntityDBO, Long> {
-    //interface, no implementation needed for standard findBy[Attribute]
-    //Attribute needs to be defined in EntityClass
-    findById(Long id); 
-    findByName(String name); //Name is not defined in sample above
-}
-```
+*Recommended: The group works as an ensemble.*
 
-### Task 4: create database structure and insert data / versioning
-- Maven Flyway dependency needed
-- Flyway Properties needed
-- create folder resources/db/migration
-  - create sql script with naming pattern 'V[version]__[description].sql' e.g. 'V1__create_table.sql'
-  
+Have a closer look at the report for the `GardenBench` class.
+Discuss with your peers.
+- Which mutations are worth fixing?
+- Which ones should we probably fix first?
 
-### Task 5: settings - versioning vs. jpa
-- spring.jpa.hibernate.ddl-auto=
-    - none
-    - <b>validate</b>
-    - update
-    - create-drop
+Add (or improve existing) tests to kill those mutants.
 
-## Needful Things
+### Exercise 4: Experimentation
 
-### dependencies
+*Recommended: The group works as an ensemble.*
 
-```xml
-<!--- JPA -->
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-data-jpa</artifactId>
-</dependency>
+Implement a simple program (FizzBuzz, Prime Numbers) without tests. Then add some unit tests.
+Run the mutation testing tool and see if you missed any test cases.
 
-<!-- H2 Database -->
-<dependency>
-    <groupId>com.h2database</groupId>
-    <artifactId>h2</artifactId>
-    <scope>runtime</scope>
-</dependency>
+Experiment!
+- Delete some tests and check the mutation test result.
+- Try to create a scenario with as many surviving mutations as possible while still at 100 % line coverage.
+- etc.
 
-<!-- Hibernate validators -->
-<dependency>
-    <groupId>org.hibernate.validator</groupId>
-    <artifactId>hibernate-validator</artifactId>
-    <version>7.0.1.Final</version>
-</dependency>
+### Exercise 5: Advanced features
 
-<!-- Flyway -->
-<dependency>
-    <groupId>org.flywaydb</groupId>
-    <artifactId>flyway-core</artifactId>
-</dependency>
+*Recommended: Each participant tries it on their own machine. The group helps in case of problems.*
 
-<!-- Lombok -->
-<dependency>
-    <groupId>org.projectlombok</groupId>
-    <artifactId>lombok</artifactId>
-    <version>1.18.32</version>
-    <optional>true</optional>
-</dependency>
-```
-
-### Application Properties
-
-```properties
-#Repository properties
-#can be accessed via localhost:9000/h2-console
-spring.h2.console.enabled=true
-spring.datasource.url=jdbc:h2:mem:testdb
-spring.datasource.driverClassName=org.h2.Driver
-spring.datasource.username=sa
-spring.datasource.password=
-spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
-#none, validate, update, create-drop
-spring.jpa.hibernate.ddl-auto=validate
-
-#Flyway properties
-#flyway default folder 'resources/db/migration'
-#flyway default name pattern 'V[version]__[description].sql' e.g. 'V1__create_table.sql'
-spring.flyway.url=jdbc:h2:mem:testdb
-spring.flyway.user=sa
-spring.flyway.password=
-```
-
-
-### MongoDB Product Database Sample
-```json
-[
-  {
-    "_id": "18f164b2-ecec-4eb7-8c3f-1ea4cf6a3a0e",
-    "name": "Chair \"Olaf\"",
-    "imageName": "chairOlaf.png",
-    "description": "description of chair Olaf, its quite beautiful and really comfortable.",
-    "parts": [ 
-        {
-          "count": 4,
-          "price": "5.00",
-          "name": "Leg"
-        },
-        {
-          "count": 1,
-          "price": "5.00",
-          "name": "Seat"
-        },
-        {
-          "count": 1,
-          "price": "5.00",
-          "name": "BackRest"
-        }
-    ],
-    "_class": "com.ite.itea.ecommerce.adapters.out.persistence.product.ProductDBO"
-  },
-  {
-    "_id": "2df1845a-55ec-4e39-9b90-7d4dca60c47b",
-    "name": "Picture \"Finland\"",
-    "imageName": "pictureFinland.png",
-    "description": "description of Picture Finland, its really worth seeing.",
-    "parts": [
-      {
-        "count": 1,
-        "price": "14.99",
-        "name": "Picture"
-      }
-    ],
-    "_class": "com.ite.itea.ecommerce.adapters.out.persistence.product.ProductDBO"
-  }
-]
-```
-
+- PIT uses 1 thread by default. Find out how to increase that, and then
+  configure it to use half of your CPU cores. See how it affects the duration
+  of a mutation test run.
+- PIT allows running the mutation tests only on classes that have been changed
+  and are not yet committed to source control. This is much faster than
+  running it on the whole code base, and can be used before committing. Find
+  out how to do that and try it out.
