@@ -1,4 +1,4 @@
-# ITEA 13 - Orange Grade: Single Level of Abstraction Principle (SLAP)
+# ITEA 16 - Mutation Testing
 
 ## Intro
 
@@ -10,132 +10,107 @@ help them in their digital transformation.
 
 <img src="assets/images/ITEA.jpg" width="400" alt="Photo of the ITEA headquarters" />
 
-In past projects you had to deal with really messy legacy code. Some of your
-colleagues regularly complained about the *lack of* abstraction, while others always
-whined about there being *too much* abstraction. After learning more about
-abstractions and design principles, you realized that the problem was actually
-*indirection without abstraction*, and different abstraction levels being mixed,
-rather than the total "amount of abstraction", whatever that means.
+### What is Mutation Testing?
 
-You decided that this project will be different—with the help of SLAP!
+How do we know if our test suite is good?
+If we have high<sup>1)</sup> test coverage and make a mistake while changing the implementation,
+we expect our tests to alert us about the mistake. Mutation testing systematically introduces
+changes ("mutations") in the code by inverting conditions, changing return values, etc.,
+and then runs the test suite on the mutated code ("mutant"). A good test suite "kills" the
+majority or all of the mutants. We can then use the information about surviving mutants to
+decide where we might want to add additional tests or improve existing tests.
 
-### SLAP - Single Level of Abstraction Principle
+<sub>1) By "high coverage" we don't mean a certain percentage, but having tests for everything
+we consider worth testing. The actual percentage depends on many factors and usually shouldn't
+be a target.</sub> 
 
-The Single Level of Abstraction Principle (SLAP, or SLA principle) is a design
-principle for making code easier to understand and reduce the reader's cognitive
-load. To understand the principle let's first look at an **analogy**:
+## Exercises
 
-You bought today's newspaper. Since you're a big football fan, you open the
-sports section. You skim the headings, looking for football-related articles.
-"Something about Manuel Neuer", "Toni Kroos joins national team (again)",
-"Ronaldo almost scores goal against titan Oliver Kahn". That last one sounds
-interesting and relevant, so you skim the article's section titles and then read
-the detailed text of the interesting parts.
+⚠️ *Make sure everyone has IntelliJ Community Edition (or equivalent) installed. Now is the time to
+start the download/installation so that it can be installed during the discussion exercise.*
 
-The newspaper is structured at different levels of detail
-(or levels of abstraction):
-1. The sports section.
-2. The article headings.
-3. The article section titles.
-4. The detailed text.
+### Exercise 1: Discussion
 
-You quickly find what you're looking for, because you can "zoom in" from one
-level to the next. The sections are typically kept on the same abstraction level,
-so you might have newspaper sections like
-- Politics
-- Sports
-- Entertainment
-- Finance
+- Why does line coverage alone not guarantee that there are no bugs? (line coverage = lines
+  that are executed by at least one test)
+- How high (in percent) should the code coverage be?
+- Mutation tests are typically much slower than unit tests. Should we run them in the
+  CI pipeline on every check-in?
 
-You generally won't find a newspaper with the sections
-- Politics
-- Sports
-- Leonardo DiCaprio again without Oscar at 2024 Academy Awards
-- Finance
+### Exercise 2: Install, run, and discuss the mutation test result
 
-Drawing the connection back to code and programming languages, does this
-remind you of something? What is (roughly) the equivalent of sections, articles,
-headings, etc. in code?
+*Recommended: Each participant tries it on their own machine. The group helps in case of problems.*
 
-## Task 1: Abstractions – Warm-up and Intuition
+We will explore mutation testing using PIT in Java, but the focus is not on
+the tool specifics, but the conceptual understanding. Still, we will look
+at some of the features that PIT provides and treat it as a proxy for mutation
+testing tools in general.
 
-<img src="assets/images/coding-dojo-literally.jpg" width="300" alt="Coding dojo taken too literally" />
-
-a) Order the following types by their level of abstraction.
-
-- `List<Product>`
-- `Product[]`
-- `ShoppingCart`
-- `AbstractProductListWrapper`
-- `ArrayList<Product>`
-
-b) Order the following statements by their level of abstraction.
-
-1. ```
-   float grossPrice = 1.19f * netPrice;
+1. Install PIT, a mutation testing tool for Java (similar tools exist for other languages).
+   Add the following to your pom.xml, within `<build><plugins>`:
    ```
-
-2. ```
-   Money grossPrice = netPrice.taxedAs(VatRate.STANDARD);
+    <plugin>
+        <groupId>org.pitest</groupId>
+        <artifactId>pitest-maven</artifactId>
+        <version>1.16.1</version>
+        <dependencies>
+            <dependency>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-junit5-plugin</artifactId>
+                <version>1.2.1</version>
+            </dependency>
+        </dependencies>
+    </plugin>
    ```
-
-3. ```
-   float grossPrice = FloatUtils.addNineteenPercent(netPrice);
-   ```
-
-4. ```
-   float grossPrice = netToGrossByStandardRate(netPrice);
-   ```
-
-5. ```
-   float grossPrice = MoneyUtils.addVat(netPrice, 19.0f);
-   ```
-
-c) Out of the following code snippets, which ones show real abstractions
-and which ones are just indirection disguised as abstraction?
-
-1. ```
-   public interface CloudStorageProvider { ... }
-   public class CloudStorageProviderImpl implements CloudStorageProvider { ... }
-   ```
-2. ```
-   public interface DropboxAdapter { ... }
-   public class DropboxAdapterImpl implements DropboxAdapter { ... }
-   ```
-3. ```
-   public interface CloudStorageProvider { ... }
-   public class DropboxAdapter implements CloudStorageProvider { ... }
-   ```
+2. Run the Maven goal `mvn test-compile org.pitest:pitest-maven:mutationCoverage`.
+3. Find the mutation test report in `target/pit-reports/index.html`.
+   Discuss.
+   - Are there any surprising or interesting insights?
+   - Which mutations might be worth fixing? (We will do that in a later exercise.)
+   - Is it worth trying to get all 3 coverage metrics to 100 %?
+4. Run the Maven goal `mvn -DwithHistory test-compile org.pitest:pitest-maven:mutationCoverage`
+   and see how the `withHistory` parameter affects the duration of the mutation
+   test run (this is purely for speeding up repeated runs on the same codebase).
+   Note: It might be necessary to run it twice to see the actual difference in duration,
+   since the history will be generated on the first run.
+5. Run the Maven command once via each of the following options:
+   - directly from this markdown file (if your IDE integrates a run button into the rendered markdown)
+   - via the CLI
+   - via the Maven UI within your IDE (if available)
    
-## Task 2: Applying SLAP
+   It's good to be familiar with all 3 options.
 
-Let's have a look into the `Invoice` class. There's a very long method there
-with abstraction levels all over the place.
+### Exercise 3: Improve the test suite
 
-a) How easy or hard is it to understand what's happening here?
+*Recommended: The group works as an ensemble.*
 
-b) Similar to task 1, let's try to identify which lines/statements/types
-are at different levels of abstraction.
+Have a closer look at the report for the `GardenBench` class.
+Discuss with your peers.
+- Which mutations are worth fixing?
+- Which ones should we probably fix first?
 
-c) How can a monster of a method like this be prevented, other than "refactoring
-when it's finished"?
+Add (or improve existing) tests to kill those mutants.
 
-<details>
-<summary>Reveal answer</summary>
-Thinking about the problem at a higher level (the "problem level") and trying to
-communicate that through the code, making it work through implementation details.
-Techniques like TDD can help, but more generally it's about the way of thinking
-more than specific approaches.
-</details>
+### Exercise 4: Experimentation
 
-d) Since this is a public method, we probably expect the highest abstraction
-level here. Using pseudocode, try to sketch roughly which steps you would expect
-at the highest abstraction level.
+*Recommended: The group works as an ensemble.*
 
-e) Refactor to a single level of abstraction in that public method. The goal is
-to end up with something similar to the pseudocode from d). The result should be
-readable almost like a story. Don't forget to regularly run the tests.<br>
-Note: If you choose to extract methods, each of these should again be on a
-single abstraction level (although a lower one) and read like a (more detailed)
-story, but let's focus on that highest level first. We can then further
-"push down" detail from that lower level.
+Implement a simple program (FizzBuzz, Prime Numbers) without tests. Then add some unit tests.
+Run the mutation testing tool and see if you missed any test cases.
+
+Experiment!
+- Delete some tests and check the mutation test result.
+- Try to create a scenario with as many surviving mutations as possible while still at 100 % line coverage.
+- etc.
+
+### Exercise 5: Advanced features
+
+*Recommended: Each participant tries it on their own machine. The group helps in case of problems.*
+
+- PIT uses 1 thread by default. Find out how to increase that, and then
+  configure it to use half of your CPU cores. See how it affects the duration
+  of a mutation test run.
+- PIT allows running the mutation tests only on classes that have been changed
+  and are not yet committed to source control. This is much faster than
+  running it on the whole code base, and can be used before committing. Find
+  out how to do that and try it out.
