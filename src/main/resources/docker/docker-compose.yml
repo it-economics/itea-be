@@ -1,0 +1,15 @@
+#docker compose up -d
+
+version: '3.8'
+services:
+  frontend:
+    image: itea-fe:latest
+    ports:
+      - "4201:4200"
+    depends_on:
+      - backend
+
+  backend:
+    image: itea-be:0.0.1-SNAPSHOT
+    ports:
+      - "9000:9000"
