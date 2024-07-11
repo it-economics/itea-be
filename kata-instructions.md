@@ -39,11 +39,22 @@ EXPOSE 9000
 ENTRYPOINT ["java", "-jar", "app.jar"]
 ```
 
-Builds and deploys to docker according to the Dockerfile
-> docker build -t itea-be .
+Builds the image to docker according to the Dockerfile
+> docker build -t itea-be:0.0.1-SNAPSHOT -t itea-be:latest .
 
-Starts the docker container with mapped port
-> docker run -d -p 8099:9000 --name itea-be itea-be
+Creates the docker container
+> docker create -p 8099:9000 --name itea-be itea-be:latest
+
+Starts/Stops the docker container
+> docker start itea-be
+> docker stop itea-be
+
+OR: Runs a newly created docker container  (docker create + docker start)
+> docker run -d -p 8099:9000 --name itea-be itea-be:latest
+> 
+> docker exec -it itea-be bash
+
+- own management of versioning
 
 ### via jib maven plugin
 build:
@@ -59,7 +70,7 @@ run:
     <version>3.1.4</version> 
     <configuration>
         <from>
-            <image>openjdk:17</image> 
+            <image>openjdk:17-alpine</image> 
             <platforms>
                 <platform>
                     <architecture>arm64</architecture>
@@ -68,7 +79,8 @@ run:
             </platforms>
         </from>
         <to>
-            <image>itea-be:${project.version}</image> 
+            <image>itea-be:latest</image>
+            <tag>${project.version}</tag> 
         </to>
         <container>
             <ports>
