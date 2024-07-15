@@ -51,8 +51,6 @@ Starts/Stops the docker container
 
 OR: Runs a newly created docker container  (docker create + docker start)
 > docker run -d -p 8099:9000 --name itea-be itea-be:latest
-> 
-> docker exec -it itea-be bash
 
 - own management of versioning
 
