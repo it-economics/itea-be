@@ -14,12 +14,24 @@ help them in their digital transformation.
 Download and install Docker Desktop
 https://www.docker.com/products/docker-desktop/
 
-## The task
-Create a docker image and run it in a container 
+# The task
+## Build and Run a Container
+
+1.) Discussion: why docker is useful? Where and Why it is needed?
+some buzzwords:
+- Test H2 vs. production Database
+- development environment vs. production environment 
+- bundle a complex application
+- ...
+
+2.) Create a docker image and run it in a container 
 
 ### via Dockerfile and terminal commands
 
 in project root "Dockerfile"
+<details>
+<summary>Dockerfile</summary>
+
 ```
 # Step 1: Use a base image with Java (adopting an OpenJDK image for compatibility)
 FROM openjdk:17
@@ -36,6 +48,7 @@ EXPOSE 9000
 # Step 5: Run your application
 ENTRYPOINT ["java", "-jar", "app.jar"]
 ```
+</details>
 
 Builds the image to docker according to the Dockerfile
 > docker build -t itea-be:0.0.1-SNAPSHOT -t itea-be:latest .
@@ -52,12 +65,20 @@ OR: Runs a newly created docker container  (docker create + docker start)
 
 - own management of versioning
 
+### How to integrate into a CI/CD pipeline?
+Discussion: how to integrate
+
 ### via jib maven plugin
+
 build:
 > mvn jib:dockerBuild
 
 run:
 > docker run -d -p 8099:9000 --name itea-be itea-be:0.0.1-SNAPSHOT
+
+
+<details>
+<summary>Jib plugin for pom.xml</summary>
 
 ```
 <plugin>
@@ -89,10 +110,14 @@ run:
     </configuration>
 </plugin>
 ```
+</details>
 
 ### exec maven  plugin
 execution via:
 > mvn package -Pdockerfile-build
+
+<details>
+<summary>execution plugin for pom.xml</summary>
 
 ```
 <profiles>
@@ -147,7 +172,18 @@ execution via:
     </profile>
 </profiles>
 ```
-Or move the "plugin /plugin" part into plugins section to run it automatically with maven lifecycle 
+</details>
+
+Or move the "plugin /plugin" part into plugins section to run it automatically with maven lifecycle
+
+### via Docker Compose
+
+- create the backend image (see above)
+- create the frontend image (https://github.com/it-economics/itea-fe-angular)
+- run docker compose file (/itea-be/src/main/resources/docker/docker-compose.yml)
+
+run via:
+> docker-compose up -d
 
 ### Some more
 shows the different available docker jdk artefacts
@@ -155,3 +191,20 @@ shows the different available docker jdk artefacts
 
 maven lifecycle
 > https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#lifecycle-reference
+
+## TestContainer
+we prepared three different ways of implementation
+
+### static container
+- all properties are overwritten in the test class
+- not recommended (we will explain this ;) )
+- see: itea-be/src/test/java/com/itea/ecommerce/docker/PostgresStaticContainerTest.java
+
+### dynamically created
+- with own test profile
+- see: itea-be/src/test/java/com/itea/ecommerce/docker/PostgresContainerProfileTest.java
+
+### with test annotation
+- with a simple annotation
+- see: itea-be/src/test/java/com/itea/ecommerce/docker/PostgresContainerAnnotationTest.java 
+- see: itea-be/src/test/java/com/itea/ecommerce/docker/WithPostgresContainer.java

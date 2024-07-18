@@ -1,12 +1,11 @@
 package com.ite.itea.ecommerce.adapters.out.persistence.product;
 
-import com.ite.itea.ecommerce.docker.PostgresContainerProfileTest;
 import com.ite.itea.ecommerce.docker.WithPostgresContainer;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @WithPostgresContainer
-public class RepositoryDockerAnnotation02Test extends PostgresContainerProfileTest {
+public class RepositoryDockerAnnotation02Test  {
 
     @Autowired
     JpaProductDatabaseRepository productDatabaseRepository;
