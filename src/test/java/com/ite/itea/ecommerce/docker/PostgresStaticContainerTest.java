@@ -3,23 +3,21 @@ package com.ite.itea.ecommerce.docker;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
-import org.springframework.test.context.TestPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-@TestPropertySource(properties = {
-        "spring.test.database.replace=none"
-})
 @Testcontainers
 @DataJpaTest
-abstract public class PostgresContainerTest {
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+public abstract class PostgresStaticContainerTest {
 
     @Container
-    protected static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>(
+    private static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>(
             "postgres:16-alpine"
     );
 
@@ -44,8 +42,5 @@ abstract public class PostgresContainerTest {
     static void tearDown() {
         postgres.stop();
     }
-
-
-
 
 }

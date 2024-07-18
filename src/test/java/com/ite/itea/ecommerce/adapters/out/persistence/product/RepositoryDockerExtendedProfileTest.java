@@ -1,18 +1,22 @@
 package com.ite.itea.ecommerce.adapters.out.persistence.product;
 
-import com.ite.itea.ecommerce.docker.PostgresContainerTest;
+import com.ite.itea.ecommerce.docker.PostgresContainerProfileTest;
+import lombok.SneakyThrows;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.Optional;
 
-public class RepositoryDockerTest extends PostgresContainerTest {
+public class RepositoryDockerExtendedProfileTest extends PostgresContainerProfileTest {
 
     @Autowired
     JpaProductDatabaseRepository productDatabaseRepository;
 
+    @SneakyThrows
     @Test
     void should_add_a_new_product() {
+
         final ProductDBO product = ProductDBO.builder()
                 .id(77L)
                 .name("Product 1")
