@@ -10,14 +10,12 @@ help them in their digital transformation.
 
 <img src="assets/images/ITEA.jpg" width="400" alt="Photo of the ITEA headquarters" />
 
-## Open Question
-- Dockerfile: how to retrieve current version (SNAPSHOT) from maven project
-- Jib Plugin: how to integrate in Maven Lifecycle
-
-## The task
-
+## What you need upfront to get started
 Download and install Docker Desktop
 https://www.docker.com/products/docker-desktop/
+
+## The task
+Create a docker image and run it in a container 
 
 ### via Dockerfile and terminal commands
 
@@ -152,8 +150,6 @@ execution via:
 Or move the "plugin /plugin" part into plugins section to run it automatically with maven lifecycle 
 
 ### Some more
-jib google plugin
-
 shows the different available docker jdk artefacts
 > https://hub.docker.com/_/openjdk
 
