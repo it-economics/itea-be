@@ -17,7 +17,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 public abstract class PostgresStaticContainerTest {
 
     @Container
-    private static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>(
+    private final static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>(
             "postgres:16-alpine"
     );
 

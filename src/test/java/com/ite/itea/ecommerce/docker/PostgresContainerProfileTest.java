@@ -14,7 +14,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 public abstract class PostgresContainerProfileTest {
 
     @Container
-    private PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>(
+    private final PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>(
             "postgres:16-alpine"
     ).withUsername("user")
             .withPassword("password")

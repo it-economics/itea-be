@@ -1,10 +1,10 @@
 package com.ite.itea.ecommerce.adapters.out.persistence.product;
 
-import com.ite.itea.ecommerce.docker.PostgresStaticContainerTest;
+import com.ite.itea.ecommerce.docker.PostgresContainerProfileTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class RepositoryDockerExtendedStaticTest extends PostgresStaticContainerTest {
+public class RepositoryDockerExtendedProfile01Test extends PostgresContainerProfileTest {
 
     @Autowired
     JpaProductDatabaseRepository productDatabaseRepository;
@@ -12,6 +12,5 @@ public class RepositoryDockerExtendedStaticTest extends PostgresStaticContainerT
     @Test
     void should_add_a_new_product() {
         RepositoryTestHelper.addProduct77(productDatabaseRepository);
-
     }
 }
