@@ -21,3 +21,6 @@ Endpoints:
 * Java 17
 * Maven
 * Postman
+
+## ad h2-database profile
+`-Dspring.profiles.active=h2database`
