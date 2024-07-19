@@ -15,8 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 @WithPostgresContainer(properties = {
         "spring.datasource.hikari.schema=RepositoryDockerAnnotation01Test",
-        "spring.flyway.schema=RepositoryDockerAnnotation01Test"
+        "spring.flyway.schemas=RepositoryDockerAnnotation01Test"
 })
+
 public class RepositoryDockerAnnotation01Test  {
 
     @Autowired

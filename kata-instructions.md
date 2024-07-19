@@ -239,6 +239,5 @@ maven lifecycle
 - see: itea-be/src/test/java/com/itea/ecommerce/docker/PostgresContainerProfileTest.java
 
 ### with test annotation
-- with a simple annotation
-- see: itea-be/src/test/java/com/itea/ecommerce/docker/PostgresContainerAnnotationTest.java 
+- with a simple annotation 
 - see: itea-be/src/test/java/com/itea/ecommerce/docker/WithPostgresContainer.java
