@@ -13,3 +13,5 @@ services:
     image: itea-be:0.0.1-SNAPSHOT
     ports:
       - "9000:9000"
+    environment:
+      SPRING_PROFILES_ACTIVE: h2database
