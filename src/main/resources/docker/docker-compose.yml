@@ -14,4 +14,4 @@ services:
     ports:
       - "9000:9000"
     environment:
-      SPRING_PROFILES_ACTIVE: h2database
+      SPRING_PROFILES_ACTIVE: "h2database"
