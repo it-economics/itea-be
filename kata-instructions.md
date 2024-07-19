@@ -214,7 +214,7 @@ execution via:
 - run docker compose file (/itea-be/src/main/resources/docker/docker-compose.yml)
 
 run via:
-> docker-compose up -d
+> docker compose up -d
 
 ### Some more
 shows the different available docker jdk artefacts
