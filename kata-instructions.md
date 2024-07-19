@@ -224,7 +224,10 @@ maven lifecycle
 > https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#lifecycle-reference
 
 ## TestContainer
-we prepared three different ways of implementation
+
+1.) Discussion: What problems does using Testcontainers solve? For what kind of tests you should use it?
+
+2.) we prepared three different ways of implementation
 
 ### static container
 - all properties are overwritten in the test class
