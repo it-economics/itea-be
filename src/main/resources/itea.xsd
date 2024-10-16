@@ -1,5 +1,5 @@
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://soprasteria.com/css/itea-soap-service"
-           targetNamespace="http://soprasteria.com/css/itea-soap-service" elementFormDefault="qualified">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ite.com/itea/ecommerce/itea-soap-service"
+           targetNamespace="http://ite.com/itea/ecommerce/itea-soap-service" elementFormDefault="qualified">
 
     <xs:element name="ProductsRequest" />
 
