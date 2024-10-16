@@ -115,28 +115,18 @@ You can use the Spring quickstart for SOAP web service: https://spring.io/guides
 2. Run the Maven goal `mvn jaxb2:xjc`.
 Maybe you want to modify the plugin configuration to skip points 3 and 4 ;-)
 <details>
+<summary>see config</summary>
+
 ```
-<plugin>
-    <groupId>org.codehaus.mojo</groupId>
-    <artifactId>jaxb2-maven-plugin</artifactId>
-    <version>3.1.0</version>
-    <executions>
-        <execution>
-            <id>xjc</id>
-            <goals>
-                <goal>xjc</goal>
-            </goals>
-        </execution>
-    </executions>
     <configuration>
         <sources>
             <source>${project.basedir}/src/main/resources/itea.xsd</source>
         </sources>
         <outputDirectory>${project.basedir}/src/main/java/com/ite/itea/ecommerce/usecase/soapmodel/</outputDirectory>
     </configuration>
-</plugin>
 ```
-<details>
+</details>
+
 3. Find the generated model classes in  `target/generated-sources/`.
 4. Copy the generated classes into the classpath or link the folder into the classpath
 5. The SOAP configuration for the spring application has already been provided in the project but was not activated. Do this now.  
