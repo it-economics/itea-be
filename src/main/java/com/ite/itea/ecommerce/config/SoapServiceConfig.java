@@ -11,8 +11,6 @@ import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
 import org.springframework.xml.xsd.XsdSchema;
 
-@EnableWs
-@Configuration
 public class SoapServiceConfig {
 
     @Bean
@@ -23,12 +21,12 @@ public class SoapServiceConfig {
         return new ServletRegistrationBean<>(servlet, "/soap/*");
     }
 
-    @Bean(name = "products")
+    @Bean(name = "")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema iteaSchema) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
-        wsdl11Definition.setPortTypeName("IteaPort");
-        wsdl11Definition.setLocationUri("/soap");
-        wsdl11Definition.setTargetNamespace("http://soprasteria.com/css/itea-soap-service");
+        wsdl11Definition.setPortTypeName("");
+        wsdl11Definition.setLocationUri("");
+        wsdl11Definition.setTargetNamespace("");
         wsdl11Definition.setSchema(iteaSchema);
         return wsdl11Definition;
     }
