@@ -1,0 +1,81 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://soprasteria.com/css/itea-soap-service"
+           targetNamespace="http://soprasteria.com/css/itea-soap-service" elementFormDefault="qualified">
+
+    <xs:element name="ProductsRequest" />
+
+    <xs:element name="ProductsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" name="productItem" type="tns:products"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ProductRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ProductResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="1" name="product" type="tns:product"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="products">
+        <xs:sequence>
+            <xs:choice maxOccurs="unbounded">
+                <xs:element name="chair" type="tns:chair"/>
+                <xs:element name="table" type="tns:table"/>
+                <xs:element name="closet" type="tns:closet"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="product">
+        <xs:sequence>
+            <xs:element name="id" type="xs:string"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="imageName" type="xs:string"/>
+            <xs:element name="description" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="chair">
+        <xs:complexContent>
+            <xs:extension base="tns:product">
+                <xs:sequence>
+                    <xs:element name="legPrice" type="xs:decimal" />
+                    <xs:element name="seatPrice" type="xs:decimal"/>
+                    <xs:element name="RestPrice" type="xs:decimal"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="table">
+        <xs:complexContent>
+            <xs:extension base="tns:product">
+                <xs:sequence>
+                    <xs:element name="legPrice" type="xs:decimal" />
+                    <xs:element name="tableTopPrice" type="xs:decimal"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="closet">
+        <xs:complexContent>
+            <xs:extension base="tns:product">
+                <xs:sequence>
+                    <xs:element name="price" type="xs:decimal" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+</xs:schema>

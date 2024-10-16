@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.4</version>
+        <version>3.3.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.ite</groupId>
@@ -29,6 +29,14 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web-services</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>wsdl4j</groupId>
+            <artifactId>wsdl4j</artifactId>
         </dependency>
 
         <dependency>
@@ -102,6 +110,24 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxb2-maven-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>xjc</id>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <sources>
+                        <source>${project.basedir}/src/main/resources/itea.xsd</source>
+                    </sources>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
     <profiles>
@@ -173,6 +199,26 @@
                         <artifactId>openapi-generator-maven-plugin</artifactId>
                         <version>5.3.0</version>
                         <executions>
+                            <!--<execution>
+                                <id>generate-client-angular</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <inputSpec>${project.basedir}/target/apidoc/itea-openapi.json</inputSpec>
+                                    <generatorName>typescript-angular</generatorName>
+                                    &lt;!&ndash; https://openapi-generator.tech/docs/generators/typescript-angular/&ndash;&gt;
+                                    <configOptions>
+                                        <apiModulePrefix>Itea</apiModulePrefix>
+                                        <enumNameSuffix>Itea</enumNameSuffix>
+                                        <fileNaming>kebab-case</fileNaming>
+                                        <ngVersion>18</ngVersion>
+                                        <nullSafeAdditionalProperties>true</nullSafeAdditionalProperties>
+                                    </configOptions>
+                                    <output>${project.basedir}/target/generated-client/angular/</output>
+                                </configuration>
+                            </execution>-->
                             <execution>
                                 <id>generate-client-tsfetch</id>
                                 <phase>post-integration-test</phase>
