@@ -78,4 +78,5 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    <!-- more complexTypes needed to declare the other product implementations-->
 </xs:schema>

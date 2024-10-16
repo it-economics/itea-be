@@ -8,9 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
-import jakarta.xml.bind.JAXBElement;
 
-import javax.xml.namespace.QName;
 import java.util.Collection;
 
 @Endpoint
@@ -30,19 +28,26 @@ public class ProductEndpoint {
     @Transactional
     @PayloadRoot(namespace = NAMESPACE, localPart = "ProductsRequest")
     @ResponsePayload
-    public JAXBElement<ProductsResponse> findAllProducts() {
+    public ProductsResponse findAllProducts() {
         final Collection<Product> products = getProductsUseCase.execute();
         ProductsResponse productsResponse = new ProductsResponse();
-        productsResponse.getProduct().addAll(products.stream().map( this::mapProduct).toList());
-        return new JAXBElement<>(new QName(NAMESPACE, "ProductsResponse"), ProductsResponse.class, productsResponse);
+        productsResponse.getProduct().addAll(
+                products.stream().map(this::mapProduct).toList()
+        );
+        return productsResponse;
     }
 
+    /**
+     * for simplicity we use only mapping for product properties
+     * @param product
+     * @return
+     */
     private com.ite.itea.ecommerce.usecase.soapmodel.Product mapProduct(Product product) {
-        com.ite.itea.ecommerce.usecase.soapmodel.Product newProduct = new com.ite.itea.ecommerce.usecase.soapmodel.Product();
-        newProduct.setId(product.id().internalID());
-        newProduct.setName(product.name());
-        newProduct.setDescription(product.name());
-        newProduct.setImageName(product.imageName());
-        return newProduct;
+        com.ite.itea.ecommerce.usecase.soapmodel.Product mappedSoapProduct = new com.ite.itea.ecommerce.usecase.soapmodel.Product();
+        mappedSoapProduct.setId(product.id().internalID());
+        mappedSoapProduct.setName(product.name());
+        mappedSoapProduct.setDescription(product.name());
+        mappedSoapProduct.setImageName(product.imageName());
+        return mappedSoapProduct;
     }
 }

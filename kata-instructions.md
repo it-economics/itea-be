@@ -1,4 +1,4 @@
-# ITEA 17 - Docker Container
+# ITEA 16 - Mutation Testing
 
 ## Intro
 
@@ -10,234 +10,151 @@ help them in their digital transformation.
 
 <img src="assets/images/ITEA.jpg" width="400" alt="Photo of the ITEA headquarters" />
 
-## What you need upfront to get started
-Download and install Docker Desktop
-https://www.docker.com/products/docker-desktop/
+### What is SOAP?
 
-# The task
-## Build and Run a Container
+S imple  
+O bject  
+A ccess  
+P rotocol
 
-1.) Discussion: why docker is useful? Where and Why it is needed?
-some buzzwords:
-- Test H2 vs. production Database
-- development environment vs. production environment 
-- bundle a complex application
-- ...
+Soap is a format for API protocol based on messages with XML payload (document) for so-called "web services".  
+Unless REST, SOAP is not bound to HTTP. Messages can also be sent over other protocols or directly through a TCP/UPD socket 
+connection. 
+When HTTP or HTTPS is used for a SOAP connection it is a must to make use of the POST method because the XML can get very 
+big in size.  
+To be independent of the HTTP protocol all endpoints of an API use just one single URL path or port to connect. 
+This also means the definition of the endpoint the request wants to use is inside the request and not detectable from 
+the metadata of the transport protocol.
 
-2.) Create a docker image and run it in a container 
+Each message (request AND response) consist of three basic and non-optional parts:
+- SOAP envelope: wraps the whole message and is XML root tag. In most cases also contains XML specific information like the namespaces used. 
+Normally the XML tag \<soapenv:Envelope\> is used
+- SOAP header: written inside the envelope. It can contain additional information about the message. It is allowed to leave it empty.
+Normally the XML tag \<soapenv:Header\> is used.
+- SOAP body: written inside the envelope and contains the message itself. Normally the XML tag \<soapenv:Body\> is used.  
+The message format of the body's inner must necessarily be declared with a user defined XML schema (XSD). 
 
-### via Dockerfile and terminal commands
+Inside a response the SOAP Envelope optionally can contain a SOAP fault part to submit error information from the server.
+When not using HTTP the \<soapenv:Fault\> can be the only possibility to send any qualified error information to the requester.
 
-in project root "Dockerfile"
-<details>
-<summary>Dockerfile</summary>
-
+A typical request SOAP XML can look like this:
 ```
-# Step 1: Use a base image with Java (adopting an OpenJDK image for compatibility)
-FROM openjdk:17
-
-# Step 2: Set the working directory inside the container
-WORKDIR /app
-
-# Step 3: Copy the built jar file from your target directory to the container
-COPY target/itea-0.0.1-SNAPSHOT.jar app.jar
-
-# Step 4: Expose the port your application uses, default Spring Boot port is 8080
-EXPOSE 9000
-
-# Step 5: Run your application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+              xmlns:itea="http://de.soprasteria.css/itea/itea-soap-service">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <itea:ProductsRequest/>
+   </soapenv:Body>
+</soapenv:Envelope>
 ```
-</details>
-
-Two approaches
-
-- build, create, start, stop
-- build, run
-
-Builds the image to docker according to the Dockerfile
-- builds the image with two tags "0.0.1-SNAPSHOT" and "latest"
-> docker build -t itea-be:0.0.1-SNAPSHOT -t itea-be:latest .
-
-Creates the docker container
-> docker create -p 8099:9000 --name itea-be itea-be:latest
-
-Starts/Stops the docker container
-> docker start itea-be
-
-> docker stop itea-be
-
-OR: Runs a newly created docker container  (docker create + docker start)
-> docker run -d -p 8099:9000 --name itea-be itea-be:latest
-
-removes an existing container
-> docker remove itea-be
-
-comment:
-
-- own management of versioning
-
-### How to integrate into a CI/CD pipeline?
-Discussion: how to integrate
-
-### via jib maven plugin
-
-build:
-> mvn jib:dockerBuild
-
-run:
-> docker run -d -p 8099:9000 --name itea-be itea-be:0.0.1-SNAPSHOT
-
-<details>
-<summary>Jib plugin for pom.xml</summary>
-
+A typical response XML can look like this:
 ```
-<plugin>
-    <groupId>com.google.cloud.tools</groupId>
-    <artifactId>jib-maven-plugin</artifactId>
-    <version>3.1.4</version> 
-    <configuration>
-        <from>
-            <image>openjdk:17</image>
-            <platforms>
-                <platform>
-                    <architecture>arm64</architecture>
-                    <os>linux</os>
-                </platform>
-            </platforms>
-        </from>
-        <to>
-            <image>itea-be:latest</image>
-            <tags>
-                <tag>${project.version}</tag>
-            </tags>
-        </to>
-        <container>
-            <ports>
-                <port>9000</port> 
-            </ports>
-            <environment>
-                <JAVA_OPTS>-Xms512m -Xmx512m</JAVA_OPTS> 
-            </environment>
-        </container>
-    </configuration>
-</plugin>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+   <SOAP-ENV:Header/>
+   <SOAP-ENV:Body>
+      <ProductsResponse xmlns:itea="http://de.soprasteria.css/itea/itea-soap-service">
+         <product>
+            <id>1</id>
+            <name>Picture "Finland"</name>
+            <imageName>pictureFinland.png</imageName>
+            <description>Picture "Finland"</description>
+         </product>
+         ...
+      </ProductsResponse>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
 ```
-</details>
+The API description for SOAP is defined to be an extended XML schema called WSDL. 
+Typically, the WSDL describes the endpoints of an API with their request and response message formats. It can contain the 
+XML schema for the messages directly or link additional XML schemas files.
 
-<details>
-<summary>with maven phase</summary>
 
+## Exercises
+
+⚠️ *Make sure everyone has IntelliJ Community Edition (or equivalent) installed.  
+For this Exercise it is also required to have one of SoapUI or Postman installed.  
+Now is the time to start the download/installation so that it can be installed during the discussion exercise.  
+Also create an account for Postman if necessary*
+
+### Exercise 1: Discussion
+
+- Did you already use SOAP? 
+- What could be the reason to use SOAP instead REST?
+- Do you see disadvantages in using SOAP?
+
+### Exercise 2: Implementation
+
+*Recommended: The group works as an ensemble.*
+
+We want to extend our application with a SOAP endpoint to deliver the product list.  
+The XML-schema is already provided in the project.
+
+You can use the Spring quickstart for SOAP web service: https://spring.io/guides/gs/producing-web-service
+
+1. Add the `jaxb2-maven-plugin` to the Maven build
 ```
 <plugin>
-    <groupId>com.google.cloud.tools</groupId>
-    <artifactId>jib-maven-plugin</artifactId>
-    <version>3.1.4</version>
+    <groupId>org.codehaus.mojo</groupId>
+    <artifactId>jaxb2-maven-plugin</artifactId>
+    <version>3.1.0</version>
     <executions>
         <execution>
-            <phase>package</phase>
+            <id>xjc</id>
             <goals>
-                <goal>dockerBuild</goal>
+                <goal>xjc</goal>
             </goals>
         </execution>
     </executions>
     <configuration>
-        ...
+        <sources>
+            <source>${project.basedir}/src/main/resources/itea.xsd</source>
+        </sources>
     </configuration>
 </plugin>
 ```
-</details>
-
-### exec maven  plugin
-execution via:
-> mvn package -Pdockerfile-build
-
+2. Run the Maven goal `mvn jaxb2:xjc`.
+Maybe you want to modify the plugin configuration to skip points 3 and 4 ;-)
 <details>
-<summary>execution plugin for pom.xml</summary>
-
 ```
-<build>
-    <plugins>
-        <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>exec-maven-plugin</artifactId>
-            <version>3.0.0</version>
-            <executions>
-                <execution>
-                    <id>docker-build</id>
-                    <phase>package</phase>
-                    <goals>
-                        <goal>exec</goal>
-                    </goals>
-                    <configuration>
-                        <executable>docker</executable>
-                        <arguments>
-                            <argument>build</argument>
-                            <argument>-t</argument>
-                            <argument>itea-be:${project.version}</argument>
-                            <argument>-t</argument>
-                            <argument>itea-be:latest</argument>
-                            <argument>.</argument>
-                        </arguments>
-                    </configuration>
-                </execution>
-                <execution>
-                    <id>docker-run</id>
-                    <phase>package</phase>
-                    <goals>
-                        <goal>exec</goal>
-                    </goals>
-                    <configuration>
-                        <executable>docker</executable>
-                        <arguments>
-                            <argument>run</argument>
-                            <argument>-d</argument>
-                            <argument>-p</argument>
-                            <argument>8099:9000</argument>
-                            <argument>--name</argument>
-                            <argument>itea-be</argument>
-                            <argument>itea-be:${project.version}</argument>
-                        </arguments>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>
-    </plugins>
-</build>
+<plugin>
+    <groupId>org.codehaus.mojo</groupId>
+    <artifactId>jaxb2-maven-plugin</artifactId>
+    <version>3.1.0</version>
+    <executions>
+        <execution>
+            <id>xjc</id>
+            <goals>
+                <goal>xjc</goal>
+            </goals>
+        </execution>
+    </executions>
+    <configuration>
+        <sources>
+            <source>${project.basedir}/src/main/resources/itea.xsd</source>
+        </sources>
+        <outputDirectory>${project.basedir}/src/main/java/com/ite/itea/ecommerce/usecase/soapmodel/</outputDirectory>
+    </configuration>
+</plugin>
 ```
-</details>
+<details>
+3. Find the generated model classes in  `target/generated-sources/`.
+4. Copy the generated classes into the classpath or link the folder into the classpath
+5. The SOAP configuration for the spring application has already been provided in the project but was not activated. Do this now.  
+*Discuss:* - What is configured there? 
+6. Now create a new SOAP endpoint class and the method to deliver the product list. Use existing functionality if possible.  
+*Discuss:* 
+  - What ist the difference to implementations of REST methods?
+  - Why is "namespace" and "localPart" important?
+  - Can we reuse the classes from the REST methods?
+7. Download the WSDL from the running Application http://localhost:9000/soap/products.wsdl (Yes it is available if configuration is correct)
+Can you compare it to the OpenAPI description http://localhost:9000/v3/api-docs? 
+8. Import the WSDL into SoapUI/Postman and try to send a request to the application.
 
-### via Docker Compose
 
-- create the backend image (see above)
-- create the frontend image (https://github.com/it-economics/itea-fe-angular)
-- run docker compose file (/itea-be/src/main/resources/docker/docker-compose.yml)
+### Exercise 3: Advanced discussion
 
-run via:
-> docker compose up -d
+*Recommended: The group works as an ensemble.*
 
-### Some more
-shows the different available docker jdk artefacts
-> https://hub.docker.com/_/openjdk
-
-maven lifecycle
-> https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#lifecycle-reference
-
-## TestContainer
-
-1.) Discussion: What problems does using Testcontainers solve? For what kind of tests you should use it?
-
-2.) we prepared three different ways of implementation
-
-### static container
-- all properties are overwritten in the test class
-- not recommended (we will explain this ;) )
-- see: itea-be/src/test/java/com/itea/ecommerce/docker/PostgresStaticContainerTest.java
-
-### dynamically created
-- with own test profile
-- see: itea-be/src/test/java/com/itea/ecommerce/docker/PostgresContainerProfileTest.java
-
-### with test annotation
-- with a simple annotation 
-- see: itea-be/src/test/java/com/itea/ecommerce/docker/WithPostgresContainer.java
+- Look at the request "payloads". (generated code / WSDL / XML schema)
+- Why do we have to have a request and a response object defined even the request has no parameters?
+- What is your opinion - REST or SOAP?
