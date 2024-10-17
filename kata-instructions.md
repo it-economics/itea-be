@@ -122,8 +122,11 @@ Maybe you want to modify the plugin configuration to skip points 3 and 4 ;-)
         <sources>
             <source>${project.basedir}/src/main/resources/itea.xsd</source>
         </sources>
+        <-- the next line is VERY IMPORTANT -->
+        <clearOutputDirectory>false</clearOutputDirectory>
         <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
         <packageName>com.ite.itea.ecommerce.usecase.soapmodel</packageName>
+        <addGeneratedAnnotation>true</addGeneratedAnnotation>
     </configuration>
 ```
 </details>
