@@ -11,6 +11,16 @@
         </xs:complexType>
     </xs:element>
 
+<!-- alternative definition for mor ProductDetails
+     <xs:element name="ProductsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="products" type="tns:products"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    -->
+
     <xs:element name="ProductRequest">
         <xs:complexType>
             <xs:sequence>
