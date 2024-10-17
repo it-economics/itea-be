@@ -6,7 +6,7 @@
     <xs:element name="ProductsResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element maxOccurs="unbounded" name="productItem" type="tns:products"/>
+                <xs:element maxOccurs="unbounded" name="product" type="tns:product"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -30,6 +30,7 @@
     <xs:complexType name="products">
         <xs:sequence>
             <xs:choice maxOccurs="unbounded">
+                <xs:element name="product" type="tns:product"/>
                 <xs:element name="chair" type="tns:chair"/>
                 <xs:element name="table" type="tns:table"/>
                 <xs:element name="closet" type="tns:closet"/>
