@@ -76,6 +76,10 @@ For this Exercise it is also required to have one of SoapUI or Postman installed
 Now is the time to start the download/installation so that it can be installed during the discussion exercise.  
 Also create an account for Postman if necessary*
 
+https://www.soapui.org/downloads/soapui/
+
+https://www.postman.com/downloads/canary/ https://www.postman.com/downloads/
+
 ### Exercise 1: Discussion
 
 - Did you already use SOAP? 
