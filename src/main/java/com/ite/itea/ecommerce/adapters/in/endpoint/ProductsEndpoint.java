@@ -1,39 +1,36 @@
 package com.ite.itea.ecommerce.adapters.in.endpoint;
 
 import com.ite.itea.ecommerce.domain.retail.Product;
-import com.ite.itea.ecommerce.domain.retail.ProductId;
-import com.ite.itea.ecommerce.usecase.FindAProductUseCase;
-import com.ite.itea.ecommerce.usecase.soapmodel.ProductRequest;
-import com.ite.itea.ecommerce.usecase.soapmodel.ProductResponse;
+import com.ite.itea.ecommerce.usecase.GetProductsUseCase;
+import com.ite.itea.ecommerce.usecase.soapmodel.ProductsResponse;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
-import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
-import java.util.Optional;
+import java.util.Collection;
 
 @Endpoint
-public class ProductEndpoint {
+public class ProductsEndpoint {
 
     private static final String NAMESPACE = "http://soprasteria.com/css/itea-soap-service";
 
-    private final FindAProductUseCase findAProductUseCase;
+    private final GetProductsUseCase getProductsUseCase;
 
-    public ProductEndpoint(FindAProductUseCase findAProductUseCase) {
-        this.findAProductUseCase = findAProductUseCase;
+    public ProductsEndpoint(GetProductsUseCase getProductsUseCase) {
+        this.getProductsUseCase = getProductsUseCase;
     }
 
     @Transactional
-    @PayloadRoot(namespace = NAMESPACE, localPart = "ProductRequest")
+    @PayloadRoot(namespace = NAMESPACE, localPart = "ProductsRequest")
     @ResponsePayload
-    public ProductResponse findProductById(@RequestPayload ProductRequest request) {
-        final Optional<Product> product = findAProductUseCase.execute(new ProductId(request.getId()));
-        ProductResponse productResponse = new ProductResponse();
-        productResponse.setProduct(
-                product.map(this::mapProduct).orElse(null)
+    public ProductsResponse findAllProducts() {
+        final Collection<Product> products = getProductsUseCase.execute();
+        ProductsResponse productsResponse = new ProductsResponse();
+        productsResponse.getProduct().addAll(
+                products.stream().map(this::mapProduct).toList()
         );
-        return productResponse;
+        return productsResponse;
     }
 
     /**
@@ -49,6 +46,4 @@ public class ProductEndpoint {
         mappedSoapProduct.setImageName(product.imageName());
         return mappedSoapProduct;
     }
-
-
 }

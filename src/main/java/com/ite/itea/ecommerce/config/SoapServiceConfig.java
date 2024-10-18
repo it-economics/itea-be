@@ -23,10 +23,10 @@ public class SoapServiceConfig {
         return new ServletRegistrationBean<>(servlet, "/soap/*");
     }
 
-    @Bean(name = "products")
+    @Bean(name = "soapservice")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema iteaSchema) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
-        wsdl11Definition.setPortTypeName("IteaPort");
+        wsdl11Definition.setPortTypeName("IteaSoapservice");
         wsdl11Definition.setLocationUri("/soap");
         wsdl11Definition.setTargetNamespace("http://soprasteria.com/css/itea-soap-service");
         wsdl11Definition.setSchema(iteaSchema);
