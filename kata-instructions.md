@@ -1,4 +1,4 @@
-# ITEA 16 - Mutation Testing
+# ITEA 18 - SOAP
 
 ## Intro
 
@@ -76,6 +76,10 @@ For this Exercise it is also required to have one of SoapUI or Postman installed
 Now is the time to start the download/installation so that it can be installed during the discussion exercise.  
 Also create an account for Postman if necessary*
 
+https://www.soapui.org/downloads/soapui/
+
+https://www.postman.com/downloads/canary/ https://www.postman.com/downloads/
+
 ### Exercise 1: Discussion
 
 - Did you already use SOAP? 
@@ -122,7 +126,11 @@ Maybe you want to modify the plugin configuration to skip points 3 and 4 ;-)
         <sources>
             <source>${project.basedir}/src/main/resources/itea.xsd</source>
         </sources>
-        <outputDirectory>${project.basedir}/src/main/java/com/ite/itea/ecommerce/usecase/soapmodel/</outputDirectory>
+        <-- the next line is VERY IMPORTANT -->
+        <clearOutputDirectory>false</clearOutputDirectory>
+        <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+        <packageName>com.ite.itea.ecommerce.usecase.soapmodel</packageName>
+        <addGeneratedAnnotation>true</addGeneratedAnnotation>
     </configuration>
 ```
 </details>
