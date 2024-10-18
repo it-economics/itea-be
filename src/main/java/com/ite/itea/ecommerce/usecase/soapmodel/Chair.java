@@ -2,18 +2,18 @@
 // Diese Datei wurde mit der Eclipse Implementation of JAXB, v3.0.0 generiert 
 // Siehe https://eclipse-ee4j.github.io/jaxb-ri 
 // Änderungen an dieser Datei gehen bei einer Neukompilierung des Quellschemas verloren. 
-// Generiert: 2024.10.17 um 01:49:35 PM CEST 
+// Generiert: 2024.10.18 um 08:21:40 AM CEST 
 //
 
 
 package com.ite.itea.ecommerce.usecase.soapmodel;
 
+import java.math.BigDecimal;
+import jakarta.annotation.Generated;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlType;
-
-import java.math.BigDecimal;
 
 
 /**
@@ -43,15 +43,19 @@ import java.math.BigDecimal;
     "seatPrice",
     "restPrice"
 })
+@Generated(value = "com.sun.tools.xjc.Driver", comments = "JAXB RI v3.0.0", date = "2024-10-18T08:21:39+02:00")
 public class Chair
     extends Product
 {
 
     @XmlElement(required = true)
+    @Generated(value = "com.sun.tools.xjc.Driver", comments = "JAXB RI v3.0.0", date = "2024-10-18T08:21:39+02:00")
     protected BigDecimal legPrice;
     @XmlElement(required = true)
+    @Generated(value = "com.sun.tools.xjc.Driver", comments = "JAXB RI v3.0.0", date = "2024-10-18T08:21:39+02:00")
     protected BigDecimal seatPrice;
     @XmlElement(name = "RestPrice", required = true)
+    @Generated(value = "com.sun.tools.xjc.Driver", comments = "JAXB RI v3.0.0", date = "2024-10-18T08:21:39+02:00")
     protected BigDecimal restPrice;
 
     /**
@@ -62,6 +66,7 @@ public class Chair
      *     {@link BigDecimal }
      *     
      */
+    @Generated(value = "com.sun.tools.xjc.Driver", comments = "JAXB RI v3.0.0", date = "2024-10-18T08:21:39+02:00")
     public BigDecimal getLegPrice() {
         return legPrice;
     }
@@ -74,6 +79,7 @@ public class Chair
      *     {@link BigDecimal }
      *     
      */
+    @Generated(value = "com.sun.tools.xjc.Driver", comments = "JAXB RI v3.0.0", date = "2024-10-18T08:21:39+02:00")
     public void setLegPrice(BigDecimal value) {
         this.legPrice = value;
     }
@@ -86,6 +92,7 @@ public class Chair
      *     {@link BigDecimal }
      *     
      */
+    @Generated(value = "com.sun.tools.xjc.Driver", comments = "JAXB RI v3.0.0", date = "2024-10-18T08:21:39+02:00")
     public BigDecimal getSeatPrice() {
         return seatPrice;
     }
@@ -98,6 +105,7 @@ public class Chair
      *     {@link BigDecimal }
      *     
      */
+    @Generated(value = "com.sun.tools.xjc.Driver", comments = "JAXB RI v3.0.0", date = "2024-10-18T08:21:39+02:00")
     public void setSeatPrice(BigDecimal value) {
         this.seatPrice = value;
     }
@@ -110,6 +118,7 @@ public class Chair
      *     {@link BigDecimal }
      *     
      */
+    @Generated(value = "com.sun.tools.xjc.Driver", comments = "JAXB RI v3.0.0", date = "2024-10-18T08:21:39+02:00")
     public BigDecimal getRestPrice() {
         return restPrice;
     }
@@ -122,6 +131,7 @@ public class Chair
      *     {@link BigDecimal }
      *     
      */
+    @Generated(value = "com.sun.tools.xjc.Driver", comments = "JAXB RI v3.0.0", date = "2024-10-18T08:21:39+02:00")
     public void setRestPrice(BigDecimal value) {
         this.restPrice = value;
     }

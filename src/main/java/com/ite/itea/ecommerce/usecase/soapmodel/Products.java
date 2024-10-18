@@ -2,16 +2,20 @@
 // Diese Datei wurde mit der Eclipse Implementation of JAXB, v3.0.0 generiert 
 // Siehe https://eclipse-ee4j.github.io/jaxb-ri 
 // Änderungen an dieser Datei gehen bei einer Neukompilierung des Quellschemas verloren. 
-// Generiert: 2024.10.17 um 01:49:35 PM CEST 
+// Generiert: 2024.10.18 um 08:21:40 AM CEST 
 //
 
 
 package com.ite.itea.ecommerce.usecase.soapmodel;
 
-import jakarta.xml.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
+import jakarta.annotation.Generated;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElements;
+import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
@@ -42,6 +46,7 @@ import java.util.List;
 @XmlType(name = "products", propOrder = {
     "productOrChairOrTable"
 })
+@Generated(value = "com.sun.tools.xjc.Driver", comments = "JAXB RI v3.0.0", date = "2024-10-18T08:21:39+02:00")
 public class Products {
 
     @XmlElements({
@@ -50,6 +55,7 @@ public class Products {
         @XmlElement(name = "table", type = Table.class),
         @XmlElement(name = "closet", type = Closet.class)
     })
+    @Generated(value = "com.sun.tools.xjc.Driver", comments = "JAXB RI v3.0.0", date = "2024-10-18T08:21:39+02:00")
     protected List<Product> productOrChairOrTable;
 
     /**
@@ -77,6 +83,7 @@ public class Products {
      * 
      * 
      */
+    @Generated(value = "com.sun.tools.xjc.Driver", comments = "JAXB RI v3.0.0", date = "2024-10-18T08:21:39+02:00")
     public List<Product> getProductOrChairOrTable() {
         if (productOrChairOrTable == null) {
             productOrChairOrTable = new ArrayList<Product>();

@@ -2,13 +2,18 @@
 // Diese Datei wurde mit der Eclipse Implementation of JAXB, v3.0.0 generiert 
 // Siehe https://eclipse-ee4j.github.io/jaxb-ri 
 // Änderungen an dieser Datei gehen bei einer Neukompilierung des Quellschemas verloren. 
-// Generiert: 2024.10.17 um 01:49:35 PM CEST 
+// Generiert: 2024.10.18 um 08:21:40 AM CEST 
 //
 
 
 package com.ite.itea.ecommerce.usecase.soapmodel;
 
-import jakarta.xml.bind.annotation.*;
+import jakarta.annotation.Generated;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
@@ -35,9 +40,11 @@ import jakarta.xml.bind.annotation.*;
     "id"
 })
 @XmlRootElement(name = "ProductRequest")
+@Generated(value = "com.sun.tools.xjc.Driver", comments = "JAXB RI v3.0.0", date = "2024-10-18T08:21:39+02:00")
 public class ProductRequest {
 
     @XmlElement(required = true)
+    @Generated(value = "com.sun.tools.xjc.Driver", comments = "JAXB RI v3.0.0", date = "2024-10-18T08:21:39+02:00")
     protected String id;
 
     /**
@@ -48,6 +55,7 @@ public class ProductRequest {
      *     {@link String }
      *     
      */
+    @Generated(value = "com.sun.tools.xjc.Driver", comments = "JAXB RI v3.0.0", date = "2024-10-18T08:21:39+02:00")
     public String getId() {
         return id;
     }
@@ -60,6 +68,7 @@ public class ProductRequest {
      *     {@link String }
      *     
      */
+    @Generated(value = "com.sun.tools.xjc.Driver", comments = "JAXB RI v3.0.0", date = "2024-10-18T08:21:39+02:00")
     public void setId(String value) {
         this.id = value;
     }
