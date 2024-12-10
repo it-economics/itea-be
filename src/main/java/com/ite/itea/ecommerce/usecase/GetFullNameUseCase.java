@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public class GetFullNameUseCase {
 
-    private final UserRepository userRepository;
+    private UserRepository userRepository;
     private final FullNamePresenter fullNamePresenter;
 
     public GetFullNameUseCase(UserRepository userRepository, FullNamePresenter fullNamePresenter) {

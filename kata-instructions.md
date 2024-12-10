@@ -59,9 +59,10 @@ The rules that we use here can be found in the ArchUnit Api under `GeneralCoding
 
 ### Exercise 2
 
-// TODO SK
 Check if fields in classes are good
 1. Create a new Java class called `FieldRulesTest` in the `architecture` folder.
+2. Write a test that checks that all fields for the `*UseCase.java` classes are private.
+3. Write a test that checks that all fields with the suffix `UseCases` are `private` and `final`.
 
 ### Exercise 3
 
@@ -69,6 +70,9 @@ Check if fields in classes are good
 Check that the Controller has the correct name and annotation
 
 1. Create a new Java class called `ControllerRulesTest` in the `architecture` folder.
+2. Write a test that checks that all classes in the `controller` package have the `@Controller` annotation.
+3. Write a test that checks that all classes in the `controller` package have the suffix `Controller` in their name.
+4. Write a test that checks that all classes in the `controller` package only call the UseCases
 
 ### Exercise 4
 
