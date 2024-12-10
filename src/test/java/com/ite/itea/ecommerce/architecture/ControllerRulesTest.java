@@ -29,13 +29,4 @@ public class ControllerRulesTest {
 
         rule.check(classes);
     }
-
-    @Test
-    public void controller_should_only_access_classes_that_are_in_the_usecase_directory() {
-        ArchRule rule = classes()
-                .that().resideInAPackage("com.ite.itea.ecommerce.adapters.in.controller")
-                .should().accessClassesThat().resideInAPackage("com.ite.itea.ecommerce.usecase");
-
-        rule.check(classes);
-    }
 }

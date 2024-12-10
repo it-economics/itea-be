@@ -70,14 +70,15 @@ The rules that we use here can be found in the ArchUnit Api under `GeneralCoding
 1. Create a new Java class called `ControllerRulesTest` in the `architecture` folder.
 2. Write a test that checks that all classes in the `controller` package have the `@Controller` annotation.
 3. Write a test that checks that all classes in the `controller` package have the suffix `Controller` in their name.
-4. Write a test that checks that all classes in the `controller` package only call the UseCases
+
 
 ### Exercise 4
 
-// TODO SK
-Check that the Architecture is like we want it to be
-
 1. Create a new Java class called `ArchitectureRulesTest` in the `architecture` folder.
+2. Write a test that checks that all classes in the `controller` package only call the `useCases` package
+3. Write a test that checks that all classes in the `useCases` package not call the `controller` or the `persistence` package
+// TODO SK: Create explanation for the test: We are not calling the `persistence` layer directly.
+// TODO SK: We use dependency inversion to call the interfaces. So that the dependencies go inwards to our business logic.
 
 ### Exercise 5
 
