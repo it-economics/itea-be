@@ -54,20 +54,18 @@ The rules that we use here can be found in the ArchUnit Api under `GeneralCoding
 1. Create a new folder in the test directory called `architecture`.
 2. Create a new Java class called `TeamRulesTest` in the `architecture` folder.
 3. Create your fist ArchUnit test, that tests, that we are not using a `deprecated api`
-// TODO SK: Create explaination for the test: Perhaps the business rules changed and we have need to sort the users now
-
+// TODO SK: Create explanation for the test: Perhaps the business rules changed and we have need to sort the users now
+4. Write a test to check no classes uses the java logging
+5. Write a test to check that no classes are using jodatime
+6. Write a test to check that no classes are throwing a generic exception
 
 ### Exercise 2
 
-Check if fields in classes are good
 1. Create a new Java class called `FieldRulesTest` in the `architecture` folder.
 2. Write a test that checks that all fields for the `*UseCase.java` classes are private.
 3. Write a test that checks that all fields with the suffix `UseCases` are `private` and `final`.
 
 ### Exercise 3
-
-// TODO SK
-Check that the Controller has the correct name and annotation
 
 1. Create a new Java class called `ControllerRulesTest` in the `architecture` folder.
 2. Write a test that checks that all classes in the `controller` package have the `@Controller` annotation.
