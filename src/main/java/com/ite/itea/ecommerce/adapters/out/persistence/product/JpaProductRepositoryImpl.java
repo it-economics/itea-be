@@ -37,6 +37,17 @@ public class JpaProductRepositoryImpl implements ProductRepository {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<Product> getAllSorted() {
+        return this.jpaProductDatabaseRepository.findAll()
+                .stream()
+                .map(JpaProductRepositoryImpl::toProduct)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
     private static Optional<Product> toProduct(ProductDBO productDbo) {
         final CustomProduct product = new CustomProduct(
                 new ProductId(productDbo.getId().toString()),

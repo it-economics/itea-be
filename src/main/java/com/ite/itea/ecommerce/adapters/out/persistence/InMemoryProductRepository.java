@@ -96,4 +96,11 @@ public class InMemoryProductRepository implements ProductRepository {
     public List<Product> getAll() {
         return entries;
     }
+
+    @Override
+    public List<Product> getAllSorted() {
+        return entries.stream()
+                .sorted()
+                .toList();
+    }
 }

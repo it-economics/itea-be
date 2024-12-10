@@ -43,8 +43,7 @@ ArchUnit’s main focus is to automatically test architecture and coding rules, 
 
 https://www.archunit.org/use-cases
 
-![Screenshot 2024-12-10 at 11.57.55.png](../../../../../var/folders/xd/4y_wv3xn22b56vh9yy6j2_0m0000gn/T/TemporaryItems/NSIRD_screencaptureui_v4q6Y5/Screenshot%202024-12-10%20at%2011.57.55.png)
-
+<img src="assets/images/archunit-example.png" width="900" alt="Photo of the ITEA headquarters" />
 
 ### Exercise 1
 
@@ -54,14 +53,15 @@ The rules that we use here can be found in the ArchUnit Api under `GeneralCoding
 
 1. Create a new folder in the test directory called `architecture`.
 2. Create a new Java class called `TeamRulesTest` in the `architecture` folder.
-3. Create your fist ArchUnit test 
-4. Now create a second test, that tests that we are not using a `deprecated api`
+3. Create your fist ArchUnit test, that tests, that we are not using a `deprecated api`
+// TODO SK: Create explaination for the test: Perhaps the business rules changed and we have need to sort the users now
 
 
 ### Exercise 2
 
 // TODO SK
 Check if fields in classes are good
+1. Create a new Java class called `FieldRulesTest` in the `architecture` folder.
 
 ### Exercise 3
 
@@ -81,6 +81,9 @@ Check that the Architecture is like we want it to be
 
 // TODO SK
 Check that there is no cycle in the Architecture
+
+1. Create a new Java class called `CycleRulesTest` in the `architecture` folder.
+
 
 
 ### Conclusion
