@@ -45,3 +45,26 @@ float wardrobeWidthInFeet = 4.921f;
 float bookshelfWidthInInches = 11.81f;
 ```
 </details>
+
+### Exercise 2 – Let's look at an existing value object
+
+We are already using value objects in some places in the code base. Have a look
+at the `EuroPrice` class. Discuss: What do you notice?
+
+<details>
+<summary>Reveal</summary>
+
+- it represents a single value, but also has some "rules" associated with it
+- it is immutable
+- operations create new prices ("changing" a value creates a new one, a.k.a. "value semantics")
+- it hides the internal representation
+- its instantiation is tightly controlled (via factory methods)
+- it is serializable (in this case as JSON)
+- invalid states (negative prices) are prevented => when an object exists, it is in a valid state
+- it has no dependencies besides the standard library and (declarative) serialization library
+- all of its operations are easily *discoverable* (if you have the value, you know what you can
+  do with it, no static utils in other files)
+- there are no *conversions* between euros and cents (from the caller's perspective)
+- it is easy to test (and in fact is comprehensively tested)
+- ... ?
+</details>
