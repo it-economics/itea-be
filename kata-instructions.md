@@ -68,3 +68,42 @@ at the `EuroPrice` class. Discuss: What do you notice?
 - it is easy to test (and in fact is comprehensively tested)
 - ... ?
 </details>
+
+### Exercise 3 – Refactoring to value objects
+
+We will soon release a convenient new feature where customers can design and plan their
+rooms configuration, virtually place furniture to see how everything fits and do
+calculations like "how much paint do I need for the walls, based on the size of the room
+and the required paint per area".
+
+Let's have a look at `CalculateRequiredWallPaintAmountUseCase` and the related code.
+Where is the complexity? How easy to understand is the use case? How easy to understand
+will it be once we allow the user to enter their room measurements in meters or feet.
+Note that we do not want all of the different frontends to do the calculations, so we
+do them in the backend.
+
+Where can we identify candidates for value objects? Let's begin with one and extract it.
+We can drive the design using TDD at a lower level while getting some safety from our
+existing high-level integration test.
+
+<details>
+<summary>Reveal suggestions (make sure to try yourself first)</summary>
+Candidates (we may not need all of these):
+
+- Length
+- Area
+- Volume
+- VolumePerArea
+
+Usage example:
+
+```
+var wallArea = Area.fromMeters(10, 3.6);
+var litersPerSquareMeter = VolumePerAre.ofGallonsPerSquareFoot(42).asLitersPerSquareMeter();
+
+var volume1 = Volume.ofGallons(13.37f);
+var volume2 = Volume.ofLiters(42);
+var totalVolume = volume1.plus(volume2);
+```
+
+</details>
