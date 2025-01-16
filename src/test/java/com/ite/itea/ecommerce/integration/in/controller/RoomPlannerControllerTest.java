@@ -33,9 +33,10 @@ class RoomPlannerControllerTest {
     private TestRestTemplate testRestTemplate;
 
     @ParameterizedTest
-    @CsvSource(value = """
-            f9a4905d-df31-4439-bac7-96528baf5a5a,4.8,2.44,81.98
-            """)
+    @CsvSource(value = {
+            "f9a4905d-df31-4439-bac7-96528baf5a5a,4.8,2.44,81.98",
+            "c9cf727e-f676-4d9c-b771-2df6a5e8fc51,13.37,3.14,419.81"
+    })
     void determinesRequiredAmountOfWallPaintForGivenRoomAndPaint(
             String wallPaintId, float roomWidth, float roomHeight, float expectedRequiredAmount
     ) {
