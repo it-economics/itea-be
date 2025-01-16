@@ -1,6 +1,9 @@
 package com.ite.itea.ecommerce.integration.in.controller;
 
+import com.ite.itea.ecommerce.adapters.out.persistence.CsvFileWallPaintRepository;
 import com.ite.itea.ecommerce.usecase.dto.*;
+import com.ite.itea.ecommerce.usecase.port.WallPaintRepository;
+import org.assertj.core.data.Offset;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,6 +13,9 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.TestPropertySource;
 
+import java.io.File;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -32,7 +38,7 @@ class RoomPlannerControllerTest {
     void determinesRequiredAmountOfWallPaintForGivenRoomAndPaint() {
         var wallPaintAmountRequest = new WallPaintAmountRequest(
                 new Room(List.of(new Wall(4.8f, 2.44f))),
-                1L
+                "f9a4905d-df31-4439-bac7-96528baf5a5a"
         );
 
         var entity = this.testRestTemplate.postForEntity(
@@ -41,6 +47,6 @@ class RoomPlannerControllerTest {
                 WallPaintAmountResponse.class);
 
         assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(entity.getBody().requiredPaintAmountLiters()).isEqualTo(42.3f);
+        assertThat(entity.getBody().requiredPaintAmountLiters()).isCloseTo(81.98f, Offset.offset(0.01f));
     }
 }
