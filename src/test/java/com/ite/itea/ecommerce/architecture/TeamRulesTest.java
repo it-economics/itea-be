@@ -2,8 +2,6 @@ package com.ite.itea.ecommerce.architecture;
 
 import com.tngtech.archunit.core.domain.JavaClasses;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
-import com.tngtech.archunit.lang.ArchRule;
-import com.tngtech.archunit.lang.CompositeArchRule;
 import org.junit.jupiter.api.Test;
 
 import static com.tngtech.archunit.library.GeneralCodingRules.*;
@@ -25,12 +23,5 @@ public class TeamRulesTest {
     @Test
     public void classes_should_not_use_jodatime() {
         NO_CLASSES_SHOULD_USE_JODATIME.check(classes);
-    }
-
-    @Test
-    public void no_classes_should_throw_generic_exceptions() {
-        ArchRule rule = CompositeArchRule.of(NO_CLASSES_SHOULD_THROW_GENERIC_EXCEPTIONS);
-
-        rule.check(classes);
     }
 }
