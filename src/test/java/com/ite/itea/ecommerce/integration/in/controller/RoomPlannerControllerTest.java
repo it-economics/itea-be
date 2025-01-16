@@ -1,8 +1,9 @@
 package com.ite.itea.ecommerce.integration.in.controller;
 
-import com.ite.itea.ecommerce.adapters.out.persistence.CsvFileWallPaintRepository;
-import com.ite.itea.ecommerce.usecase.dto.*;
-import com.ite.itea.ecommerce.usecase.port.WallPaintRepository;
+import com.ite.itea.ecommerce.usecase.dto.Room;
+import com.ite.itea.ecommerce.usecase.dto.Wall;
+import com.ite.itea.ecommerce.usecase.dto.WallPaintAmountRequest;
+import com.ite.itea.ecommerce.usecase.dto.WallPaintAmountResponse;
 import org.assertj.core.data.Offset;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +14,9 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.TestPropertySource;
 
-import java.io.File;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.BDDAssertions.then;
 
 @TestPropertySource(properties = {"management.port=0"})
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
