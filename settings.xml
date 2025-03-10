@@ -1,0 +1,20 @@
+<settings>
+    <pluginGroups>
+        <pluginGroup>org.sonarsource.scanner.maven</pluginGroup>
+    </pluginGroups>
+    <profiles>
+        <profile>
+            <id>sonar</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
+    <servers>
+        <server>
+            <id>upload-maven-repository</id>
+            <username>${env.UPLOAD_ARTIFACT_USERNAME}</username>
+            <password>${env.UPLOAD_ARTIFACT_PASSWORD}</password>
+        </server>
+    </servers>
+</settings>

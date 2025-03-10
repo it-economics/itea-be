@@ -1,0 +1,39 @@
+---
+# This file contains a json representation of the inputs used by Project Booster to initialize the files of this repository.
+# Project Booster can use it to ease the update of this repository by pre-filling values in the UI form.
+# It can be deleted safely if it really bothers you.
+{
+  "deploymentRoutePath" : "/itea-backend/",
+  "deploymentSiteAppDomain" : "none",
+  "deploymentSiteKastenInstalled" : "false",
+  "deploymentSiteType" : "gitlab",
+  "deploymentSiteLabel" : "Innersource (public cloud)",
+  "artifactorySiteApiUrl" : "https://artifact.soprasteria.com",
+  "deploymentSiteUrl" : "https://innersource.soprasteria.com",
+  "language" : "Java",
+  "templateId" : "web-backend/java",
+  "deploymentSiteCanTriggerManualBackup" : "false",
+  "livenessProbePath" : "/actuator/health/liveness",
+  "buildTool" : "Maven",
+  "artifactorySiteUrl" : "https://artifact.soprasteria.com",
+  "deploymentOptionId" : "default",
+  "readinessProbePath" : "/actuator/health/readiness",
+  "isUsingSpringBoot3" : true,
+  "javaArtifactName" : "iteabe",
+  "componentIndex" : 0,
+  "springBootVersionJava17" : "3.3.5",
+  "isUsingCustomRepoTarget" : false,
+  "deploymentSiteKubeGreenInstalled" : "false",
+  "deploymentSiteUsingUntrustedCertificate" : "false",
+  "isUsingCustomRepoSource" : false,
+  "isUsingModernWorkstation" : false,
+  "artifactoryBaseDomain" : "artifact.soprasteria.com",
+  "deploymentExposedPort" : "8080",
+  "framework" : "Spring",
+  "jvmVersion" : "17",
+  "gitlabProjectName" : "itea-be",
+  "artifactoryPackageType" : "maven",
+  "deploymentSiteApiUrl" : "https://innersource.soprasteria.com",
+  "gitlabProjectDescription" : "Backend of the ITEA Demonstration Store used by CSS CodingDojos",
+  "isUpdate" : false
+}

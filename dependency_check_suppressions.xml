@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
+    <suppress>
+        <notes><![CDATA[
+        This suppresses false positives identified on spring security.
+        ]]></notes>
+        <packageUrl regex="true">^pkg:maven/org\.springframework/..*$</packageUrl>
+        <cpe>cpe:/a:vmware:spring_framework</cpe>
+        <cve>CVE-2016-1000027</cve>
+    </suppress>
+</suppressions>
