@@ -4,7 +4,7 @@ variable "ngnix_name_dev" {
 }
 variable "ngnix_version_dev" {
  type= string
- default  = "nginx:1.26.1"
+ default  = "nginx:latest"
 }
 
 # variable "ngnix_name_prod" {
