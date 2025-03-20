@@ -1,127 +1,61 @@
+## run terraform workflow 
 include:
-  - project: "dep/library/ci-library"
-    ref: production
-    file: "main.yml"
+ - template: Terraform/Base.gitlab-ci.yml  
+ - template: Jobs/SAST-IaC.gitlab-ci.yml   
 
+stages:
+ - validate
+ - test
+ - build
+ - deploy
+ - cleanup
 
-.deployment:
-  variables:
-    DEPLOYMENT_PROJECT: $CI_PROJECT_NAMESPACE/deployment
-    COMPONENT_INDEX: 0
-    # we pass this so that the release name used in the deployment pipeline matches the one in this repo
-    HELM_RELEASE_NAME: $CI_COMMIT_REF_SLUG-itea
+fmt:
+ extends: .terraform:fmt
+ needs: []
 
+validate:
+ extends: .terraform:validate
+ needs: []
 
+build:
+ extends: .terraform:build
 
-variables:
-  PROJ_FILE_PATH: "pom.xml"
-  SONAR_SCANNER_OPTIONS: |
-    -Dsonar.dependencyCheck.xmlReportPath=dependency-check/dependency-check-report.xml
-    -Dsonar.dependencyCheck.jsonReportPath=dependency-check/dependency-check-report.json
-    -Dsonar.dependencyCheck.htmlReportPath=dependency-check/dependency-check-report.html
-  OAUTH_PROXY_IMAGE_TAG: "v7-update1"
-  # disabled by default, to avoid issues when not defined
-  ENABLE_OAUTH_PROXY: "false"
+deploy:
+ extends: .terraform:deploy
+ dependencies:
+   - build
+ when: manual
+ environment:
+   name: $TF_STATE_NAME
+# before_script:
+#   - terraform --version
+#   - terraform init
+# validate:
+#   stage: validate
+#   script:
+#     - terraform validate
+#     - terraform fmt -check=true
+#   only:
+#     - branches
+# plan:
+#   stage: build
+#   script:
+#     - terraform plan
 
-build-application:
-  image: ${CI_REGISTRY}/dep/library/project-oci-images/build-java-jdk17-maven:3.9.3-update1
-  script:
-    - cd "${PROJECT_ROOT_DIR}"
-    - rm -f target/*.jar
-    # Skipping check as we will do it in test-application
-    - |
-      mvn package \
-        -Dmaven.test.skip \
-        -Dstyle.color=always \
-        -s settings.xml
-  cache:
-    # cache target folder for pipeline performances
-    policy: pull-push
-    untracked: false
-    paths:
-      - $PROJECT_ROOT_DIR/target/
-  artifacts:
-    paths:
-      - $PROJECT_ROOT_DIR/target/*.jar
+# apply:
+#   stage: deploy
+#   script:
+#     - terraform apply
+#   dependencies:
+#     - plan
+#   when: manual
 
-test-application:
-  extends: .test-application
-  image: !reference [build-application, image]
-  script:
-    - cd "${PROJECT_ROOT_DIR}"
-    - |
-      mvn verify \
-        -Dstyle.color=always \
-        -s settings.xml
-    - awk -F"," '{ instructions += $4 + $5; covered += $5 } END { print covered, "/", instructions, " instructions covered"; print 100*covered/instructions, "% covered" }' target/site/jacoco/jacoco.csv
-  coverage: '/(\d+(?:\.\d+)?)? % covered/'
-  # need to explicitly set the same paths: as for the build-application (and same dependencies) for it to work
-  cache:
-    paths:
-      - $PROJECT_ROOT_DIR/target/
-    policy: pull
-  artifacts:
-    when: always
-    paths:
-      - $PROJECT_ROOT_DIR/target/
-    reports:
-      junit:
-        - $PROJECT_ROOT_DIR/target/surefire-reports/*.xml
-        - $PROJECT_ROOT_DIR/target/failsafe-reports/*.xml
+# destroy:
+#   stage: destroy
+#   script:
+#     - terraform destroy
+#   dependencies:
+#     - apply
+#   when: manual
 
-coverage:
-  # Must be in a stage later than test-jdk11's stage.
-  # The `visualize` stage does not exist by default.
-  # Please define it first, or choose an existing stage like `deploy`.
-  stage: test-application
-  image: ${CI_REGISTRY}/dep/library/project-oci-images/build-java-jacoco2cobertura-v1:update1
-  script:
-    # convert report from jacoco to cobertura, using relative project path
-    - python /opt/cover2cover.py $PROJECT_ROOT_DIR/target/site/jacoco/jacoco.xml $CI_PROJECT_DIR/src/main/java/ > $PROJECT_ROOT_DIR/target/site/cobertura.xml
-  needs: ["test-application"]
-  artifacts:
-    reports:
-      coverage_report:
-        coverage_format: cobertura
-        path: $PROJECT_ROOT_DIR/target/site/cobertura.xml
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-
-sonarqube:
-  # doing this in a second analysis stage to have the dependency-check artifacts ready to be uploaded to Sonarqube
-  stage: analysis2
-  image: !reference [build-application, image]
-  script:
-    - !reference [.sonarqube-common, script]
-    - |
-      mvn sonar:sonar \
-        -Dstyle.color=always \
-        -s settings.xml \
-        -Dsonar.host.url=${SONAR_HOST_URL} \
-        -Dsonar.login=${SONAR_LOGIN} \
-        -Dsonar.qualitygate.wait=${SONAR_QUALITYGATE_WAIT} \
-        ${ANALYSIS_OPTIONS} \
-        ${SONAR_SCANNER_OPTIONS} \
-        ${JAVA_OPTS}
-  cache: !reference [test-application, cache]
-
-upload-artifact:
-  extends: .java-job-with-web-requests
-  image: !reference [build-application, image]
-  variables:
-    UPLOAD_ARTIFACT_USERNAME: $CI_DEPLOY_USER
-    UPLOAD_ARTIFACT_PASSWORD: $CI_DEPLOY_PASSWORD
-  script:
-    - cd "${PROJECT_ROOT_DIR}"
-    - SetVersion
-    - if [[ $VERSION == *SNAPSHOT ]]; then echo -e "${COLOR_CYAN}[INFO] Uploading the artifact to $UPLOAD_SNAPSHOTS_REPO_URL ${COLOR_DEFAULT}"; else echo -e "${COLOR_CYAN}[INFO] Uploading the artifact to $UPLOAD_RELEASES_REPO_URL ${COLOR_DEFAULT}"; fi
-    - |
-      mvn deploy \
-        -Dmaven.test.skip \
-        -s settings.xml
-  rules:
-    - if: '$UPLOAD_ARTIFACT_USERNAME && $UPLOAD_ARTIFACT_PASSWORD && ($UPLOAD_RELEASES_REPO_URL || $UPLOAD_SNAPSHOTS_REPO_URL)'
-
-defectdojo:
-  variables:
-    SONAR_PROJECT_KEY: "com.soprasteria:iteabe"
