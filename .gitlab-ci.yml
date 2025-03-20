@@ -1,61 +1,32 @@
-## run terraform workflow 
-include:
- - template: Terraform/Base.gitlab-ci.yml  
- - template: Jobs/SAST-IaC.gitlab-ci.yml   
-
 stages:
- - validate
- - test
- - build
- - deploy
- - cleanup
-
-fmt:
- extends: .terraform:fmt
- needs: []
-
+  - validate
+  - plan
+  - apply
+image:
+  name: hashicorp/terraform:light
+  entrypoint:
+    - '/usr/bin/env'
+    - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+before_script:
+  - terraform --version
+  - terraform init
 validate:
- extends: .terraform:validate
- needs: []
-
-build:
- extends: .terraform:build
-
-deploy:
- extends: .terraform:deploy
- dependencies:
-   - build
- when: manual
- environment:
-   name: $TF_STATE_NAME
-# before_script:
-#   - terraform --version
-#   - terraform init
-# validate:
-#   stage: validate
-#   script:
-#     - terraform validate
-#     - terraform fmt -check=true
-#   only:
-#     - branches
-# plan:
-#   stage: build
-#   script:
-#     - terraform plan
-
-# apply:
-#   stage: deploy
-#   script:
-#     - terraform apply
-#   dependencies:
-#     - plan
-#   when: manual
-
-# destroy:
-#   stage: destroy
-#   script:
-#     - terraform destroy
-#   dependencies:
-#     - apply
-#   when: manual
-
+  stage: validate
+  script:
+    - terraform validate
+plan:
+  stage: plan
+  script:
+    - terraform plan -out "planfile"
+  dependencies:
+    - validate
+  artifacts:
+    paths:
+      - planfile
+apply:
+  stage: apply
+  script:
+    - terraform apply -input=false "planfile"
+  dependencies:
+    - plan
+  when: manual
