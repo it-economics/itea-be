@@ -1,0 +1,72 @@
+image: registry.gitlab.com/gitlab-org/terraform-images/stable:latest
+
+variables:
+  TF_STATE: "tf_state"
+  TF_ADDRESS: ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/terraform/state/${TF_STATE}
+  TF_ROOT:
+    value: "0_init"
+    description: "Select the desired TF folder : 0_init, 1_lambda, 2_frontend, 3_backend" 
+
+
+cache:
+  key: ${TF_STATE}
+  paths:
+    - ${TF_ROOT}/.terraform
+
+before_script:
+  - echo "$TF_ROOT"
+  - cd ${TF_ROOT}
+
+stages:
+  - validate
+  - build
+  - deploy
+  - destroy
+
+
+init:
+  stage: .pre
+  script:
+    - gitlab-terraform init
+
+fmt:
+  stage: .pre
+  script:
+    - gitlab-terraform fmt
+
+validate:
+  stage: validate
+  script:
+    - gitlab-terraform validate
+
+plan:
+  stage: build
+  script:
+    - gitlab-terraform plan
+    - gitlab-terraform plan-json
+  artifacts:
+    name: plan
+    paths:
+      - ${TF_ROOT}/plan.cache
+    reports:
+      terraform: ${TF_ROOT}/plan.json
+
+apply:
+  stage: deploy
+  script:
+    - gitlab-terraform apply
+  dependencies:
+    - plan
+  when: manual
+  only:
+    - main
+
+destroy:
+  stage: destroy
+  script:
+    - gitlab-terraform destroy
+  dependencies:
+    - apply
+  when: manual
+  only:
+    - main
