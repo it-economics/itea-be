@@ -10,10 +10,13 @@ image:
 before_script:
   - terraform --version
   - terraform init
+
 validate:
   stage: validate
   script:
     - terraform validate
+    - sudo systemctl unmask docker
+    - sudo systemctl start docker
 plan:
   stage: plan
   script:
