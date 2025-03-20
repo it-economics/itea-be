@@ -33,6 +33,7 @@
 #   when: manual
 stages:
   - terraform_init
+  - terraform_plan
   - terraform_apply
   - deploy_nginx
 
@@ -48,6 +49,18 @@ terraform_init:
     paths:
       - .terraform
 
+# This job runs terraform plan to show the changes that will be applied
+terraform_plan:
+  image: hashicorp/terraform:latest
+  stage: terraform_plan
+  before_script:
+    - terraform --version
+  script:
+    - terraform plan
+  artifacts:
+    paths:
+      - plan.out
+
 # This job applies Terraform to create the infrastructure
 terraform_apply:
   image: hashicorp/terraform:latest
@@ -55,7 +68,8 @@ terraform_apply:
   before_script:
     - terraform --version
   script:
-    - terraform apply -auto-approve
+    - terraform apply #-auto-approve
+  when: manual  # This makes it a manual trigger after the plan
 
 # This job deploys the Nginx container using Docker
 deploy_nginx:
@@ -68,3 +82,5 @@ deploy_nginx:
   script:
     - docker pull nginx:latest
     - docker run --name nginx-container -d -p 80:80 nginx
+  # only:
+  #   - main
