@@ -2,19 +2,24 @@ stages:
   - validate
   - plan
   - apply
+
 image:
   name: hashicorp/terraform:latest
   entrypoint:
     - '/usr/bin/env'
     - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+
 before_script:
   - terraform --version
   - terraform init
 
+# The validate stage to check if the Terraform code is syntactically correct
 validate:
   stage: validate
   script:
     - terraform validate
+
+# The plan stage to preview changes
 plan:
   stage: plan
   script:
@@ -24,6 +29,8 @@ plan:
   artifacts:
     paths:
       - planfile
+
+# The apply stage to apply the Terraform plan
 apply:
   stage: apply
   script:
@@ -31,6 +38,26 @@ apply:
   dependencies:
     - plan
   when: manual
+
+# Ensure Docker is running in the CI/CD environment
+deploy_docker:
+  image: docker:latest
+  stage: deploy_nginx
+  services:
+    - name: docker:19.03.12-dind  # Docker-in-Docker service
+      alias: docker
+  before_script:
+    - docker --version
+    - docker info  # Verify Docker is running and available
+  script:
+    # Pull the Nginx image and run a container
+    - docker pull nginx:latest  # Pull the latest Nginx image
+    - docker run --name nginx-container -d -p 8080:80 nginx  # Run Nginx container on port 8080
+  # only:
+  #   - main  # Only run on the main branch
+  volume:
+    - /var/run/docker.sock:/var/run/docker.sock  # Mount the Docker socket
+
 # stages:
 #   - terraform_init
 #   - terraform_plan
