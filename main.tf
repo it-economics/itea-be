@@ -7,11 +7,11 @@ resource "docker_image" "nginx" {
 }
 # ngnix configuration 
 resource "docker_container" "nginx" {
- image = docker_image.nginx.latest
+ image = "nginx:latest"
  name  = var.ngnix_name_dev
  ports {
    internal = 80
-   external = 80
+   external = 8080
  }
    volumes {
     host_path      = "/hello-world-dev.html"

@@ -49,13 +49,13 @@ terraform_init:
       - .terraform
 
 # This job applies Terraform to create the infrastructure
-terraform_apply:
+terraform_plan:
   image: hashicorp/terraform:latest
-  stage: terraform_apply
+  stage: terraform_plan
   before_script:
     - terraform --version
   script:
-    - terraform apply -auto-approve
+    - terraform plan #-auto-approve
 
 # This job deploys the Nginx container using Docker
 deploy_nginx:
