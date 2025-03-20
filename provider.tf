@@ -3,7 +3,7 @@ terraform {
   required_providers {
     docker = {
       source  = "kreuzwerker/docker"
-      version = "~> 2.21.0"
+      version = "~> 3.0.2"
 }
 }
 # #supports state locking remotly. When locking support is enabled it will use LOCK and UNLOCK requests providing the lock info in the body
