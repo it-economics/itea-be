@@ -16,5 +16,6 @@ resource "docker_container" "nginx" {
    volumes {
     host_path      = "/hello-world-dev.html"
     container_path = "/usr/share/nginx/html/index.html"
+ #   container_path= "/var/run/docker.sock:/var/run/docker.sock"
   }
 }

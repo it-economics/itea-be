@@ -55,8 +55,8 @@ deploy_docker:
     - docker run --name nginx-container -d -p 8080:80 nginx  # Run Nginx container on port 8080
   # only:
   #   - main  # Only run on the main branch
-  volume:
-    - /var/run/docker.sock:/var/run/docker.sock  # Mount the Docker socket
+  # volume:
+  #   - /var/run/docker.sock:/var/run/docker.sock  # Mount the Docker socket
 
 # stages:
 #   - terraform_init
