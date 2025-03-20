@@ -1,33 +1,72 @@
-stages:
-  - validate
-  - plan
-  - apply
-image:
-  name: hashicorp/terraform:light
-  entrypoint:
-    - '/usr/bin/env'
-    - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
-before_script:
-  - terraform --version
-  - terraform init
+# stages:
+#   - validate
+#   - plan
+#   - apply
+# image:
+#   name: hashicorp/terraform:light
+#   entrypoint:
+#     - '/usr/bin/env'
+#     - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+# before_script:
+#   - terraform --version
+#   - terraform init
 
-validate:
-  stage: validate
+# validate:
+#   stage: validate
+#   script:
+#     - terraform validate
+# plan:
+#   stage: plan
+#   script:
+#     - terraform plan -out "planfile"
+#   dependencies:
+#     - validate
+#   artifacts:
+#     paths:
+#       - planfile
+# apply:
+#   stage: apply
+#   script:
+#     - terraform apply -input=false "planfile"
+#   dependencies:
+#     - plan
+#   when: manual
+stages:
+  - terraform_init
+  - terraform_apply
+  - deploy_nginx
+
+# This job initializes Terraform
+terraform_init:
+  image: hashicorp/terraform:latest
+  stage: terraform_init
+  before_script:
+    - terraform --version
   script:
-    - terraform validate
-plan:
-  stage: plan
-  script:
-    - terraform plan -out "planfile"
-  dependencies:
-    - validate
+    - terraform init
   artifacts:
     paths:
-      - planfile
-apply:
-  stage: apply
+      - .terraform
+
+# This job applies Terraform to create the infrastructure
+terraform_apply:
+  image: hashicorp/terraform:latest
+  stage: terraform_apply
+  before_script:
+    - terraform --version
   script:
-    - terraform apply -input=false "planfile"
-  dependencies:
-    - plan
-  when: manual
+    - terraform apply -auto-approve
+
+# This job deploys the Nginx container using Docker
+deploy_nginx:
+  image: docker:latest
+  stage: deploy_nginx
+  services:
+    - docker:dind
+  before_script:
+    - docker --version
+  script:
+    - docker pull nginx:latest
+    - docker run --name nginx-container -d -p 80:80 nginx
+  only:
+    - main
