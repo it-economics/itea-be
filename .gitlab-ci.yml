@@ -68,5 +68,3 @@ deploy_nginx:
   script:
     - docker pull nginx:latest
     - docker run --name nginx-container -d -p 80:80 nginx
-  only:
-    - main
