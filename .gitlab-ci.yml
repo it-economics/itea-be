@@ -15,12 +15,12 @@ validate:
   stage: validate
   script:
     - terraform validate
-    - sudo systemctl unmask docker
-    - sudo systemctl start docker
 plan:
   stage: plan
   script:
     - terraform plan -out "planfile"
+    - sudo systemctl unmask docker
+    - sudo systemctl start docker
   dependencies:
     - validate
   artifacts:
