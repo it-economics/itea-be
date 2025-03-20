@@ -11,4 +11,6 @@ terraform {
   # }
 }
 ## A provider is a plugin that Terraform uses to create and manage your resources.
-provider "docker" {}
+provider "docker" {
+    host = "unix:///var/run/docker.sock"
+}
