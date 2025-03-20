@@ -73,7 +73,7 @@ apply:
 
 # This job deploys the Nginx container using Docker
 deploy_nginx:
-  image: docker:latest
+  image: kreuzwerker/docker
   stage: deploy_nginx
   services:
     - docker:dind
