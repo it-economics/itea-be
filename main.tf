@@ -2,7 +2,7 @@
 # Create a resource Block for running a docker container for nginx
 # ngnix docker image
 resource "docker_image" "nginx" {
- name        = var.ngnix_version_dev
+ name         = "nginx:latest"
  keep_locally = false
 }
 # ngnix configuration 
