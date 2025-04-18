@@ -1,4 +1,4 @@
-# ITEA 19 - ArchUnit
+# ITEA 22 - Monitoring / Logging
 
 ## Intro
 
@@ -12,73 +12,59 @@ And you should enforce the Coding Rules of the Team and Architecture of the soft
 
 <img src="assets/images/ITEA.jpg" width="400" alt="Photo of the ITEA headquarters" />
 
-## Why test your architecture?
+## What does monitoring do
 
-https://www.archunit.org/motivation
-
-```
-Most developers working in larger projects will know the story, where once upon a time somebody experienced looked at the code and
-drew up some nice architecture diagrams, showing the components the system should consist of, and how they should interact.
-But when the project got bigger, the use cases more complex, and new developers dropped in and old developers dropped out,
-there were more and more cases where new features would just be added in any way that fit. 
-And suddenly everything depended on everything and every change could have an unforeseeable effect on any other component.
-Of course, you could have one or several experienced developers, having the role of the architect,
-who look at the code once a week, identify violations and correct them.
-But a safer way is to just define the components in code and rules for these components that can be automatically tested,
-for example as part of your continuous integration build.
-```
-
-### What is ArchUnit?
-
-https://www.archunit.org/userguide/html/000_Index.html
-
-```
-ArchUnit is a free, simple and extensible library for checking the architecture of your Java code.
-That is, ArchUnit can check dependencies between packages and classes, layers and slices, check for cyclic dependencies and more.
-It does so by analyzing given Java bytecode, importing all classes into a Java code structure.
-ArchUnit’s main focus is to automatically test architecture and coding rules, using any plain Java unit testing framework.
-```
-
-### Example
-
-https://www.archunit.org/use-cases
-
-<img src="assets/images/archunit-example.png" width="900" alt="Photo of the ITEA headquarters" />
+## Why logging is related to monitoring
 
 ### Exercise 1
 
-In our fist task we will use the standard rule set from ArchUnit, and we will see if those rules passes in our codebase.
+Basic configuration of spring actuator is already activated for the itea-be
 
-The rules that we use here can be found in the ArchUnit Api under `GeneralCodingRules`: https://javadoc.io/doc/com.tngtech.archunit/archunit/latest/com/tngtech/archunit/library/GeneralCodingRules.html
+1. Start the application and try http://localhost:9000/actuator Does it work?
+2. Correct the URL
+3. What monitoring informations do you get in basic configurations?
+4. Try to activate exposing more informations. Look a the documentation to find out how.  
 
-1. Create a new folder in the test directory called `architecture`.
-2. Create a new Java class called `TeamRulesTest` in the `architecture` folder.
-3. Create your fist ArchUnit test, that tests, that we are not using a `deprecated api`
-4. Write a test to check no classes uses the java logging
-5. Write a test to check that no classes are using jodatime
-6. Write a test to check that no classes are throwing a generic exception
+5. **Discuss whit the group:**  
+- Why can it be a security problem to use monitoring?
+- What you can do to improve security?
+6. Restrict the informations to just show general information and status of the application
 
 ### Exercise 2
 
-1. Create a new Java class called `FieldRulesTest` in the `architecture` folder.
-2. Write a test that checks that all fields for the `*UseCase.java` classes are private.
-3. Write a test that checks that all fields with the suffix `UseCases` are `private` and `final`.
+Configuring one endpoint. We will look at the health monitoring
+
+1. Can you get more detailed information about system health?
+2. What sub statuses do we have in the application?
 
 ### Exercise 3
 
-1. Create a new Java class called `ControllerRulesTest` in the `architecture` folder.
-2. Write a test that checks that all classes in the `controller` package have the `@Controller` annotation.
-3. Write a test that checks that all classes in the `controller` package have the suffix `Controller` in their name.
+show metrics
 
+1. Activate showing metrics in actuator
+2. Browse the metrics. Select some and dive into its details.
+3. Discuss the different types of metrics you found. 
+4. What happens if you reload the page?
+5. Try to make a api request and search for the metrics related to it.
+5. Discuss in the group:  
+- How can you use the metrics to monitor your application?
+- Can you get statistics from only using Actuator or will it need more?
 
 ### Exercise 4
 
-1. Create a new Java class called `ArchitectureRulesTest` in the `architecture` folder.
-2. Write a test that checks that all classes in the `controller` package only call the `useCases` package
-3. Write a test that checks that all classes in the `useCases` package not call the `controller` or the `persistence` package
+Monitoring Systems  
+We will use the Prometheus adapter of Actuator because it is the only monitoring system
+that uses pull principle. Therefor Actuator provides a web endpoint to read the metrics.
+
+1. Enable Prometheus registry and expose the endpoint
+2. Can you tell differences to the *metrics/* endpoint?
+3. Try to make a api request again and search for the metrics related to it.
+4. Discuss in the group:  
+- What possibilities does a monitoring system give you to monitor your application
+
+### Exercise 5
+
+Actuator and logging
 
 ### Conclusion
 
-ArchUnit can more than just check the architecture of your code.
-You can write tests about your `Fields`, `Classes` and `Method calls` and much more.
-I recommend to try this framework in your projects and see what is hiding in your code, that you do not want to be there.
