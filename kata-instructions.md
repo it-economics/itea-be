@@ -14,8 +14,22 @@ And you should enforce the Coding Rules of the Team and Architecture of the soft
 
 ## What does monitoring do?
 
+With monitoring, an application provides metrics racking to analyze its performance, behavior, and health in real-time.
+Often the application does only provide the pure metric values at a certain point in time. To make use of the metrics 
+applications are coupled with a monitoring application like Prometheus or Dynatrace that can store metric values over 
+the timeline and deliver the values as a base for any kind of charts. Most monitoring applications are also capable of 
+continuously tracking certain critical metrics an send warning or alert messages by email or messanger post if its value 
+exceeds a certain threshold value.
+Very often a monitoring is also extended with a visualization application that provides al kind of UI widgets to display
+the applications state, performance, alerts and many more.
 
+A complete monitoring environment can look like this:
 ![prometheus_grafana_stack.png](assets/images/prometheus_grafana_stack.png)
+
+Because our Application ITEA Backend is SpringBoot based we wir use the Build-in Feature "Spring Actuator" to collect 
+and deliver metrics values. For our exercises we additionally will use Prometheus as the monitoring System and additionally 
+Grafana to visualize our metrics in cool UI widgets. For convenience, we added a docker-compose environment to run 
+Prometheus and Grafana in a local docker container. 
 
 ## Why logging is related to monitoring
 
@@ -38,8 +52,8 @@ The Basic configuration of spring actuator is already activated for the itea-be
 4. Try to activate exposing more information. Look at the documentation to find out how.  
    https://docs.spring.io/spring-boot/reference/actuator/index.html
 5. **Discuss with the group:**  
-- Why can it be a security problem to use monitoring?
-- What can you do to improve security?
+   - Why can it be a security problem to use monitoring?
+   - What can you do to improve security?
 6. Restrict the information to just show general information and status of the application
 
 ### Exercise 2
@@ -59,8 +73,8 @@ show metrics
 4. What happens if you reload the page?
 5. Try to make a api request and search for the metrics related to it.
 6. **Discuss with the group:**  
-- How can you use the metrics to monitor your application?
-- Can you get statistics from only using Actuator or will it need more?
+   - How can you use the metrics to monitor your application?
+   - Can you get statistics from only using Actuator or will it need more?
 
 ### Exercise 4
 
@@ -79,11 +93,23 @@ A Docker compose file is provided in the project to start a Prometheus and Grafa
 7. Create a new dashboard to get a visualization for the itea application metrics and watch the application running
 (HINT: community has provided a lot of ready to use dashboard configs you can import https://grafana.com/grafana/dashboards/) 
 8. **Discuss with the group:**  
-- Compared to just using actuator, what possibilities does a monitoring/visualization system give you to monitor your application?
+   - Compared to just using actuator, what possibilities does a monitoring/visualization system give you to monitor your application?
 
 ### Exercise 5
 
 Actuator and logging
+Spring actuator also provide the possibility to expose logfiles via an endpoint
+
+1. **Discuss with the group:**
+   - Why can it be a security problem?
+   - What can you do to add safety?
+2. Activate the log output in Spring Actuator.  
+   You will need to consult the documentation https://docs.spring.io/spring-boot/reference/actuator/index.html
+3. Can you configure prometheus to also scrape the logs?
+4. **Discuss with the group:**
+   - Do you know any other possibilities to aggregate logs with a centralized system?
 
 ### Conclusion
 
+By using application monitoring, you get a deeper understanding of their applications' behavior and optimize 
+them for better performance, scalability, and security. 
