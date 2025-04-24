@@ -58,14 +58,14 @@ The Basic configuration of spring actuator is already activated for the itea-be
 
 ### Exercise 2
 
-Configuring one endpoint. We will look at the health monitoring
+**Configuring one endpoint.** We will look at the health monitoring
 
 1. Can you get more detailed information about system health?
 2. What sub statuses do we have in the application?
 
 ### Exercise 3
 
-show metrics
+**Show metrics**
 
 1. Activate showing metrics in actuator
 2. Browse the metrics. Select some and dive into its details.
@@ -78,10 +78,10 @@ show metrics
 
 ### Exercise 4
 
-Monitoring systems and visualization
+**Monitoring systems and visualization.**
 We will use the Prometheus adapter of Actuator because it is the only monitoring system
 that uses pull principle (so-called "scraping"). Therefore, Actuator provides a web endpoint to read the metrics.
-For visualizing the Monitoring stats, we will use Grafana
+For visualizing the Monitoring stats, we will use Grafana.
 A Docker compose file is provided in the project to start a Prometheus and Grafana server is located in the resources subfolder "monitoring"
 
 1. Enable Prometheus registry and expose the endpoint
@@ -97,8 +97,8 @@ A Docker compose file is provided in the project to start a Prometheus and Grafa
 
 ### Exercise 5
 
-Actuator and logging
-Spring actuator also provide the possibility to expose logfiles via an endpoint
+**Actuator and logging.**
+Spring Actuator also provides the possibility to expose logfiles via an endpoint.
 
 1. **Discuss with the group:**
    - Why can it be a security problem?
