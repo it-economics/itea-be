@@ -38,7 +38,7 @@ running a single instance on a physical machine. When it comes to modern applica
 load balancing on a containerized cloud platform, you will need more than write a local logfile to later on read it.
 What if the restart of a crashed container drops all logs before they can be backed up. How will you find the reason for the crash? 
 You may need to have the log entries of all instances in sorted order of the occurrence to research an error reason.
-This is where monitoring Systems are handy too. Let your application mirror every log entry to a monitoring system 
+This is where monitoring Systems are handy too. They let your application mirror every log entry to a monitoring system 
 and store them into its database. The result is having logs of all application instances aggregated at a single place where you can 
 search and filter the contents efficiently. Most log aggregation systems also support to visualize reoccurring log entry events.
 
@@ -111,5 +111,5 @@ Spring actuator also provide the possibility to expose logfiles via an endpoint
 
 ### Conclusion
 
-By using application monitoring, you get a deeper understanding of their applications' behavior and optimize 
+By using application monitoring, you get a deeper understanding of your applications' behavior and optimize 
 them for better performance, scalability, and security. 
