@@ -7,7 +7,7 @@
 The ***ITEA Furniture Store*** is a company that primarily sells furniture and home decoration in their stores.
 You have been hired as a software developer to help them team implement new features.
 
-Today you will have a look on a service you have never seen before.
+Today you will have a look at a service you have never seen before.
 And you should enforce the Coding Rules of the Team and Architecture of the software.
 
 <img src="assets/images/ITEA.jpg" width="400" alt="Photo of the ITEA headquarters" />
@@ -15,19 +15,19 @@ And you should enforce the Coding Rules of the Team and Architecture of the soft
 ## What does monitoring do?
 
 With monitoring, an application provides metrics racking to analyze its performance, behavior, and health in real-time.
-Often the application does only provide the pure metric values at a certain point in time. To make use of the metrics 
+Often the application does only provide the pure metric values at a certain point in time. To make use of the metrics,  
 applications are coupled with a monitoring application like Prometheus or Dynatrace that can store metric values over 
 the timeline and deliver the values as a base for any kind of charts. Most monitoring applications are also capable of 
-continuously tracking certain critical metrics an send warning or alert messages by email or messanger post if its value 
+continuously tracking certain critical metrics and send warning or alert messages by email or messanger post if its value 
 exceeds a certain threshold value.
 Very often a monitoring is also extended with a visualization application that provides al kind of UI widgets to display
-the applications state, performance, alerts and many more.
+the application's state, performance, alerts and many more.
 
 A complete monitoring environment can look like this:
 ![prometheus_grafana_stack.png](assets/images/prometheus_grafana_stack.png)
 
-Because our Application ITEA Backend is SpringBoot based we wir use the Build-in Feature "Spring Actuator" to collect 
-and deliver metrics values. For our exercises we additionally will use Prometheus as the monitoring System and additionally 
+Because our Application ITEA Backend is SpringBoot based, we will use the Build-in Feature "Spring Actuator" to collect 
+and deliver metrics values. For our exercises, we additionally will use Prometheus as the monitoring System and additionally 
 Grafana to visualize our metrics in cool UI widgets. For convenience, we added a docker-compose environment to run 
 Prometheus and Grafana in a local docker container. 
 
@@ -38,7 +38,7 @@ running a single instance on a physical machine. When it comes to modern applica
 load balancing on a containerized cloud platform, you will need more than write a local logfile to later on read it.
 What if the restart of a crashed container drops all logs before they can be backed up. How will you find the reason for the crash? 
 You may need to have the log entries of all instances in sorted order of the occurrence to research an error reason.
-This is where monitoring Systems are handy too. Just let your application mirror every log entry to a monitoring system 
+This is where monitoring Systems are handy too. They let your application mirror every log entry to a monitoring system 
 and store them into its database. The result is having logs of all application instances aggregated at a single place where you can 
 search and filter the contents efficiently. Most log aggregation systems also support to visualize reoccurring log entry events.
 
@@ -71,7 +71,7 @@ show metrics
 2. Browse the metrics. Select some and dive into its details.
 3. Discuss the different types of metrics you find. 
 4. What happens if you reload the page?
-5. Try to make a api request and search for the metrics related to it.
+5. Try to make an api request and search for the metrics related to it.
 6. **Discuss with the group:**  
    - How can you use the metrics to monitor your application?
    - Can you get statistics from only using Actuator or will it need more?
