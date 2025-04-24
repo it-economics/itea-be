@@ -64,10 +64,6 @@
             <groupId>io.micrometer</groupId>
         </dependency>
         <dependency>
-            <artifactId>micrometer-registry-prometheus</artifactId>
-            <groupId>io.micrometer</groupId>
-        </dependency>
-        <dependency>
             <artifactId>micrometer-registry-prometheus-simpleclient</artifactId>
             <groupId>io.micrometer</groupId>
         </dependency>
