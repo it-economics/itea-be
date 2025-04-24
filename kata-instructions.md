@@ -111,5 +111,5 @@ Spring actuator also provide the possibility to expose logfiles via an endpoint
 
 ### Conclusion
 
-By using application monitoring, you get a deeper understanding of their applications' behavior and optimize 
+By using application monitoring, you get a deeper understanding of your applications' behavior and optimize 
 them for better performance, scalability, and security. 
