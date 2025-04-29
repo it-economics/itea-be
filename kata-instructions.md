@@ -1,115 +1,79 @@
-# ITEA 22 - Monitoring / Logging
+# ITEA 23 - CI/CD: Continuous Integration and Continuous Delivery
 
-## Intro
-
-### Background story
+## Background story
 
 The ***ITEA Furniture Store*** is a company that primarily sells furniture and home decoration in their stores.
-You have been hired as a software developer to help them team implement new features.
+You have been hired as a consultant to help with their digital transformation.
 
-Today you will have a look at a service you have never seen before.
-And you should enforce the Coding Rules of the Team and Architecture of the software.
+<img src="assets/images/ITEA.jpg" width="200" alt="Photo of the ITEA headquarters" />
 
-<img src="assets/images/ITEA.jpg" width="400" alt="Photo of the ITEA headquarters" />
+## Kata – Part 1 (whole group)
 
-## What does monitoring do?
+### Exercise 1: Concepts
 
-With monitoring, an application provides metrics racking to analyze its performance, behavior, and health in real-time.
-Often the application does only provide the pure metric values at a certain point in time. To make use of the metrics,  
-applications are coupled with a monitoring application like Prometheus or Dynatrace that can store metric values over 
-the timeline and deliver the values as a base for any kind of charts. Most monitoring applications are also capable of 
-continuously tracking certain critical metrics and send warning or alert messages by email or messanger post if its value 
-exceeds a certain threshold value.
-Very often a monitoring is also extended with a visualization application that provides al kind of UI widgets to display
-the application's state, performance, alerts and many more.
+**CI** stands for **continuos integration**. It means we continuously (i.e., frequently, regularly) integrate (i.e.,
+merge) each others changes together into a common code base (main branch or trunk), at least once per day, but usually
+multiple times per developer per day.
 
-A complete monitoring environment can look like this:
-![prometheus_grafana_stack.png](assets/images/prometheus_grafana_stack.png)
+**CD** stands for **continuous delivery**: The ability to release at any point on demand. A feature is ready? We can
+*decide* to simply release it. A bug is fixed? We can simply release the new version, easily and safely.
 
-Because our Application ITEA Backend is SpringBoot based, we will use the Build-in Feature "Spring Actuator" to collect 
-and deliver metrics values. For our exercises, we additionally will use Prometheus as the monitoring System and additionally 
-Grafana to visualize our metrics in cool UI widgets. For convenience, we added a docker-compose environment to run 
-Prometheus and Grafana in a local docker container. 
+**CD** can also stand for **continuous deployment**, a special case of continuous delivery where every *releasable*
+build is automatically deployed. By default, CD means the more general continuous delivery.
 
-## Why logging is related to monitoring
+1a) The terms "CI/CD" and "continuous integration" are often misunderstood and misused. Discuss: Which common
+misconceptions have you heard before?
+  <details>
+  <summary>Examples</summary>
+  Common misconceptions:<br>
+  - "The CI/CD is the build/test/deployment pipeline".<br>
+  - Alice: "Does your team practice CI/CD?" Bob: "Yes, we do have a CI/CD!"<br>
+  - "Continuous integration means that when all the branches are merged at the end of the sprint, the pipeline is triggered and fully automates build, test, and deployment."
+  </details>
 
-In basic "logging is just the application writing something into a file". That might be true for an application only
-running a single instance on a physical machine. When it comes to modern applications running in multiple instances with 
-load balancing on a containerized cloud platform, you will need more than write a local logfile to later on read it.
-What if the restart of a crashed container drops all logs before they can be backed up. How will you find the reason for the crash? 
-You may need to have the log entries of all instances in sorted order of the occurrence to research an error reason.
-This is where monitoring Systems are handy too. They let your application mirror every log entry to a monitoring system 
-and store them into its database. The result is having logs of all application instances aggregated at a single place where you can 
-search and filter the contents efficiently. Most log aggregation systems also support to visualize reoccurring log entry events.
+1b) Here's what Bob's everyday work experience looks like. Discuss: Why is Bob's team not doing CI/CD?
 
-### Exercise 1
+- Every developer in Bob's team works alone on a separate branch until a whole feature is ready. This typically takes a
+  few days, sometimes a few weeks.
+- Code reviews are done asynchronously using pull requests. It typically takes 2 - 3 days until a PR is approved and
+  merged.
+- Bob's team refers to the build/test pipeline as "the CI", although Bob is not sure why.
+- While there are some tests which run automatically after a PR is merged, they don't give enough confidence, so the
+  testing team takes about a week to manually test at the end of the sprint before the release.
+- A new version is released at the end of the 3-week sprint, because that is a rule of Scrum according to Bob's
+  knowledge. If the testing team finds too many major defects, the release is skipped and the customer needs to wait
+  for the next release.
 
-The Basic configuration of spring actuator is already activated for the itea-be
+1c) In Bob's team, everyone works alone on their own ticket on a separate branch. Tickets are assigned to
+individual.<br>
+Result: 6 of 11 tickets done, 4 tickets "almost done." His manager tells them to "estimate
+better".
 
-1. Start the application and try http://localhost:9000/actuator. Does it work?
-2. Correct the URL
-3. What monitoring information do you get in basic configurations?
-4. Try to activate exposing more information. Look at the documentation to find out how.  
-   https://docs.spring.io/spring-boot/reference/actuator/index.html
-5. **Discuss with the group:**  
-   - Why can it be a security problem to use monitoring?
-   - What can you do to improve security?
-6. Restrict the information to just show general information and status of the application
+Meanwhile, Alice's team uses practices like pair/ensemble programming and WIP limits. When they don't pair program, they
+work on different parts of the same feature.<br>
+Result: 9 of 11 tickets done, 2 tickets not started.
 
-### Exercise 2
+1c) What can Bob's team try in order to get closer to CI/CD?
 
-**Configuring one endpoint.** We will look at the health monitoring
+<details><summary>Hint</summary></details>
 
-1. Can you get more detailed information about system health?
-2. What sub statuses do we have in the application?
+1d) Continuous deployment is not always possible, but continuous delivery usually is. In which of these scenarios is
+continuous deployment an option and why?
 
-### Exercise 3
+- A web application hosted on AWS.
+- A static website hosted on premises.
+- An online game hosted on Steam/PlayStation Network/Xbox Live.
+- A printer's firmware (update via USB cable).
+- Embedded firmware in a car's ABS system or engine controller.
 
-**Show metrics**
+## Kata – Part 2 (breakout sessions)
 
-1. Activate showing metrics in actuator
-2. Browse the metrics. Select some and dive into its details.
-3. Discuss the different types of metrics you find. 
-4. What happens if you reload the page?
-5. Try to make an api request and search for the metrics related to it.
-6. **Discuss with the group:**  
-   - How can you use the metrics to monitor your application?
-   - Can you get statistics from only using Actuator or will it need more?
+### Exercise 2: Trunk-based development (TBD)
 
-### Exercise 4
+Many of us learn early in our career that "you never commit directly to main/master". That is unfortunate, because what
+applies to one context is not necessarily a universal rule for all contexts. The canonical, simplest way of doing
+continuous integration (CI) is actually to work directly on the main branch, and to only push when the tests pass. This
+is often unlikely to happen in most "enterprise" teams (we will look at other variants later), but good to know as a
+default that we then change depending on our context.
 
-**Monitoring systems and visualization.**
-We will use the Prometheus adapter of Actuator because it is the only monitoring system
-that uses pull principle (so-called "scraping"). Therefore, Actuator provides a web endpoint to read the metrics.
-For visualizing the Monitoring stats, we will use Grafana.
-A Docker compose file is provided in the project to start a Prometheus and Grafana server is located in the resources subfolder "monitoring"
-
-1. Enable Prometheus registry and expose the endpoint
-2. Can you tell differences to the *metrics/* endpoint?
-3. Add a scraping configuration to the prometheus.yaml configuration file
-4. Start the docker files you can reach Prometheus at http://localhost:9090 (no user/password) and Grafana at http://localhost:3000 (admin:admin)
-5. Check the scrape was successfully in the "targets" view of Prometheus
-6. In Grafana configure the Prometheus server as a new datasource
-7. Create a new dashboard to get a visualization for the itea application metrics and watch the application running
-(HINT: community has provided a lot of ready to use dashboard configs you can import https://grafana.com/grafana/dashboards/) 
-8. **Discuss with the group:**  
-   - Compared to just using actuator, what possibilities does a monitoring/visualization system give you to monitor your application?
-
-### Exercise 5
-
-**Actuator and logging.**
-Spring Actuator also provides the possibility to expose logfiles via an endpoint.
-
-1. **Discuss with the group:**
-   - Why can it be a security problem?
-   - What can you do to add safety?
-2. Activate the log output in Spring Actuator.  
-   You will need to consult the documentation https://docs.spring.io/spring-boot/reference/actuator/index.html
-3. Can you configure prometheus to also scrape the logs?
-4. **Discuss with the group:**
-   - Do you know any other possibilities to aggregate logs with a centralized system?
-
-### Conclusion
-
-By using application monitoring, you get a deeper understanding of your applications' behavior and optimize 
-them for better performance, scalability, and security. 
+2a) 
