@@ -7,9 +7,10 @@ You have been hired as a consultant to help with their digital transformation.
 
 <img src="assets/images/ITEA.jpg" width="200" alt="Photo of the ITEA headquarters" />
 
-## Kata – Part 1 (whole group)
+## Intro – Concepts
 
-### Exercise 1: Concepts
+CI/CD is more than "just a pipeline". The term is often misunderstood or misused, which only spreads the misconceptions
+further.
 
 **CI** stands for **continuos integration**. It means we continuously (i.e., frequently, regularly) integrate (i.e.,
 merge) each others changes together into a common code base (main branch or trunk), at least once per day, but usually
@@ -21,59 +22,62 @@ multiple times per developer per day.
 **CD** can also stand for **continuous deployment**, a special case of continuous delivery where every *releasable*
 build is automatically deployed. By default, CD means the more general continuous delivery.
 
-1a) The terms "CI/CD" and "continuous integration" are often misunderstood and misused. Discuss: Which common
-misconceptions have you heard before?
-  <details>
-  <summary>Examples</summary>
-  Common misconceptions:<br>
-  - "The CI/CD is the build/test/deployment pipeline".<br>
-  - Alice: "Does your team practice CI/CD?" Bob: "Yes, we do have a CI/CD!"<br>
-  - "Continuous integration means that when all the branches are merged at the end of the sprint, the pipeline is triggered and fully automates build, test, and deployment."
-  </details>
+**DevOps** is the collaboration (!) between development and operations (a.k.a. "Ops", i.e. system admins or cloud
+engineers) using practices like CI/CD, monitoring, and a culture of shared responsibility ("you build it, you run it").
+It is *not* "operations for development", nor is it a separate role or even a separate department that "does the DevOps
+for the other teams".
 
-1b) Here's what Bob's everyday work experience looks like. Discuss: Why is Bob's team not doing CI/CD?
+The goals of these practices include: identify bottlenecks, find and fix/prevent integration problems earlier (merge
+conflicts,
+incompatibilities, etc.), minimize the risk per release, and get early and frequent feedback from users and customers.
 
-- Every developer in Bob's team works alone on a separate branch until a whole feature is ready. This typically takes a
-  few days, sometimes a few weeks.
-- Code reviews are done asynchronously using pull requests. It typically takes 2 - 3 days until a PR is approved and
-  merged.
-- Bob's team refers to the build/test pipeline as "the CI", although Bob is not sure why.
-- While there are some tests which run automatically after a PR is merged, they don't give enough confidence, so the
-  testing team takes about a week to manually test at the end of the sprint before the release.
-- A new version is released at the end of the 3-week sprint, because that is a rule of Scrum according to Bob's
-  knowledge. If the testing team finds too many major defects, the release is skipped and the customer needs to wait
-  for the next release.
+## Kata – Part 1
 
-1c) In Bob's team, everyone works alone on their own ticket on a separate branch. Tickets are assigned to
-individual.<br>
-Result: 6 of 11 tickets done, 4 tickets "almost done." His manager tells them to "estimate
-better".
+On the Miro board (the link will be shared in the session), solve and discuss the provided exercises together.
+Discussing and understanding the nuances is more important than "correct" answers, because a lot of it depends on the
+context.
 
-Meanwhile, Alice's team uses practices like pair/ensemble programming and WIP limits. When they don't pair program, they
-work on different parts of the same feature.<br>
-Result: 9 of 11 tickets done, 2 tickets not started.
+## Kata – Part 2
 
-1c) What can Bob's team try in order to get closer to CI/CD?
+### Exercise 2.1: Basic continuous integration
 
-<details><summary>Hint</summary></details>
+In the simplest case of CI, we work directly on the main branch (a.k.a. the trunk). Sounds dangerous? We will look at
+how to do this safely. Forget any "universal" rules you may have learned about "never committing to main". Context
+matters and universal rules are rare!
+Later we will look at variants of CI where we don't work directly on main.
 
-1d) Continuous deployment is not always possible, but continuous delivery usually is. In which of these scenarios is
-continuous deployment an option and why?
+*Breakout sessions in pairs or groups ("ensembles") of 2-5 people each. Ensure at least one per ensemble has push
+privileges.*
 
-- A web application hosted on AWS.
-- A static website hosted on premises.
-- An online game hosted on Steam/PlayStation Network/Xbox Live.
-- A printer's firmware (update via USB cable).
-- Embedded firmware in a car's ABS system or engine controller.
+#### Tasks:
 
-## Kata – Part 2 (breakout sessions)
+- TODO
 
-### Exercise 2: Trunk-based development (TBD)
+#### Rules:
 
-Many of us learn early in our career that "you never commit directly to main/master". That is unfortunate, because what
-applies to one context is not necessarily a universal rule for all contexts. The canonical, simplest way of doing
-continuous integration (CI) is actually to work directly on the main branch, and to only push when the tests pass. This
-is often unlikely to happen in most "enterprise" teams (we will look at other variants later), but good to know as a
-default that we then change depending on our context.
+- Commit and push directly to main, at least once every 5 minutes.
+- TDD + only push on green.
+- `git pull --rebase`
+- If the tooling allows it, rotate the "driver" role after every commit.
 
-2a) 
+### Exercise 2.2: "Corporate" continuous integration
+
+In many environments, there are reasons to deviate from that simplest version of CI. Still, consider it the default in
+case nothing requires additional process overhead.
+
+For example, for compliance reasons it might be necessary to have a "paper trail" proving that at least 2 people have
+worked on a change ([Two-person rule](https://en.wikipedia.org/wiki/Two-person_rule), in German "Vieraugenprinzip") to
+make it impossible for a "single bad actor" to intentionally act maliciously. Such a paper trail is easily provided by
+many pull request tools. Another reason could be that the tooling has support for pull request integration of pipelines
+and static analysis. However, that does not mean we need to block the flow by waiting for someone to asynchronously
+review the code *when they get to it, after it is already finished* to ask for additional changes.
+
+#### Tasks:
+
+- TODO
+
+#### Rules:
+
+- 1 to 3 related commits on a so called "topic-branch" (*not* a whole feature).
+- Pull request as "proof of pair/ensemble programming". Merge it immediately.
+- Pipeline runs automatically after merge (and if the tooling allows, also in the PR before the merge).
