@@ -79,5 +79,7 @@ review the code *when they get to it, after it is already finished* to ask for a
 #### Rules:
 
 - 1 to 3 related commits on a so called "topic-branch" (*not* a whole feature).
+  These branches are short-lived (merged within a day, usually shorter). It's not CI if we don't, well, *continuously
+  integrate*!
 - Pull request as "proof of pair/ensemble programming". Merge it immediately.
 - Pipeline runs automatically after merge (and if the tooling allows, also in the PR before the merge).
