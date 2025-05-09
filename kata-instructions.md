@@ -70,7 +70,8 @@ worked on a change ([Two-person rule](https://en.wikipedia.org/wiki/Two-person_r
 make it impossible for a "single bad actor" to intentionally act maliciously. Such a paper trail is easily provided by
 many pull request tools. Another reason could be that the tooling has support for pull request integration of pipelines
 and static analysis. However, that does not mean we need to block the flow by waiting for someone to asynchronously
-review the code *when they get to it, after it is already finished* to ask for additional changes.
+review the code *when they get to it, after it is already finished* to ask for additional changes.<br>
+*Pull request != code review* and *code review != pull request*.
 
 #### Tasks:
 
