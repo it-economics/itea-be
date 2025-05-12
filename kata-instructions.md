@@ -86,3 +86,36 @@ review the code *when they get to it, after it is already finished* to ask for a
   integrate*!
 - Pull request as "proof of pair/ensemble programming". Merge it immediately.
 - Pipeline runs automatically after merge (and if the tooling allows, also in the PR before the merge).
+
+### Helpful Git commands for CI
+
+- `git fetch`: Download all commits from the remote and update the tracking branches (mostly `origin/main`).
+- `git pull --ff-only` *(when working directly on main)*: Fast-forward the local main onto the remote main, or fail if a
+  rebase is required.
+- `git pull --rebase` *(when working directly on main)*: Rebase your local changes onto main. When pushing
+  fails, do this and then push again.
+- `git pull --rebase origin main` *(when using short-lived branches)*: Rebase your short-lived branch onto main.
+
+#### A typical workflow (working directly on main):
+
+At start of session (e.g. in the morning):<br>
+`git pull --ff-only`
+
+1. `git commit`
+2. `git push`
+3. *iff* pushing fails:
+
+- 3a. `git pull --rebase`
+- 3b. `git push`
+
+#### A typical workflow (short-lived branches):
+
+At start of session (e.g. in the morning):<br>
+`git fetch`<br>
+`git checkout origin/main`<br>
+`git switch -c ITEA-23_my_topic_branch`
+
+1. `git commit` (maybe a few times)
+2. `git pull --rebase origin main`
+3. `git push`
+4. *open PR and merge if pipeline is green; code review happened during pairing*
