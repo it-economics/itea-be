@@ -95,6 +95,13 @@ review the code *when they get to it, after it is already finished* to ask for a
 - `git pull --rebase` *(when working directly on main)*: Rebase your local changes onto main. When pushing
   fails, do this and then push again.
 - `git pull --rebase origin main` *(when using short-lived branches)*: Rebase your short-lived branch onto main.
+- `git push --force-with-lease` *(when using short-lived branches)*: Overwrite the remote version of your short-lived
+  branch after rebasing.
+  <details>
+  Note: Most teams have an (explicit or implicit) agreement that everyone only works on their own topic branch unless agreed
+  otherwise, so everyone force-pushes only their "own" branches. Force-pushing other peoples' branches or shared/public branches
+  should be done with great care and only in exceptional cases.
+  </details>
 
 #### A typical workflow (working directly on main):
 
