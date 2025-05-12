@@ -22,6 +22,8 @@ multiple times per developer per day.
 **CD** can also stand for **continuous deployment**, a special case of continuous delivery where every *releasable*
 build is automatically deployed. By default, CD means the more general continuous delivery.
 
+<img src="assets/images/cicd.png" width="300" alt="The relationship between CI and CD" />
+
 **DevOps** is the collaboration (!) between development and operations (a.k.a. "Ops", i.e. system admins or cloud
 engineers) using practices like CI/CD, monitoring, and a culture of shared responsibility ("you build it, you run it").
 It is *not* "operations for development", nor is it a separate role or even a separate department that "does the DevOps
