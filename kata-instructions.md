@@ -12,22 +12,29 @@ You have been hired as a consultant to help with their digital transformation.
 CI/CD is more than "just a pipeline". The term is often misunderstood or misused, which only spreads the misconceptions
 further.
 
+<img src="assets/images/cicd.png" width="300" alt="The relationship between CI and CD" />
+
 **CI** stands for **continuos integration**. It means we continuously (i.e., frequently, regularly) integrate (i.e.,
 merge) each others changes together into a common code base (main branch or trunk), at least once per day, but usually
-multiple times per developer per day.
+multiple times per developer per day. To do so safely, we rely on continuous testing (e.g., TDD), continuous code
+review (e.g., pairing).
+
+<img src="assets/images/ci.png" width="300" alt="Illustration of CI" />
 
 **CD** stands for **continuous delivery**: The ability to release at any point on demand. A feature is ready? We can
 *decide* to simply release it. A bug is fixed? We can simply release the new version, easily and safely.
 
+<img src="assets/images/cd.png" width="300" alt="Illustration of CD" />
+
 **CD** can also stand for **continuous deployment**, a special case of continuous delivery where every *releasable*
 build is automatically deployed. By default, CD means the more general continuous delivery.
-
-<img src="assets/images/cicd.png" width="300" alt="The relationship between CI and CD" />
 
 **DevOps** is the collaboration (!) between development and operations (a.k.a. "Ops", i.e. system admins or cloud
 engineers) using practices like CI/CD, monitoring, and a culture of shared responsibility ("you build it, you run it").
 It is *not* "operations for development", nor is it a separate role or even a separate department that "does the DevOps
 for the other teams".
+
+<img src="assets/images/devops.png" width="300" alt="Illustration of DevOps" />
 
 The goals of these practices include: identify bottlenecks, find and fix/prevent integration problems earlier (merge
 conflicts,
