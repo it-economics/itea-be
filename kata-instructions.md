@@ -60,7 +60,21 @@ privileges.*
 
 #### Tasks:
 
-- TODO
+<details>
+<summary>Group 1</summary>
+1. Refactor the method "Invoice#grossPrice".<br>
+2. Introduce a new VatRate "COVID_REDUCED" at 5 percent.<br>
+</details>
+<details>
+<summary>Group 2</summary>
+1. Refactor the method "Invoice#netPrice".<br>
+2. Introduce a new VatRate "COVID_STANDARD" at 16 percent.<br>
+</details>
+<details>
+<summary>Group 3</summary>
+1. Refactor the method "LineItem#netPrice".<br>
+2. Introduce a new VatRate "VAT_EXEMPT" at 0 percent.<br>
+</details>
 
 #### Rules:
 
@@ -84,7 +98,24 @@ review the code *when they get to it, after it is already finished* to ask for a
 
 #### Tasks:
 
-- TODO
+For better direct comparison between the workflows, we do the same tasks, but this time using short-lived branches. Use
+a branch "main2" as the trunk.
+
+<details>
+<summary>Group 1</summary>
+1. Refactor the method "Invoice#grossPrice".<br>
+2. Introduce a new VatRate "COVID_REDUCED" at 5 percent.<br>
+</details>
+<details>
+<summary>Group 2</summary>
+1. Refactor the method "Invoice#netPrice".<br>
+2. Introduce a new VatRate "COVID_STANDARD" at 16 percent.<br>
+</details>
+<details>
+<summary>Group 3</summary>
+1. Refactor the method "LineItem#netPrice".<br>
+2. Introduce a new VatRate "VAT_EXEMPT" at 0 percent.<br>
+</details>
 
 #### Rules:
 
