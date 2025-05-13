@@ -16,7 +16,7 @@ further.
 
 **CI** stands for **continuos integration**. It means we continuously (i.e., frequently, regularly) integrate (i.e.,
 merge) each others changes together into a common code base (main branch or trunk), at least once per day, but usually
-multiple times per developer per day. To do so safely, we rely on continuous testing (e.g., TDD), continuous code
+multiple times per developer per day. To do so safely, we rely on continuous testing (e.g., TDD) and continuous code
 review (e.g., pairing).
 
 <img src="assets/images/ci.png" width="300" alt="Illustration of CI" />
