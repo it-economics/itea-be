@@ -14,16 +14,19 @@ class Invoice {
     }
 
     EuroPrice grossPrice() {
-        return lineItems.parallelStream()
-                .map(lineItem -> lineItem.unitPriceGross().times(lineItem.quantity().value))
-                .reduce(EuroPrice::plus)
-                .orElse(EuroPrice.zero());
+        var sum = EuroPrice.zero();
+        for (var lineItem : lineItems) {
+            sum = sum.plus(lineItem.unitPriceGross().times(lineItem.quantity().value));
+        }
+        return sum;
     }
 
     EuroPrice netPrice() {
-        return lineItems.parallelStream()
-                .map(LineItem::netPrice)
-                .reduce(EuroPrice::plus)
-                .orElse(EuroPrice.zero());
+        EuroPrice res = EuroPrice.zero();
+        for (LineItem lit : lineItems) {
+            EuroPrice netPrice = lit.netPrice();
+            res = res.plus(netPrice);
+        }
+        return res;
     }
 }
