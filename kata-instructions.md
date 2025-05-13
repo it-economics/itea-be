@@ -78,7 +78,7 @@ privileges.*
 
 #### Rules:
 
-- Commit and push directly to main, at least once every 5 minutes.
+- Commit and push directly to main. Make the smallest reasonable change and push ASAP.
 - TDD + only push on green.
 - `git pull --rebase`
 - If the tooling allows it, rotate the "driver" role after every commit.
