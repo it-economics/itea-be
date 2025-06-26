@@ -29,6 +29,10 @@ record LineItem(
     }
 
     private int getVatRate(VatRate vatRate) {
-        return vatRate == VatRate.STANDARD ? 19 : 7;
+        return switch(vatRate) {
+            case REDUCED -> 7;
+            case STANDARD -> 19;
+            case COVID_STANDARD -> 16;
+        };
     }
 }
