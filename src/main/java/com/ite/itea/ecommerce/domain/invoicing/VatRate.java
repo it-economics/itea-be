@@ -4,5 +4,6 @@ public enum VatRate {
 
     STANDARD,
     REDUCED,
+    COVID_REDUCED,
     COVID_STANDARD
 }
