@@ -30,6 +30,7 @@ record LineItem(
 
     private int getVatRate(VatRate vatRate) {
         return switch(vatRate) {
+            case COVID_REDUCED -> 5;
             case REDUCED -> 7;
             case STANDARD -> 19;
             case COVID_STANDARD -> 16;

@@ -25,6 +25,12 @@ public class InvoicePricingTest {
             Quantity.of(3),
             VatRate.REDUCED
     );
+    private final LineItem covidDiningTable = new LineItem(
+            "asdf",
+            EuroPrice.ofEurosAndCents(105, 0),
+            Quantity.of(1),
+            VatRate.COVID_REDUCED
+    );
 
     @Test
     void calculatesCorrectGrossPriceWithStandardTaxRate() {
@@ -75,5 +81,13 @@ public class InvoicePricingTest {
         // The total price excluding VAT, with different VAT rates per item and
         // rounded per item to the nearest cent.
         assertThat(invoice.netPrice()).isEqualTo(EuroPrice.ofEurosAndCents(590, 41));
+    }
+
+    @Test
+    void calculatesCorrectNetPriceForCovidDiningTable() {
+        var invoice = new Invoice();
+        invoice.addLineItem(covidDiningTable);
+
+        assertThat(invoice.netPrice()).isEqualTo(EuroPrice.ofEurosAndCents(100, 0));
     }
 }
