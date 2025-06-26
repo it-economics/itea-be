@@ -14,11 +14,9 @@ class Invoice {
     }
 
     EuroPrice grossPrice() {
-        var sum = EuroPrice.zero();
-        for (var lineItem : lineItems) {
-            sum = sum.plus(lineItem.unitPriceGross().times(lineItem.quantity().value));
-        }
-        return sum;
+        return lineItems.stream()
+                .map(lineItem -> lineItem.unitPriceGross().times(lineItem.quantity().value))
+                .reduce(EuroPrice.zero(), EuroPrice::plus);
     }
 
     EuroPrice netPrice() {
