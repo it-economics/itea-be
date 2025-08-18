@@ -51,5 +51,7 @@ What counts is that everyone tries and none of the practices are skipped.
 - **Rebase:** No downstream merges. Branches are rebased onto upstream (main) and merged upstream
   via pull request.
 - **Double-loop TDD:** Each use case starts with a failing test for the happy path
-  through the REST API (the outer loop), followed by multiple TDD iterations (the inner loop)
-  to flesh out the functionality including edge cases.
+  through the REST API (the outer loop) to make sure the feature "works", followed
+  by many small TDD iterations (the inner loop) *below* the REST API layer
+  (e.g. component facades, domain services, value objects) to guide the design and
+  flesh out the functionality including edge cases.
